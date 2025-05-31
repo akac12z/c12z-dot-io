@@ -1,0 +1,30 @@
+---
+import "../styles/global.css";
+
+import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
+
+import GTMBody from "@shared/analytics/Google/GTMBody.astro";
+import Header from "@shared/Header.astro";
+
+import Footer from "@shared/Footer.astro";
+import ScrollToTopBtn from "@shared/components/bottons/ScrollToTopBtn";
+import BaseHead from "@SEO/BaseHead.astro";
+
+const { lang } = SITE_DEFAULT_CONFIG;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <BaseHead>
+    <slot name="head" />
+  </BaseHead>
+  <body class="body-layout-classes">
+    <GTMBody />
+    <Header />
+    <main class="mt-2 xs:mt-5 mb-14 overflow-x-hidden">
+      <slot />
+      <ScrollToTopBtn client:only="react" />
+    </main>
+    <Footer />
+  </body>
+</html>
