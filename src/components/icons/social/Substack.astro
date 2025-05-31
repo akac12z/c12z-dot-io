@@ -1,0 +1,27 @@
+---
+import type { SocialIcons } from "@interfaces/socialIcons.interface";
+
+const {
+  customColor = "text-mr-text-headers hover:text-mr-primary-green",
+  height = "16",
+  width = "16",
+} = Astro.props as SocialIcons;
+---
+
+<a
+  href="https://mrjark.substack.com/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 16 16"
+    class={customColor}
+    ><path
+      fill="currentColor"
+      d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"
+    ></path></svg
+  >
+</a>

@@ -1,0 +1,33 @@
+---
+import type { SocialIcons } from "@interfaces/socialIcons.interface";
+
+const {
+  customColor = "text-mr-text-headers hover:text-mr-primary-green",
+  height = "20",
+  width = "20",
+} = Astro.props as SocialIcons;
+---
+
+<a
+  href="https://www.linkedin.com/in/chemaferrandez/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width}
+    height={height}
+    viewBox="0 0 24 24"
+    class={customColor}
+    ><g
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      ><path d="M8 11v5m0-8v.01M12 16v-5m4 5v-3a2 2 0 1 0-4 0"></path><path
+        d="M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"
+      ></path></g
+    ></svg
+  >
+</a>
