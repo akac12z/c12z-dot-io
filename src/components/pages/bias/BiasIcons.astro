@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { allBiasIcon } from "./icons/biasIconsComponents";
+
+interface Props {
+  entry: CollectionEntry<"bias">;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { biasID } = data;
+
+const matchedIcon = allBiasIcon.find((icon) => icon.id === biasID);
+
+if (!matchedIcon) {
+  throw new Error(`No icon found with this biasID: ${biasID}`);
+}
+---
+
+{matchedIcon && <matchedIcon.icon />}

@@ -1,0 +1,52 @@
+---
+interface Props {
+  category: string[];
+}
+
+// Configuración de categorías con colores
+const biasCategories = [
+  {
+    key: "velocidad",
+    classes: "speed-bias-category",
+  },
+  {
+    key: "juicio",
+    classes: " judgment-bias-category",
+  },
+  {
+    key: "memoria",
+    classes: "memory-bias-category",
+  },
+  {
+    key: "percepción",
+    classes: " perception-bias-category",
+  },
+  {
+    key: "contexto",
+    classes: "context-bias-category",
+  },
+];
+
+// Generador de clases dinámicas según categoría
+function getBiasCategoryClass(category: string) {
+  const matchedCategory = biasCategories.find(
+    (cat) => cat.key.toLowerCase() === category.toLowerCase()
+  );
+  if (matchedCategory) {
+    return matchedCategory.classes;
+  } else {
+    throw new Error("The bias category is not correct. Make sure it exists!");
+  }
+}
+
+const { category } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-3">
+  {
+    category.map((c) => {
+      const dynamicClasses = getBiasCategoryClass(c);
+      return <span class={` ${dynamicClasses}`}>{c}</span>;
+    })
+  }
+</div>

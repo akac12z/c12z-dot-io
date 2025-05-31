@@ -1,0 +1,36 @@
+---
+import { Picture } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  entry: CollectionEntry<"library">;
+  customClasses?: string;
+}
+
+const { entry, customClasses = " md:max-w-40" } = Astro.props;
+const { data, id } = entry;
+const { cover } = data;
+// class="max-w-28 xs:max-w-36 md:max-w-40 mx-auto h-fit w-fit rounded"
+// class="max-w-28 xs:max-w-36 md:max-w-40 overflow-hidden object-cover w-fit h-fit rounded"
+---
+
+<div
+  class:list={[
+    "max-w-28 xs:max-w-36 mx-auto h-fit w-fit max-h-48 xs:max-h-52 rounded ",
+    `${customClasses}`,
+  ]}
+>
+  <Picture
+    src={cover.src}
+    height={cover.src.height}
+    width={cover.src.width}
+    formats={["avif", "webp", "jpeg", "png"]}
+    alt={cover.alt}
+    class:list={[
+      "max-w-28 xs:max-w-36 overflow-hidden object-cover w-fit h-fit max-h-48 xs:max-h-52 rounded",
+      `${customClasses}`,
+    ]}
+    quality="high"
+    transition:name={`${id}-bookCover`}
+  />
+</div>

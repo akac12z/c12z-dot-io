@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+
+import ScrollGoBackBtn from "../../shared/components/bottons/ScrollGoBackBtn";
+
+import BiasHeader from "./BiasHeader.astro";
+import BiasCard from "./BiasCard.astro";
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+
+const biases = await getCollection("bias");
+---
+
+<section class="mx-auto">
+  <GoBackInTop headPage="/behavior" />
+  <ScrollGoBackBtn headPage="/behavior" client:only="react" />
+  <section class="flex flex-col gap-y-2 xs:gap-y-16">
+    <BiasHeader />
+
+    <div class="max-w-2xl mx-auto flex flex-col">
+      <h2 class="xs:text-xl text-base mb-2">Pincha. Investiga. Aplica.</h2>
+      <section class="grid grid-cols-1 xs:grid-cols-2 gap-x-4 mx-auto gap-y-4">
+        {
+          biases.map((bias) => (
+            <BiasCard entry={bias} transition:name={`${bias.id}-name`} />
+          ))
+        }
+      </section>
+    </div>
+  </section>
+</section>

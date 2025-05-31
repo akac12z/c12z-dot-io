@@ -1,0 +1,12 @@
+---
+import { getCollection } from "astro:content";
+import BookCard from "./BookCard.astro";
+import BookHeader from "./BookHeader.astro";
+
+const library = await getCollection("library");
+---
+
+<section class="grid mx-auto max-w-2xl">
+  <BookHeader />
+  {library.map((book) => <BookCard entry={book} />)}
+</section>

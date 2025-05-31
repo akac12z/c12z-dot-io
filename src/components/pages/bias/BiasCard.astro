@@ -1,0 +1,83 @@
+---
+/*inspiración -> https://www.creative-tim.com/twcomponents/component/tailwind-css-cards*/
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import BiasCategory from "./BiasCategory.astro";
+import BiasIcons from "./BiasIcons.astro";
+
+interface Props {
+  entry: CollectionEntry<"bias">;
+}
+
+export async function getStaticPaths() {
+  const biases = await getCollection("bias");
+
+  return biases.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data, id } = entry;
+const { biasQuestion, biasName, category, backlog } = data;
+---
+
+<article
+  class:list={[
+    "relative group flex rounded-xl h-full w-full border-2 bg-clip-border  transition-colors duration-300 ",
+    `${backlog === "wip" ? "border-mr-text-relax/20 " : "border-mr-text-relax hover:border-mr-bias-500"}`,
+  ]}
+>
+  {
+    backlog === "wip" ? (
+      <div class="flex flex-col justify-between h-full w-full p-3 opacity-20">
+        <article class="flex flex-col justify-between">
+          <div class="flex items-center justify-start gap-2">
+            <BiasIcons entry={entry} />
+            <h2
+              class="line-clamp-2 text-ellipsis overflow-hidden flex-wrap "
+              transition:name={`${id}-name`}
+            >
+              {biasName}
+            </h2>
+          </div>
+          <div class="flex flex-col justify-between gap-2 mt-1">
+            <p class="line-clamp-3 leading-snug">{biasQuestion}</p>
+            <BiasCategory category={category} />
+          </div>
+        </article>
+      </div>
+    ) : (
+      <a
+        href={`/behavior/sesgos/${id}`}
+        class="flex flex-col justify-between h-full w-full p-3"
+      >
+        <article class="flex flex-col justify-between">
+          <div class="flex items-center justify-start gap-2">
+            <BiasIcons entry={entry} />
+            <h2
+              class="line-clamp-2 text-ellipsis overflow-hidden flex-wrap"
+              transition:name={`${id}-name`}
+            >
+              {biasName}
+            </h2>
+          </div>
+          <div class="flex flex-col justify-between gap-2 mt-1">
+            <p class="line-clamp-3 leading-snug">{biasQuestion}</p>
+            <BiasCategory category={category} />
+          </div>
+        </article>
+      </a>
+    )
+  }
+  {
+    backlog === "wip" && (
+      <div class="absolute inset-0 flex items-center justify-center ">
+        <span class="text-mr-text-headers bg-mr-bg/80 border-2 border-mr-neon-red px-2 py-1 rounded-lg shadow-md">
+          ¡Estoy trabajando en el sesgo!
+        </span>
+      </div>
+    )
+  }
+</article>
