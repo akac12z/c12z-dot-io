@@ -1,0 +1,66 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@sharedComponentsInPages/*": [
+        "./src/components/pages/shared/*"
+      ],
+      "@shared/*": [
+        "./src/components/shared/*"
+      ],
+      "@analytics/*": [
+        "./src/components/shared/analytics/*"
+      ],
+      "@static/*": [
+        "./src/components/pages/static/*"
+      ],
+      "@home/*": [
+        "./src/components/static/home/*"
+      ],
+      "@about/*": [
+        "./src/components/static/about/*"
+      ],
+      "@data/*": [
+        "./src/data/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
+      ],
+      "@essay/*": [
+        "./src/components/essay/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@imageAssets/*": [
+        "./src/assets/images/*"
+      ],
+      "@bookImages/*": [
+        "./src/components/assets/images/books/*"
+      ],
+      "@SEO/*": [
+        "./src/components/SEO/*"
+      ],
+      "@icons/*": [
+        "./src/components/icons/*"
+      ],
+      "@test/*": [
+        "./src/components/test/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
