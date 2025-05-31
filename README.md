@@ -1,4 +1,4 @@
-# Proyecto mrjark
+# Proyecto c12z
 
 Un blog/web personal que voy a ir construyendo poco a poco.
 En este readme voy a ir poniendo ciertas cosas del código que pueden ser interesantes.

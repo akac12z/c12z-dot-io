@@ -20,7 +20,7 @@ import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig( {
-  site: 'https://mrjark.com',
+  site: 'https://c12z.io',
   vite: {
     plugins: [ tailwindcss() ],
   },

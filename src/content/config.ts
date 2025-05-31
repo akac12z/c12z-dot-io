@@ -33,7 +33,7 @@ const essayCollection = defineCollection({
     //   }).optional(),
     // tags: z.array(z.string()),
     // language: z.enum(["es"]),
-    // author: z.string().default("mrjark"),
+    // author: z.string().default("c12z"),
     // authorLink: z.string(),
     // readingTime: z.string(),
     // categories: z.array(z.string()),
