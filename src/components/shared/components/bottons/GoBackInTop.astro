@@ -1,0 +1,20 @@
+---
+interface Props {
+  headPage: string;
+}
+
+const { headPage } = Astro.props;
+
+if (!headPage.startsWith("/")) {
+  throw new Error(
+    `Invalid href: "${headPage}". The href must start with a "/".`
+  );
+}
+---
+
+<a
+  href={headPage}
+  class="my-2 px-1 py-0.5 text-xs font-museo_moderno tracking-widest border border-mr-neon-orange text-mr-text-content rounded opacity-50 hover:opacity-100 flex items-center justify-center gap-1 w-fit h-fit mb-5"
+>
+  ← Atrás
+</a>

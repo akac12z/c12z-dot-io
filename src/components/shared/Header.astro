@@ -1,0 +1,53 @@
+---
+import NavbarMobileMenu from "./headerMenus/NavbarMobileMenu.astro";
+import NavbarDesktopMenu from "./headerMenus/NavbarDesktopMenu.astro";
+import Logo from "@icons/shared/Logo.astro";
+---
+
+<header class="flex items-center justify-between">
+  <nav class="flex justify-between items-center mx-auto w-full my-2">
+    <Logo shouldGo="/" height="1.5rem" width="1.5rem" />
+    <NavbarMobileMenu />
+    <NavbarDesktopMenu />
+  </nav>
+</header>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const primaryNav = document.querySelector(
+      ".navigation-mobile-menu"
+    ) as HTMLUListElement;
+    const navToggle = document.querySelector(
+      ".mobile-nav-toggle"
+    ) as HTMLButtonElement;
+
+    const toggleMenu = () => {
+      const visibility = primaryNav.getAttribute("data-visible");
+      if (visibility === "false") {
+        primaryNav.setAttribute("data-visible", "true");
+        navToggle.setAttribute("aria-expanded", "true");
+      } else {
+        primaryNav.setAttribute("data-visible", "false");
+        navToggle.setAttribute("aria-expanded", "false");
+      }
+    };
+
+    const closeMenu = () => {
+      primaryNav.setAttribute("data-visible", "false");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
+
+    navToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener("click", (e) => {
+      const isClickInsideMenu = primaryNav.contains(e.target as Node);
+      const isClickInsideButton = navToggle.contains(e.target as Node);
+      if (!isClickInsideMenu && !isClickInsideButton) {
+        closeMenu();
+      }
+    });
+  });
+</script>

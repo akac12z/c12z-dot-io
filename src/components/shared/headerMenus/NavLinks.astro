@@ -1,0 +1,17 @@
+---
+import type { NavLinkProps } from "@interfaces/navLinks.interface";
+
+const { href, text, currentPath, customClasses } = Astro.props as NavLinkProps;
+const isActive = currentPath.includes(href);
+
+const navLinksClasses = [
+  customClasses,
+  isActive ? customClasses : "text-mr-text-headers",
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<li class="navigation-mobile-link xs:navigation-desktop-link">
+  <a class={navLinksClasses} href={href}>{text}</a>
+</li>
