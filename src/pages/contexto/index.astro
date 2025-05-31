@@ -1,0 +1,17 @@
+---
+import { CONTEXT_PAGE_INFO } from "@/global/pagesInfo";
+
+import MainLayout from "@layouts/MainLayout.astro";
+import ContextSEO from "@SEO/pages/context/ContextSEO.astro";
+
+import Context from "@static/Context.astro";
+---
+
+<MainLayout>
+  <ContextSEO
+    slot="head"
+    pageTitle={CONTEXT_PAGE_INFO.title}
+    pageDescription={CONTEXT_PAGE_INFO.description}
+  />
+  <Context />
+</MainLayout>

@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+
+import { ESSAY_PAGE_INFO } from "@/global/pagesInfo";
+import MainLayout from "@layouts/MainLayout.astro";
+import EssaysPageSEO from "@SEO/pages/essays/EssaysPageSEO.astro";
+
+const essays = await getCollection("essay");
+---
+
+<MainLayout>
+  <EssaysPageSEO
+    slot="head"
+    pageTitle={ESSAY_PAGE_INFO.title}
+    pageDescription={ESSAY_PAGE_INFO.description}
+  />
+  <h1>Ensayos</h1>
+  <p>Por ahora, no tengo ningún ensayo que mustrarte! 🙂</p>
+
+  <section class="flex justify-between items-center mt-6 gap-x-4">
+    {
+      essays.map((essay) => {
+        const { data, id } = essay;
+        const { title, description } = data;
+
+        return (
+          <article class="">
+            <div>
+              <h1>{title}</h1>
+              <p class="mb-2">{description}</p>
+            </div>
+            <a
+              class="text-sm underline hover:text-mr-primary-green hover:no-underline"
+              href={`/ensayos/${id}`}
+            >
+              Ir al post
+            </a>
+          </article>
+        );
+      })
+    }
+  </section>
+</MainLayout>

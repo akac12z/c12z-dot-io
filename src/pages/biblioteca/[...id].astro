@@ -1,0 +1,104 @@
+---
+export const prerender = true;
+
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection, render } from "astro:content";
+
+import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
+
+import BookScore from "@/components/pages/books/BookScore.astro";
+import BookCover from "@/components/pages/books/BookCover.astro";
+import MainLayout from "@layouts/MainLayout.astro";
+import LibrarySEO from "@SEO/contents/BooksSEO.astro";
+import TableOfContents from "@shared/components/TableOfContent";
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+
+interface Props {
+  entry: CollectionEntry<"library">;
+}
+
+export async function getStaticPaths() {
+  const library = await getCollection("library");
+
+  return library.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data, id } = entry;
+
+const { title, score, authors, readingTime, publishDate } = data;
+const authorsInArry = Array.isArray(authors) ? authors : [authors];
+
+const { Content, headings } = await render(entry);
+---
+
+<MainLayout>
+  <LibrarySEO slot="head" entry={entry} />
+  <article class="mx-auto">
+    <GoBackInTop headPage="/biblioteca" />
+    <ScrollGoBackBtn headPage="/biblioteca" client:only="react" />
+
+    <section class="grid grid-cols-2 max-w-lg mx-auto">
+      <BookCover entry={entry} />
+
+      <section class="flex flex-col items-start custom-prose">
+        <h1 transition:name={`${id}-${title}`} class="text-start mb-2">
+          {title}
+        </h1>
+        <div class="flex flex-col -mt-1 mb-4">
+          <!-- TODO: HACER EL AUTHORS EN UN COMPONENTE A PARTE Y QUE DEPENDIENDO DE SI ES UNO o DOS, QUE SE MUESTRE UNA COSA U OTRA -->
+          {
+            authorsInArry.map((author) => (
+              <a
+                class="no-underline text-sm hover:underline text-mr-text-headers"
+                target="_blank"
+                rel="noopener"
+                href={author.link}
+              >
+                de {author.name}
+              </a>
+            ))
+          }
+        </div>
+        <BookScore
+          entry={entry}
+          width="w-5 xs:w-7"
+          height="w-5 xs:h-7"
+          transition:name={`${id}-bookScore-${score}`}
+        />
+        <div class="flex flex-col mt-4 gap-y-2 text-xs text-mr-text-relax">
+          <span
+            >Lo publiqué el {publishDate} y puedes leerlo en {readingTime} min</span
+          >
+        </div>
+      </section>
+    </section>
+    <div class="mt-4 mx-auto">
+      <TableOfContents headings={headings} client:only="react" />
+    </div>
+    <section class="custom-prose mx-auto">
+      <Content />
+    </section>
+    <section class="custom-prose">
+      <h2 class="mb-2">Autor(es)</h2>
+      {
+        authorsInArry.map((author) => (
+          <div>
+            <a
+              class="no-underline text-sm text-mr-neon-blue"
+              href={author.link}
+              target="_blank"
+              rel="noopener"
+            >
+              {author.name}
+            </a>
+          </div>
+        ))
+      }
+    </section>
+  </article>
+</MainLayout>

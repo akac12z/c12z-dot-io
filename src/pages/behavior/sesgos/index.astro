@@ -1,0 +1,16 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import { BIAS_PAGE_INFO } from "@/global/pagesInfo";
+import BiasPage from "@/components/pages/bias/BiasPage.astro";
+
+import BiasPageSEO from "@SEO/pages/bias/BiasPageSEO.astro";
+---
+
+<MainLayout>
+  <BiasPageSEO
+    slot="head"
+    pageTitle={BIAS_PAGE_INFO.title}
+    pageDescription={BIAS_PAGE_INFO.description}
+  />
+  <BiasPage />
+</MainLayout>

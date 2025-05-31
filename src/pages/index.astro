@@ -1,0 +1,16 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import MainSEO from "@SEO/pages/MainSEO.astro";
+import Home from "@static/Home.astro";
+
+import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
+---
+
+<MainLayout>
+  <MainSEO
+    slot="head"
+    pageTitle={SITE_DEFAULT_CONFIG.title}
+    pageDescription={SITE_DEFAULT_CONFIG.description}
+  />
+  <Home />
+</MainLayout>

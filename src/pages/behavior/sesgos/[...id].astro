@@ -1,0 +1,77 @@
+---
+/**
+ * Neceito porner el prerender porque aun no ha salido ASTRO 5 por ende, en las páginas dinámicas necesitas esto
+ */
+export const prerender = true;
+
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+import MainLayout from "@layouts/MainLayout.astro";
+import BiasSEO from "@SEO/contents/BiasSEO.astro";
+
+import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
+import BiasCategory from "@/components/pages/bias/BiasCategory.astro";
+import TableOfContents from "@shared/components/TableOfContent";
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+
+
+interface Props {
+  entry: CollectionEntry<"bias">;
+}
+
+export async function getStaticPaths() {
+  const biases = await getCollection("bias");
+
+  return biases.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data, id } = entry;
+const { biasName, publishDate, lastTimeEdited, biasQuestion, category } = data;
+
+const { Content, headings } = await render(entry);
+
+---
+
+<MainLayout>
+  <BiasSEO slot="head" entry={entry} />
+  <section class="mx-auto">
+    <GoBackInTop headPage="/behavior/sesgos"/>
+    <ScrollGoBackBtn headPage="/behavior/sesgos" client:only="react" />
+    <article class="flex flex-col justify-center ">
+      <section class="text-center">
+        <h1 transition:name=`${id}-name` class="text-base text-center mb-2 underline">
+          {biasName}
+        </h1>
+        <h2 class="xs:text-2xl text-xl font-museo_moderno text-mr-text-headers tracking-wider">{biasQuestion}</h2>
+        <section class="flex flex-col justify-center items-center text-center my-4 gap-y-2">
+          {
+            category.length > 1
+              ? <p>Categorías del sesgo:</p>
+              : <p>Categoría del sesgo:</p>
+          }
+          <BiasCategory category={category} />
+        </section>
+        <section class="flex items-center justify-between text-mr-text-relax mb-6">
+          {
+            lastTimeEdited && lastTimeEdited !== publishDate
+              ? (
+                <span class="text-xs">Publicado: {publishDate}</span>
+                <span class="text-xs">Editado: {lastTimeEdited}</span>
+              )
+              : (
+                <span class="text-xs">Publicado: {publishDate}</span>
+              )
+          }
+        </section>
+      </section>
+      <TableOfContents headings={headings} client:only="react" />
+        <section class="custom-prose mx-auto">
+          <Content />
+        </section>
+    </article>
+  </section>
+</MainLayout>

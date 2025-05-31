@@ -1,0 +1,22 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import { BEHAVIOR_PAGE_INFO } from "@/global/pagesInfo";
+import BehaviorPageSEO from "@SEO/pages/behavior/BehaviorPageSEO.astro";
+---
+
+<MainLayout>
+  <BehaviorPageSEO
+    slot="head"
+    pageTitle={BEHAVIOR_PAGE_INFO.title}
+    pageDescription={BEHAVIOR_PAGE_INFO.description}
+  />
+  <h1>Behavior Page: W.I.P.</h1>
+  <a
+    class="text-md underline underline-offset-4 text-mr-bias-500"
+    href="/behavior/sesgos"
+    >Ir a la página de <span
+      transition:name="bias-header-page-h1-transition-name"
+      >Sesgos Cognitivos</span
+    ></a
+  >
+</MainLayout>

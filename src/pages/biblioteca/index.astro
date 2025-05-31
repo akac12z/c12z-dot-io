@@ -1,0 +1,15 @@
+---
+import { LIBRARY_PAGE_INFO } from "@/global/pagesInfo";
+import MainLayout from "@layouts/MainLayout.astro";
+import LibrarySEO from "@SEO/pages/library/LibrarySEO.astro";
+import BookPage from "@/components/pages/books/BookPage.astro";
+---
+
+<MainLayout>
+  <LibrarySEO
+    slot="head"
+    pageTitle={LIBRARY_PAGE_INFO.title}
+    pageDescription={LIBRARY_PAGE_INFO.description}
+  />
+  <BookPage />
+</MainLayout>
