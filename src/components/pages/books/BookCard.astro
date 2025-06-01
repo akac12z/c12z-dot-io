@@ -70,7 +70,9 @@ const { quote, title, readingTime, backlog } = data;
             <p>"{quote}"</p>
           </>
         ) : (
-          <p class="text-neutral-500">
+
+            <BookScore entry={entry} />
+            <p class="text-neutral-500">
             "El resumen e insights de{" "}
             <span class="font-museo_moderno italic">{title}</span> aún no lo
             tengo listo. Estoy leyéndolo o en proceso de subirlo.

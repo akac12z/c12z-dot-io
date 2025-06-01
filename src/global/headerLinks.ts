@@ -9,7 +9,7 @@ export const HEADER_LINKS: HeaderLinksInterface[] = [
   {
     href: "/biblioteca",
     text: "/biblioteca",
-    customClasses: "hover:text-cz-neon-gold text-cz-neon-gold",
+    customClasses: "hover:text-cz-neon-lime text-cz-neon-lime",
   },
   {
     href: "/behavior",
