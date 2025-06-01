@@ -4,16 +4,16 @@ export const HEADER_LINKS: HeaderLinksInterface[] = [
   {
     href: "/ensayos",
     text: "/ensayos",
-    customClasses: "hover:text-mr-neon-blue text-mr-neon-blue",
+    customClasses: "hover:text-cz-neon-blue text-cz-neon-blue",
   },
   {
     href: "/biblioteca",
     text: "/biblioteca",
-    customClasses: "hover:text-mr-neon-gold text-mr-neon-gold",
+    customClasses: "hover:text-cz-neon-gold text-cz-neon-gold",
   },
   {
     href: "/behavior",
     text: "/behavior",
-    customClasses: "hover:text-mr-neon-pink text-mr-neon-pink",
+    customClasses: "hover:text-cz-neon-pink text-cz-neon-pink",
   },
 ];

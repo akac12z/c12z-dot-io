@@ -46,7 +46,7 @@ const { Content, headings } = await render(entry);
         <h1 transition:name=`${id}-name` class="text-base text-center mb-2 underline">
           {biasName}
         </h1>
-        <h2 class="xs:text-2xl text-xl font-museo_moderno text-mr-text-headers tracking-wider">{biasQuestion}</h2>
+        <h2 class="xs:text-2xl text-xl font-museo_moderno text-cz-text-headers tracking-wider">{biasQuestion}</h2>
         <section class="flex flex-col justify-center items-center text-center my-4 gap-y-2">
           {
             category.length > 1
@@ -55,7 +55,7 @@ const { Content, headings } = await render(entry);
           }
           <BiasCategory category={category} />
         </section>
-        <section class="flex items-center justify-between text-mr-text-relax mb-6">
+        <section class="flex items-center justify-between text-cz-text-relax mb-6">
           {
             lastTimeEdited && lastTimeEdited !== publishDate
               ? (

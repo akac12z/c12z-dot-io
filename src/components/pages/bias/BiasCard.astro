@@ -26,7 +26,7 @@ const { biasQuestion, biasName, category, backlog } = data;
 <article
   class:list={[
     "relative group flex rounded-xl h-full w-full border-2 bg-clip-border  transition-colors duration-300 ",
-    `${backlog === "wip" ? "border-mr-text-relax/20 " : "border-mr-text-relax hover:border-mr-bias-500"}`,
+    `${backlog === "wip" ? "border-cz-text-relax/20 " : "border-cz-text-relax hover:border-cz-bias-500"}`,
   ]}
 >
   {
@@ -74,7 +74,7 @@ const { biasQuestion, biasName, category, backlog } = data;
   {
     backlog === "wip" && (
       <div class="absolute inset-0 flex items-center justify-center ">
-        <span class="text-mr-text-headers bg-mr-bg/80 border-2 border-mr-neon-red px-2 py-1 rounded-lg shadow-md">
+        <span class="text-cz-text-headers bg-cz-bg/80 border-2 border-cz-neon-red px-2 py-1 rounded-lg shadow-md">
           ¡Estoy trabajando en el sesgo!
         </span>
       </div>

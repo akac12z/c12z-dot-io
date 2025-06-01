@@ -64,7 +64,7 @@ const { quote, title, readingTime, backlog } = data;
         backlog === "upload" ? (
           <>
             <BookScore entry={entry} />
-            <div class="flex flex-col gap-y-2 text-xs text-mr-text-relax">
+            <div class="flex flex-col gap-y-2 text-xs text-cz-text-relax">
               <span>Léelo en {readingTime}min</span>
             </div>
             <p>"{quote}"</p>
@@ -82,7 +82,7 @@ const { quote, title, readingTime, backlog } = data;
     {
       backlog !== "upload" && (
         <div class="absolute inset-0 flex items-center justify-center ">
-          <span class="text-mr-text-headers bg-mr-bg/60 border-2 border-mr-neon-red px-2 py-1 rounded-lg shadow-md">
+          <span class="text-cz-text-headers bg-cz-bg/60 border-2 border-cz-neon-red px-2 py-1 rounded-lg shadow-md">
             ¡No disponible por ahora!
           </span>
         </div>

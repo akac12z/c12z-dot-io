@@ -10,7 +10,7 @@ const { text, author, image, link } = Astro.props as QuoteCardProps;
 >
   <!--TODO: Y si hago esto como un link y que lleve a la página del autor (si es que tengo más de un autor para mi blog)  -->
   <div
-    class="border border-mr-primary-green/80 shrink-0 w-16 h-16 rounded-full flex items-center justify-center m-2"
+    class="border border-cz-primary/80 shrink-0 w-16 h-16 rounded-full flex items-center justify-center m-2"
   >
     <Image
       width={64}
@@ -30,7 +30,7 @@ const { text, author, image, link } = Astro.props as QuoteCardProps;
       referrerpolicy="strict-origin"
       title="Ver más sobre el autor"
       rel="noopener noreferrer"
-      class="mt-2 text-sm font-semibold text-mr-primary-green/80 no-underline hover:underline flex items-center gap-1 w-fit"
+      class="mt-2 text-sm font-semibold text-cz-primary/80 no-underline hover:underline flex items-center gap-1 w-fit"
     >
       {author}
       <svg

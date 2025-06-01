@@ -106,33 +106,33 @@
   --font-rubik: "Rubik", system-ui, "sans-serif";
   --font-code: "Cascadia, ui-monospace, monospace";
 
-  --color-mr-bg: #0b0b0e;
-  --color-mr-text-headers: #f6efe5;
-  --color-mr-text-content: #ddd8d1;
-  --color-mr-text-relax: #c3bdb4;
-  --color-mr-primary-green: #f6ad02;
-  --color-mr-secondary-pink: #ec1564;
-  --color-mr-neon-violet: #e22ef6;
-  --color-mr-neon-pink: #ff33c4;
-  --color-mr-neon-cosmic: #ff327d;
-  --color-mr-neon-blue: #33afff;
-  --color-mr-neon-lime: #d4fe34;
-  --color-mr-neon-gold: #ffc733;
-  --color-mr-neon-red: #ff4d4d;
-  --color-mr-neon-orange: #ff8a33;
-  --color-mr-neon-green: #afff33;
-  --color-mr-neon-aqua: #33ffe8;
-  --color-mr-bias-300: #c3b4c6;
-  --color-mr-bias-500: #a58faa;
-  --color-mr-bias-700: #756679;
-  --color-mr-bias-category-perception: #f2ce57;
-  --color-mr-bias-category-context: #9ed841;
-  --color-mr-bias-category-judgment: #4c9dff;
-  --color-mr-bias-category-memory: #af76ff;
-  --color-mr-bias-category-speed: #e03d3d;
-  --color-mr-error: #ef4444;
-  --color-mr-warning: #eab308;
-  --color-mr-success: #22c55e;
+  --color-cz-bg: #0b0b0e;
+  --color-cz-text-headers: #f6efe5;
+  --color-cz-text-content: #ddd8d1;
+  --color-cz-text-relax: #c3bdb4;
+  --color-cz-primary: #f6ad02;
+  --color-cz-secondary-pink: #ec1564;
+  --color-cz-neon-violet: #e22ef6;
+  --color-cz-neon-pink: #ff33c4;
+  --color-cz-neon-cosmic: #ff327d;
+  --color-cz-neon-blue: #33afff;
+  --color-cz-neon-lime: #d4fe34;
+  --color-cz-neon-gold: #ffc733;
+  --color-cz-neon-red: #ff4d4d;
+  --color-cz-neon-orange: #ff8a33;
+  --color-cz-neon-green: #afff33;
+  --color-cz-neon-aqua: #33ffe8;
+  --color-cz-bias-300: #c3b4c6;
+  --color-cz-bias-500: #a58faa;
+  --color-cz-bias-700: #756679;
+  --color-cz-bias-category-perception: #f2ce57;
+  --color-cz-bias-category-context: #9ed841;
+  --color-cz-bias-category-judgment: #4c9dff;
+  --color-cz-bias-category-memory: #af76ff;
+  --color-cz-bias-category-speed: #e03d3d;
+  --color-cz-error: #ef4444;
+  --color-cz-warning: #eab308;
+  --color-cz-success: #22c55e;
 
   --breakpoint-xs: 28.75rem;
 
@@ -143,10 +143,10 @@
 /* COMPONENTS */
 @layer base {
   html {
-    @apply bg-mr-bg antialiased scroll-smooth;
+    @apply bg-cz-bg antialiased scroll-smooth;
   }
   body {
-    @apply bg-mr-bg antialiased scroll-smooth;
+    @apply bg-cz-bg antialiased scroll-smooth;
   }
   h1,
   h2,
@@ -154,7 +154,7 @@
   h4,
   h5,
   h6 {
-    @apply font-museo_moderno tracking-wider text-mr-text-headers;
+    @apply font-museo_moderno tracking-wider text-cz-text-headers;
   }
   h1 {
     @apply text-2xl;
@@ -174,16 +174,16 @@
     @apply text-sm;
   }
   p {
-    @apply font-rubik text-sm text-mr-text-content font-normal tracking-wider leading-relaxed;
+    @apply font-rubik text-sm text-cz-text-content font-normal tracking-wider leading-relaxed;
   }
   a {
-    @apply font-museo_moderno tracking-wider text-mr-text-headers;
+    @apply font-museo_moderno tracking-wider text-cz-text-headers;
   }
   blockquote {
-    @apply font-rubik text-base border-l-2 pl-4 my-2 text-mr-text-relax;
+    @apply font-rubik text-base border-l-2 pl-4 my-2 text-cz-text-relax;
   }
   li {
-    @apply font-rubik text-sm text-mr-text-content font-normal tracking-wider leading-relaxed mb-2;
+    @apply font-rubik text-sm text-cz-text-content font-normal tracking-wider leading-relaxed mb-2;
   }
 
   footer {
@@ -195,7 +195,7 @@
 @layer components {
   /* CUSTOM PROSE PLUGING */
   .custom-prose {
-    @apply prose prose-invert prose-headings:text-mr-text-headers prose-strong:text-mr-text-content prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4;
+    @apply prose prose-invert prose-headings:text-cz-text-headers prose-strong:text-cz-text-content prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4;
   }
 
   /* CUSTOM BULLET LIST */
@@ -203,7 +203,7 @@
     @apply list-disc;
   }
   .custom-list ul > li::marker {
-    @apply text-mr-primary-green;
+    @apply text-cz-primary;
   }
 
   /* BODY */
@@ -212,7 +212,7 @@
   }
   /* CODING STYLE */
   .coding {
-    @apply font-code text-xs text-mr-text-content;
+    @apply font-code text-xs text-cz-text-content;
   }
 
   /* COVER IMAGES */
@@ -233,13 +233,13 @@
   /* TOGGLE HAMBURGER MENU */
   /* Toggle Menu: Mobile */
   .mobile-nav-toggle {
-    @apply absolute block text-mr-primary-green z-10 w-6 h-6 aspect-square top-6 right-3 transform duration-500 ease-linear;
+    @apply absolute block text-cz-primary z-10 w-6 h-6 aspect-square top-6 right-3 transform duration-500 ease-linear;
   }
   .mobile-nav-toggle[aria-expanded="true"] {
-    @apply text-mr-neon-orange transform duration-500 ease-linear rotate-90;
+    @apply text-cz-neon-orange transform duration-500 ease-linear rotate-90;
   }
   .navigation-mobile-menu {
-    @apply fixed top-0 right-0 w-2/3 h-2/4 rounded-b-xl rounded-tl-xl flex flex-col items-start justify-start pt-10 pl-4 gap-2 border border-mr-primary-green bg-mr-bg/10 backdrop-blur-md transform -translate-y-[500px] transition-transform duration-500 ease-out;
+    @apply fixed top-0 right-0 w-2/3 h-2/4 rounded-b-xl rounded-tl-xl flex flex-col items-start justify-start pt-10 pl-4 gap-2 border border-cz-primary bg-cz-bg/10 backdrop-blur-md transform -translate-y-[500px] transition-transform duration-500 ease-out;
   }
   .navigation-mobile-menu[data-visible="true"] {
     @apply transform translate-y-0;
@@ -257,18 +257,18 @@
 
   /* BIAS CATEGORIES */
   .speed-bias-category {
-    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-mr-bias-category-speed border-mr-bias-category-speed bg-mr-bias-category-speed/10;
+    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-speed border-cz-bias-category-speed bg-cz-bias-category-speed/10;
   }
   .memory-bias-category {
-    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-mr-bias-category-memory border-mr-bias-category-memory bg-mr-bias-category-memory/10;
+    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-memory border-cz-bias-category-memory bg-cz-bias-category-memory/10;
   }
   .judgment-bias-category {
-    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-mr-bias-category-judgment border-mr-bias-category-judgment bg-mr-bias-category-judgment/10;
+    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-judgment border-cz-bias-category-judgment bg-cz-bias-category-judgment/10;
   }
   .context-bias-category {
-    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-mr-bias-category-context border-mr-bias-category-context bg-mr-bias-category-context/10;
+    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-context border-cz-bias-category-context bg-cz-bias-category-context/10;
   }
   .perception-bias-category {
-    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-mr-bias-category-perception border-mr-bias-category-perception bg-mr-bias-category-perception/10;
+    @apply border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-perception border-cz-bias-category-perception bg-cz-bias-category-perception/10;
   }
 }
