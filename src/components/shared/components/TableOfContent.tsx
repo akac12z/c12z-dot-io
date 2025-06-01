@@ -22,7 +22,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
         <button
           aria-expanded={isVisible}
           onClick={() => setIsVisible(!isVisible)}
-          className="flex items-center text-cz-text-headers text-sm cursor-pointer"
+          className="flex items-center text-cz-text-headers-light text-sm cursor-pointer"
         >
           Tabla de Contenidos
           <span
@@ -34,7 +34,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
           </span>
         </button>
         {isVisible && (
-          <div className="backdrop-blur-lg border border-cz-text-relax p-1 z-10 overflow-y-auto absolute w-72 xs:w-96 left-0 pt-4 rounded-tr-lg rounded-br-lg rounded-bl-lg">
+          <div className="backdrop-blur-lg border border-cz-text-relax-light p-1 z-10 overflow-y-auto absolute w-72 xs:w-96 left-0 pt-4 rounded-tr-lg rounded-br-lg rounded-bl-lg">
             <ul>
               {headings.map(({ slug, text }) => (
                 <li key={slug} className="ml-2 cz-1 mb-1">

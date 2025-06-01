@@ -54,7 +54,7 @@ const { Content, headings } = await render(entry);
           {
             authorsInArry.map((author) => (
               <a
-                class="no-underline text-sm hover:underline text-cz-text-headers"
+                class="no-underline text-sm hover:underline text-cz-text-headers-light"
                 target="_blank"
                 rel="noopener"
                 href={author.link}
@@ -70,7 +70,9 @@ const { Content, headings } = await render(entry);
           height="w-5 xs:h-7"
           transition:name={`${id}-bookScore-${score}`}
         />
-        <div class="flex flex-col mt-4 gap-y-2 text-xs text-cz-text-relax">
+        <div
+          class="flex flex-col mt-4 gap-y-2 text-xs text-cz-text-relax-light"
+        >
           <span
             >Lo publiqué el {publishDate} y puedes leerlo en {readingTime} min</span
           >

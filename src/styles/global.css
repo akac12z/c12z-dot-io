@@ -106,17 +106,21 @@
   --font-rubik: "Rubik", system-ui, "sans-serif";
   --font-code: "Cascadia, ui-monospace, monospace";
 
-  --color-cz-bg: #060607;
-  --color-cz-text-headers: #f6efe5;
-  --color-cz-text-content: #ddd8d1;
-  --color-cz-text-relax: #c3bdb4;
+  --color-cz-bg-dark: #060607;
+  --color-cz-bg-light: #f5f2ee;
+  --color-cz-text-headers-light: #fcf8f1;
+  --color-cz-text-content-light: #dfdbd5;
+  --color-cz-text-relax-light: #9d9b98;
+  --color-cz-text-headers-dark: #0c0c0b;
+  --color-cz-text-content-dark: #1f1e1d;
+  --color-cz-text-relax-dark: #595856;
   --color-cz-primary: #f6ad02;
   --color-cz-secondary: #904fe7;
   --color-cz-neon-violet: #e22ef6;
   --color-cz-neon-pink: #ff33c4;
   --color-cz-neon-cosmic: #ff327d;
   --color-cz-neon-blue: #33afff;
-  --color-cz-neon-lime: #d4fe34;
+  --color-cz-neon-lime: #41ce1a;
   --color-cz-neon-gold: #ffc733;
   --color-cz-neon-red: #ff4d4d;
   --color-cz-neon-orange: #f16f0e;
@@ -143,10 +147,10 @@
 /* COMPONENTS */
 @layer base {
   html {
-    @apply bg-cz-bg antialiased scroll-smooth;
+    @apply bg-cz-bg-dark antialiased scroll-smooth;
   }
   body {
-    @apply bg-cz-bg antialiased scroll-smooth;
+    @apply bg-cz-bg-dark antialiased scroll-smooth;
   }
   h1,
   h2,
@@ -154,7 +158,7 @@
   h4,
   h5,
   h6 {
-    @apply font-museo_moderno tracking-wider text-cz-text-headers;
+    @apply font-museo_moderno tracking-wider text-cz-text-headers-light;
   }
   h1 {
     @apply text-2xl;
@@ -174,18 +178,17 @@
     @apply text-sm;
   }
   p {
-    @apply font-rubik text-sm text-cz-text-content font-normal tracking-wider leading-relaxed;
+    @apply font-rubik text-sm text-cz-text-content-light font-normal tracking-wider leading-relaxed;
   }
   a {
-    @apply font-museo_moderno tracking-wider text-cz-text-headers;
+    @apply font-museo_moderno tracking-wider text-cz-text-headers-light;
   }
   blockquote {
-    @apply font-rubik text-base border-l-2 pl-4 my-2 text-cz-text-relax;
+    @apply font-rubik text-base border-l-2 pl-4 my-2 text-cz-text-relax-light;
   }
   li {
-    @apply font-rubik text-sm text-cz-text-content font-normal tracking-wider leading-relaxed mb-2;
+    @apply font-rubik text-sm text-cz-text-content-light font-normal tracking-wider leading-relaxed mb-2;
   }
-
   footer {
     @apply mt-auto;
   }
@@ -195,7 +198,7 @@
 @layer components {
   /* CUSTOM PROSE PLUGING */
   .custom-prose {
-    @apply prose prose-invert prose-headings:text-cz-text-headers prose-strong:text-cz-text-content prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4;
+    @apply prose prose-invert prose-headings:text-cz-text-headers-light prose-strong:text-cz-text-content-light prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4;
   }
 
   /* CUSTOM BULLET LIST */
@@ -212,7 +215,7 @@
   }
   /* CODING STYLE */
   .coding {
-    @apply font-code text-xs text-cz-text-content;
+    @apply font-code text-xs text-cz-text-content-light;
   }
 
   /* COVER IMAGES */
@@ -239,7 +242,7 @@
     @apply text-cz-neon-orange transform duration-500 ease-linear rotate-90;
   }
   .navigation-mobile-menu {
-    @apply fixed top-0 right-0 w-2/3 h-2/4 rounded-b-xl rounded-tl-xl flex flex-col items-start justify-start pt-10 pl-4 gap-2 border border-cz-primary bg-cz-bg/10 backdrop-blur-md transform -translate-y-[500px] transition-transform duration-500 ease-out;
+    @apply fixed top-0 right-0 w-2/3 h-2/4 rounded-b-xl rounded-tl-xl flex flex-col items-start justify-start pt-10 pl-4 gap-2 border border-cz-primary bg-cz-bg-dark/10 backdrop-blur-md transform -translate-y-[500px] transition-transform duration-500 ease-out;
   }
   .navigation-mobile-menu[data-visible="true"] {
     @apply transform translate-y-0;

@@ -25,8 +25,8 @@ const { biasQuestion, biasName, category, backlog } = data;
 
 <article
   class:list={[
-    "relative group flex rounded-xl h-full w-full border-2 bg-clip-border  transition-colors duration-300 ",
-    `${backlog === "wip" ? "border-cz-text-relax/20 " : "border-cz-text-relax hover:border-cz-bias-500"}`,
+    "relative group flex rounded-xl h-full w-full border-2 bg-clip-border transition-colors duration-300 ",
+    `${backlog === "wip" ? "border-cz-text-relax-light/20 " : "border-cz-bias-300 hover:shadow-[4px_4px_0px_0px] hover:shadow-cz-bias-500 hover:border-cz-bias-500 hover:-translate-1"}`,
   ]}
 >
   {
@@ -74,7 +74,7 @@ const { biasQuestion, biasName, category, backlog } = data;
   {
     backlog === "wip" && (
       <div class="absolute inset-0 flex items-center justify-center ">
-        <span class="text-cz-text-headers bg-cz-bg/80 border-2 border-cz-neon-red px-2 py-1 rounded-lg shadow-md">
+        <span class="text-cz-text-headers-light bg-cz-bg/80 border-2 border-cz-neon-red px-2 py-1 rounded-lg shadow-md">
           ¡Estoy trabajando en el sesgo!
         </span>
       </div>
