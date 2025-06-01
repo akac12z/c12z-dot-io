@@ -41,7 +41,7 @@ const ScrollToTopBtn = () => {
         className="
           w-8 h-8 sm:right-10 sm:bottom-10 rounded-full cursor-pointer
           border border-cz-primary bg-cz-primary/10
-          text-cz-primary hover:scale-105 flex items-center justify-center
+          text-cz-primary hover:scale-110 transition-all flex items-center justify-center
         "
       >
         ↑

@@ -36,7 +36,7 @@ export default function TestingGoTo({ headPage }: Props) {
         className="
           w-8 h-8 rounded-full 
           border border-cz-neon-orange bg-cz-neon-orange/10 cursor-pointer
-          text-cz-neon-orange hover:scale-105 flex items-center justify-center
+          text-cz-neon-orange hover:scale-110 transition-all flex items-center justify-center
         "
         href={headPage}
       >

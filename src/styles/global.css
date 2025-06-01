@@ -106,12 +106,12 @@
   --font-rubik: "Rubik", system-ui, "sans-serif";
   --font-code: "Cascadia, ui-monospace, monospace";
 
-  --color-cz-bg: #0b0b0e;
+  --color-cz-bg: #060607;
   --color-cz-text-headers: #f6efe5;
   --color-cz-text-content: #ddd8d1;
   --color-cz-text-relax: #c3bdb4;
   --color-cz-primary: #f6ad02;
-  --color-cz-secondary-pink: #ec1564;
+  --color-cz-secondary: #904fe7;
   --color-cz-neon-violet: #e22ef6;
   --color-cz-neon-pink: #ff33c4;
   --color-cz-neon-cosmic: #ff327d;
@@ -119,7 +119,7 @@
   --color-cz-neon-lime: #d4fe34;
   --color-cz-neon-gold: #ffc733;
   --color-cz-neon-red: #ff4d4d;
-  --color-cz-neon-orange: #ff8a33;
+  --color-cz-neon-orange: #f16f0e;
   --color-cz-neon-green: #afff33;
   --color-cz-neon-aqua: #33ffe8;
   --color-cz-bias-300: #c3b4c6;
