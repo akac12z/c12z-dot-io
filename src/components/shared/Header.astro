@@ -2,13 +2,15 @@
 import NavbarMobileMenu from "./headerMenus/NavbarMobileMenu.astro";
 import NavbarDesktopMenu from "./headerMenus/NavbarDesktopMenu.astro";
 import Logo from "@icons/shared/Logo.astro";
+import DarkModeToggle from "./components/bottons/theme/DarkModeToggle";
 ---
 
 <header class="flex items-center justify-between">
   <nav class="flex justify-between items-center mx-auto w-full my-2">
     <Logo shouldGo="/" height="1.5rem" width="1.5rem" />
-    <NavbarMobileMenu />
-    <NavbarDesktopMenu />
+    <!-- <NavbarMobileMenu /> -->
+    <!-- <NavbarDesktopMenu /> -->
+    <!-- <DarkModeToggle client:only="react" /> -->
   </nav>
 </header>
 
