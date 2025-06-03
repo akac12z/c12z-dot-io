@@ -120,6 +120,17 @@
   --color-cz-primary: #f6ad02;
   --color-cz-secondary: #904fe7;
 
+  --color-cz-behavior-dark: #e22ef6;
+  --color-cz-behavior-light: #80008e;
+  --color-cz-ensayos-dark: #33ffe8;
+  --color-cz-ensayos-light: #016c60;
+  --color-cz-biblioteca-dark: #ffa424;
+  --color-cz-biblioteca-light: #a15e00;
+  --color-cz-proyectos-dark: #a2ff27;
+  --color-cz-proyectos-light: #2e5100;
+  --color-cz-otros-dark: #ff3838;
+  --color-cz-otros-light: #c10000;
+
   --color-cz-neon-violet: #e22ef6;
   --color-cz-neon-pink: #ff33c4;
   --color-cz-neon-cosmic: #ff327d;
@@ -127,9 +138,10 @@
   --color-cz-neon-lime: #41ce1a;
   --color-cz-neon-gold: #ffc733;
   --color-cz-neon-red: #ff4d4d;
-  --color-cz-neon-orange: #f16f0e;
   --color-cz-neon-green: #afff33;
   --color-cz-neon-aqua: #33ffe8;
+
+  --color-cz-neon-orange: #f16f0e;
 
   --color-cz-bias-300: #c3b4c6;
   --color-cz-bias-500: #a58faa;
