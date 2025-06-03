@@ -9,7 +9,7 @@ export default function GoBackInTop() {
 
   return (
     <button
-      className="my-2 px-1 py-0.5 text-xs font-museo_moderno tracking-widest border border-cz-neon-orange text-cz-text-content-light rounded opacity-50 hover:opacity-100 flex items-center justify-center gap-1"
+      className="my-2 px-1 py-0.5 text-xs font-museo_moderno tracking-widest border border-cz-neon-orange text-cz-text-content-dark rounded opacity-50 hover:opacity-100 flex items-center justify-center gap-1"
       onClick={goBack}
     >
       ← Atrás
