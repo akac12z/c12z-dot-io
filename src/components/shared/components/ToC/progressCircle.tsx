@@ -2,14 +2,14 @@
  * This component was inspired by bepyan.me/en and its documentation.
  */
 
-import { motion, MotionValue } from "motion/react";
+import type { ProgressCircleProps } from "@interfaces/toc.interface";
+import { motion } from "motion/react";
 
-export default function ProgressCircle(props: {
-  progress: MotionValue<number>;
-  strokeWidth?: number;
-  className?: string;
-}) {
-  const { progress, strokeWidth = 4, className } = props;
+export default function ProgressCircle({
+  progress,
+  strokeWidth = 4,
+  className,
+}: ProgressCircleProps) {
   return (
     <span className={`relative rounded-full text-cz-primary ${className}`}>
       <svg

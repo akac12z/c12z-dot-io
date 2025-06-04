@@ -4,20 +4,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import type { DynamicTocProps } from "@interfaces/toc.interface";
+
 import { throttle } from "es-toolkit";
 
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 
 import ProgressCircle from "./progressCircle";
-
-interface Headings {
-  slug: string;
-  text: string;
-}
-interface DynamicTocProps {
-  title: string;
-  headings: Headings[];
-}
 
 export default function TOC({ title, headings }: DynamicTocProps) {
   const isHidden = useIsHidden();
