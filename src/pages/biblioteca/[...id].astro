@@ -5,14 +5,16 @@ import type { CollectionEntry } from "astro:content";
 
 import { getCollection, render } from "astro:content";
 
+import MainLayout from "@layouts/MainLayout.astro";
+import LibrarySEO from "@SEO/contents/BooksSEO.astro";
+
 import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+import TOC from "@shared/components/ToC/toc";
 
 import BookScore from "@/components/pages/books/BookScore.astro";
 import BookCover from "@/components/pages/books/BookCover.astro";
-import MainLayout from "@layouts/MainLayout.astro";
-import LibrarySEO from "@SEO/contents/BooksSEO.astro";
-import TableOfContents from "@shared/components/TableOfContent";
-import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+import GoOut from "@icons/shared/GoOut.astro";
 
 interface Props {
   entry: CollectionEntry<"library">;
@@ -39,6 +41,7 @@ const { Content, headings } = await render(entry);
 <MainLayout>
   <LibrarySEO slot="head" entry={entry} />
   <article class="mx-auto">
+    <TOC client:only="react" headings={headings} title={title} />
     <GoBackInTop headPage="/biblioteca" />
     <ScrollGoBackBtn headPage="/biblioteca" client:only="react" />
 
@@ -77,24 +80,25 @@ const { Content, headings } = await render(entry);
         </div>
       </section>
     </section>
-    <div class="mt-4 mx-auto">
+    <!-- <div class="mt-4 mx-auto">
       <TableOfContents headings={headings} client:only="react" />
-    </div>
-    <section class="custom-prose mx-auto">
+    </div> -->
+    <section id="mdx-content" class="custom-prose mx-auto mdx">
       <Content />
     </section>
     <section class="custom-prose">
       <h2 class="mb-2">Autor(es)</h2>
       {
         authorsInArry.map((author) => (
-          <div>
+          <div class="flex items-center gap-x-1 mb-2">
             <a
-              class="no-underline text-sm text-cz-neon-blue"
+              class="no-underline text-sm text-cz-neon-blue flex items-center gap-x-1 mb-2"
               href={author.link}
               target="_blank"
               rel="noopener"
             >
               {author.name}
+              <GoOut classes="w-4 h-4" />
             </a>
           </div>
         ))

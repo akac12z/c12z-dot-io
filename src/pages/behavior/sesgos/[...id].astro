@@ -10,9 +10,9 @@ import MainLayout from "@layouts/MainLayout.astro";
 import BiasSEO from "@SEO/contents/BiasSEO.astro";
 
 import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
-import BiasCategory from "@/components/pages/bias/BiasCategory.astro";
-import TableOfContents from "@shared/components/TableOfContent";
+import TOC from "@shared/components/ToC/toc";
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+import BiasCategory from "@/components/pages/bias/BiasCategory.astro";
 
 
 interface Props {
@@ -39,6 +39,7 @@ const { Content, headings } = await render(entry);
 <MainLayout>
   <BiasSEO slot="head" entry={entry} />
   <section class="mx-auto">
+    <TOC client:only="react" headings={headings} title={biasName}/>
     <GoBackInTop headPage="/behavior/sesgos"/>
     <ScrollGoBackBtn headPage="/behavior/sesgos" client:only="react" />
     <article class="flex flex-col justify-center ">
@@ -68,7 +69,6 @@ const { Content, headings } = await render(entry);
           }
         </section>
       </section>
-      <TableOfContents headings={headings} client:only="react" />
         <section class="custom-prose mx-auto">
           <Content />
         </section>

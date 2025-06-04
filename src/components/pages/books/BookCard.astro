@@ -56,7 +56,7 @@ const { quote, title, readingTime, backlog } = data;
             <a href={`/biblioteca/${id}`}>{title}</a>
           </h2>
         ) : (
-          <h2 class="text-neutral-500">{title}</h2>
+          <h2 class="text-cz-text-relax-dark/60">{title}</h2>
         )
       }
 
@@ -64,7 +64,7 @@ const { quote, title, readingTime, backlog } = data;
         backlog === "upload" ? (
           <>
             <BookScore entry={entry} />
-            <div class="flex flex-col gap-y-2 text-xs text-cz-text-relax-dark">
+            <div class="flex flex-col gap-y-2 text-xs text-cz-text-relax-dark/60">
               <span>Léelo en {readingTime}min</span>
             </div>
             <p>"{quote}"</p>
@@ -72,7 +72,7 @@ const { quote, title, readingTime, backlog } = data;
         ) : (
 
             <BookScore entry={entry} />
-            <p class="text-neutral-500">
+            <p class="text-cz-text-relax-dark">
             "El resumen e insights de{" "}
             <span class="font-museo_moderno italic">{title}</span> aún no lo
             tengo listo. Estoy leyéndolo o en proceso de subirlo.
@@ -84,7 +84,7 @@ const { quote, title, readingTime, backlog } = data;
     {
       backlog !== "upload" && (
         <div class="absolute inset-0 flex items-center justify-center ">
-          <span class="text-cz-text-headers-dark bg-cz-bg-dark/60 border-2 border-cz-neon-red px-2 py-1 rounded-lg shadow-md">
+          <span class="text-cz-text-headers-dark font-bold bg-cz-bg-dark/60 border-2 border-cz-red-wip px-2 py-1 rounded-lg shadow-md">
             ¡No disponible por ahora!
           </span>
         </div>

@@ -27,7 +27,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) => {
           Tabla de Contenidos
           <span
             className={`ml-2 transform transition-transform duration-500 ${
-              isVisible ? "rotate-180 text-cz-neon-orange" : "rotate-0"
+              isVisible ? "rotate-180 text-cz-orange-goback" : "rotate-0"
             }`}
           >
             ▿

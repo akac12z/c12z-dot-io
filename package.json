@@ -20,6 +20,8 @@
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
     "astro": "5.8.0",
+    "es-toolkit": "1.38.0",
+    "motion": "12.16.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sharp": "0.34.1",

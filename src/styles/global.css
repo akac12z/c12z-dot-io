@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@source "../components/pages/shared/ScrollToTopBtn.tsx";
+/* @source "../components/pages/shared/ScrollToTopBtn.tsx";
 @source "../components/pages/shared/ScrollGoBackBtn.tsx";
-@source "../components/pages/shared/TableOfContent.tsx";
+@source "../components/pages/shared/TableOfContent.tsx"; */
 
 /* headers */
 @font-face {
@@ -109,39 +109,31 @@
   --color-cz-bg-dark: #060607;
   --color-cz-bg-light: #f5f2ee;
 
-  --color-cz-text-headers-dark: #fcf8f1;
-  --color-cz-text-content-dark: #dfdbd5;
-  --color-cz-text-relax-dark: #9d9b98;
-
-  --color-cz-text-headers-light: #0c0c0b;
-  --color-cz-text-content-light: #1f1e1d;
-  --color-cz-text-relax-light: #595856;
-
   --color-cz-primary: #f6ad02;
   --color-cz-secondary: #904fe7;
 
+  /* --- For Darkmode --- */
+  --color-cz-text-headers-dark: #fcf8f1;
+  --color-cz-text-content-dark: #dfdbd5;
+  --color-cz-text-relax-dark: #9d9b98;
   --color-cz-behavior-dark: #e22ef6;
-  --color-cz-behavior-light: #80008e;
   --color-cz-ensayos-dark: #33ffe8;
-  --color-cz-ensayos-light: #016c60;
   --color-cz-biblioteca-dark: #ffa424;
-  --color-cz-biblioteca-light: #a15e00;
   --color-cz-proyectos-dark: #a2ff27;
-  --color-cz-proyectos-light: #2e5100;
   --color-cz-otros-dark: #ff3838;
+
+  /* --- For Darkmode --- */
+  --color-cz-text-headers-light: #0c0c0b;
+  --color-cz-text-content-light: #1f1e1d;
+  --color-cz-text-relax-light: #595856;
+  --color-cz-behavior-light: #80008e;
+  --color-cz-ensayos-light: #016c60;
+  --color-cz-biblioteca-light: #a15e00;
+  --color-cz-proyectos-light: #2e5100;
   --color-cz-otros-light: #c10000;
 
-  --color-cz-neon-violet: #e22ef6;
-  --color-cz-neon-pink: #ff33c4;
-  --color-cz-neon-cosmic: #ff327d;
-  --color-cz-neon-blue: #33afff;
-  --color-cz-neon-lime: #41ce1a;
-  --color-cz-neon-gold: #ffc733;
-  --color-cz-neon-red: #ff4d4d;
-  --color-cz-neon-green: #afff33;
-  --color-cz-neon-aqua: #33ffe8;
-
-  --color-cz-neon-orange: #f16f0e;
+  --color-cz-orange-goback: #f16f0e;
+  --color-cz-red-wip: #ff4d4d;
 
   --color-cz-bias-300: #c3b4c6;
   --color-cz-bias-500: #a58faa;
@@ -257,7 +249,7 @@
     @apply absolute block text-cz-primary z-10 w-6 h-6 aspect-square top-6 right-3 transform duration-500 ease-linear;
   }
   .mobile-nav-toggle[aria-expanded="true"] {
-    @apply text-cz-neon-orange transform duration-500 ease-linear rotate-90;
+    @apply text-cz-orange-goback transform duration-500 ease-linear rotate-90;
   }
   .navigation-mobile-menu {
     @apply fixed top-0 right-0 w-2/3 h-2/4 rounded-b-xl rounded-tl-xl flex flex-col items-start justify-start pt-10 pl-4 gap-2 border border-cz-primary bg-cz-bg-dark/10 backdrop-blur-md transform -translate-y-[500px] transition-transform duration-500 ease-out;
