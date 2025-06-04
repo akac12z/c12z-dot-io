@@ -5,9 +5,9 @@ import type {
 } from "@interfaces/siteInfo.interface";
 
 export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
-  title: "c12z",
+  title: "c12z.io",
   description:
-    "Un 'build(me) in public' donde compartiré aquello que voy haciendo, aprendiendo y pensando en mi carrera como Growth en Startups",
+    "Un 'build(me) in public' donde compartiré aquello que voy haciendo, aprendiendo y pensando en mi carrera como Growth",
   url: "https://c12z.io",
   author: "Chema | c12z",
   location: "es_ES",
