@@ -1,0 +1,43 @@
+---
+import { STYLE_CLASSES } from "@/global/sectionLists.styles";
+import type { Section } from "@interfaces/sectionLists.interface";
+
+const { href, style, label, description, items } = Astro.props as Section;
+
+const currentStyle = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
+---
+
+<section class="mt-4">
+  <h3 class="text-sm font-rubik">
+    <a
+      href={href}
+      class={`${currentStyle} transition-colors underline underline-offset-2 hover:no-underline`}
+    >
+      <span class={currentStyle}>/</span>{label}
+    </a>
+    · {description}
+  </h3>
+  <ul
+    class="border-cz-text-relax-dark/20 ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-4"
+  >
+    {
+      items.length === 0 ? (
+        <div class="my-2 rounded w-fit bg-cz-bg-light/10 border border-cz-red-wip text-cz-red-wip px-3 py-2 text-xs font-semibold flex items-center gap-2">
+          🚧 Estoy trabajando en ello.
+        </div>
+      ) : (
+        items.map((items) => (
+          <li class="mb-2 line-clamp-2">
+            <span>·</span>{" "}
+            <a
+              href={items.href}
+              class="underline font-rubik decoration-cz-text-relax-light hover:no-underline"
+            >
+              {items.text}
+            </a>
+          </li>
+        ))
+      )
+    }
+  </ul>
+</section>

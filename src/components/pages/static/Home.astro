@@ -1,7 +1,9 @@
 ---
-import ReaderStaticMarkdowns from "@static/markdowns/ReaderStaticMarkdowns.astro";
-
-import { Content as HomeContent } from "@static/markdowns/home.mdx";
+// import GoOut from "@icons/shared/GoOut.astro";
+// import ReaderStaticMarkdowns from "@static/markdowns/ReaderStaticMarkdowns.astro";
+// import { Content as HomeContent } from "@static/markdowns/home.mdx";
+import { SECTION_LISTS } from "@/global/sectionLists";
+import SectionLists from "@static/SectionLists.astro";
 ---
 
 <!-- <ReaderStaticMarkdowns>
@@ -13,15 +15,15 @@ import { Content as HomeContent } from "@static/markdowns/home.mdx";
   </section>
   <section class="flex flex-col gap-y-2">
     <p class="text-sm">
-      Un Growth, apasionado de la psicología del comportamiento, cómo hablar con
-      usuarios y cómo esto afecta al producto y negocio.
+      Un Growth, apasionado de la psicología del comportamiento y de hablar con
+      usuarios para crear mejores productos.
     </p><p>
-      Amante del arte del tattoo, compito en CrossFit y en mi tiempo libre
-      programo (AI).
+      Amante del arte del tattoo, compito en CrossFit y en mi tiempo libre pico
+      código (AI).
     </p>
   </section>
 
-  <section class="flex flex-col gap-y-2 mt-4">
+  <section class="flex gap-y-2 mt-4">
     <p class="text-sm">
       Actualemente estoy <span
         class="text-cz-primary italic md:cursor-wait animate-pulse"
@@ -30,146 +32,25 @@ import { Content as HomeContent } from "@static/markdowns/home.mdx";
         class="text-sm hover:border-b-2 border-cz-primary"
         href="https://www.linkedin.com/in/chemaferrandez/"
         target="_blank"
-        rel="noopener noreferrer">LinkedIn</a
-      >
+        rel="noopener noreferrer"
+        >LinkedIn
+      </a>
     </p>
   </section>
 
-  <section class="flex flex-col mt-12">
-    <h2 class="">Sobre qué me gusta hablar</h2>
-    <section class="flex flex-col gap-y-4">
-      <section class="mt-4">
-        <p>
-          <a
-            href="/ensayos"
-            class="hover:text-cz-ensayos-dark transition-colors"
-          >
-            <span class="text-cz-ensayos-dark">/</span>ensayos
-          </a>
-          · Insights, frameworks y pensamientos sobre Growth y producto
-        </p>
-        <ul
-          class="border-cz-text-relax-dark/20 ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-4 sm:w-"
-        >
-          <li class="mb-2 line-clamp-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-dark/30"
-            >
-              un ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </a>
-          </li>
-          <li class="mb-2 line-clamp-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light/30"
-            >
-              dos ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </a>
-          </li>
-        </ul>
-      </section>
-      <section class="mt-4">
-        <p>
-          <a
-            href="/behavior"
-            class="hover:text-cz-behavior-dark transition-colors"
-          >
-            <span class="text-cz-behavior-dark">/</span>behavior
-          </a>
-          · Cómo y por qué hacemos lo que hacemos
-        </p>
-        <ul
-          class="border-cz-text-relax-dark ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-4"
-        >
-          <li class="mb-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light"
-            >
-              un ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </a>
-          </li>
-          <li class="mb-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light"
-            >
-              dos ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </a>
-          </li>
-        </ul>
-      </section>
-      <section class="mt-4">
-        <p>
-          <a
-            href="/biblioteca"
-            class="hover:text-cz-biblioteca-dark transition-colors"
-          >
-            <span class="text-cz-biblioteca-dark">/</span>biblioteca
-          </a>
-          · Notas de los libros que voy leyendo
-        </p>
-        <ul
-          class="border-cz-text-relax-dark ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-4"
-        >
-          <li class="mb-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light"
-            >
-              un ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </a>
-          </li>
-          <li class="mb-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light"
-            >
-              dos ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </a>
-          </li>
-        </ul>
-      </section>
-      <section class="mt-4">
-        <p>
-          <a
-            href="/proyectos"
-            class="hover:text-cz-proyectos-dark transition-colors"
-          >
-            <span class="text-cz-proyectos-dark">/</span>proyectos
-          </a>
-          · Proyectos que voy creando que me parecen interesantes
-        </p>
-        <ul
-          class="border-cz-text-relax-dark ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-4"
-        >
-          <li class="mb-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light"
-            >
-              La Vida Moderna Quotes
-            </a>
-          </li>
-          <li class="mb-2">
-            <span>·</span>{""}
-            <a
-              href="#"
-              class="underline font-rubik decoration-cz-text-relax-light"
-            >
-              Mom's Meals
-            </a>
-          </li>
-        </ul>
-      </section>
-    </section>
+  <h2 class="mt-12">Sobre qué me gusta hablar</h2>
+
+  <section class="flex flex-col gap-y-4">
+    {
+      SECTION_LISTS.map(({ style, description, href, items, label }) => (
+        <SectionLists
+          href={href}
+          style={style}
+          label={label}
+          description={description}
+          items={items}
+        />
+      ))
+    }
   </section>
 </article>
