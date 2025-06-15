@@ -25,11 +25,9 @@ import SectionLists from "@static/SectionLists.astro";
 
   <section class="flex gap-y-2 mt-4">
     <p class="text-sm">
-      Actualemente estoy <span
-        class="text-cz-primary italic md:cursor-wait animate-pulse"
-        >{`{{open_to_work}}`}</span
-      > → <a
-        class="text-sm hover:border-b-2 border-cz-primary"
+      Actualemente estoy <span class="font-medium">{`{{open_to_work}}`}</span> →
+      <a
+        class="text-sm hover:underline hover:underline-offset-2 hover:decoration-cz-primary border-cz-primary"
         href="https://www.linkedin.com/in/chemaferrandez/"
         target="_blank"
         rel="noopener noreferrer"
@@ -38,7 +36,7 @@ import SectionLists from "@static/SectionLists.astro";
     </p>
   </section>
 
-  <h2 class="mt-12">Sobre qué me gusta hablar</h2>
+  <h2 class="mt-12">Cosas de las que hablo</h2>
 
   <section class="flex flex-col gap-y-4">
     {
