@@ -8,11 +8,11 @@ export const SECTION_LISTS: Section[] = [
     description: "Insights, frameworks y pensamientos sobre Growth y producto",
     items: [
       {
-        text: "un ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "Acquisition Playbook.",
         href: "#",
       },
       {
-        text: "dos ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "Best retention metrics for B2B ealy stage starups.",
         href: "#",
       },
     ],
@@ -24,11 +24,11 @@ export const SECTION_LISTS: Section[] = [
     description: "Cómo y por qué hacemos lo que hacemos y cómo aplicarlo",
     items: [
       {
-        text: "un ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "Sesgo de Escasez.",
         href: "#",
       },
       {
-        text: "dos ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "¿Qué son los modelos mentales?",
         href: "#",
       },
     ],
@@ -40,11 +40,11 @@ export const SECTION_LISTS: Section[] = [
     description: "Notas de los libros que voy leyendo",
     items: [
       {
-        text: "un ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "The Mom Test.",
         href: "#",
       },
       {
-        text: "dos ele i Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "Show your Work",
         href: "#",
       },
     ],
@@ -70,15 +70,6 @@ export const SECTION_LISTS: Section[] = [
     style: "otros",
     label: "notas",
     description: "pensamientos que me parecen interesante guardar",
-    items: [
-      {
-        text: "La Vida Moderna Quotes",
-        href: "#",
-      },
-      {
-        text: "Mom's Meals",
-        href: "#",
-      },
-    ],
+    items: [],
   },
 ];
