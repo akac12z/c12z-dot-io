@@ -1,6 +1,7 @@
 import { defineCollection, z } from "astro:content";
-import { isValidDateFormat } from "@utils/validatingDate";
 import { glob } from "astro/loaders";
+
+import { isValidDateFormat } from "@utils/validatingDate";
 // import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 
 /**
