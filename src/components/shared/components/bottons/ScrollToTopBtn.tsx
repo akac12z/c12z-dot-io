@@ -29,7 +29,8 @@ const ScrollToTopBtn = () => {
   return (
     <div
       className={`
-        fixed bottom-12 xs:bottom-10 right-5 md:right-auto w-full max-w-[47rem] mx-auto
+        fixed bottom-12 xs:bottom-10 right-0 left-0 z-10
+        max-w-2xl mx-auto px-5
         ${
           isVisible
             ? "opacity-100 flex justify-end"
@@ -39,7 +40,7 @@ const ScrollToTopBtn = () => {
       <button
         onClick={scrollToTop}
         className="
-          w-8 h-8 sm:right-10 sm:bottom-10 rounded-full cursor-pointer
+          w-8 h-8 rounded-full cursor-pointer
           border border-cz-primary bg-cz-primary/10
           text-cz-primary hover:scale-110 transition-all flex items-center justify-center
         "
