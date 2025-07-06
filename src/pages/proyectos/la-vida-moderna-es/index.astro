@@ -1,0 +1,144 @@
+---
+import { Image } from "astro:assets";
+
+import MainLayout from "@layouts/MainLayout.astro";
+import LVMes from "./lavidamodernaes-banner.png";
+
+import { SquareArrowOutUpRight } from "@lucide/astro";
+---
+
+<MainLayout>
+  <article>
+    <section class="">
+      <h1 class="text-center">#LaVidaModerna es...</h1>
+
+      <Image
+        class="w-full h-auto mt-5"
+        src={LVMes}
+        width={1000}
+        height={1000}
+        alt={"Banner del proyecto de Chema de LaVidaModerna es..."}
+      />
+
+      <a
+        class="mt-2 underline decoration-wavy decoration-[#f9138e] text-xs flex items-center justify-center gap-1"
+        href="https://lavidamodernaes.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        >lavidamodernaes.com <SquareArrowOutUpRight size={12} />
+      </a>
+      <section class="mt-12">
+        <h2 class="mt-5 mb-2">¿De qué va este proyecto?</h2>
+        <p class="text-sm">
+          Este proyecto empezó como una tontería. En el autiguo programa de
+          radio de la SER, La Vida Moderna, empezaron a crear un hashtag en
+          Twitter de <span class="italic">#LaVidaModerna</span> donde ponías frases
+          que empezaran con ese hashtag y que tuvieran la ironía, sarcasmo y sátira
+          de lo que puede ser la vida moderna.
+        </p>
+        <h2 class="mt-10 mb-2">¿Cómo y por qué he hecho lo que he hecho?</h2>
+        <p>
+          Todo lo que ves, tiene su por qué. No me gusta dejar al azar las
+          cosas.
+        </p>
+        <h3 class="mt-8 mb-2">Diseño</h3>
+        <p>
+          He intentado mantener en todo momento el espíritu cutre del programa y
+          añadir algunos elementos que le dieran ese carácter:
+        </p>
+        <ul class="ml-8 mt-2 list-disc">
+          <li>
+            Las páginas las he dividido por Temporadas (T), y la general donde
+            están todas recopiladas para una mejor experiencia.
+          </li>
+          <li>
+            He añadido un botón para mezclar, con el algoritmo de Fusher-Yates,
+            con tal de eviatr hacer un scroll muy largo, hay 739 frases, y así
+            poder sorprender siempre al usuario.
+          </li>
+          <li>
+            La fuente de letra había intentado que fuera <span class="font-bold"
+              >Comic Sans</span
+            > como fuente cutre por naturaleza, pero al ser de pago, tuve que usar
+            la "hermana" gratuita de Google, <a
+              href="https://fonts.google.com/specimen/Comic+Neue?query=comic"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline decoration-wavy">Comic Neue.</a
+            >
+          </li>
+          <li>
+            El color, por supuesto, tenía que ser el Rosa Moderdonia: <span
+              class="text-[#f9138e]">#f9138e</span
+            >.
+          </li>
+          <li>El logo, por supuesto, debía ser la bandera.</li>
+          <li>
+            Y para mantener el espíritu "Keep it cutre", las tarjetas tenían que
+            estar "mal colgadas", y la pantalla debía ser rosa entera para que
+            te dolieran los ojos al mirarla.
+          </li>
+        </ul>
+
+        <h3 class="mt-8 mb-2">Herramientas</h3>
+        <ul class="ml-8 list-disc">
+          <li>
+            <a
+              class="underline decoration-wavy"
+              href="https://astro.build/"
+              target="_blank"
+              rel="noopener noreferrer">Astro</a
+            >
+            como framework para constuir la web con páginas estáticas.
+          </li>
+          <li>
+            <a
+              class="underline decoration-wavy"
+              href="https://tailwindcss.com/"
+              target="_blank"
+              rel="noopener noreferrer">Tailwind</a
+            > como framework de CSS para ir más rápido diseñando.
+          </li>
+          <li>
+            <a
+              class="underline decoration-wavy"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://lovable.dev/">Lovable</a
+            > para coger ideas para la UI.
+          </li>
+          <li>
+            <a
+              class="underline decoration-wavy"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://cursor.com/">Cursor</a
+            > como editor para ir más rápido programando y ayudarme a hacer algunas
+            cosas más complejas.
+          </li>
+          <li>
+            Twitter y YouTube como fuentes para coger y buscar las frases.
+          </li>
+        </ul>
+        <h3 class="mt-8 mb-2">Cosas interesantes que he añadido</h3>
+        <ul class="ml-8 list-disc">
+          <li>El SEO:</li>
+          <li>
+            El compartir: incito a la gente a que hagan un pantallazo
+            difuminando todo el resto y a su vez, aparece la web para usar el
+            factor viral.
+          </li>
+          <li>
+            Nunca está mal monetizar algo, así que añadí un elemento para el/la
+            que quiera apoyar el proyecto con <a
+              target="_blank"
+              class="underline decoration-wavy decoration-amber-500"
+              rel="noopener noreferrer"
+              href="https://buymeacoffee.com/akac12z">Buy Me A Coffee</a
+            >.
+          </li>
+        </ul>
+      </section>
+    </section>
+  </article>
+</MainLayout>
