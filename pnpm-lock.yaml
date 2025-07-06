@@ -10,7 +10,7 @@ dependencies:
     version: 0.9.4(typescript@5.8.3)
   '@astrojs/mdx':
     specifier: 4.3.0
-    version: 4.3.0(astro@5.9.3)
+    version: 4.3.0(astro@5.11.0)
   '@astrojs/partytown':
     specifier: 2.1.4
     version: 2.1.4
@@ -21,8 +21,8 @@ dependencies:
     specifier: 3.4.1
     version: 3.4.1
   '@astrojs/vercel':
-    specifier: 8.1.5
-    version: 8.1.5(astro@5.9.3)(react@19.1.0)
+    specifier: 8.2.1
+    version: 8.2.1(astro@5.11.0)(react@19.1.0)
   '@tailwindcss/vite':
     specifier: 4.1.3
     version: 4.1.3(vite@6.3.5)
@@ -33,8 +33,8 @@ dependencies:
     specifier: 19.1.1
     version: 19.1.1(@types/react@19.1.0)
   astro:
-    specifier: 5.9.3
-    version: 5.9.3(typescript@5.8.3)
+    specifier: 5.11.0
+    version: 5.11.0(typescript@5.8.3)
   es-toolkit:
     specifier: 1.38.0
     version: 1.38.0
@@ -158,7 +158,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx@4.3.0(astro@5.9.3):
+  /@astrojs/mdx@4.3.0(astro@5.11.0):
     resolution: {integrity: sha512-OGX2KvPeBzjSSKhkCqrUoDMyzFcjKt5nTE5SFw3RdoLf0nrhyCXBQcCyclzWy1+P+XpOamn+p+hm1EhpCRyPxw==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
     peerDependencies:
@@ -167,7 +167,7 @@ packages:
       '@astrojs/markdown-remark': 6.3.2
       '@mdx-js/mdx': 3.1.0(acorn@8.15.0)
       acorn: 8.15.0
-      astro: 5.9.3(typescript@5.8.3)
+      astro: 5.11.0(typescript@5.8.3)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -250,8 +250,8 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/vercel@8.1.5(astro@5.9.3)(react@19.1.0):
-    resolution: {integrity: sha512-3FX8Pe/mzbvUfBJi+73aOrXp5L0s9IkNH5WlexHkzJHUvnkr5PqOB6h4Yya5owmmCDhKzH79YZ+ga0Xwz0MxXQ==}
+  /@astrojs/vercel@8.2.1(astro@5.11.0)(react@19.1.0):
+    resolution: {integrity: sha512-z/AV2lOA5xQGA4q6Hk06HbRdI+ITwDKwfpQcK/Go5rVUHd/ng2brDAHycLKUp0LIVh0JHi2wiYJe8cZe7bVhfg==}
     peerDependencies:
       astro: ^5.0.0
     dependencies:
@@ -260,7 +260,7 @@ packages:
       '@vercel/edge': 1.2.2
       '@vercel/nft': 0.29.4
       '@vercel/routing-utils': 5.0.8
-      astro: 5.9.3(typescript@5.8.3)
+      astro: 5.11.0(typescript@5.8.3)
       esbuild: 0.25.5
       tinyglobby: 0.2.14
     transitivePeerDependencies:
@@ -1997,8 +1997,8 @@ packages:
     hasBin: true
     dev: false
 
-  /astro@5.9.3(typescript@5.8.3):
-    resolution: {integrity: sha512-VReZrpUa/3rfeiVvsQ1A2M3ujDPI+pDGIYOMtXPEZwut8tZoEyealXXLjitgCsJ+3dunKGZbg4Eak6i+r0vniw==}
+  /astro@5.11.0(typescript@5.8.3):
+    resolution: {integrity: sha512-MEICntERthUxJPSSDsDiZuwiCMrsaYy3fnDhp4c6ScUfldCB8RBnB/myYdpTFXpwYBy6SgVsHQ1H4MuuA7ro/Q==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     dependencies:
