@@ -2,38 +2,6 @@ import type { Section } from "@interfaces/sectionLists.interface";
 
 export const SECTION_LISTS: Section[] = [
   {
-    href: "/ensayos",
-    style: "ensayos",
-    label: "ensayos",
-    description: "Insights, frameworks y pensamientos sobre Growth y producto",
-    items: [
-      {
-        text: "Acquisition Playbook.",
-        href: "#",
-      },
-      {
-        text: "Best retention metrics for B2B ealy stage starups.",
-        href: "#",
-      },
-    ],
-  },
-  {
-    href: "/behavior",
-    style: "behavior",
-    label: "behavior",
-    description: "Cómo y por qué hacemos lo que hacemos y cómo aplicarlo",
-    items: [
-      {
-        text: "Sesgo de Escasez.",
-        href: "#",
-      },
-      {
-        text: "¿Qué son los modelos mentales?",
-        href: "#",
-      },
-    ],
-  },
-  {
     href: "/biblioteca",
     style: "biblioteca",
     label: "biblioteca",
@@ -56,14 +24,28 @@ export const SECTION_LISTS: Section[] = [
     description: "Cosas que voy creando que me parecen interesantes",
     items: [
       {
-        text: "La Vida Moderna Quotes",
-        href: "#",
+        text: "#LaVidaModerna es...",
+        href: "/proyectos/lavidamodernaes",
       },
       {
         text: "Mom's Meals",
         href: "#",
       },
     ],
+  },
+  {
+    href: "/ensayos",
+    style: "ensayos",
+    label: "ensayos",
+    description: "Insights, frameworks y pensamientos sobre Growth y producto",
+    items: [],
+  },
+  {
+    href: "/behavior",
+    style: "behavior",
+    label: "behavior",
+    description: "Cómo y por qué hacemos lo que hacemos y cómo aplicarlo",
+    items: [],
   },
   {
     href: "/notas",
