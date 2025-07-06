@@ -202,8 +202,27 @@ const biasCollection = defineCollection({
       ),
 });
 
+const projectCollections = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/projects",
+  }),
+  /*schema: ({ image }) =>
+    z.object({
+      project: z.string(),
+      description: z.string().min(60).max(140),
+      cover: z.object({
+        src: image(),
+        alt: z.string(),
+      }),
+      publishDate: z.string().refine(isValidDateFormat),
+      keywords: z.array(z.string()),
+    }),*/
+});
+
 export const collections = {
   bias: biasCollection,
   essay: essayCollection,
   library: libraryCollection,
+  project: projectCollections,
 };
