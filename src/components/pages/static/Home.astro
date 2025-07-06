@@ -26,16 +26,21 @@ import SectionLists from "@static/SectionLists.astro";
 </article>
 
 <section class="flex gap-y-2 mt-4">
-  <p>
-    Actualemente estoy <span class="font-medium">{`{{open_to_work}}`}</span> →
-    <a
-      class="text-sm hover:underline hover:underline-offset-2 hover:decoration-cz-primary border-cz-primary"
-      href="https://www.linkedin.com/in/chemaferrandez/"
-      target="_blank"
-      rel="noopener noreferrer"
-      >LinkedIn
-    </a>
-  </p>
+  <p>Actualemente estoy buscando trabajo →</p>
+  {" "}
+  <a
+    class="text-sm hover:underline hover:underline-offset-2 hover:decoration-cz-primary border-cz-primary"
+    href="https://www.linkedin.com/in/chemaferrandez/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >LinkedIn
+  </a>
+  <span class="relative flex justify-center items-center size-3">
+    <span
+      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cz-primary opacity-75"
+    ></span>
+    <span class="absolute inline-flex size-2 rounded-full bg-cz-primary"></span>
+  </span>
 </section>
 
 <h2 class="mt-12">Cosas de las que hablo</h2>
