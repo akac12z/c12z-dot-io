@@ -25,7 +25,7 @@ export const SECTION_LISTS: Section[] = [
     items: [
       {
         text: "#LaVidaModerna es...",
-        href: "/proyectos/lavidamodernaes",
+        href: "/proyectos/la-vida-moderna-es",
       },
       {
         text: "Mom's Meals",
