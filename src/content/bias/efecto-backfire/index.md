@@ -3,7 +3,7 @@ titleTag: "Efecto Backfire"
 description: "Un ejemplo del primer bias con su descripción para ver cómo queda"
 biasName: "Efecto Backfire"
 biasID: "backfire-effect"
-backlog: "upload"
+backlog: "wip"
 cover:
   src: ./andrew-robinson-xh3DYZLFfgA-unsplash-copy.jpg
   alt: "Efecto Backfire iamgen"
