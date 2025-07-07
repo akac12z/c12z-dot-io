@@ -57,7 +57,7 @@ const libraryCollection = defineCollection({
       }),
       titleTag: z.string().max(85),
       description: z.string().min(60).max(140),
-      backlog: z.enum(["reading", "upload", "uploading"]),
+      backlog: z.enum(["wip", "upload"]),
       quote: z.string().max(150),
       score: z
         .number()
@@ -217,6 +217,7 @@ const projectCollections = defineCollection({
       }),
       publishDate: z.string().refine(isValidDateFormat),
       keywords: z.array(z.string()),
+      backlog: z.enum(["wip", "upload"]),
     }),*/
 });
 
@@ -224,5 +225,5 @@ export const collections = {
   bias: biasCollection,
   essay: essayCollection,
   library: libraryCollection,
-  project: projectCollections,
+  // project: projectCollections,
 };
