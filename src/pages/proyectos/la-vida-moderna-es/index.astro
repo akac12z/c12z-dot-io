@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+
 import MainLayout from "@layouts/MainLayout.astro";
 import TOC from "@shared/components/ToC/toc";
 import ProjectsSEO from "@SEO/pages/projects/ProjectsSEO.astro";
@@ -37,6 +39,7 @@ const title = "#LaVidaModerna es...";
     ogImage={LVMes.src}
   />
   <article>
+    <GoBackInTop headPage="/proyectos" />
     <TOC client:only="react" headings={LVM_headings} title={title} />
     <section class="flex flex-col items-center justify-center">
       <h1 class="text-center">#LaVidaModerna es...</h1>
