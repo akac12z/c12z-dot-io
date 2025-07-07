@@ -2,14 +2,19 @@
 import { Image } from "astro:assets";
 
 import MainLayout from "@layouts/MainLayout.astro";
+
 import LVMes from "./lavidamodernaes-banner.png";
+import Mezclar from "./boton-mezclar.png";
+import OG from "./opengraph-lvmes.png";
+import OGErrorPage from "./opengraph-lvmes-error-page.png";
+import Loop from "./viral-loop-lavidamodernaes.png";
 
 import { SquareArrowOutUpRight } from "@lucide/astro";
 ---
 
 <MainLayout>
   <article>
-    <section class="">
+    <section class="flex flex-col items-center justify-center">
       <h1 class="text-center">#LaVidaModerna es...</h1>
 
       <Image
@@ -47,51 +52,60 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
         </p>
         <h3 class="mt-8 mb-2">Diseño</h3>
         <p>
-          He intentado mantener en todo momento el espíritu cutre del programa
-          añadiendo algunos elementos que le dieran ese carácter pero
-          manteniendo la buena UX:
+          He intentado mantener en todo momento el espíritu "keep it cutre" del
+          programa añadiendo algunos elementos sin perder una buena UX:
         </p>
         <ul class="ml-4 sm:ml-8 mt-2 list-disc">
           <li>
-            He intentado hacer la página con el estilo <a
+            Para hacer la página he seguido el estilo <a
               target="_blank"
               rel="noopener noreferrer"
               class="underline decoration-wavy decoration-[#f9138e]"
               href="https://www.nngroup.com/articles/neobrutalism/"
               >Neobrutalism</a
-            > manteniendo el toque cutre, siempre.
-          </li>
-          <li>
-            Las páginas las he dividido por Temporadas (T), y la general (Todas)
-            que es la Home, donde están todas recopiladas para una mejor
-            experiencia.
-          </li>
-          <li>
-            En la Home, al hacer el deploy a producción se hace una mezcla
-            aleatoria y así avisto que no estén ordenadas y sea igual que ver
-            por Temporadas.
-            <p class="mt-2">
-              El "problema" es que solo cuando hago un deploy se mezclan y no
-              cada vez que entras a la págian ya que Astro es estático y no
-              quería añadir complejidad ahí.
+            >.
+            <p class="mt-1">
+              Me parecía un diseño sencillo y descuidado que podría servir para
+              el proyecto.
             </p>
           </li>
           <li>
-            Para resolver el problema de lo estático, añadí un botón para
-            mezclar, en la parte inferior izquierda, que por detás está el <a
-              href="https://es.wikipedia.org/wiki/Algoritmo_de_Fisher-Yates"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="underline decoration-wavy decoration-[#f9138e]"
-              >algoritmo de "shuffle" de Fisher-Yates</a
-            >, con tal de evitar hacer un scroll muy largo.
-            <p class="mt-2">
-              Hay 739 frases, lo último que quiero es crear ese scroll infinito
-              donde siempre estén ordenadas por igual y aburrir.
+            Las páginas las he dividido por Temporadas (T), y la Home (Todas),
+            donde están todas las frases recopiladas.
+            <p class="mt-1">
+              Vi necesiario en la Home, hacer una mezcla aleatoria a la hora de
+              hacer el deploy a producción pero no cada vez que un usuario
+              entrase para no añadir complejidad.
             </p>
           </li>
           <li>
-            La letra intenté que fuera <span class="font-bold">Comic Sans</span>
+            Para resolver el problema de "ver siempre lo mismo si no hago un
+            deploy" y no añadir JavaScript innecasario, cree un botón para
+            mezclar.
+            <p class="mt-1">
+              Funciona con el <a
+                href="https://es.wikipedia.org/wiki/Algoritmo_de_Fisher-Yates"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline decoration-wavy decoration-[#f9138e]"
+                >algoritmo de "shuffle" de Fisher-Yates</a
+              > y así crear siempre una sensación de novedad en el usuario.
+            </p>
+            <Image
+              src={Mezclar}
+              width={1000}
+              height={1000}
+              class="w-3/4 h-auto py-2"
+              alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
+            />
+            <p class="mt-1">
+              Hay 739 frases, lo último que quiero es obligar a hacer un scroll
+              infinito si quieren ver algo nuevo.
+            </p>
+          </li>
+          <li>
+            La fuente intenté que fuera <span class="font-bold">Comic Sans</span
+            >
             como fuente cutre por antonomasia, pero al ser de pago, tuve que usar
             la "hermana" gratuita de Google, <a
               href="https://fonts.google.com/specimen/Comic+Neue?query=comic"
@@ -104,18 +118,17 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           <li>
             El color, por supuesto, tenía que ser el Rosa Moderdonia: <span
               class="text-[#f9138e]">#f9138e</span
-            >. Es el nombre que le puse al color en el proyecto y que lo cogí
-            con el "color picker" en la imagen de la bandera que subí a Figma.
+            >, copiado de la bandera.
           </li>
-          <li>El logo, por supuesto, debía ser la bandera.</li>
+          <li>El logo, debía ser la bandera.</li>
           <li>
-            Y para mantener el espíritu "Keep it cutre", las tarjetas tenían que
-            estar "mal colgadas", y la pantalla debía ser rosa entera para que
-            te dolieran los ojos al mirarla.
+            Para mantener un poco más el espíritu "Keep it cutre", las tarjetas
+            debían estar como cuadros mal colgados de manera aleatoria entre
+            -rotation-3 y rotation-3.
           </li>
         </ul>
 
-        <h3 class="mt-8 mb-2">Herramientas</h3>
+        <h3 class="mt-8 mb-2">Herramientas que he usado:</h3>
         <ul class="ml-4 sm:ml-8 mt-2 list-disc">
           <li>
             <a
@@ -124,7 +137,8 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
               target="_blank"
               rel="noopener noreferrer">Astro</a
             >
-            como framework para constuir la web con páginas estáticas.
+            como framework para constuir la web con páginas estáticas. No hacía falta
+            más.
           </li>
           <li>
             <a
@@ -156,21 +170,76 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           </li>
         </ul>
         <h3 class="mt-8 mb-2">Cosas interesantes que he añadido</h3>
+        <p>
+          Como Growth, me gusta tenerlo todo atado y tener algún sistema de
+          adquisición y retención. Aunque este solo era para divertirme pero,
+          siempre está la mentalidad.
+        </p>
         <ul class="ml-4 sm:ml-8 mt-2 list-disc">
-          <li>El SEO:</li>
           <li>
-            El compartir: incito a la gente a que hagan un pantallazo
-            difuminando todo el resto y a su vez, aparece la web para usar el
-            factor viral.
+            SEO
+            <p class="mt-1">
+              Soy un friki del SEO y se la importancia que puede llegar a tener
+              unos buenos OpenGraph o una buena tarjeta de Twitter, así que
+              decidí invertirle tiempo a ello con tal de que cada vez que
+              compartiera una la web o alguna página se viera de la siguiente
+              manera:
+            </p>
+            <Image
+              src={OG}
+              width={1000}
+              height={1000}
+              class="w-2/4 h-auto py-2"
+              alt="Imagen del open graph de lavidamodernaes.com"
+            />
+            <p class="mt-1">
+              E incluso pensé en la página 404 que para mí, es una de las más
+              divertidas y donde aún habiéndo un error, puedes no perder al
+              usuario y hacer que se enganche de nuevo.
+            </p>
+            <Image
+              src={OGErrorPage}
+              width={1000}
+              height={1000}
+              class="w-2/4 h-auto py-2"
+              alt="Imagen del open graph de la página de error de lavidamodernaes.com"
+            />
           </li>
           <li>
-            Nunca está mal monetizar, así que añadí un elemento para el/la que
-            quiera apoyar el proyecto con <a
-              target="_blank"
-              class="underline decoration-wavy decoration-amber-500"
-              rel="noopener noreferrer"
-              href="https://buymeacoffee.com/akac12z">Buy Me A Coffee</a
-            >.
+            "Viralidad"
+            <p class="mt-1"></p>
+            Quería añadir un par de botones para que la gente pudiera compartir tanto
+            en Twitter como en Instagram pero lo vi demasiado elaborado y simplemente
+            coloqué un botón que incitava a hacer un pantallazo.
+            <p class="mt-1">
+              Se difumina el fondo y aparece la marca como una especie de "Loop
+              Viral" de contacto casual.
+            </p>
+            <Image
+              src={Loop}
+              width={1000}
+              height={1000}
+              class="w-full h-auto py-2"
+              alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
+            />
+          </li>
+          <li>
+            Monetización
+            <p>
+              Este proyecto es totalmente gratis y de <a
+                class="underline decoration-wavy decoration-[#f9138e]"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/akac12z/lavidamodernaes-dot-com"
+                >código abierto</a
+              > pero yo tengo que comer, así que puse un
+              <a
+                target="_blank"
+                class="underline decoration-wavy decoration-amber-500"
+                rel="noopener noreferrer"
+                href="https://buymeacoffee.com/akac12z">Buy Me A Coffee</a
+              > para el que quiera apoyar al proyecto 😁.
+            </p>
           </li>
         </ul>
       </section>
