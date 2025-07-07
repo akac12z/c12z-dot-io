@@ -28,49 +28,84 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
         >lavidamodernaes.com <SquareArrowOutUpRight size={12} />
       </a>
       <section class="mt-12">
-        <h2 class="mt-5 mb-2">¿De qué va este proyecto?</h2>
-        <p class="text-sm">
-          Este proyecto empezó como una tontería. En el autiguo programa de
-          radio de la SER, La Vida Moderna, empezaron a crear un hashtag en
-          Twitter de <span class="italic">#LaVidaModerna</span> donde ponías frases
-          que empezaran con ese hashtag y que tuvieran la ironía, sarcasmo y sátira
-          de lo que puede ser la vida moderna.
+        <h2 class="mt-5 mb-4">¿De qué va este proyecto?</h2>
+        <p class="mb-2">
+          Empezó como una tontería. En el autiguo programa de radio de la SER,
+          La Vida Moderna, crearon un hashtag en Twitter, <span class="italic"
+            >#LaVidaModerna es</span
+          >, donde creabas frases que empezaran con ese hashtag y que tuvieran
+          la ironía, sarcasmo y sátira de lo que puede llegar a ser (es) la vida
+          (moderna).
+        </p>
+        <p class="mb-2">
+          Y aquí te quiero contar un poco cómo ha sido el detrás de cámaras.
         </p>
         <h2 class="mt-10 mb-2">¿Cómo y por qué he hecho lo que he hecho?</h2>
         <p>
-          Todo lo que ves, tiene su por qué. No me gusta dejar al azar las
-          cosas.
+          Todo lo que ves, tiene su sentido. No me gusta dejar las cosas al
+          azar.
         </p>
         <h3 class="mt-8 mb-2">Diseño</h3>
         <p>
-          He intentado mantener en todo momento el espíritu cutre del programa y
-          añadir algunos elementos que le dieran ese carácter:
+          He intentado mantener en todo momento el espíritu cutre del programa
+          añadiendo algunos elementos que le dieran ese carácter pero
+          manteniendo la buena UX:
         </p>
-        <ul class="ml-8 mt-2 list-disc">
+        <ul class="ml-4 sm:ml-8 mt-2 list-disc">
           <li>
-            Las páginas las he dividido por Temporadas (T), y la general donde
-            están todas recopiladas para una mejor experiencia.
+            He intentado hacer la página con el estilo <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline decoration-wavy decoration-[#f9138e]"
+              href="https://www.nngroup.com/articles/neobrutalism/"
+              >Neobrutalism</a
+            > manteniendo el toque cutre, siempre.
           </li>
           <li>
-            He añadido un botón para mezclar, con el algoritmo de Fusher-Yates,
-            con tal de eviatr hacer un scroll muy largo, hay 739 frases, y así
-            poder sorprender siempre al usuario.
+            Las páginas las he dividido por Temporadas (T), y la general (Todas)
+            que es la Home, donde están todas recopiladas para una mejor
+            experiencia.
           </li>
           <li>
-            La fuente de letra había intentado que fuera <span class="font-bold"
-              >Comic Sans</span
-            > como fuente cutre por naturaleza, pero al ser de pago, tuve que usar
+            En la Home, al hacer el deploy a producción se hace una mezcla
+            aleatoria y así avisto que no estén ordenadas y sea igual que ver
+            por Temporadas.
+            <p class="mt-2">
+              El "problema" es que solo cuando hago un deploy se mezclan y no
+              cada vez que entras a la págian ya que Astro es estático y no
+              quería añadir complejidad ahí.
+            </p>
+          </li>
+          <li>
+            Para resolver el problema de lo estático, añadí un botón para
+            mezclar, en la parte inferior izquierda, que por detás está el <a
+              href="https://es.wikipedia.org/wiki/Algoritmo_de_Fisher-Yates"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline decoration-wavy decoration-[#f9138e]"
+              >algoritmo de "shuffle" de Fisher-Yates</a
+            >, con tal de evitar hacer un scroll muy largo.
+            <p class="mt-2">
+              Hay 739 frases, lo último que quiero es crear ese scroll infinito
+              donde siempre estén ordenadas por igual y aburrir.
+            </p>
+          </li>
+          <li>
+            La letra intenté que fuera <span class="font-bold">Comic Sans</span>
+            como fuente cutre por antonomasia, pero al ser de pago, tuve que usar
             la "hermana" gratuita de Google, <a
               href="https://fonts.google.com/specimen/Comic+Neue?query=comic"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline decoration-wavy">Comic Neue.</a
+              class="underline decoration-wavy decoration-[#f9138e]"
+              >Comic Neue.</a
             >
           </li>
           <li>
             El color, por supuesto, tenía que ser el Rosa Moderdonia: <span
               class="text-[#f9138e]">#f9138e</span
-            >.
+            >. Es el nombre que le puse al color en el proyecto y que lo cogí
+            con el "color picker" en la imagen de la bandera que subí a Figma.
           </li>
           <li>El logo, por supuesto, debía ser la bandera.</li>
           <li>
@@ -81,10 +116,10 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
         </ul>
 
         <h3 class="mt-8 mb-2">Herramientas</h3>
-        <ul class="ml-8 list-disc">
+        <ul class="ml-4 sm:ml-8 mt-2 list-disc">
           <li>
             <a
-              class="underline decoration-wavy"
+              class="underline decoration-wavy decoration-[#f9138e]"
               href="https://astro.build/"
               target="_blank"
               rel="noopener noreferrer">Astro</a
@@ -93,7 +128,7 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           </li>
           <li>
             <a
-              class="underline decoration-wavy"
+              class="underline decoration-wavy decoration-[#f9138e]"
               href="https://tailwindcss.com/"
               target="_blank"
               rel="noopener noreferrer">Tailwind</a
@@ -101,7 +136,7 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           </li>
           <li>
             <a
-              class="underline decoration-wavy"
+              class="underline decoration-wavy decoration-[#f9138e]"
               target="_blank"
               rel="noopener noreferrer"
               href="https://lovable.dev/">Lovable</a
@@ -109,7 +144,7 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           </li>
           <li>
             <a
-              class="underline decoration-wavy"
+              class="underline decoration-wavy decoration-[#f9138e]"
               target="_blank"
               rel="noopener noreferrer"
               href="https://cursor.com/">Cursor</a
@@ -121,7 +156,7 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           </li>
         </ul>
         <h3 class="mt-8 mb-2">Cosas interesantes que he añadido</h3>
-        <ul class="ml-8 list-disc">
+        <ul class="ml-4 sm:ml-8 mt-2 list-disc">
           <li>El SEO:</li>
           <li>
             El compartir: incito a la gente a que hagan un pantallazo
@@ -129,8 +164,8 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
             factor viral.
           </li>
           <li>
-            Nunca está mal monetizar algo, así que añadí un elemento para el/la
-            que quiera apoyar el proyecto con <a
+            Nunca está mal monetizar, así que añadí un elemento para el/la que
+            quiera apoyar el proyecto con <a
               target="_blank"
               class="underline decoration-wavy decoration-amber-500"
               rel="noopener noreferrer"
