@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 
 import MainLayout from "@layouts/MainLayout.astro";
+import TOC from "@shared/components/ToC/toc";
+import ProjectsSEO from "@SEO/pages/projects/ProjectsSEO.astro";
 
 import LVMes from "./lavidamodernaes-banner.png";
 import Mezclar from "./boton-mezclar.png";
@@ -10,10 +12,32 @@ import OGErrorPage from "./opengraph-lvmes-error-page.png";
 import Loop from "./viral-loop-lavidamodernaes.png";
 
 import { SquareArrowOutUpRight } from "@lucide/astro";
+import { LVM_es_Info } from "@/global/projectsInfo";
+
+const LVM_headings = [
+  { text: "¿De qué va este proyecto?", slug: "de-que-va-este-proyecto" },
+  {
+    text: "¿Cómo y por qué he hecho lo que he hecho?",
+    slug: "como-y-por-que-he-hecho-lo-que-he-hecho",
+  },
+  { text: "Diseño", slug: "diseno" },
+  { text: "Herramientas que he usado", slug: "herramientas-que-he-usado" },
+  {
+    text: "Cosas interesantes que he añadido",
+    slug: "cosas-interesantes-que-he-anadido",
+  },
+];
+const title = "#LaVidaModerna es...";
 ---
 
 <MainLayout>
+  <ProjectsSEO
+    pageTitle={LVM_es_Info.title}
+    pageDescription={LVM_es_Info.description}
+    ogImage={LVMes.src}
+  />
   <article>
+    <TOC client:only="react" headings={LVM_headings} title={title} />
     <section class="flex flex-col items-center justify-center">
       <h1 class="text-center">#LaVidaModerna es...</h1>
 
@@ -33,7 +57,9 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
         >lavidamodernaes.com <SquareArrowOutUpRight size={12} />
       </a>
       <section class="mt-12">
-        <h2 class="mt-5 mb-4">¿De qué va este proyecto?</h2>
+        <h2 id="de-que-va-este-proyecto" class="mt-5 mb-4">
+          ¿De qué va este proyecto?
+        </h2>
         <p class="mb-2">
           Empezó como una tontería. En el autiguo programa de radio de la SER,
           La Vida Moderna, crearon un hashtag en Twitter, <span class="italic"
@@ -45,12 +71,14 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
         <p class="mb-2">
           Y aquí te quiero contar un poco cómo ha sido el detrás de cámaras.
         </p>
-        <h2 class="mt-10 mb-2">¿Cómo y por qué he hecho lo que he hecho?</h2>
+        <h2 id="como-y-por-que-he-hecho-lo-que-he-hecho" class="mt-10 mb-2">
+          ¿Cómo y por qué he hecho lo que he hecho?
+        </h2>
         <p>
           Todo lo que ves, tiene su sentido. No me gusta dejar las cosas al
           azar.
         </p>
-        <h3 class="mt-8 mb-2">Diseño</h3>
+        <h3 id="diseño" class="mt-8 mb-2">Diseño</h3>
         <p>
           He intentado mantener en todo momento el espíritu "keep it cutre" del
           programa añadiendo algunos elementos sin perder una buena UX:
@@ -128,7 +156,9 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
           </li>
         </ul>
 
-        <h3 class="mt-8 mb-2">Herramientas que he usado:</h3>
+        <h3 id="herramientas-que-he-usado" class="mt-8 mb-2">
+          Herramientas que he usado:
+        </h3>
         <ul class="ml-4 sm:ml-8 mt-2 list-disc">
           <li>
             <a
@@ -169,7 +199,9 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
             Twitter y YouTube como fuentes para coger y buscar las frases.
           </li>
         </ul>
-        <h3 class="mt-8 mb-2">Cosas interesantes que he añadido</h3>
+        <h3 id="cosas-interesantes-que-he-anadido" class="mt-8 mb-2">
+          Cosas interesantes que he añadido
+        </h3>
         <p>
           Como Growth, me gusta tenerlo todo atado y tener algún sistema de
           adquisición y retención. Aunque este solo era para divertirme pero,
