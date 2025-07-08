@@ -6,7 +6,7 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection, render } from "astro:content";
 
 import MainLayout from "@layouts/MainLayout.astro";
-import LibrarySEO from "@SEO/contents/BooksSEO.astro";
+import BooksSEO from "@SEO/contents/BooksSEO.astro";
 
 import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
@@ -39,7 +39,7 @@ const { Content, headings } = await render(entry);
 ---
 
 <MainLayout>
-  <LibrarySEO slot="head" entry={entry} />
+  <BooksSEO slot="head" entry={entry} />
   <article class="mx-auto">
     <TOC client:only="react" headings={headings} title={title} />
     <GoBackInTop headPage="/biblioteca" />
