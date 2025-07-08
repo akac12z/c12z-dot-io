@@ -223,7 +223,7 @@ const projectCollections = defineCollection({
 
 export const collections = {
   bias: biasCollection,
-  essay: essayCollection,
+  // essay: essayCollection,
   library: libraryCollection,
   // project: projectCollections,
 };
