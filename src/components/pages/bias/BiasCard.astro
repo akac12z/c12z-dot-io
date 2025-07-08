@@ -23,7 +23,7 @@ const { data, id } = entry;
 const { biasQuestion, biasName, category, backlog } = data;
 ---
 
-<article
+<section
   class:list={[
     "relative group flex rounded-xl h-full w-full border-2 bg-clip-border transition-all duration-100 ",
     `${backlog === "wip" ? "border-cz-text-relax-dark/20 " : "border-cz-bias-300 hover:border-cz-bias-500 transition-colors"}`,
@@ -80,4 +80,4 @@ const { biasQuestion, biasName, category, backlog } = data;
       </div>
     )
   }
-</article>
+</section>
