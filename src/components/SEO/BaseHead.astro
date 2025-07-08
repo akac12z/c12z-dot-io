@@ -8,8 +8,6 @@ import "../../styles/global.css";
 
 import { ClientRouter } from "astro:transitions";
 
-import GA4 from "@analytics/Google/GA4.astro";
-import GTMHead from "@analytics/Google/GTMHead.astro";
 import AhrefsAnalytics from "@analytics/Ahrefs/AhrefsAnalytics.astro";
 
 import Favicons from "./Favicons.astro";
@@ -17,8 +15,10 @@ import Overtracking from "@shared/analytics/Overtracking/Overtracking.astro";
 ---
 
 <head>
-  <GA4 />
-  <GTMHead />
+  {
+    /*<GA4 />
+  <GTMHead />*/
+  }
   <AhrefsAnalytics />
   <Overtracking />
 

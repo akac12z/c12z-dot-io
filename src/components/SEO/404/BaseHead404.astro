@@ -5,14 +5,14 @@ import "../../../styles/global.css";
 
 import Favicons from "@SEO/Favicons.astro";
 
-import GA4 from "@analytics/Google/GA4.astro";
-import GTMHead from "@analytics/Google/GTMHead.astro";
 import AhrefsAnalytics from "@analytics/Ahrefs/AhrefsAnalytics.astro";
 ---
 
 <head>
-  <GA4 />
-  <GTMHead />
+  {
+    /*<GA4 />
+  <GTMHead />*/
+  }
   <AhrefsAnalytics />
 
   <Favicons />

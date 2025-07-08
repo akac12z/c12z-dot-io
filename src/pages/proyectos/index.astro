@@ -1,7 +1,19 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
+
+import ProjectCard from "@/components/pages/projects/ProjectCard.astro";
+import ProjectPage from "@/components/pages/projects/ProjectPage.astro";
 ---
 
 <MainLayout>
-  <h1>Página de Proyectos</h1>
+  <h1>Proyectos</h1>
+  <ProjectPage>
+    <ProjectCard
+      href="proyectos/la-vida-moderna-es"
+      srcImage="/projects/lavidamodernaes-dot-com.png"
+      altImage="a"
+      projectDescription="aa"
+      projectTitle="aaa"
+    />
+  </ProjectPage>
 </MainLayout>

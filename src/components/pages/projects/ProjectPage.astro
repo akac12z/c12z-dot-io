@@ -1,0 +1,16 @@
+---
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+---
+
+<section class="mx-auto">
+  <GoBackInTop headPage="/" />
+  <section class="flex flex-col gap-y-2 xs:gap-y-16">
+    <div class="max-w-2xl mx-auto flex flex-col">
+      <section
+        class="grid grid-cols-1 xs:grid-cols-2 gap-x-4 mx-auto gap-y-4 my-5"
+      >
+        <slot />
+      </section>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,41 @@
+---
+import { Picture } from "astro:assets";
+
+interface Props {
+  href: string;
+  srcImage: string;
+  altImage: string;
+  projectTitle: string;
+  projectDescription: string;
+}
+
+const {
+  href,
+  srcImage = "/og-image.png",
+  altImage = "La imagen de Open Graph de c12z.io, Chema Ferrández",
+  projectTitle,
+  projectDescription,
+} = Astro.props;
+---
+
+<article class="flex flex-col justify-center items-center text-center">
+  <div class="flex flex-col items-center justify-start gap-2">
+    <a href={href}>
+      <Picture
+        src={srcImage}
+        width={1000}
+        height={1000}
+        alt={altImage}
+        class="rounded-t-lg w-full"
+      />
+    </a>
+    <h2 class="line-clamp-2 text-ellipsis overflow-hidden flex-wrap">
+      {projectTitle}
+    </h2>
+  </div>
+  <div class="flex flex-col justify-between gap-2 mt-1">
+    <p class="line-clamp-3 text-sm leading-snug text-pretty">
+      {projectDescription}
+    </p>
+  </div>
+</article>
