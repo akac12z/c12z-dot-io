@@ -1,5 +1,6 @@
 ---
 import { Picture } from "astro:assets";
+import { PROJETCS_DATA } from "./data/projectsData";
 
 interface Props {
   href: string;
@@ -16,6 +17,7 @@ const {
   projectTitle,
   projectDescription,
 } = Astro.props;
+const { LVM_es } = PROJETCS_DATA;
 ---
 
 <article class="flex flex-col justify-center items-center text-center">
@@ -27,9 +29,13 @@ const {
         height={1000}
         alt={altImage}
         class="rounded-t-lg w-full"
+        transition:name={`${LVM_es.href}-project-image`}
       />
     </a>
-    <h2 class="line-clamp-2 text-ellipsis overflow-hidden flex-wrap">
+    <h2
+      class="line-clamp-2 text-ellipsis overflow-hidden flex-wrap"
+      transition:name={`${LVM_es.href}-project-title`}
+    >
       {projectTitle}
     </h2>
   </div>

@@ -1,19 +1,25 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
+import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
 
 import ProjectCard from "@/components/pages/projects/ProjectCard.astro";
 import ProjectPage from "@/components/pages/projects/ProjectPage.astro";
+
+import { PROJETCS_DATA } from "@/components/pages/projects/data/projectsData";
+
+const { LVM_es } = PROJETCS_DATA;
 ---
 
 <MainLayout>
+  <GoBackInTop headPage="/" />
   <h1>Proyectos</h1>
   <ProjectPage>
     <ProjectCard
-      href="proyectos/la-vida-moderna-es"
-      srcImage="/projects/lavidamodernaes-dot-com.png"
-      altImage="a"
-      projectDescription="aa"
-      projectTitle="aaa"
+      href={LVM_es.href}
+      srcImage={LVM_es.srcImage}
+      altImage={LVM_es.altImage}
+      projectDescription={LVM_es.projectDescription}
+      projectTitle={LVM_es.projectTitle}
     />
   </ProjectPage>
 </MainLayout>

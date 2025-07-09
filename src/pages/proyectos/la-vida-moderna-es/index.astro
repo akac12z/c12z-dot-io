@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
 
@@ -14,7 +15,7 @@ import OGErrorPage from "./_opengraph-lvmes-error-page.png";
 import Loop from "./_viral-loop-lavidamodernaes.png";
 
 import { SquareArrowOutUpRight } from "@lucide/astro";
-import { LVM_es_Info } from "@/global/projectsInfo";
+import { PROJETCS_DATA } from "@/components/pages/projects/data/projectsData";
 
 const LVM_headings = [
   { text: "¿De qué va este proyecto?", slug: "de-que-va-este-proyecto" },
@@ -29,27 +30,34 @@ const LVM_headings = [
     slug: "cosas-interesantes-que-he-anadido",
   },
 ];
-const title = "#LaVidaModerna es...";
+const { LVM_es } = PROJETCS_DATA;
 ---
 
 <MainLayout>
   <ProjectsSEO
-    pageTitle={LVM_es_Info.title}
-    pageDescription={LVM_es_Info.description}
+    pageTitle={LVM_es.projectTitle}
+    pageDescription={LVM_es.projectDescription}
     ogImage={LVMes.src}
   />
   <article>
     <GoBackInTop headPage="/proyectos" />
-    <TOC client:only="react" headings={LVM_headings} title={title} />
+    <TOC
+      client:only="react"
+      headings={LVM_headings}
+      title={LVM_es.projectTitle}
+    />
     <section class="flex flex-col items-center justify-center">
-      <h1 class="text-center">#LaVidaModerna es...</h1>
+      <h1 transition:name={`${LVM_es.href}-project-title`} class="text-center">
+        #LaVidaModerna es...
+      </h1>
 
-      <Image
+      <Picture
         class="w-full h-auto mt-5"
         src={LVMes}
         width={1000}
         height={1000}
         alt={"Banner del proyecto de Chema de LaVidaModerna es..."}
+        transition:name={`${LVM_es.href}-project-image`}
       />
 
       <a
