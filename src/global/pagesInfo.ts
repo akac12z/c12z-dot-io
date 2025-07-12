@@ -29,3 +29,9 @@ export const ESSAY_PAGE_INFO: PagesInfo = {
   description:
     "Colección de ensayos sobre Growth en startups y psicología del comportamiento. Reflexiones y aprendizajes recopilados de la experiencia mía, de mis pares y de lo que voy leyendo.",
 };
+
+export const PROJECTS_PAGE: PagesInfo = {
+  title: "Proyectos de Chema Ferrández",
+  description:
+    "Recopilación de los proyectos que Chema (yo 🙃) hace como hobby en su tiempo libre.",
+};

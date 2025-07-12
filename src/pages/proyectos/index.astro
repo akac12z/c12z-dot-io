@@ -6,11 +6,18 @@ import ProjectCard from "@/components/pages/projects/ProjectCard.astro";
 import ProjectPage from "@/components/pages/projects/ProjectPage.astro";
 
 import { PROJETCS_DATA } from "@/components/pages/projects/data/projectsData";
+import ProjectPageSEO from "@SEO/pages/projects/ProjectPageSEO.astro";
+import { PROJECTS_PAGE } from "@/global/pagesInfo";
 
 const { LVM_es } = PROJETCS_DATA;
 ---
 
 <MainLayout>
+  <ProjectPageSEO
+    slot="head"
+    pageTitle={PROJECTS_PAGE.title}
+    pageDescription={PROJECTS_PAGE.description}
+  />
   <GoBackInTop headPage="/" />
   <h1>Proyectos</h1>
   <ProjectPage>
