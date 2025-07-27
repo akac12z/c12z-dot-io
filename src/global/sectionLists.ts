@@ -2,22 +2,6 @@ import type { Section } from "@interfaces/sectionLists.interface";
 
 export const SECTION_LISTS: Section[] = [
   {
-    href: "/biblioteca",
-    style: "biblioteca",
-    label: "biblioteca",
-    description: "Notas de los libros que voy leyendo",
-    items: [
-      {
-        text: "The Mom Test.",
-        href: "#",
-      },
-      {
-        text: "Show your Work",
-        href: "#",
-      },
-    ],
-  },
-  {
     href: "/proyectos",
     style: "proyectos",
     label: "proyectos",
@@ -27,10 +11,24 @@ export const SECTION_LISTS: Section[] = [
         text: "#LaVidaModerna es...",
         href: "/proyectos/la-vida-moderna-es",
       },
+    ],
+  },
+  {
+    href: "/biblioteca",
+    style: "biblioteca",
+    label: "biblioteca",
+    description: "Notas de los libros que voy leyendo",
+    items: [
+      /*
       {
-        text: "Mom's Meals",
+        text: "The Mom Test",
         href: "#",
       },
+      {
+        text: "Show your Work",
+        href: "#",
+      },
+    */
     ],
   },
   {
@@ -47,11 +45,14 @@ export const SECTION_LISTS: Section[] = [
     description: "Cómo y por qué hacemos lo que hacemos y cómo aplicarlo",
     items: [],
   },
-  {
-    href: "/notas",
-    style: "otros",
-    label: "notas",
-    description: "pensamientos que me parecen interesante guardar",
-    items: [],
-  },
 ];
+
+{
+  /*
+  href: "/notas",
+  style: "otros",
+  label: "notas",
+  description: "pensamientos que me parecen interesante guardar",
+  items: [],
+*/
+}
