@@ -42,8 +42,8 @@ export const SOCIAL_LINKS: SocialLinksInterface = {
   },
   substack: {
     name: "Substack",
-    url: "https://mrjark.substack.com",
-    userName: "@mrjark",
+    url: "https://chemaferrandez.substack.com",
+    userName: "@chemaferrandez",
   },
   goodreads: {
     name: "Goodreads",
