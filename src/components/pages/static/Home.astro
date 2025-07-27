@@ -6,53 +6,65 @@ import { SECTION_LISTS } from "@/global/sectionLists";
 import SectionLists from "@static/SectionLists.astro";
 ---
 
-<!-- <ReaderStaticMarkdowns>
-  <HomeContent />
-</ReaderStaticMarkdowns> -->
-<article class="mx-auto flex flex-col justify-center text-pretty">
-  <section class="flex items-center justify-between gap-4 mb-6">
-    <h1 class="text-xl">Aquí Chema F. · c12z</h1>
+<article>
+  <section class="mx-auto flex flex-col justify-center text-pretty">
+    <h1 class="mb-4">Aquí Chema F. · c12z</h1>
+
+    <section class="flex flex-col gap-y-2">
+      <p>
+        Un Growth, apasionado de la psicología del comportamiento y de hablar
+        con usuarios para crear mejores productos. EdTech, ClimateTech y
+        productos con Network Effects me interesan.
+      </p>
+      <p>
+        Amante del arte del Tattoo, compito en CrossFit y en mi tiempo libre
+        programo.
+      </p>
+    </section>
   </section>
-  <section class="flex flex-col gap-y-2">
+
+  <section
+    class="flex gap-y-2 mt-4 border-2 border-cz-primary px-2 py-2 bg-cz-primary/5 rounded w-fit"
+  >
     <p>
-      Un Growth, apasionado de la psicología del comportamiento y de hablar con
-      usuarios para crear mejores productos.
+      ¿Buscas un Growth?
+      <a
+        class="text-sm hover:underline hover:underline-offset-2 hover:decoration-cz-primary border-cz-primary"
+        href="https://www.linkedin.com/in/chemaferrandez/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LinkedIn
+      </a>
     </p>
-    <p>
-      Amante del arte del tattoo, compito en CrossFit y en mi tiempo libre pico
-      código (AI).
+    <span class="relative flex justify-center items-center size-3">
+      <span
+        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cz-secondary opacity-75"
+      ></span>
+      <span class="absolute inline-flex size-2 rounded-full bg-cz-primary"
+      ></span>
+    </span>
+  </section>
+
+  <section>
+    <h2 class="mt-8 mb-4">Cosas de las que hablo</h2>
+    <p class="">
+      Comparto aquello que voy aprendiendo sobre Growth, Psicología del
+      Comportamiento y Producto junto con algunas reflexiones.
     </p>
+
+    <section class="flex flex-col gap-y-4">
+      {
+        SECTION_LISTS.map(({ style, description, href, items, label }) => (
+          <SectionLists
+            href={href}
+            style={style}
+            label={label}
+            description={description}
+            items={items}
+          />
+        ))
+      }
+    </section>
   </section>
 </article>
-
-<section class="flex gap-y-2 mt-4">
-  <p>Estoy buscando trabajo como Growth →</p>
-  <a
-    class="text-sm hover:underline hover:underline-offset-2 hover:decoration-cz-primary border-cz-primary"
-    href="https://www.linkedin.com/in/chemaferrandez/"
-    target="_blank"
-    rel="noopener noreferrer">LinkedIn</a
-  >
-  <span class="relative flex justify-center items-center size-3">
-    <span
-      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cz-primary opacity-75"
-    ></span>
-    <span class="absolute inline-flex size-2 rounded-full bg-cz-primary"></span>
-  </span>
-</section>
-
-<h2 class="mt-12">Cosas de las que hablo</h2>
-
-<section class="flex flex-col gap-y-4">
-  {
-    SECTION_LISTS.map(({ style, description, href, items, label }) => (
-      <SectionLists
-        href={href}
-        style={style}
-        label={label}
-        description={description}
-        items={items}
-      />
-    ))
-  }
-</section>
