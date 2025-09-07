@@ -258,6 +258,9 @@
   .goback-in-top-btn {
     @apply my-2 px-1 py-0.5 text-xs font-pixel tracking-widest border border-cz-orange-goback text-cz-text-content-dark rounded opacity-50 hover:opacity-100 flex items-center justify-center gap-1 w-fit h-fit mb-5;
   }
+  .scroll-totop-btn {
+    @apply w-8 h-8 rounded-full cursor-pointer border border-cz-primary bg-cz-primary/10 text-cz-primary hover:scale-110 transition-all flex items-center justify-center;
+  }
 
   /* TOGGLE HAMBURGER MENU */
   /* Toggle Menu: Mobile */

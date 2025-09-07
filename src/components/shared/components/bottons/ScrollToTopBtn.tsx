@@ -37,14 +37,7 @@ const ScrollToTopBtn = () => {
             : "pointer-events-none opacity-0 hidden"
         }`}
     >
-      <button
-        onClick={scrollToTop}
-        className="
-          w-8 h-8 rounded-full cursor-pointer
-          border border-cz-primary bg-cz-primary/10
-          text-cz-primary hover:scale-110 transition-all flex items-center justify-center
-        "
-      >
+      <button onClick={scrollToTop} className="scroll-totop-btn">
         ↑
       </button>
     </div>
