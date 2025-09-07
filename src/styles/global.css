@@ -181,7 +181,7 @@
   h4,
   h5,
   h6 {
-    @apply font-museo_moderno tracking-wider text-cz-text-headers-dark;
+    @apply font-pixel tracking-wider text-cz-text-headers-dark;
   }
   h1 {
     @apply text-2xl;
