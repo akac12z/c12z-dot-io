@@ -41,13 +41,13 @@
       "@SEO/*": [
         "./src/components/SEO/*"
       ],
-      "@icons/*": [
-        "./src/components/icons/*"
-      ],
       "@test/*": [
         "./src/components/test/*"
       ],
-
+      
+      "@commonIcons/*": [
+        "./src/components/common/icons/*"
+      ],
       "@basicPageComponents/*": [
         "./src/components/pages/basics/*"
       ],
@@ -68,6 +68,9 @@
       ],
       "@projectPageComponents/*": [
         "./src/components/pages/content/projects/*"
+      ],
+      "@commonComponents/*": [
+        "./src/components/common/*"
       ],
       "@/*": [
         "./src/*"
