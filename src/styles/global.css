@@ -251,9 +251,12 @@
     @apply rounded-lg mt-0 w-5/6 h-auto place-self-center;
   }
 
-  /* TO TOP BOTTON */
+  /* BOTTONs */
   .to-top-btn {
     @apply fixed bottom-5 right-5 w-8 h-8 rounded-full border border-green-500 bg-transparent text-green-500 hidden items-center justify-center;
+  }
+  .goback-in-top-btn {
+    @apply my-2 px-1 py-0.5 text-xs font-pixel tracking-widest border border-cz-orange-goback text-cz-text-content-dark rounded opacity-50 hover:opacity-100 flex items-center justify-center gap-1 w-fit h-fit mb-5;
   }
 
   /* TOGGLE HAMBURGER MENU */
