@@ -101,18 +101,29 @@
   font-display: swap;
 }
 
+/* TAMAGO - PIXEL */
+@font-face {
+  font-family: "Tamago";
+  src: url("/src/assets/fonts/Tamago.woff2") format("woff2"),
+    url("/src/assets/fonts/Tamago.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-museo_moderno: "MuseoModerno", sans-serif;
   --font-rubik: "Rubik", system-ui, "sans-serif";
   --font-code: "Cascadia, ui-monospace, monospace";
+  --font-pixel: "Tamago", sans-serif;
 
-  --color-cz-bg-dark: #060607;
+  --color-cz-bg-dark: #111;
   --color-cz-bg-light: #f5f2ee;
 
   --color-cz-primary: #00c876;
   --color-cz-secondary: #904fe7;
 
-  /* --- For Darkmode --- */
+  /* --- DARKMODE --- */
   --color-cz-text-headers-dark: #fcf8f1;
   --color-cz-text-content-dark: #dfdbd5;
   --color-cz-text-relax-dark: #9d9b98;
@@ -122,7 +133,7 @@
   --color-cz-proyectos-dark: #a2ff27;
   --color-cz-otros-dark: #ff3838;
 
-  /* --- For Lightmode --- */
+  /* --- LIGHTMODE --- */
   --color-cz-text-headers-light: #0c0c0b;
   --color-cz-text-content-light: #1f1e1d;
   --color-cz-text-relax-light: #595856;
@@ -131,6 +142,8 @@
   --color-cz-biblioteca-light: #a15e00;
   --color-cz-proyectos-light: #2e5100;
   --color-cz-otros-light: #c10000;
+
+  /* OTHERS */
 
   --color-cz-orange-goback: #f16f0e;
   --color-cz-red-wip: #ff4d4d;
@@ -191,7 +204,7 @@
     @apply font-rubik text-sm text-cz-text-content-dark font-normal tracking-wider leading-relaxed;
   }
   a {
-    @apply font-museo_moderno tracking-wider text-cz-text-headers-dark;
+    @apply font-pixel tracking-wider text-cz-text-headers-dark;
   }
   blockquote {
     @apply font-rubik text-base border-l-2 pl-4 my-2 text-cz-text-relax-dark;
