@@ -11,7 +11,7 @@ import BooksSEO from "@SEO/pages/library/BooksSEO.astro";
 import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
 
-import TOC from "@shared/components/ToC/toc";
+import TOC from "@commonPageComponents/ToC/toc";
 import GoOut from "@commonIcons/GoOut.astro";
 
 import BookScore from "@bookPageComponents/components/BookScore.astro";
@@ -46,7 +46,7 @@ const { Content, headings } = await render(entry);
     <GoBackInTop headPage="/biblioteca" />
     <ScrollGoBackBtn headPage="/biblioteca" client:only="react" />
 
-    <section class="grid grid-cols-2 max-w-lg mx-auto">
+    <section class="grid grid-cols-2 max-w-2xl mx-auto">
       <BookCover entry={entry} />
 
       <section class="flex flex-col items-start custom-prose">

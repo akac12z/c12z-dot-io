@@ -45,11 +45,12 @@
         "./src/components/test/*"
       ],
       
+      
       "@commonIcons/*": [
         "./src/components/common/icons/*"
       ],
       "@basicPageComponents/*": [
-        "./src/components/pages/basics/*"
+        "./src/components/pages/content/basics/*"
       ],
       "@errorPageComponents/*": [
         "./src/components/pages/content/404/*"
@@ -71,6 +72,9 @@
       ],
       "@commonComponents/*": [
         "./src/components/common/*"
+      ],
+      "@commonPageComponents/*": [
+        "./src/components/pages/common/*"
       ],
       "@/*": [
         "./src/*"
