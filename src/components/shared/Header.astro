@@ -5,51 +5,55 @@ import Logo from "@icons/shared/Logo.astro";
 // import DarkModeToggle from "./components/bottons/theme/DarkModeToggle";
 ---
 
-<header class="flex items-center justify-between">
-  <nav class="flex justify-between items-center mx-auto w-full my-2">
-    <Logo shouldGo="/" height="1.5rem" width="1.5rem" />
-    <!-- <NavbarMobileMenu /> -->
-    <!-- <NavbarDesktopMenu /> -->
-    <!-- <DarkModeToggle client:only="react" /> -->
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-cz-bg-dark/80 backdrop-blur-sm"
+>
+  <nav class="mx-auto max-w-4xl">
+    <div class="flex justify-between items-center mx-2 my-4 max-w-4xl">
+      <Logo shouldGo="/" height="1.5rem" width="1.5rem" />
+      <!-- <NavbarMobileMenu /> -->
+      <!-- <NavbarDesktopMenu /> -->
+      <!-- <DarkModeToggle client:only="react" /> -->
+    </div>
   </nav>
-</header>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const primaryNav = document.querySelector(
-      ".navigation-mobile-menu"
-    ) as HTMLUListElement;
-    const navToggle = document.querySelector(
-      ".mobile-nav-toggle"
-    ) as HTMLButtonElement;
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      const primaryNav = document.querySelector(
+        ".navigation-mobile-menu"
+      ) as HTMLUListElement;
+      const navToggle = document.querySelector(
+        ".mobile-nav-toggle"
+      ) as HTMLButtonElement;
 
-    const toggleMenu = () => {
-      const visibility = primaryNav.getAttribute("data-visible");
-      if (visibility === "false") {
-        primaryNav.setAttribute("data-visible", "true");
-        navToggle.setAttribute("aria-expanded", "true");
-      } else {
+      const toggleMenu = () => {
+        const visibility = primaryNav.getAttribute("data-visible");
+        if (visibility === "false") {
+          primaryNav.setAttribute("data-visible", "true");
+          navToggle.setAttribute("aria-expanded", "true");
+        } else {
+          primaryNav.setAttribute("data-visible", "false");
+          navToggle.setAttribute("aria-expanded", "false");
+        }
+      };
+
+      const closeMenu = () => {
         primaryNav.setAttribute("data-visible", "false");
         navToggle.setAttribute("aria-expanded", "false");
-      }
-    };
+      };
 
-    const closeMenu = () => {
-      primaryNav.setAttribute("data-visible", "false");
-      navToggle.setAttribute("aria-expanded", "false");
-    };
+      navToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleMenu();
+      });
 
-    navToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      toggleMenu();
+      document.addEventListener("click", (e) => {
+        const isClickInsideMenu = primaryNav.contains(e.target as Node);
+        const isClickInsideButton = navToggle.contains(e.target as Node);
+        if (!isClickInsideMenu && !isClickInsideButton) {
+          closeMenu();
+        }
+      });
     });
-
-    document.addEventListener("click", (e) => {
-      const isClickInsideMenu = primaryNav.contains(e.target as Node);
-      const isClickInsideButton = navToggle.contains(e.target as Node);
-      if (!isClickInsideMenu && !isClickInsideButton) {
-        closeMenu();
-      }
-    });
-  });
-</script>
+  </script>
+</header>
