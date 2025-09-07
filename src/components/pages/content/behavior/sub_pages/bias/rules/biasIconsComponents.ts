@@ -1,7 +1,6 @@
+import AnchorEffect from "@biasPageComponents/icons/AnchorEffect.icon.astro";
 import { type BiasIcon } from "./biasIcons.interface";
-
-import AnchorEffect from "./AnchorEffect.icon.astro";
-import BackfireEffect from "./BackfireEffect.icon.astro";
+import BackfireEffect from "@biasPageComponents/icons/BackfireEffect.icon.astro";
 
 export const allBiasIcon: BiasIcon[] = [
   {

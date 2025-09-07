@@ -10,11 +10,12 @@ import BooksSEO from "@SEO/pages/library/BooksSEO.astro";
 
 import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+import GoOut from "@icons/shared/GoOut.astro";
+
 import TOC from "@shared/components/ToC/toc";
 
-import BookScore from "@/components/pages/books/BookScore.astro";
-import BookCover from "@/components/pages/books/BookCover.astro";
-import GoOut from "@icons/shared/GoOut.astro";
+import BookScore from "@bookPageComponents/components/BookScore.astro";
+import BookCover from "@bookPageComponents/components/BookCover.astro";
 
 interface Props {
   entry: CollectionEntry<"library">;

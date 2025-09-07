@@ -14,14 +14,8 @@
       "@analytics/*": [
         "./src/components/shared/analytics/*"
       ],
-      "@static/*": [
-        "./src/components/pages/static/*"
-      ],
       "@home/*": [
         "./src/components/static/home/*"
-      ],
-      "@about/*": [
-        "./src/components/static/about/*"
       ],
       "@data/*": [
         "./src/data/*"
@@ -44,9 +38,6 @@
       "@imageAssets/*": [
         "./src/assets/images/*"
       ],
-      "@bookImages/*": [
-        "./src/components/assets/images/books/*"
-      ],
       "@SEO/*": [
         "./src/components/SEO/*"
       ],
@@ -55,6 +46,28 @@
       ],
       "@test/*": [
         "./src/components/test/*"
+      ],
+
+      "@basicPageComponents/*": [
+        "./src/components/pages/basics/*"
+      ],
+      "@errorPageComponents/*": [
+        "./src/components/pages/content/404/*"
+      ],
+      "@bookPageComponents/*": [
+        "./src/components/pages/content/books/*"
+      ],
+      "@bookImages/*": [
+        "./src/components/assets/images/books/*"
+      ],
+      "@biasPageComponents/*": [
+        "./src/components/pages/content/behavior/sub_pages/bias/*"
+      ],
+      "@essayPageComponents/*": [
+        "./src/components/pages/content/essay/*"
+      ],
+      "@projectPageComponents/*": [
+        "./src/components/pages/content/projects/*"
       ],
       "@/*": [
         "./src/*"

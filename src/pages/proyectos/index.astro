@@ -2,12 +2,12 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
 
-import ProjectCard from "@/components/pages/projects/ProjectCard.astro";
-import ProjectPage from "@/components/pages/projects/ProjectPage.astro";
-
-import { PROJETCS_DATA } from "@/components/pages/projects/data/projectsData";
-import ProjectPageSEO from "@SEO/pages/projects/ProjectPageSEO.astro";
 import { PROJECTS_PAGE } from "@/global/pagesInfo";
+import { PROJETCS_DATA } from "@projectPageComponents/data/projectsData";
+
+import ProjectPage from "@projectPageComponents/components/ProjectPage.astro";
+import ProjectPageSEO from "@SEO/pages/projects/ProjectPageSEO.astro";
+import ProjectCard from "@projectPageComponents/components/ProjectCard.astro";
 
 const { LVM_es } = PROJETCS_DATA;
 ---

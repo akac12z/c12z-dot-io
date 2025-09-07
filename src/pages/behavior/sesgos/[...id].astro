@@ -12,7 +12,7 @@ import BiasSEO from "@SEO/pages/behavior/bias/BiasSEO.astro";
 import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
 import TOC from "@shared/components/ToC/toc";
 import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
-import BiasCategory from "@/components/pages/bias/BiasCategory.astro";
+import BiasCategory from "@biasPageComponents/components/BiasCategory.astro";
 
 
 interface Props {
@@ -47,7 +47,7 @@ const { Content, headings } = await render(entry);
         <h1 transition:name=`${id}-name` class="text-base text-center mb-2 underline">
           {biasName}
         </h1>
-        <h2 class="xs:text-2xl text-xl font-museo_moderno text-cz-text-headers-dark tracking-wider">{biasQuestion}</h2>
+        <h2 class="xs:text-2xl text-xl text-cz-text-headers-dark tracking-wider">{biasQuestion}</h2>
         <section class="flex flex-col justify-center items-center text-center my-4 gap-y-2">
           {
             category.length > 1
