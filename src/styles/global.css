@@ -234,7 +234,7 @@
 
   /* BODY */
   .body-layout-classes {
-    @apply mx-auto p-5 px-3 max-w-3xl min-h-screen flex flex-col;
+    @apply mx-auto p-5 px-3 max-w-4xl min-h-screen flex flex-col;
   }
   /* CODING STYLE */
   .coding {
