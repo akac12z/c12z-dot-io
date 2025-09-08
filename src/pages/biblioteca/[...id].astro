@@ -39,12 +39,12 @@ const { Content, headings } = await render(entry);
 
 <MainLayout>
   <BooksSEO slot="head" entry={entry} />
-  <article class="mx-auto w-full">
+  <article class="mx-auto max-w-3xl">
     <TOC client:only="react" headings={headings} title={title} />
     <GoBackInTop headPage="/biblioteca" />
     <ScrollGoBackBtn headPage="/biblioteca" client:only="react" />
 
-    <section class="grid grid-cols-2 w-full mx-auto">
+    <section class="grid grid-cols-2 max-w-3xl mx-auto">
       <BookCover entry={entry} />
 
       <section class="flex flex-col items-start custom-prose">
