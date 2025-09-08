@@ -76,6 +76,9 @@
       "@commonPageComponents/*": [
         "./src/components/pages/common/*"
       ],
+      "@btnCommonPageComponents/*": [
+        "./src/components/pages/common/bottons/*"
+      ],
       "@/*": [
         "./src/*"
       ]

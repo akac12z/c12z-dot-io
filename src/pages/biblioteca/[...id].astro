@@ -7,15 +7,13 @@ import { getCollection, render } from "astro:content";
 
 import MainLayout from "@layouts/MainLayout.astro";
 import BooksSEO from "@SEO/pages/library/BooksSEO.astro";
-
-import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
-import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
-
-import TOC from "@commonPageComponents/ToC/toc";
-import GoOut from "@commonIcons/GoOut.astro";
-
 import BookScore from "@bookPageComponents/components/BookScore.astro";
 import BookCover from "@bookPageComponents/components/BookCover.astro";
+
+import ScrollGoBackBtn from "@commonPageComponents/bottons/ScrollGoBackBtn";
+import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
+import TOC from "@commonPageComponents/ToC/toc";
+import GoOut from "@commonIcons/GoOut.astro";
 
 interface Props {
   entry: CollectionEntry<"library">;

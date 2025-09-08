@@ -1,11 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 
-import ScrollGoBackBtn from "@shared/components/bottons/ScrollGoBackBtn";
-
 import BiasHeader from "./BiasHeader.astro";
 import BiasCard from "./BiasCard.astro";
-import GoBackInTop from "@shared/components/bottons/GoBackInTop.astro";
+
+import ScrollGoBackBtn from "@commonPageComponents/bottons/ScrollGoBackBtn";
+import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 
 const biases = await getCollection("bias");
 ---
