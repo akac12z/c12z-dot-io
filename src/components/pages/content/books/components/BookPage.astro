@@ -6,7 +6,7 @@ import BookHeader from "./BookHeader.astro";
 const library = await getCollection("library");
 ---
 
-<section class="grid mx-auto max-w-2xl">
+<section class="grid mx-auto max-w-3xl">
   <BookHeader />
   {library.map((book) => <BookCard entry={book} />)}
 </section>
