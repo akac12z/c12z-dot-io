@@ -1,18 +1,16 @@
 ---
-/**
- * !Esto se le tiene que poner a todas las páginas estáticas por defecto para que coja los metatags
- */
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 import processKeywords from "@utils/processKeywords";
-import { projectsKeywords } from "./projects.keywords";
+import { keywordsInProjectPage } from "./projectsPage.keywords";
 
 interface Props {
   pageTitle: string;
   pageDescription: string;
   ogImage?: string;
+  keywordsInProjects: string[];
 }
 
-const { pageTitle, pageDescription, ogImage } = Astro.props;
+const { pageTitle, pageDescription, ogImage, keywordsInProjects } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
@@ -21,7 +19,10 @@ const ogImageURL = ogImage
   : new URL("./og-image.png", Astro.site);
 const ogImageAlt = pageTitle;
 
-const keywords = processKeywords(projectsKeywords).keywords;
+const projectKeywords = processKeywords(keywordsInProjects).keywords;
+const pageProjectKeywords = processKeywords(keywordsInProjectPage).keywords;
+
+const allKeywords = [...new Set([...pageProjectKeywords, ...projectKeywords])];
 ---
 
 <title>{pageTitle}</title>
@@ -48,8 +49,8 @@ const keywords = processKeywords(projectsKeywords).keywords;
 {/* PARA TODAS MENOS EL MAIN */}
 <meta property="og:type" content="article" />
 {
-  keywords &&
-    keywords.map((keyword: string) => {
+  allKeywords &&
+    allKeywords.map((keyword: string) => {
       return <meta property="article:tag" content={keyword} />;
     })
 }

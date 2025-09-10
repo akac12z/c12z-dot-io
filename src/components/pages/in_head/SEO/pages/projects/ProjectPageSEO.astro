@@ -4,7 +4,7 @@
  */
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 import processKeywords from "@utils/processKeywords";
-import { projectsKeywords } from "./projects.keywords";
+import { keywordsInProjectPage } from "./projectsPage.keywords";
 
 interface Props {
   pageTitle: string;
@@ -18,7 +18,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("./og-image.png", Astro.site);
 const ogImageAlt = pageTitle;
 
-const keywords = processKeywords(projectsKeywords).keywords;
+const keywords = processKeywords(keywordsInProjectPage).keywords;
 ---
 
 <title>{pageTitle}</title>

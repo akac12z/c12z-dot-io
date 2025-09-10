@@ -8,5 +8,15 @@ export const PROJETCS_DATA: Record<string, ProjectData> = {
     projectTitle: "#LaVidaModerna es...",
     projectDescription:
       "Un homenaje a las frases y momentos de #Moderdonia, el programa que me marcó con humor y cutrez.",
+    projectKeywords: [
+      "la vida moderna",
+      "la vida moderna es",
+      "lvm",
+      "moderdonia",
+      "programa de radio de la Cadena SER",
+      "David Broncano",
+      "Ignatius Farray",
+      "Queque",
+    ],
   },
 } as const;

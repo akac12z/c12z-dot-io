@@ -1,6 +1,6 @@
 import type { PageKeywords } from "@interfaces/keywords.interface";
 
-export const projectsKeywords: PageKeywords = {
+export const keywordsInProjectPage: PageKeywords = {
   keywords: [
     "projects",
     "proyectos de chema ferrandez",

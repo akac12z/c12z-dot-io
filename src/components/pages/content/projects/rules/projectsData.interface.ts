@@ -4,4 +4,5 @@ export interface ProjectData {
   altImage: string;
   projectTitle: string;
   projectDescription: string;
+  projectKeywords: string[];
 }
