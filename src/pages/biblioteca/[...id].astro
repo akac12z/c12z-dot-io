@@ -39,44 +39,42 @@ const { Content, headings } = await render(entry);
 
 <MainLayout>
   <BooksSEO slot="head" entry={entry} />
-  <article class="mx-auto max-w-3xl">
+  <article
+    class="flex flex-col w-full lg:min-w-3xl md:min-w-2xl sm:min-w-xl mx-auto"
+  >
     <TOC client:only="react" headings={headings} title={title} />
     <GoBackInTop headPage="/biblioteca" />
     <ScrollGoBackBtn headPage="/biblioteca" client:only="react" />
 
-    <section class="grid grid-cols-2 max-w-3xl mx-auto">
+    <section class="grid grid-cols-2">
       <BookCover entry={entry} />
 
       <section class="flex flex-col items-start custom-prose">
         <h1 transition:name={`${id}-${title}`} class="text-start mb-2">
           {title}
         </h1>
-        <div class="flex flex-col -mt-1 mb-4">
+        <section class="flex flex-col -mt-1 mb-4">
           <!-- TODO: HACER EL AUTHORS EN UN COMPONENTE A PARTE Y QUE DEPENDIENDO DE SI ES UNO o DOS, QUE SE MUESTRE UNA COSA U OTRA -->
           {
             authorsInArry.map((author) => (
-              <a
-                class="no-underline text-sm hover:underline text-cz-text-headers-dark"
-                target="_blank"
-                rel="noopener"
-                href={author.link}
-              >
+              <span class="font-pixel text-xs text-cz-text-headers-dark">
                 de {author.name}
-              </a>
+              </span>
             ))
           }
-        </div>
+        </section>
         <BookScore
           entry={entry}
           width="w-5 xs:w-7"
           height="w-5 xs:h-7"
           transition:name={`${id}-bookScore-${score}`}
         />
-        <div class="flex flex-col mt-4 gap-y-2 text-xs text-cz-text-relax-dark">
-          <span
-            >Lo publiqué el {publishDate} y puedes leerlo en {readingTime} min</span
-          >
-        </div>
+        <section
+          class="flex flex-col mt-4 gap-y-2 text-xs text-cz-text-relax-dark"
+        >
+          <span>Publicado: {publishDate}</span>
+          <span>Léelo en: {readingTime} min.</span>
+        </section>
       </section>
     </section>
     <!-- <div class="mt-4 mx-auto">
@@ -91,7 +89,7 @@ const { Content, headings } = await render(entry);
         authorsInArry.map((author) => (
           <div class="flex items-center gap-x-1 mb-2">
             <a
-              class="no-underline text-sm text-cz-neon-blue flex items-center gap-x-1 mb-2"
+              class="text-sm flex items-center gap-x-1 mb-2"
               href={author.link}
               target="_blank"
               rel="noopener"
