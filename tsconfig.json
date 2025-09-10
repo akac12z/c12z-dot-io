@@ -8,9 +8,6 @@
       "@sharedComponentsInPages/*": [
         "./src/components/pages/shared/*"
       ],
-      "@shared/*": [
-        "./src/components/shared/*"
-      ],
       "@analytics/*": [
         "./src/components/shared/analytics/*"
       ],
@@ -37,9 +34,6 @@
       ],
       "@imageAssets/*": [
         "./src/assets/images/*"
-      ],
-      "@SEO/*": [
-        "./src/components/SEO/*"
       ],
       "@test/*": [
         "./src/components/test/*"

@@ -3,8 +3,6 @@ import "../styles/global.css";
 
 import BaseHead404 from "@in_headComponents/SEO/pages/404/BaseHead404.astro";
 
-import GTMBody from "@analytics/Google/GTMBody.astro";
-
 import { SITE_404_CONFIG } from "@/global/siteInfo";
 
 const { lang } = SITE_404_CONFIG;
@@ -16,7 +14,6 @@ const { lang } = SITE_404_CONFIG;
     <slot name="head" />
   </BaseHead404>
   <body class="mx-auto px-3 max-w-3xl min-h-screen">
-    <GTMBody />
     <main class="my-5 overflow-x-hidden">
       <slot />
     </main>

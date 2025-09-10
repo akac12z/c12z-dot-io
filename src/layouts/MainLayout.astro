@@ -3,7 +3,6 @@ import "../styles/global.css";
 
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 
-import GTMBody from "@shared/analytics/Google/GTMBody.astro";
 import Header from "@commonComponents/header/Header.astro";
 import Footer from "@commonComponents/footer/Footer.astro";
 
@@ -19,7 +18,6 @@ const { lang } = SITE_DEFAULT_CONFIG;
     <slot name="head" />
   </BaseHead>
   <body class="body-layout-classes">
-    <GTMBody />
     <Header />
     <main class="mt-10 pb-14 max-w-3xl mx-auto">
       <slot />
