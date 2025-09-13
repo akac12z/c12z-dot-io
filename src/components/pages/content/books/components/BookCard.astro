@@ -64,8 +64,8 @@ const { quote, title, readingTime, backlog } = data;
         backlog === "upload" ? (
           <>
             <BookScore entry={entry} />
-            <div class="flex flex-col gap-y-2 text-xs text-cz-text-relax-dark/60">
-              <span>Léelo en {readingTime}min</span>
+            <div class="flex flex-col gap-y-2 text-xs font-pixel text-cz-text-relax-dark/60">
+              <span>Léelo en: {readingTime}min</span>
             </div>
             <p>"{quote}"</p>
           </>
