@@ -23,7 +23,7 @@ const currentStyle = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
     {
       items.length === 0 ? (
         <div class="my-2 rounded w-fit bg-cz-red-wip/10 border border-cz-red-wip/50 text-cz-red-wip px-3 py-2 text-xs font-semibold flex items-center gap-2">
-          🚧 Estoy trabajando en la sección.
+          🚧 WIP
         </div>
       ) : (
         items.map((items) => (
@@ -31,7 +31,7 @@ const currentStyle = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
             <span>·</span>{" "}
             <a
               href={items.href}
-              class="underline font-rubik decoration-cz-text-relax-light hover:no-underline"
+              class="underline font-pixel decoration-cz-text-relax-light hover:no-underline"
             >
               {items.text}
             </a>
