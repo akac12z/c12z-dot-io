@@ -1,0 +1,41 @@
+---
+import Bulb from "@commonIcons/Bulb.astro";
+
+interface Thoughts {
+  first_paragraph: string[];
+  second_paragraph?: string[];
+  third_paragraph?: string[];
+}
+
+const {
+  first_paragraph,
+  second_paragraph ,
+  third_paragraph,
+} = Astro.props as Thoughts;
+
+if (!first_paragraph) {
+  throw new Error("At least, you need a first_paragraph in quote component. Then you can add a second_paragraph and a third_paragraph.");
+}
+---
+
+<section
+  class="border border-cz-primary/50 p-2 rounded-lg gap-y-1 flex flex-col mx-auto mb-4"
+>
+  <section class="grid grid-cols-[auto_1fr] my-auto gap-x-2">
+    <Bulb />
+    <section class="flex flex-col justify-center">
+      <p class="text-xs italic mb-0">{first_paragraph}</p>
+      {
+        second_paragraph && (
+          <p class="text-xs italic mt-2">{second_paragraph}</p>
+        )
+      }
+      {
+        second_paragraph && third_paragraph && (
+          <p class="text-xs italic mt-2">{second_paragraph}</p>
+          <p class="text-xs italic mt-2">{third_paragraph}</p>
+        )
+      }
+    </section>
+  </section>
+</section>
