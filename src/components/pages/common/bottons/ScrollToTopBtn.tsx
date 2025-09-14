@@ -37,7 +37,11 @@ const ScrollToTopBtn = () => {
             : "pointer-events-none opacity-0 hidden"
         }`}
     >
-      <button onClick={scrollToTop} className="scroll-totop-btn">
+      <button
+        title="go to top"
+        onClick={scrollToTop}
+        className="scroll-totop-btn"
+      >
         ↑
       </button>
     </div>
