@@ -100,7 +100,7 @@ export default function TOC({ title, headings }: DynamicTocProps) {
               tabIndex={0}
               ref={rootRef}
               layout
-              className="relative select-none max-w-2xs sm:max-w-4xl backdrop-blur-xl border border-cz-text-relax-dark text-cz-text-content-dark max-h-3/4 overflow-y-auto"
+              className="relative select-none max-w-2xs sm:max-w-4xl backdrop-blur-xl border border-cz-text-relax-dark text-cz-text-content-dark "
               style={{
                 borderRadius: expanded ? 16 : 300,
                 padding: expanded ? "16px 16px" : "8px 12px",
@@ -145,7 +145,7 @@ export default function TOC({ title, headings }: DynamicTocProps) {
                   }}
                   key={expanded ? "list" : "title"}
                 >
-                  <div className="mt-2 text-xs">
+                  <div className="mt-2 text-xs overflow-y-auto max-h-90">
                     {headings.map(({ text, slug, depth }) => (
                       <div
                         key={slug}
