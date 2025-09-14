@@ -5,7 +5,7 @@ import type {
 } from "@interfaces/siteInfo.interface";
 
 export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
-  title: "c12z.io",
+  title: "Chema Ferrández | c12z.io",
   description:
     "Un 'build(me) in public' donde compartiré aquello que voy haciendo, aprendiendo y pensando en mi carrera como Growth",
   url: "https://c12z.io",
@@ -15,7 +15,7 @@ export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
 };
 
 export const SITE_404_CONFIG: Site404ConfigInterface = {
-  errorTitle: "Hiuston, hemos tenido un problema 404 en c12z",
+  errorTitle: "Hiuston, error 404 en c12z",
   errorDescription:
     "Ha habido un problema con la página que estabas buscando y bueno... aquí estamos.",
   url: "https://c12z.io",
