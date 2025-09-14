@@ -100,7 +100,7 @@ export default function TOC({ title, headings }: DynamicTocProps) {
               tabIndex={0}
               ref={rootRef}
               layout
-              className="relative select-none max-w-2xs sm:max-w-4xl backdrop-blur-xl border border-cz-text-relax-dark text-cz-text-content-dark "
+              className="relative select-none max-w-2xs sm:max-w-4xl backdrop-blur-xl border border-cz-text-relax-dark text-cz-text-content-dark max-h-3/4 overflow-y-auto"
               style={{
                 borderRadius: expanded ? 16 : 300,
                 padding: expanded ? "16px 16px" : "8px 12px",
@@ -121,7 +121,7 @@ export default function TOC({ title, headings }: DynamicTocProps) {
             >
               <motion.div layout="position" className="flex">
                 <ProgressCircle progress={progress} />
-                <span className="font-museo_moderno ml-2 inline-block truncate text-sm font-bold">
+                <span className="font-pixel ml-2 inline-block truncate text-sm font-bold">
                   {title}
                 </span>
               </motion.div>
@@ -146,10 +146,11 @@ export default function TOC({ title, headings }: DynamicTocProps) {
                   key={expanded ? "list" : "title"}
                 >
                   <div className="mt-2 text-xs">
-                    {headings.map(({ text, slug }) => (
+                    {headings.map(({ text, slug, depth }) => (
                       <div
                         key={slug}
-                        className="relative flex items-center pl-3"
+                        className="relative flex items-center"
+                        style={{ paddingLeft: `${(depth - 2) * 12}px` }}
                       >
                         <AnimatePresence mode="popLayout">
                           {slug === activeSlug && (

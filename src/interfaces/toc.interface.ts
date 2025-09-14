@@ -3,6 +3,7 @@ import type { MotionValue } from "motion/react";
 interface Headings {
   slug: string;
   text: string;
+  depth: number;
 }
 
 export interface DynamicTocProps {
