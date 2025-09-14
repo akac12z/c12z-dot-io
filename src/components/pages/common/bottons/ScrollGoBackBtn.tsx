@@ -24,7 +24,7 @@ export default function TestingGoTo({ headPage }: Props) {
   return (
     <div
       className={`
-        fixed bottom-12 xs:bottom-10 right-0 left-0 z-10
+        fixed bottom-12 xs:bottom-10 right-0 xs:right-24 left-0 z-10
         max-w-2xl mx-auto px-5
         transition-opacity duration-300
         ${
