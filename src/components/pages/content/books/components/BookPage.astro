@@ -1,12 +1,20 @@
 ---
-/**
- * ! CREAR UN SORT QUE SEA POR FECHA DE SUBIDA DONDE LOS ÚLTIMOS SALGAN PRIMERO
- */
 import { getCollection } from "astro:content";
 import BookCard from "./BookCard.astro";
 import BookHeader from "./BookHeader.astro";
 
 const library = await getCollection("library");
+
+// Sort by publishDate descending (most recent first)
+library.sort((a, b) => {
+  const dateA = new Date(
+    a.data.publishDate.split("/").reverse().join("-")
+  ).getTime();
+  const dateB = new Date(
+    b.data.publishDate.split("/").reverse().join("-")
+  ).getTime();
+  return dateB - dateA;
+});
 ---
 
 <section class="grid mx-auto max-w-3xl">
