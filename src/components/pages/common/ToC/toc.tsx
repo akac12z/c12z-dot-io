@@ -121,7 +121,7 @@ export default function TOC({ title, headings }: DynamicTocProps) {
             >
               <motion.div layout="position" className="flex">
                 <ProgressCircle progress={progress} />
-                <span className="font-pixel ml-2 inline-block truncate text-sm font-bold">
+                <span className="font-pixel tracking-widest ml-2 inline-block truncate text-sm font-bold">
                   {title}
                 </span>
               </motion.div>
