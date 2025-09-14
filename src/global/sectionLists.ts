@@ -19,16 +19,10 @@ export const SECTION_LISTS: Section[] = [
     label: "biblioteca",
     description: "Notas de los libros que voy leyendo",
     items: [
-      /*
       {
-        text: "The Mom Test",
-        href: "#",
+        text: "Steal Like An Artist",
+        href: "/biblioteca/steal-like-an-artist",
       },
-      {
-        text: "Show your Work",
-        href: "#",
-      },
-    */
     ],
   },
   {
@@ -46,13 +40,3 @@ export const SECTION_LISTS: Section[] = [
     items: [],
   },
 ];
-
-{
-  /*
-  href: "/notas",
-  style: "otros",
-  label: "notas",
-  description: "pensamientos que me parecen interesante guardar",
-  items: [],
-*/
-}
