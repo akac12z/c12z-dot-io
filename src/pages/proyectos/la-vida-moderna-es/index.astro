@@ -18,16 +18,26 @@ import { SquareArrowOutUpRight } from "@lucide/astro";
 import { PROJETCS_DATA } from "@projectPageComponents/data/projectsData";
 
 const LVM_headings = [
-  { text: "¿De qué va este proyecto?", slug: "de-que-va-este-proyecto" },
+  {
+    text: "¿De qué va este proyecto?",
+    slug: "de-que-va-este-proyecto",
+    depth: 2,
+  },
   {
     text: "¿Cómo y por qué he hecho lo que he hecho?",
     slug: "como-y-por-que-he-hecho-lo-que-he-hecho",
+    depth: 2,
   },
-  { text: "Diseño", slug: "diseño" },
-  { text: "Herramientas que he usado", slug: "herramientas-que-he-usado" },
+  { text: "Diseño", slug: "diseño", depth: 2 },
+  {
+    text: "Herramientas que he usado",
+    slug: "herramientas-que-he-usado",
+    depth: 2,
+  },
   {
     text: "Cosas interesantes que he añadido",
     slug: "cosas-interesantes-que-he-anadido",
+    depth: 2,
   },
 ];
 const { LVM_es } = PROJETCS_DATA;
