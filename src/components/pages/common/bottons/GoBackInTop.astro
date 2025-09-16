@@ -1,9 +1,10 @@
 ---
 interface Props {
   headPage: string;
+  title?: string;
 }
 
-const { headPage } = Astro.props;
+const { headPage, title } = Astro.props;
 
 if (!headPage.startsWith("/")) {
   throw new Error(
@@ -12,4 +13,4 @@ if (!headPage.startsWith("/")) {
 }
 ---
 
-<a href={headPage} class="goback-in-top-btn"> ← Atrás </a>
+<a title={title} href={headPage} class="goback-in-top-btn"> ← Atrás </a>
