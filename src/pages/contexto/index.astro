@@ -5,6 +5,7 @@ import { CONTEXT_PAGE_INFO } from "@/global/pagesInfo";
 import ContextSEO from "@in_headComponents/SEO/pages/context/ContextSEO.astro";
 
 import Context from "@basicPageComponents/Context.astro";
+import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 ---
 
 <MainLayout>
@@ -13,5 +14,6 @@ import Context from "@basicPageComponents/Context.astro";
     pageTitle={CONTEXT_PAGE_INFO.title}
     pageDescription={CONTEXT_PAGE_INFO.description}
   />
+  <GoBackInTop headPage="/" title="ir a la home" />
   <Context />
 </MainLayout>

@@ -4,6 +4,7 @@
 import { ESSAY_PAGE_INFO } from "@/global/pagesInfo";
 import MainLayout from "@layouts/MainLayout.astro";
 import EssaysPageSEO from "@in_headComponents/SEO/pages/essays/EssaysPageSEO.astro";
+import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 
 // const essays = await getCollection("essay");
 ---
@@ -14,6 +15,7 @@ import EssaysPageSEO from "@in_headComponents/SEO/pages/essays/EssaysPageSEO.ast
     pageTitle={ESSAY_PAGE_INFO.title}
     pageDescription={ESSAY_PAGE_INFO.description}
   />
+  <GoBackInTop headPage="/" title="ir a la home" />
   <h1>Ensayos</h1>
   <p>Por ahora, no tengo ningún ensayo que mustrarte! 🙂</p>
 

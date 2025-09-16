@@ -2,6 +2,7 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import { BEHAVIOR_PAGE_INFO } from "@/global/pagesInfo";
 import BehaviorPageSEO from "@in_headComponents/SEO/pages/behavior/BehaviorPageSEO.astro";
+import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 ---
 
 <MainLayout>
@@ -10,6 +11,7 @@ import BehaviorPageSEO from "@in_headComponents/SEO/pages/behavior/BehaviorPageS
     pageTitle={BEHAVIOR_PAGE_INFO.title}
     pageDescription={BEHAVIOR_PAGE_INFO.description}
   />
+  <GoBackInTop headPage="/" title="ir a la home" />
   <h1>Behavior Page: W.I.P.</h1>
   <a
     class="text-md underline underline-offset-4 text-cz-bias-500"

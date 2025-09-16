@@ -43,7 +43,7 @@ const { Content, headings } = await render(entry);
     class="flex flex-col w-full lg:min-w-3xl md:min-w-2xl sm:min-w-xl mx-auto"
   >
     <TOC client:only="react" headings={headings} title={title} />
-    <GoBackInTop headPage="/biblioteca" />
+    <GoBackInTop headPage="/biblioteca" title="ir a la página biblioteca" />
     <ScrollGoBackBtn headPage="/biblioteca" client:only="react" />
 
     <section class="grid grid-cols-2 mb-8">
