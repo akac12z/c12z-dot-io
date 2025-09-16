@@ -119,7 +119,10 @@ export default function TOC({ title, headings }: DynamicTocProps) {
               }}
               onClick={() => setExpanded(!expanded)}
             >
-              <motion.div layout="position" className="flex">
+              <motion.div
+                layout="position"
+                className="flex items-center justify-center"
+              >
                 <ProgressCircle progress={progress} />
                 <span className="font-pixel tracking-widest ml-2 inline-block truncate text-sm font-bold">
                   {title}
