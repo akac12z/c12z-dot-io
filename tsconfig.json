@@ -55,6 +55,9 @@
       "@bookImages/*": [
         "./src/components/assets/images/books/*"
       ],
+      "@behaviorPageComponents/*": [
+        "./src/components/pages/content/behavior/components/*"
+      ],
       "@biasPageComponents/*": [
         "./src/components/pages/content/behavior/sub_pages/bias/*"
       ],
