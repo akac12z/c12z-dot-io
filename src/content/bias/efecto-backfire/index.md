@@ -5,7 +5,7 @@ biasName: "Efecto Backfire"
 biasID: "backfire-effect"
 backlog: "wip"
 cover:
-  src:
+  src: ""
   alt: "Efecto Backfire iamgen"
 biasQuestion: ¿Por qué mantenemos las creencias, aún cuando se demuestra que están equivocados?
 publishDate: "10/12/2023"
