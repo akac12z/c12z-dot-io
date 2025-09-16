@@ -1,0 +1,18 @@
+---
+import SectionLists from "./SectionLists.astro";
+import { updatedSectionLists } from "./sortContentInHome";
+---
+
+<section class="flex flex-col gap-y-4">
+  {
+    updatedSectionLists.map(({ style, description, href, items, label }) => (
+      <SectionLists
+        href={href}
+        style={style}
+        label={label}
+        description={description}
+        items={items}
+      />
+    ))
+  }
+</section>

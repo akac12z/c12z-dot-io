@@ -1,6 +1,5 @@
 ---
-import { SECTION_LISTS } from "@/global/sectionLists";
-import SectionLists from "./SectionLists.astro";
+import ShowSortContent from "./section_lists/ShowSortContent.astro";
 ---
 
 <article>
@@ -27,18 +26,6 @@ import SectionLists from "./SectionLists.astro";
       Comportamiento y Producto junto con algunas reflexiones.
     </p>
 
-    <section class="flex flex-col gap-y-4">
-      {
-        SECTION_LISTS.map(({ style, description, href, items, label }) => (
-          <SectionLists
-            href={href}
-            style={style}
-            label={label}
-            description={description}
-            items={items}
-          />
-        ))
-      }
-    </section>
+    <ShowSortContent />
   </section>
 </article>
