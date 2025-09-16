@@ -1,10 +1,10 @@
 ---
-
+import { AHRFS_MEASUREMENT_ID } from "astro:env/client";
 ---
 
 <script
   is:inline
   type="text/partytown"
   src="https://analytics.ahrefs.com/analytics.js"
-  data-key="LxrsN25cyGQ6fpXut9mTgw"
+  data-key={AHRFS_MEASUREMENT_ID}
   async></script>
