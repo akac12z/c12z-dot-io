@@ -46,7 +46,7 @@ const { category } = Astro.props;
   {
     category.map((c) => {
       const dynamicClasses = getBiasCategoryClass(c);
-      return <span class={` ${dynamicClasses}`}>{c}</span>;
+      return <span class={`${dynamicClasses}`}>{c}</span>;
     })
   }
 </div>
