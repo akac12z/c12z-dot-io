@@ -21,8 +21,9 @@ const postDescription = `${description} - ${SITE_DEFAULT_CONFIG.title}`;
 const ogImage = new URL("./og-image.png", Astro.site);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const justInCaseNoCoverSrc =
-  `${SITE_DEFAULT_CONFIG.url}${cover.src.src}` || ogImage;
+const justInCaseNoCoverSrc = cover?.src?.src
+  ? `${SITE_DEFAULT_CONFIG.url}${cover.src.src}`
+  : ogImage;
 const justInCaseNoCoverAlt = cover.alt || postName;
 
 // Validación de fechas. lastTimeEdited puede ser undefined en la collection pero en la práctica no pero para evitar el error hago la validación
