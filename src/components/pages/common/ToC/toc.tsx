@@ -172,7 +172,7 @@ export default function TOC({ title, headings }: DynamicTocProps) {
                         <a
                           href={`#${slug}`}
                           onClick={(e) => e.stopPropagation()}
-                          className={`py-1 transition-all duration-200 ease-in-out font-rubik ${
+                          className={`py-1 ml-2 transition-all duration-200 ease-in-out font-rubik ${
                             slug === activeSlug
                               ? "text-cz-text-headers-dark"
                               : "text-cz-text-relax-dark"
