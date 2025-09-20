@@ -11,13 +11,13 @@ import { ClientRouter } from "astro:transitions";
 import Favicons from "@in_headComponents/SEO/common/Favicons.astro";
 import AhrefsAnalytics from "@in_headComponents/analytics/Ahrefs/AhrefsAnalytics.astro";
 import Overtracking from "@in_headComponents/analytics/Overtracking/Overtracking.astro";
+import GA4 from "@in_headComponents/analytics/Google/GA4.astro";
+import GTMHead from "@in_headComponents/analytics/Google/GTMHead.astro";
 ---
 
 <head>
-  {
-    /*<GA4 />
-  <GTMHead />*/
-  }
+  <GA4 />
+  <GTMHead />
   <AhrefsAnalytics />
   <Overtracking />
 
