@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* @source "../components/pages/shared/ScrollToTopBtn.tsx";
-@source "../components/pages/shared/ScrollGoBackBtn.tsx";
-@source "../components/pages/shared/TableOfContent.tsx"; */
-
 /* headers */
 @font-face {
   font-family: "MuseoModerno";
