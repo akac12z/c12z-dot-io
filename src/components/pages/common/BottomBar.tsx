@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const FooterBar = () => {
+const BottomBar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
 
@@ -77,4 +77,4 @@ const FooterBar = () => {
   );
 };
 
-export default FooterBar;
+export default BottomBar;

@@ -8,7 +8,7 @@ import Footer from "@commonComponents/footer/Footer.astro";
 
 import BaseHead from "@in_headComponents/SEO/common/BaseHead.astro";
 import GTMBody from "@in_headComponents/analytics/Google/GTMBody.astro";
-import FooterBar from "@commonPageComponents/FooterBar";
+import BottomBar from "@commonPageComponents/BottomBar";
 
 const { lang } = SITE_DEFAULT_CONFIG;
 ---
@@ -23,7 +23,7 @@ const { lang } = SITE_DEFAULT_CONFIG;
     <Header />
     <main class="mt-10 pb-14 max-w-3xl mx-auto">
       <slot />
-      <FooterBar client:only="react" />
+      <BottomBar client:only="react" />
     </main>
     <Footer />
   </body>
