@@ -41,7 +41,7 @@
       
       
       "@commonIcons/*": [
-        "./src/components/common/icons/*"
+        "src/components/general/icons/*"
       ],
       "@basicPageComponents/*": [
         "./src/components/pages/content/basics/*"
@@ -68,7 +68,7 @@
         "./src/components/pages/content/projects/*"
       ],
       "@commonComponents/*": [
-        "./src/components/common/*"
+        "src/components/general/*"
       ],
       "@commonPageComponents/*": [
         "./src/components/pages/common/*"
