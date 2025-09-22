@@ -13,7 +13,6 @@ import BooksSEO from "@in_headComponents/SEO/pages/library/BooksSEO.astro";
 import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 import TOC from "@commonPageComponents/ToC/toc";
 import GoOut from "@/components/general/icons/GoOut.astro";
-import FooterBar from "@commonPageComponents/BottomBar";
 
 interface Props {
   entry: CollectionEntry<"library">;
@@ -44,8 +43,6 @@ const { Content, headings } = await render(entry);
   >
     <TOC client:only="react" headings={headings} title={title} />
     <GoBackInTop headPage="/biblioteca" title="ir a la página biblioteca" />
-    <!-- <ScrollGoBackBtn headPage="/biblioteca" client:only="react" /> -->
-    <FooterBar client:only="react" />
 
     <section class="grid grid-cols-2 mb-8">
       <BookCover entry={entry} />
