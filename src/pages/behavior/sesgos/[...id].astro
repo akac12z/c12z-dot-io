@@ -10,7 +10,7 @@ import MainLayout from "@layouts/MainLayout.astro";
 import BiasSEO from "@in_headComponents/SEO/pages/behavior/bias/BiasSEO.astro";
 import BiasCategory from "@biasPageComponents/components/BiasCategory.astro";
 
-import ScrollGoBackBtn from "@commonPageComponents/bottons/ScrollGoBackBtn";
+import ScrollGoBackBtn from "@commonPageComponents/bottons/ScrollGoBackBtn.old";
 import TOC from "@commonPageComponents/ToC/toc";
 import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 
@@ -41,8 +41,8 @@ const { Content, headings } = await render(entry);
   <BiasSEO slot="head" entry={entry} />
   <section class="mx-auto">
     <TOC client:only="react" headings={headings} title={biasName}/>
-    <GoBackInTop headPage="/behavior/sesgos"/>
-    <ScrollGoBackBtn headPage="/behavior/sesgos" client:only="react" />
+    <!-- <GoBackInTop headPage="/behavior/sesgos"/> -->
+    <!-- <ScrollGoBackBtn headPage="/behavior/sesgos" client:only="react" /> -->
     <article class="flex flex-col justify-center ">
       <section class="text-center">
         <h1 transition:name=`${id}-name` class="text-base text-center mb-2 underline">

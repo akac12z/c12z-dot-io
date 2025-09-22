@@ -4,6 +4,7 @@ import { LIBRARY_PAGE_INFO } from "@/global/pagesInfo";
 import MainLayout from "@layouts/MainLayout.astro";
 import LibrarySEO from "@in_headComponents/SEO/pages/library/LibrarySEO.astro";
 import BookPage from "@bookPageComponents/components/BookPage.astro";
+import FooterBar from "@commonPageComponents/FooterBar";
 ---
 
 <MainLayout>
@@ -13,4 +14,5 @@ import BookPage from "@bookPageComponents/components/BookPage.astro";
     pageDescription={LIBRARY_PAGE_INFO.description}
   />
   <BookPage />
+  <!-- <FooterBar client:only="react" /> -->
 </MainLayout>

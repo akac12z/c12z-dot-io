@@ -4,15 +4,15 @@ import { getCollection } from "astro:content";
 import BiasHeader from "./BiasHeader.astro";
 import BiasCard from "./BiasCard.astro";
 
-import ScrollGoBackBtn from "@commonPageComponents/bottons/ScrollGoBackBtn";
+import ScrollGoBackBtn from "@commonPageComponents/bottons/ScrollGoBackBtn.old";
 import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
 
 const biases = await getCollection("bias");
 ---
 
 <section class="mx-auto">
-  <GoBackInTop headPage="/behavior" title="ir a la página de behavior" />
-  <ScrollGoBackBtn headPage="/behavior" client:only="react" />
+  <!-- <GoBackInTop headPage="/behavior" title="ir a la página de behavior" />
+  <ScrollGoBackBtn headPage="/behavior" client:only="react" /> -->
   <section class="flex flex-col gap-y-2 xs:gap-y-16">
     <BiasHeader />
 
