@@ -22,9 +22,9 @@ const currentStyle = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
   >
     {
       items.length === 0 ? (
-        <span class="my-2 tracking-wider rounded w-fit bg-cz-red-wip/10 border border-cz-red-wip/50 text-cz-red-wip px-3 py-2 text-xs font-semibold flex items-center ">
+        <li class="my-2 tracking-wider rounded w-fit bg-cz-red-wip/10 border border-cz-red-wip/50 text-cz-red-wip px-3 py-2 text-xs font-semibold flex items-center ">
           🚧 WIP
-        </span>
+        </li>
       ) : (
         items.map((items) => (
           <li class="mb-2 line-clamp-2">
