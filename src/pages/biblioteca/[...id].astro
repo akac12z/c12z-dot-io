@@ -2,12 +2,12 @@
 export const prerender = true;
 
 import type { CollectionEntry } from "astro:content";
-
 import { getCollection, render } from "astro:content";
 
 import MainLayout from "@layouts/MainLayout.astro";
 import BookScore from "@bookPageComponents/components/BookScore.astro";
 import BookCover from "@bookPageComponents/components/BookCover.astro";
+import BookAbstract from "@bookPageComponents/components/BookAbstract.astro";
 import BooksSEO from "@in_headComponents/SEO/pages/library/BooksSEO.astro";
 
 import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
@@ -44,7 +44,7 @@ const { Content, headings } = await render(entry);
     <TOC client:only="react" headings={headings} title={title} />
     <GoBackInTop headPage="/biblioteca" title="ir a la página biblioteca" />
 
-    <section class="grid grid-cols-2 mb-8">
+    <section class="grid grid-cols-2 mb-4">
       <BookCover entry={entry} />
 
       <section class="flex flex-col items-start custom-prose">
@@ -73,6 +73,7 @@ const { Content, headings } = await render(entry);
         <p class="italic text-xs text-cz-text-content-dark">"{quote}"</p>
       </section>
     </section>
+    <BookAbstract />
     <!-- <div class="mt-4 mx-auto">
       <TableOfContents headings={headings} client:only="react" />
     </div> -->
