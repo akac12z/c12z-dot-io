@@ -15,8 +15,8 @@ const essayCollection = defineCollection({
     base: "./src/content/essay",
   }),
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
+    title: z.string().max(60),
+    description: z.string().min(110).max(140),
     // essayImage: z.object({
     //   src: z.union([z.string().url(), z.string()]),
     //   alt: z.string(),
@@ -56,7 +56,7 @@ const libraryCollection = defineCollection({
         alt: z.string(),
       }),
       titleTag: z.string().max(85),
-      description: z.string().min(60).max(140),
+      description: z.string().min(110).max(140),
       backlog: z.enum(["wip", "upload"]),
       quote: z.string().max(150),
       score: z
@@ -156,7 +156,7 @@ const biasCollection = defineCollection({
           alt: z.string(),
         }),
         titleTag: z.string().max(85),
-        description: z.string().min(60).max(140),
+        description: z.string().min(110).max(140),
         biasQuestion: z.string().max(120),
         backlog: z.enum(["wip", "upload"]),
         publishDate: z.string().refine(isValidDateFormat),
@@ -210,7 +210,7 @@ const projectCollections = defineCollection({
   /*schema: ({ image }) =>
       z.object({
         project: z.string(),
-        description: z.string().min(60).max(140),
+        description: z.string().min(110).max(140),
         cover: z.object({
           src: image(),
           alt: z.string(),
