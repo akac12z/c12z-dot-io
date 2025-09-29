@@ -57,6 +57,7 @@ const libraryCollection = defineCollection({
       }),
       titleTag: z.string().max(85),
       description: z.string().min(110).max(140),
+      abstract: z.string().min(250).max(410),
       backlog: z.enum(["wip", "upload"]),
       quote: z.string().max(150),
       score: z
