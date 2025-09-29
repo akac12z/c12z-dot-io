@@ -22,7 +22,7 @@ if (!first_paragraph) {
 >
   <section class="grid grid-cols-[auto_1fr] my-auto gap-x-2">
     <Bulb />
-    <section class="flex flex-col justify-center">
+    <section class="flex flex-col justify-center mb-0">
       <p class="text-xs italic mb-0">{first_paragraph}</p>
       {
         second_paragraph && (
@@ -34,6 +34,9 @@ if (!first_paragraph) {
           <p class="text-xs italic mt-2 mb-0">{third_paragraph}</p>
         )
       }
+      <section class="mt-2 mb-0 text-xs">
+        <slot />
+      </section>
     </section>
   </section>
 </section>
