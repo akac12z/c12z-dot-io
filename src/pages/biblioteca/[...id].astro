@@ -73,10 +73,7 @@ const { Content, headings } = await render(entry);
         <p class="italic text-xs text-cz-text-content-dark">"{quote}"</p>
       </section>
     </section>
-    <!-- <BookAbstract /> -->
-    <!-- <div class="mt-4 mx-auto">
-      <TableOfContents headings={headings} client:only="react" />
-    </div> -->
+    <BookAbstract entry={entry} />
     <section id="mdx-content" class="custom-prose mx-auto mdx">
       <Content />
     </section>
