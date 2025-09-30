@@ -7,7 +7,7 @@ import { getCollection, render } from "astro:content";
 import MainLayout from "@layouts/MainLayout.astro";
 import BookScore from "@bookPageComponents/components/BookScore.astro";
 import BookCover from "@bookPageComponents/components/BookCover.astro";
-import BookAbstract from "@bookPageComponents/components/BookAbstract.astro";
+import BookSpoiler from "@bookPageComponents/components/BookSpoiler.astro";
 import BooksSEO from "@in_headComponents/SEO/pages/library/BooksSEO.astro";
 
 import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
@@ -73,7 +73,7 @@ const { Content, headings } = await render(entry);
         <p class="italic text-xs text-cz-text-content-dark">"{quote}"</p>
       </section>
     </section>
-    <BookAbstract entry={entry} />
+    <BookSpoiler entry={entry} />
     <section id="mdx-content" class="custom-prose mx-auto mdx">
       <Content />
     </section>
