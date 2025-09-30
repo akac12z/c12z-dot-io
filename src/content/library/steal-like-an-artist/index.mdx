@@ -40,8 +40,9 @@ buyItOnAmazon:
   spain: https://www.amazon.es/-/en/Austin-Kleon/dp/0761169253/ref=sr_1_1?crid=3T6KMLZP2K1TD&dib=eyJ2IjoiMSJ9.H6q8sN0xNuuI97vzn767zG86jx5_NsgKKF0dR3I5Gk8VQOWKioyfzbg50Rdx8tSiQFBidBWKsi4XVinWa3WiNCJtcx8ENledE2PWkZlZENfEP806JwfuXNkn2JtAcofjR50jlTuaRMMPDivlSnyXxnjlfEBx3-8biWdmKLlw4rbVH30Gw0rl_yuLXbmjPNacWgd-l4kPEJ2AN8YkzpCl6FLpelzPhM3M1YYvc9d1kJav6Irw-bpkxyuq4KYxBUD_puYje6emStiP6XCji6xqAn677vuFhGsdgTHJTX282LU.q29Q_HuIAlTBl5-uN_hWG_AG6w6EUsPBC9Kz2PDqah0&dib_tag=se&keywords=steal+like+an+artist&qid=1757512506&sprefix=steal+lik%2Caps%2C127&sr=8-1
 ---
 
-import { Image } from "astro:assets";
 import OwnThoughts from "../../../components/pages/common/items/OwnThoughts.astro";
+import ImgAndCap from "../../../components/pages/common/items/ImgAndCap.astro";
+
 import ArrowsImage from "./2-or-3-lines-steal-like-an-artis-think-out-the-box-c12z.jpeg";
 import Observe from "./observe-anything-and-invite-others-to-observe-steal-like-an-artis-c12z.jpeg";
 import Office from "./austin-kleon-office-steal-like-an-artist-c12z.jpeg";
@@ -71,17 +72,15 @@ Lo que un artista tiene que saber es que nada viene de la nada. Todo trabajo cre
 
 ¿Cuántas lineas ves aquí abajo?
 
-<Image
+<ImgAndCap
   src={ArrowsImage}
   alt="imagen de 2 lineas paraleas haciendo donde se puede observar en el espacio negativo una tercera"
   width="400px"
   height="400xp"
-  class="for-images-in-mdx"
-  decoding="async"
-  loading="lazy"
+  caption="3 lineas paralelas. Página 9, Steal Like An Artist"
 />
 
-3, no siempre 1 + 1 = 2.
+No siempre 1 + 1 = 2. Aquí hay 3.
 
 ### Rubbish In, Rubbish Out
 
@@ -154,14 +153,12 @@ El manifiesto es: Dibuja el arte que quieres ver, empieza el negocio que quieres
 
 > No sabemos de dónde vienen nuestras ideas. Lo que sí sabemos es que no vienen de nuestros ordenadores. - John
 
-<Image
+<ImgAndCap
   src={Office}
   alt="oficina de Austin Kleon donde muestra una diferencia entre la parte analógica y la parte digital bien diferenciada"
   width="400px"
-  height="400px"
-  class="for-images-in-mdx"
-  decoding="async"
-  loading="lazy"
+  height="400xp"
+  caption="Oficina de Kleon. Página 59, Steal Like An Artist"
 />
 
 ## Capítulo 5 - Los proyectos extra y los hobbies son importantes
@@ -196,14 +193,12 @@ Sólo hay una: **_Haz un buen trabajo y compártelo_**
 
 Lo difícil está en hacer un buen trabajo, compartirlo es solo subirlo a internet.
 
-<Image
+<ImgAndCap
   src={Observe}
   alt="imagen de alguien observando una flor y luego ese alguien con más personas objservando la misma flor"
   width="400px"
-  height="400px"
-  class="for-images-in-mdx"
-  decoding="async"
-  loading="lazy"
+  height="400xp"
+  caption="Observa algo que te interesa y compártelo. Página 80, Steal Like An Artist"
 />
 
 <OwnThoughts first_paragraph="a la gente le encanta que compartas tus secretos, tus procesos creativos → CREA PROCESOS. Consejo de mí pa' mí." />
