@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets";
+
+// Define props interface (inline for simplicity; consider moving to a separate .ts file for reusability)
+interface Props {
+  src: any; // Use proper type like ImageMetadata if importing assets, or string for URLs
+  alt: string;
+  caption: string;
+  width?: number;
+  height?: number;
+}
+
+// Destructure props with defaults
+const { src, alt, caption, width = 400, height = 400 } = Astro.props as Props;
+---
+
+<div class="flex flex-col justify-center items-center">
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading="lazy"
+    class="rounded-lg mt-0 w-5/6 h-auto place-content-start mb-0"
+  />
+  <p
+    class="text-xxs text-cz-text-relax-dark mt-0 place-content-start w-5/6 break-words"
+  >
+    {caption}
+  </p>
+</div>
