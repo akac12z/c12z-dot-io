@@ -8,7 +8,7 @@ score: 5
 cover:
   src: "cover-of-show-your-work-10-ways-to-share-your-creativity-and-get-discovered-summarized-in-c12z.jpg"
   alt: "portada del libro Show Your Work de Austin Kleon por Chema Ferrandez - c12z"
-readingTime: 2
+readingTime: 12
 keywords:
   [
     "show-your-work-resumen",
@@ -40,6 +40,7 @@ buyItOnAmazon:
 
 import { Image } from "astro:assets";
 import OwnThoughts from "../../../components/pages/common/items/OwnThoughts.astro";
+import ImgAndCap from "../../../components/pages/common/items/ImgAndCap.astro";
 import StoryCircle from "./dan-harmon-story-circle-c12z.jpeg";
 import LearnThenTeachCircle from "./learn-then-teach-c12z.jpeg";
 
@@ -202,14 +203,12 @@ Si quieres ser más eficaz compartiendo(te) tu trabajo, necesitas convertirte en
 
 ### La estrtuctura lo es todo
 
-<Image
+<ImgAndCap
   src={StoryCircle}
   alt="estructura en forma de círculo de cómo debe ser la estructura de una historia según Dan Harmon"
   width="400px"
   height="400xp"
-  class="for-images-in-mdx"
-  decoding="async"
-  loading="lazy"
+  caption="Estructura de las historias según Dan Harmon. Página 97, Show Your Work!"
 />
 
 La parte más importante de una historia es su estructura.
@@ -237,14 +236,12 @@ En cuanto aprendas algo, date la vuelta y enséñaselo a los demás. Comparte tu
 
 > Haz que la gente mejore en algo en lo que quiere ser mejor - Kathy Sierra
 
-<Image
+<ImgAndCap
   src={LearnThenTeachCircle}
-  alt="bucle que ilustra que después de aprender, debes enseñar y que después de enseñar, debes aprender."
+  alt="bucle que ilustra que después de aprender, debes enseñar y que después de enseñar, debes aprender"
   width="400px"
   height="400xp"
-  class="for-images-in-mdx"
-  decoding="async"
-  loading="lazy"
+  caption="Bucle 'Learn then Teach'. Página 118, Show Your Work!"
 />
 
 Cuando enseñas algo sobre cómo hacer tu trabajo, estás generando más interés en tu trabajo.
