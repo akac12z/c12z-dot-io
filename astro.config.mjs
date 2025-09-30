@@ -43,6 +43,7 @@ export default defineConfig( {
       OVERTRACKING_MEASUREMENT_ID: envField.string( { context: 'client', access: 'public', optional: false } ),
     }
   },
+  trailingSlash: 'never',
   adapter: vercel( {
     webAnalytics: {
       enabled: true,
