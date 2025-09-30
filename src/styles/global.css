@@ -206,8 +206,15 @@
     @apply font-rubik text-base border-l-2 pl-4 my-2 text-cz-text-relax-dark;
   }
   li {
-    @apply font-rubik text-sm text-cz-text-content-dark font-normal tracking-wider leading-relaxed mb-2;
+    @apply font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed mb-2 mt-0;
   }
+  ol {
+    @apply mt-0 font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed;
+  }
+  ul {
+    @apply mt-0 font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed;
+  }
+
   footer {
     @apply mt-auto;
   }
@@ -217,7 +224,7 @@
 @layer components {
   /* CUSTOM PROSE PLUGING */
   .custom-prose {
-    @apply prose prose-invert prose-headings:text-cz-text-headers-dark prose-strong:text-cz-text-content-dark prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4 prose-blockquote:border-l-cz-primary prose-hr:border-cz-primary prose-hr:mb-2 prose-li:marker:text-cz-primary prose-ul:mt-0;
+    @apply prose prose-invert prose-headings:text-cz-text-headers-dark prose-strong:text-cz-text-content-dark prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4 prose-blockquote:border-l-cz-primary prose-hr:border-cz-primary prose-hr:mb-2 prose-li:marker:text-cz-primary prose-ul:mt-0 prose-ol:mt-0 prose-li:mt-0;
   }
 
   /* CUSTOM BULLET LIST */
