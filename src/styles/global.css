@@ -116,7 +116,7 @@
   --color-cz-bg-dark: #111;
   --color-cz-bg-light: #f5f2ee;
 
-  --color-cz-primary: #00c876;
+  --color-cz-primary: #adfa1b;
   --color-cz-secondary: #904fe7;
 
   /* --- DARKMODE --- */
@@ -128,6 +128,10 @@
   --color-cz-biblioteca-dark: #ffa424;
   --color-cz-proyectos-dark: #a2ff27;
   --color-cz-otros-dark: #ff3838;
+  --color-cz-surface-dark: #1a1a1a;
+  --color-cz-surface-alt-dark: #2e2e2e;
+  --color-cz-border-dark: #242424;
+  --color-cz-overlay-dark: rgba(0, 0, 0, 0.5);
 
   /* --- LIGHTMODE --- */
   --color-cz-text-headers-light: #0c0c0b;
@@ -138,6 +142,10 @@
   --color-cz-biblioteca-light: #a15e00;
   --color-cz-proyectos-light: #2e5100;
   --color-cz-otros-light: #c10000;
+  --color-cz-surface-light: #eae6e1;
+  --color-cz-surface-alt-light: #cfcac3;
+  --color-cz-border-light: #d8d3cc;
+  --color-cz-overlay-light: rgba(0, 0, 0, 0.15);
 
   /* OTHERS */
 
@@ -224,16 +232,16 @@
 @layer components {
   /* CUSTOM PROSE PLUGING */
   .custom-prose {
-    @apply prose prose-invert prose-headings:text-cz-text-headers-dark prose-strong:text-cz-text-content-dark prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4 prose-blockquote:border-l-cz-primary prose-hr:border-cz-primary prose-hr:mb-2 prose-li:marker:text-cz-primary prose-ul:mt-0 prose-ol:mt-0 prose-li:mt-0;
+    @apply prose prose-invert prose-headings:text-cz-text-headers-dark prose-strong:text-cz-text-content-dark prose-h1:text-2xl prose-h2:text-xl prose-h2:mb-3 prose-h2:mt-9 prose-h3:text-lg prose-h3:mb-3 prose-h3:mt-9 prose-h4:text-base prose-h4:mb-3 prose-h4:mt-9 prose-h5:text-sm prose-h5:mb-3 prose-h5:mt-9 prose-h6:text-xs prose-h6:mb-3 prose-h6:mt-9 prose-p:mt-0 prose-p:mb-4 prose-blockquote:border-l-cz-surface-alt-light/30 prose-hr:border-cz-surface-light prose-hr:mb-2 prose-li:marker:text-cz-text-headers-dark prose-ul:mt-0 prose-ol:mt-0 prose-li:mt-0;
   }
 
   /* CUSTOM BULLET LIST */
   .custom-list {
     @apply list-disc;
   }
-  .custom-list ul > li::marker {
+  /* .custom-list ul > li::marker {
     @apply text-cz-primary;
-  }
+  } */
 
   /* BODY */
   .body-layout-classes {
