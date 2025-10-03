@@ -14,6 +14,10 @@ import GoBackInTop from "@commonPageComponents/bottons/GoBackInTop.astro";
     pageTitle={CONTEXT_PAGE_INFO.title}
     pageDescription={CONTEXT_PAGE_INFO.description}
   />
-  <GoBackInTop headPage="/" title="ir a la home" />
-  <Context />
+  <section class="flex flex-col w-full md:min-w-3xl sm:min-w-xl mx-auto">
+    <GoBackInTop headPage="/" title="ir a la home" />
+    <article class="mx-auto">
+      <Context />
+    </article>
+  </section>
 </MainLayout>
