@@ -126,8 +126,8 @@
   --color-cz-behavior-dark: #e22ef6;
   --color-cz-ensayos-dark: #33ffe8;
   --color-cz-biblioteca-dark: #ffa424;
-  --color-cz-proyectos-dark: #a2ff27;
-  --color-cz-otros-dark: #ff3838;
+  --color-cz-proyectos-dark: #ff3838;
+  /* --color-cz-otros-dark: #ff3838; */
   --color-cz-surface-dark: #1a1a1a;
   --color-cz-surface-alt-dark: #2e2e2e;
   --color-cz-border-dark: #242424;
@@ -141,7 +141,7 @@
   --color-cz-ensayos-light: #016c60;
   --color-cz-biblioteca-light: #a15e00;
   --color-cz-proyectos-light: #2e5100;
-  --color-cz-otros-light: #c10000;
+  /* --color-cz-otros-light: #c10000; */
   --color-cz-surface-light: #eae6e1;
   --color-cz-surface-alt-light: #cfcac3;
   --color-cz-border-light: #d8d3cc;

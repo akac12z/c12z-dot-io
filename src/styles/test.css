@@ -1,0 +1,197 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+/* text: normal*/
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-light-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-regular-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-medium-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-bold-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* text: italic */
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-lightitalic-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-lightitalic-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-italic-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-italic-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-mediumitalic-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-mediumitalic-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("/src/assets/fonts/rubik-bolditalic-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/rubik-bolditalic-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* CODE */
+@font-face {
+  font-family: "Cascadia";
+  src: url("/src/assets/fonts/cascadia-webfont.woff2") format("woff2"),
+    url("/src/assets/fonts/cascadia-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TAMAGO - PIXEL */
+@font-face {
+  font-family: "Tamago";
+  src: url("/src/assets/fonts/Tamago.woff2") format("woff2"),
+    url("/src/assets/fonts/Tamago.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-dark: hsl(0 0 0.7); /* #121212 */
+  --bg: hsl(30 0 10); /* #1a1a1a */
+  --bg-light: hsl(30 0 15); /* #262626 */
+  --primary: hsl(80.717, 96%, 54%); /* #adfa1b */
+  --secondary: hsl(265.658, 76%, 61%); /* #904FE7 */
+
+  /* text colors */
+  --text-header: hsl(38.182, 65%, 97%); /* #FCF8F1 */
+  --text-content: hsl(36, 14%, 86%); /* #DFDBD5 */
+  --text-muted: hsl(36, 3%, 61%); /* #9D9B98 */
+
+  /* fonts */
+  --ff-headings: "Tamago", sans-serif;
+  --ff-body: "Rubik", sans-serif;
+  --ff-code: "Cascadia", monospace;
+
+  --h1: 400 1.5rem/1.2em var(--ff-headings);
+  --h2: 400 1.25rem/1.2em var(--ff-headings);
+  --h3: 400 1.125rem/1.2em var(--ff-headings);
+  --h4: 400 1rem/1.2em var(--ff-headings);
+  --h5: 400 0.875rem/1.2em var(--ff-headings);
+  --h6: 400 0.875rem/1.2em var(--ff-headings);
+
+  --p: 300 0.875rem/1.6em var(--ff-body);
+  --small-p: 300 0.625rem/1.6em var(--ff-body);
+
+  --h-spacing: 0.1rem; /* headers spacing */
+  --p-spacing: 0.05rem; /* paragraph spacing */
+
+  /* border */
+  --border: hsl(0, 0% 30%); /* #4D4D4D */
+  --border-card: solid 1px var(--border);
+
+  /* shadows */
+  --shadow-s: inset 0 1px 2px #ffffff30, /* top highlight */ 0 1px 2px #00000030,
+    /* dark shadow */ 0 2px 4px #00000015; /* soft shadow*/
+  --shadow-m: inset 0 1px 2px #ffffff50, /* top highlight */ 0 2px 4px #00000030,
+    /* dark shadow */ 0 4px 8px #00000015; /* soft shadow*/
+  --shadow-l: inset 0 1px 2px #ffffff70, /* top highlight */ 0 4px 6px #00000030,
+    /* dark shadow */ 0 6px 10px #00000015; /* soft shadow*/
+
+  /*  gradients */
+  --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+  --highlight: hsl(0 0% 60%); /* #999999 */
+
+  --behavior: hsl(297, 89%, 58%); /* #e22ef6 */
+  --ensayos: hsl(167, 100%, 58%); /* #33ffe8 */
+  --biblioteca: hsl(39, 100%, 58%); /* #ffa424 */
+  --proyectos: hsl(0, 100%, 61%); /* #ff3838 */
+  --otros: hsl(0, 100%, 58%); /* #ff3838 */
+
+  --orange-goback: hsl(25, 89%, 49%); /* #f16f0e */
+  --red-wip: hsl(0, 100%, 66%); /* #ff4d4d */
+
+  --bias-300: hsl(290, 19%, 74%); /* #c3b4c6 */
+  --bias-500: hsl(290, 19%, 61%); /* #a58faa */
+  --bias-700: hsl(290, 19%, 43%); /* #756679 */
+
+  --bias-category-perception: hsl(47, 85%, 66%); /* #f2ce57 */
+  --bias-category-context: hsl(89, 69%, 55%); /* #9ed841 */
+  --bias-category-judgment: hsl(212, 100%, 62%); /* #4c9dff */
+  --bias-category-memory: hsl(263, 100%, 73%); /* #af76ff */
+  --bias-category-speed: hsl(0, 79%, 58%); /* #e03d3d */
+
+  --error: hsl(0, 76%, 58%); /* #ef4444 */
+  --warning: hsl(48, 89%, 50%); /* #eab308 */
+  --success: hsl(142, 76%, 36%); /* #22c55e */
+}
+
+[data-theme="light"] {
+  --bg-dark: hsl(34.286, 26%, 95%); /* #F5F2EE */
+  --bg: hsl(40, 38%, 97%); /* #FAF8F4 */
+  --bg-light: hsl(36, 56%, 98%); /* #FDFBF8 */
+  --primary: hsl(265.658, 76%, 61%); /* #904FE7 */
+  --secondary: hsl(80.717, 96%, 54%); /* #adfa1b */
+
+  /* text color */
+  --text-header: hsl(60, 4%, 5%); /* #0C0C0B */
+  --text-content: hsl(30, 3%, 12%); /* #1F1E1D */
+  --text-muted: hsl(40, 2%, 34%); /* #595856 */
+
+  /* border */
+  --border: hsl(0, 0%, 30%); /* #4D4D4D */
+  --border-card: solid 1px var(--bg);
+
+  /*  gradients */
+  --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+  --highlight: hsl(0 0% 100%); /* #FFFFFF */
+
+  --behavior: hsl(295, 100%, 28%); /* #80008e */
+  --ensayos: hsl(173, 98%, 22%); /* #016c60 */
+  --biblioteca: hsl(39, 100%, 31%); /* #a15e00 */
+  --proyectos: hsl(0, 100%, 38%); /* #c10000 */
+  --otros: hsl(0, 100%, 38%); /* #c10000 */
+}
