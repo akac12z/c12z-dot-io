@@ -1,0 +1,94 @@
+---
+import TestLayout from "@layouts/TestLayout.astro";
+---
+
+<TestLayout>
+  <article>
+    <section class="mx-auto flex flex-col justify-center text-pretty">
+      <!-- <h1 class="mb-4">Aquí Chema F. · c12z</h1> -->
+
+      <h1
+        class="underline decoration-cz-primary font-pixel text-center text-2xl xs:text-3xl mb-4 sm:mb-10"
+      >
+        I'm a Growth who Program.
+      </h1>
+      <section class="flex flex-col">
+        <p>
+          Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code,
+          con el fin de crear mejores producto. Documento mi proceso en Substack
+          y LinkedIn, un "build in public" de mi día a día.
+        </p>
+        <p class="">
+          Me interesa <span class="underline decoration-cz-primary">EdTech</span
+          >, <span class="underline decoration-cz-primary">ClimateTech</span> y productos
+          con
+          <span class="underline decoration-cz-primary">Network Effects</span>.
+        </p>
+        <p class="">
+          Por cierto, soy Chema ✌🏽. Un Growth & Dev, amante del arte callejero y
+          del tattoo, compito en CrossFit y ahora estoy estudiando un <span
+            title="Desarrollo de Aplicaciones Multiplataforma"
+            >Grado Superior en DAM</span
+          >.
+        </p>
+      </section>
+
+      <section>
+        <h2>Tarjetas para visualizar</h2>
+        <div class="custom-header">
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="power-icon"
+            >
+              <path d="M12 2v10"></path>
+              <path d="M18.4 6.6a9 9 0 1 1-12.77.04"></path>
+            </svg>
+          </button>
+        </div>
+        <section class="shadows">
+          <div class="shadow-none">
+            <h2>Level 0</h2>
+            <p>No shadow</p>
+          </div>
+          <div class="shadow-s">
+            <h2>Level 1</h2>
+            <p>Small shadow</p>
+          </div>
+          <div class="shadow-m">
+            <h2>Level 2</h2>
+            <p>Medium shadow</p>
+          </div>
+          <div class="shadow-l">
+            <h2>Level 3</h2>
+            <p>Large shadow</p>
+          </div>
+        </section>
+      </section>
+
+      <!-- <section>
+        <h2 class="mt-8 text-pretty">Qué te vas a encontrar aquí?</h2>
+
+        <ShowSortContent />
+      </section> -->
+    </section>
+  </article>
+</TestLayout>
+
+<script>
+  // theme toggle
+  const toggleBtn = document.querySelector("button") as HTMLElement;
+  toggleBtn.addEventListener("click", toggle);
+
+  function toggle() {
+    document.body.classList.toggle("light");
+  }
+</script>

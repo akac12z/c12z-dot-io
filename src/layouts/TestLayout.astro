@@ -1,0 +1,30 @@
+---
+import "../styles/test.css";
+
+import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
+
+import Header from "@/components/general/header/Header.astro";
+import Footer from "@/components/general/footer/Footer.astro";
+
+import BaseHead from "@in_headComponents/SEO/common/BaseHead.astro";
+import GTMBody from "@in_headComponents/analytics/Google/GTMBody.astro";
+import BottomBar from "@commonPageComponents/bottons/BottomBar";
+
+const { lang } = SITE_DEFAULT_CONFIG;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <BaseHead>
+    <slot name="head" />
+  </BaseHead>
+  <body class="">
+    <GTMBody />
+    <Header />
+    <main class="">
+      <slot />
+      <BottomBar client:only="react" />
+    </main>
+    <Footer />
+  </body>
+</html>
