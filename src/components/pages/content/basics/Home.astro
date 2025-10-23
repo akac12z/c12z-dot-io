@@ -2,7 +2,7 @@
 import ShowSortContent from "./section_lists/ShowSortContent.astro";
 ---
 
-<article>
+<section>
   <section class="mx-auto flex flex-col justify-center text-pretty">
     <!-- <h1 class="mb-4">Aquí Chema F. · c12z</h1> -->
 
@@ -11,30 +11,46 @@ import ShowSortContent from "./section_lists/ShowSortContent.astro";
     >
       I'm a Growth who Program.
     </h1>
-    <section class="flex flex-col">
-      <p>
-        Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code,
-        con el fin de crear y escalar productos. Documento mi proceso en
-        Substack y LinkedIn, en una especie de "build in public" de mi día a
-        día.
-      </p>
-      <p class="mt-2">
-        Me fascian la industria EdTech, ClimateTech y los productos con Network
-        Effects.
-      </p>
-      <p class="mt-4">
-        Por cierto, soy Chema ✌🏽. Un Growth & Dev, amante del arte callejero y
-        del tattoo, compito en CrossFit y ahora estoy estudiando un <span
-          title="Desarrollo de Aplicaciones Multiplataforma"
-          >Grado Superior en DAM</span
-        >.
-      </p>
-    </section>
 
-    <section>
-      <h2 class="mt-8 text-pretty">Qué te vas a encontrar aquí?</h2>
-
-      <ShowSortContent />
-    </section>
+    <p class="">
+      Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code, con
+      el fin de crear y escalar productos. Documento mi proceso en
+      <a
+        class="decoration-cz-primary underline hover:no-underline"
+        target="_blank"
+        title="ir al substack de chema ferrández"
+        rel="noopener noreferrer"
+        href="https://chemaferrandez.substack.com/"
+      >
+        Substack</a
+      >
+      y <a
+        class="decoration-cz-primary underline hover:no-underline"
+        target="_blank"
+        title="ir al linkedin de chema ferrández"
+        rel="noopener noreferrer"
+        href="https://linkedin.com/in/chemaferrandez/"
+      >
+        LinkedIn</a
+      >, en una especie de "build in public" de mi día a día.
+    </p>
   </section>
-</article>
+</section>
+
+<p class="mt-2">
+  Me fascian la industria EdTech, ClimateTech y los productos con Network
+  Effects.
+</p>
+<p class="mt-4">
+  Por cierto, soy Chema ✌🏽. Un Growth & Dev, amante del arte callejero y del
+  tattoo, compito en CrossFit y ahora estoy estudiando un <span
+    title="Desarrollo de Aplicaciones Multiplataforma"
+    >Grado Superior en DAM</span
+  >.
+</p>
+
+<section>
+  <h2 class="mt-8 text-pretty">Qué te vas a encontrar aquí?</h2>
+
+  <ShowSortContent />
+</section>
