@@ -17,7 +17,7 @@
     "@astrojs/sitemap": "3.6.0",
     "@astrojs/vercel": "9.0.0",
     "@lucide/astro": "0.546.0",
-    "@tailwindcss/vite": "4.1.10",
+    "@tailwindcss/vite": "4.1.16",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "astro": "5.15.0",
@@ -26,7 +26,7 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "sharp": "0.34.4",
-    "tailwindcss": "4.1.10",
+    "tailwindcss": "4.1.16",
     "typescript": "5.9.3"
   },
   "devDependencies": {
