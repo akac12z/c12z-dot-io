@@ -1,56 +1,65 @@
 ---
 import ShowSortContent from "./section_lists/ShowSortContent.astro";
+
+import LinkedIn from "@commonIcons/social/LinkedIn.astro";
+import Github from "@commonIcons/social/Github.astro";
+import X from "@commonIcons/social/X.astro";
+import Substack from "@commonIcons/social/Substack.astro";
 ---
 
-<section>
-  <section class="mx-auto flex flex-col justify-center text-pretty">
-    <!-- <h1 class="mb-4">Aquí Chema F. · c12z</h1> -->
+<section class="mx-auto flex flex-col justify-center text-pretty">
+  <!-- <h1 class="mb-4">Aquí Chema F. · c12z</h1> -->
 
-    <h1
-      class="underline decoration-cz-primary text-balance font-pixel text-center text-2xl xs:text-3xl mb-4 sm:mb-10"
+  <h1
+    class="underline decoration-cz-primary text-balance font-pixel text-center text-3xl mb-8 sm:mb-10"
+  >
+    I'm a Growth who Program.
+  </h1>
+
+  <p class="">
+    Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code, con
+    el fin de crear y escalar productos. Documento mi proceso en
+    <a
+      class="decoration-cz-primary underline hover:no-underline"
+      target="_blank"
+      title="ir al substack de chema ferrández"
+      rel="noopener noreferrer"
+      href="https://chemaferrandez.substack.com/"
     >
-      I'm a Growth who Program.
-    </h1>
-
-    <p class="">
-      Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code, con
-      el fin de crear y escalar productos. Documento mi proceso en
-      <a
-        class="decoration-cz-primary underline hover:no-underline"
-        target="_blank"
-        title="ir al substack de chema ferrández"
-        rel="noopener noreferrer"
-        href="https://chemaferrandez.substack.com/"
-      >
-        Substack</a
-      >
-      y <a
-        class="decoration-cz-primary underline hover:no-underline"
-        target="_blank"
-        title="ir al linkedin de chema ferrández"
-        rel="noopener noreferrer"
-        href="https://linkedin.com/in/chemaferrandez/"
-      >
-        LinkedIn</a
-      >, en una especie de "build in public" de mi día a día.
-    </p>
-  </section>
+      Substack</a
+    >
+    y menos constante en <a
+      class="decoration-cz-primary underline hover:no-underline"
+      target="_blank"
+      title="ir al linkedin de chema ferrández"
+      rel="noopener noreferrer"
+      href="https://linkedin.com/in/chemaferrandez/"
+    >
+      LinkedIn</a
+    >, en una especie de "build in public" de mi día a día.
+  </p>
+  <p class="mt-2">
+    Me fascian la industria EdTech, ClimateTech y los productos con Network
+    Effects.
+  </p>
+  <p class="mt-2">
+    Por cierto, soy Chema ✌🏽. Un Growth & Dev, amante del arte callejero y del
+    tattoo, compito en CrossFit y ahora estoy estudiando un <span
+      title="Desarrollo de Aplicaciones Multiplataforma"
+      >Grado Superior en DAM</span
+    >.
+  </p>
 </section>
 
-<p class="mt-2">
-  Me fascian la industria EdTech, ClimateTech y los productos con Network
-  Effects.
-</p>
-<p class="mt-4">
-  Por cierto, soy Chema ✌🏽. Un Growth & Dev, amante del arte callejero y del
-  tattoo, compito en CrossFit y ahora estoy estudiando un <span
-    title="Desarrollo de Aplicaciones Multiplataforma"
-    >Grado Superior en DAM</span
-  >.
-</p>
+<section class="flex justify-start items-center gap-6 mt-4 sm:mt-6">
+  <Substack width="18" height="18" />
+  <LinkedIn width="20" height="20" />
+  <Github width="20" height="20" />
+  <X width="20" height="20" />
+</section>
 
 <section>
-  <h2 class="mt-8 text-pretty">Qué te vas a encontrar aquí?</h2>
+  <h2 class="mt-8 text-balance">Qué te vas a encontrar aquí?</h2>
 
   <ShowSortContent />
 </section>
