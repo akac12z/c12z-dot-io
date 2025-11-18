@@ -1,5 +1,5 @@
 ---
-import Bulb from "@/components/general/icons/Bulb.astro";
+import UnclearThought from "@/components/general/icons/UnclearThought.astro";
 
 interface Thoughts {
   first_paragraph: string[];
@@ -21,7 +21,7 @@ if (!first_paragraph) {
   class="border border-cz-border-dark bg-cz-surface-dark p-2 rounded-lg gap-y-1 my-4 flex flex-col mx-auto"
 >
   <section class="grid grid-cols-[auto_1fr] my-auto gap-x-2">
-    <Bulb />
+    <UnclearThought />
     <section class="flex flex-col justify-center mb-0">
       <p class="font-mono text-xs mb-0">
         {first_paragraph}
