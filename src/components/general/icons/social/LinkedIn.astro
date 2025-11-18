@@ -2,7 +2,7 @@
 import type { SocialIcons } from "@interfaces/socialIcons.interface";
 
 const {
-  customColor = "text-cz-text-headers-dark hover:text-cz-primary",
+  customColor = "text-cz-text-headers-dark",
   height = "20",
   width = "20",
 } = Astro.props as SocialIcons;
@@ -13,6 +13,7 @@ const {
   target="_blank"
   rel="noopener noreferrer"
   title="LinkedIn de Chema Ferrández - c12z"
+  class="group p-2 hover:bg-cz-bg-light/10 rounded-md transition-colors duration-300"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"

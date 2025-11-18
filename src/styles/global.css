@@ -205,7 +205,7 @@
     @apply text-sm;
   }
   p {
-    @apply font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed;
+    @apply font-rubik text-sm text-cz-text-content-dark font-normal tracking-wider leading-relaxed;
   }
   a {
     @apply font-pixel tracking-wider text-cz-text-headers-dark;
@@ -214,13 +214,13 @@
     @apply font-rubik text-base border-l-2 pl-4 my-2 text-cz-text-relax-dark;
   }
   li {
-    @apply font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed mb-2 mt-0;
+    @apply font-rubik text-sm text-cz-text-content-dark font-normal tracking-wider leading-relaxed mb-2 mt-0;
   }
   ol {
-    @apply mt-0 font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed;
+    @apply mt-0 font-rubik text-sm text-cz-text-content-dark font-normal tracking-wider leading-relaxed;
   }
   ul {
-    @apply mt-0 font-rubik text-sm text-cz-text-content-dark font-light tracking-wider leading-relaxed;
+    @apply mt-0 font-rubik text-sm text-cz-text-content-dark font-normal tracking-wider leading-relaxed;
   }
 
   footer {
