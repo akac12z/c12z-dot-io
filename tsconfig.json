@@ -3,7 +3,6 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@sharedComponentsInPages/*": [
         "./src/components/pages/shared/*"
@@ -41,7 +40,7 @@
       
       
       "@commonIcons/*": [
-        "src/components/general/icons/*"
+        "./src/components/general/icons/*"
       ],
       "@basicPageComponents/*": [
         "./src/components/pages/content/basics/*"
@@ -68,7 +67,7 @@
         "./src/components/pages/content/projects/*"
       ],
       "@commonComponents/*": [
-        "src/components/general/*"
+        "./src/components/general/*"
       ],
       "@commonPageComponents/*": [
         "./src/components/pages/common/*"
