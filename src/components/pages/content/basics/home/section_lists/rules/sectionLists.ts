@@ -1,4 +1,4 @@
-import type { Section } from "@basicPageComponents/home/section_lists/sectionLists.interface";
+import type { Section } from "@basicPageComponents/home/section_lists/rules/sectionLists.interface";
 
 export const SECTION_LISTS: Section[] = [
   {
