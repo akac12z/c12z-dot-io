@@ -11,6 +11,7 @@ import BiasSEO from "@analyticsComponents/SEO/pages/behavior/bias/BiasSEO.astro"
 import BiasCategory from "@biasPageComponents/components/BiasCategory.astro";
 
 import TOC from "@sharedPageComponents/ToC/toc";
+import GoBackInTop from "@sharedComponentsInPages/items/bottons/GoBackInTop.astro";
 
 
 
@@ -39,6 +40,7 @@ const { Content, headings } = await render(entry);
   <BiasSEO slot="head" entry={entry} />
   <section class="mx-auto">
     <TOC client:only="react" headings={headings} title={biasName}/>
+    <GoBackInTop headPage="/behavior" title="ir a la página de behavior" />
 
     <article class="flex flex-col justify-center ">
       <section class="text-center">
