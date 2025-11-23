@@ -4,15 +4,14 @@
  * TODO: HACER MANIFEST -> <link rel="manifest" href="/site.webmanifest" />
  *
  */
+import GA4 from "@analyticsComponents/crowlers/Google/GA4.astro";
 import "../../../../../styles/global.css";
 
 import { ClientRouter } from "astro:transitions";
-
-import Favicons from "@analyticsComponents/SEO/shared/Favicons.astro";
+import GTMHead from "@analyticsComponents/crowlers/Google/GTMHead.astro";
 import AhrefsAnalytics from "@analyticsComponents/crowlers/Ahrefs/AhrefsAnalytics.astro";
 import Overtracking from "@analyticsComponents/crowlers/Overtracking/Overtracking.astro";
-import GA4 from "@analyticsComponents/crowlers/Google/GA4.astro";
-import GTMHead from "@analyticsComponents/crowlers/Google/GTMHead.astro";
+import Favicons from "./Favicons.astro";
 ---
 
 <head>
