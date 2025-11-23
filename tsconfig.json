@@ -75,8 +75,8 @@
       "@btnsharedPageComponents/*": [
         "./src/components/pages/shared/bottons/*"
       ],
-      "@in_headComponents/*": [
-        "./src/components/pages/in_head/*"
+      "@analyticsComponents/*": [
+        "./src/components/pages/analytics/*"
       ],
       
       "@/*": [
