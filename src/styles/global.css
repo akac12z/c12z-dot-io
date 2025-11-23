@@ -262,7 +262,7 @@
     @apply rounded-lg mt-0 w-5/6 h-auto place-self-center;
   }
 
-  /* BOTTONs */
+  /* buttons */
   .to-top-btn {
     @apply fixed bottom-5 right-5 w-8 h-8 rounded-full border border-green-500 bg-transparent text-green-500 hidden items-center justify-center;
   }

@@ -73,7 +73,7 @@
         "./src/components/pages/shared/*"
       ],
       "@btnsharedPageComponents/*": [
-        "./src/components/pages/shared/bottons/*"
+        "./src/components/pages/shared/buttons/*"
       ],
       "@analyticsComponents/*": [
         "./src/components/pages/analytics/*"
