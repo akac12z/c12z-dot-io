@@ -1,3 +1,5 @@
+// los títuos deben tener entre 50-60 caracteres y las descripciones entre 110-160 caracteres
+
 import type { PagesInfo } from "@interfaces/pagesInfo.interface";
 import { SITE_DEFAULT_CONFIG } from "./siteInfo";
 
@@ -7,31 +9,31 @@ export const CONTEXT_PAGE_INFO: PagesInfo = {
 };
 
 export const LIBRARY_PAGE_INFO: PagesInfo = {
-  title: `Notas de libros: growth, psicología, crecimiento personal y startups - ${SITE_DEFAULT_CONFIG.title}`,
+  title: "Biblioteca y Notas de Libros que voy leyendo - c12z",
   description:
-    "Explora las ideas y conceptos más importantes de libros sobre growth, startups, psicología del comportamiento y crecimiento personal. Accede a contenido esencial en un solo lugar.",
+    "Notas y reflexiones de los libros que voy leyendo sobre growth, startups, psicología del comportamiento y crecimiento personal.",
 };
 
 export const BEHAVIOR_PAGE_INFO: PagesInfo = {
-  title: `Psicología del comportamiento y heurísticas aplicadas a Growth y Startups - ${SITE_DEFAULT_CONFIG.title}`,
+  title: `Behavioral economics aplicado a Growth y Producto - c12z`,
   description:
-    "Descubre cómo aplicar la psicología del comportamiento y la economía conductual para entender mejor a los usuarios y potenciar estrategias de growth en startups.",
+    "Entiende mejor a tus usuarios y crea mejores productos (y más sticky) sabiendo cómo funciona la mente humana a través de behavioral economics.",
 };
 
 export const BIAS_PAGE_INFO: PagesInfo = {
-  title: `Sesgos cognitivos y heurísticas: Casos de estudio, ejemplos y aplicaciones a Startups - ${SITE_DEFAULT_CONFIG.title}`,
+  title: `Sesgos y heurísticas: por qué hacemos lo que hacemos? - c12z`,
   description:
-    "Explora una recopilación de sesgos cognitivos y heurísticas humanas con ejemplos prácticos y aplicaciones para entender y mejorar la toma de decisiones y cómo poder aplicarlos en tus productos.",
+    "Sesgos cognitivos y heurísticas explicados con ejemplos y aplicados al mundo de producto y growth para aumentar adquisición y retención de usuarios en startups.",
 };
 
 export const ESSAY_PAGE_INFO: PagesInfo = {
-  title: `Ensayos sobre Growth, Psicología del Comportamiento y Startups. - ${SITE_DEFAULT_CONFIG.title}`,
+  title: `Guias sobre Growth, Behavioral Economics y Producto - c12z`,
   description:
-    "Colección de ensayos sobre Growth en startups y psicología del comportamiento. Reflexiones y aprendizajes recopilados de la experiencia mía, de mis pares y de lo que voy leyendo.",
+    "Ensayos y reflexiones sobre growth, behavioral economics y desarrollo. Ideas propias y recopiladas de mis pares del mundo startup y producto.",
 };
 
 export const PROJECTS_PAGE: PagesInfo = {
-  title: "Proyectos de Chema Ferrández",
+  title: "Proyectos y cosas que voy haciendo - c12z",
   description:
-    "Recopilación de los proyectos que Chema (yo 🙃) hace como hobby en su tiempo libre.",
+    "Proyectos personales de Chema (yo 🙃) explicados paso a paso: cómo los he construido, qué herramientas he usado y el porqué detrás de cada decisión.",
 };

@@ -5,21 +5,21 @@ import type {
 } from "@interfaces/siteInfo.interface";
 
 export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
-  title: "Chema Ferrández | c12z.io",
+  title: "Chema Ferrandez - c12z",
   description:
-    "Un 'build(me) in public' donde compartiré aquello que voy haciendo, aprendiendo y pensando en mi carrera como Growth",
+    "Un 'building(me) in public' donde comparto aquello que voy haciendo, aprendiendo y pensando en mi carrera sobre Growth, Behavioral Dev y Product.",
   url: "https://c12z.io",
-  author: "Chema | c12z",
+  author: "Chema Ferrandez | c12z",
   location: "es_ES",
   lang: "es-ES",
 };
 
 export const SITE_404_CONFIG: Site404ConfigInterface = {
-  errorTitle: "Hiuston, error 404 en c12z",
+  errorTitle: "Houston, tenemos un error 404",
   errorDescription:
     "Ha habido un problema con la página que estabas buscando y bueno... aquí estamos.",
   url: "https://c12z.io",
-  author: "Chema | c12z",
+  author: "Chema Ferrandez | c12z",
   location: "es_ES",
   lang: "es-ES",
 };
