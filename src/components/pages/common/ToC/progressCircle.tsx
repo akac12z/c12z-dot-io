@@ -2,7 +2,7 @@
  * This component was inspired by bepyan.me/en and its documentation.
  */
 
-import type { ProgressCircleProps } from "@interfaces/toc.interface";
+import type { ProgressCircleProps } from "./toc.interface";
 import { motion } from "motion/react";
 
 export default function ProgressCircle({
