@@ -39,7 +39,7 @@
       ],
       
       
-      "@commonIcons/*": [
+      "@sharedIcons/*": [
         "./src/components/shared/icons/*"
       ],
       "@basicPageComponents/*": [
@@ -66,14 +66,14 @@
       "@projectPageComponents/*": [
         "./src/components/pages/content/projects/*"
       ],
-      "@commonComponents/*": [
+      "@sharedComponents/*": [
         "./src/components/shared/*"
       ],
-      "@commonPageComponents/*": [
-        "./src/components/pages/common/*"
+      "@sharedPageComponents/*": [
+        "./src/components/pages/shared/*"
       ],
-      "@btnCommonPageComponents/*": [
-        "./src/components/pages/common/bottons/*"
+      "@btnsharedPageComponents/*": [
+        "./src/components/pages/shared/bottons/*"
       ],
       "@in_headComponents/*": [
         "./src/components/pages/in_head/*"
