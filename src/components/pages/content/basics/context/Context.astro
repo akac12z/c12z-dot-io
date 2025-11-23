@@ -1,12 +1,11 @@
 ---
 import { Picture } from "astro:assets";
-import { Content as ContextContent } from "@basicPageComponents/markdowns/context.mdx";
+import { Content as ContextContent } from "./context.mdx";
 
 import Mii from "@imageAssets/mii/c12z-photo-profiles.jpeg";
-import ReaderStaticMarkdowns from "./markdowns/ReaderStaticMarkdowns.astro";
 ---
 
-<ReaderStaticMarkdowns>
+<section class="custom-prose custom-list">
   <h1>¿Quién carajos (soy) es Chema?</h1>
   <section class="flex w-full justify-center">
     <div
@@ -22,4 +21,4 @@ import ReaderStaticMarkdowns from "./markdowns/ReaderStaticMarkdowns.astro";
     </div>
   </section>
   <ContextContent />
-</ReaderStaticMarkdowns>
+</section>
