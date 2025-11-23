@@ -40,7 +40,7 @@
       
       
       "@commonIcons/*": [
-        "./src/components/general/icons/*"
+        "./src/components/shared/icons/*"
       ],
       "@basicPageComponents/*": [
         "./src/components/pages/content/basics/*"
@@ -67,7 +67,7 @@
         "./src/components/pages/content/projects/*"
       ],
       "@commonComponents/*": [
-        "./src/components/general/*"
+        "./src/components/shared/*"
       ],
       "@commonPageComponents/*": [
         "./src/components/pages/common/*"
