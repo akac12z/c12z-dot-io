@@ -4,7 +4,7 @@
 import { ESSAY_PAGE_INFO } from "@/global/pagesInfo";
 import MainLayout from "@layouts/MainLayout.astro";
 import EssaysPageSEO from "@analyticsComponents/SEO/pages/essays/EssaysPageSEO.astro";
-import GoBackInTop from "@sharedComponentsInPages/items/bottons/GoBackInTop.astro";
+import GoBackInTop from "@sharedComponentsInPages/items/buttons/GoBackInTop.astro";
 
 // const essays = await getCollection("essay");
 ---
@@ -16,8 +16,10 @@ import GoBackInTop from "@sharedComponentsInPages/items/bottons/GoBackInTop.astr
     pageDescription={ESSAY_PAGE_INFO.description}
   />
   <GoBackInTop headPage="/" title="ir a la home" />
-  <h1>Ensayos</h1>
-  <p>Por ahora, no tengo ningún ensayo que mustrarte! 🙂</p>
+  <section class="flex flex-col max-w-3xl">
+    <h1>Ensayos</h1>
+    <p>Por ahora, no tengo ningún ensayo que mustrarte! 🙂</p>
+  </section>
 
   <section class="flex justify-between items-center mt-6 gap-x-4">
     {
