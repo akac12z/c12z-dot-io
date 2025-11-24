@@ -3,11 +3,12 @@ import Github from "@sharedIcons/social/Github.astro";
 import LinkedIn from "@sharedIcons/social/LinkedIn.astro";
 import Substack from "@sharedIcons/social/Substack.astro";
 import X from "@sharedIcons/social/X.astro";
+import SocialMediaBlock from "../SocialMediaBlock.astro";
 ---
 
 <footer class="flex flex-col items-center footer">
   <hr class="pb-3 h-px w-3/4 text-cz-text-headers-dark/50" />
-  <div class="flex items-center justify-between w-full">
+  <section class="flex items-center justify-between w-full">
     <p class="text-xs self-start">
       with 🖤 - <a
         class="text-cz-primary"
@@ -15,11 +16,6 @@ import X from "@sharedIcons/social/X.astro";
         title="Contexto de Chema Ferréndez - c12z">chema</a
       >
     </p>
-    <div class="flex justify-center items-center">
-      <Github />
-      <LinkedIn />
-      <X />
-      <Substack />
-    </div>
-  </div>
+    <SocialMediaBlock width={16} height={16} />
+  </section>
 </footer>

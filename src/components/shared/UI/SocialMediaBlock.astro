@@ -1,0 +1,20 @@
+---
+import Github from "@sharedIcons/social/Github.astro";
+import LinkedIn from "@sharedIcons/social/LinkedIn.astro";
+import Substack from "@sharedIcons/social/Substack.astro";
+import X from "@sharedIcons/social/X.astro";
+
+interface Props {
+  width?: number;
+  height?: number;
+}
+
+const { width = 20, height = 20 }: Props = Astro.props;
+---
+
+<section class="flex justify-start items-center">
+  <Substack width={width} height={height} />
+  <LinkedIn width={width} height={height} />
+  <Github width={width} height={height} />
+  <X width={width} height={height} />
+</section>
