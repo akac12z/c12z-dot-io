@@ -27,13 +27,13 @@ export const SITE_404_CONFIG: Site404ConfigInterface = {
 export const SOCIAL_LINKS: SocialLinksInterface = {
   github: {
     name: "Github",
-    url: "https://github.com/akac12zk",
-    userName: "akac12zk",
+    url: "https://github.com/akac12z",
+    userName: "akac12z",
   },
   twitter: {
     name: "Twitter/𝕏",
-    url: "https://x.com/akac12zk",
-    userName: "@akac12zk",
+    url: "https://x.com/akac12z",
+    userName: "@akac12z",
   },
   linkedin: {
     name: "LinkedIn",
@@ -47,7 +47,7 @@ export const SOCIAL_LINKS: SocialLinksInterface = {
   },
   goodreads: {
     name: "Goodreads",
-    url: "goodreads.com/akac12zk",
-    userName: "akac12zk",
+    url: "goodreads.com/akac12z",
+    userName: "akac12z",
   },
 };
