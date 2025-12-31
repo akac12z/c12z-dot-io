@@ -4,26 +4,28 @@
  * TODO: HACER MANIFEST -> <link rel="manifest" href="/site.webmanifest" />
  *
  */
-import "../../../../../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+
+import "../../../styles/global.css";
 
 import tamagoFont from "../../../../../assets/fonts/Tamago.woff2";
 
-import { ClientRouter } from "astro:transitions";
 import GA4 from "@/analytics/Google/GA4.astro";
 import GTMHead from "@/analytics/Google/GTMHead.astro";
 import AhrefsAnalytics from "@/analytics/Ahrefs/AhrefsAnalytics.astro";
 import Overtracking from "@/analytics/Overtracking/Overtracking.astro";
+
 import Favicons from "./Favicons.astro";
 ---
 
 <head>
+  <ClientRouter />
+  <Favicons />
+
   <GA4 />
   <GTMHead />
   <AhrefsAnalytics />
   <Overtracking />
-
-  <Favicons />
-  <ClientRouter />
 
   {/* IMPORT TAMAGO FONT TO PREVENT FLASHING */}
   <link
