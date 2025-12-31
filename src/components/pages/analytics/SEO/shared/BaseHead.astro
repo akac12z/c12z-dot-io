@@ -7,6 +7,8 @@
 import GA4 from "@analyticsComponents/crowlers/Google/GA4.astro";
 import "../../../../../styles/global.css";
 
+import tamagoFont from "../../../../../assets/fonts/Tamago.woff2";
+
 import { ClientRouter } from "astro:transitions";
 import GTMHead from "@analyticsComponents/crowlers/Google/GTMHead.astro";
 import AhrefsAnalytics from "@analyticsComponents/crowlers/Ahrefs/AhrefsAnalytics.astro";
@@ -22,6 +24,15 @@ import Favicons from "./Favicons.astro";
 
   <Favicons />
   <ClientRouter />
+
+  {/* IMPORT TAMAGO FONT TO PREVENT FLASHING */}
+  <link
+    rel="preload"
+    as="font"
+    href={tamagoFont}
+    type="font/woff2"
+    crossorigin
+  />
 
   {/* Global Metadata */}
   <meta charset="UTF-8" />
