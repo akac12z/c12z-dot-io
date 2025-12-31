@@ -8,11 +8,11 @@ import CourageError404Image from "@imageAssets/OpenGraph/404/og-404-error.png";
 import Layout404Error from "@layouts/Layout404Error.astro";
 
 import Page404 from "@errorPageComponents/Page404.astro";
-import PageSEO404Error from "@analyticsComponents/SEO/pages/404/PageSEO404Error.astro";
+import Error404SEO from "@/seo/404/Error404SEO.astro";
 ---
 
 <Layout404Error>
-  <PageSEO404Error
+  <Error404SEO
     slot="head"
     pageTitle={SITE_404_CONFIG.errorTitle}
     pageDescription={SITE_404_CONFIG.errorDescription}
