@@ -1,18 +1,16 @@
 ---
-/**
- * !Esto se le tiene que poner a todas las páginas estáticas por defecto para que coja los metatags
- */
-import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
+import type { PageKeywords } from "@/interfaces/keywords.interface";
 
+import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 import processKeywords from "@utils/processKeywords";
-import { essaysKeywords } from "./essays.keywords";
 
 interface Props {
   pageTitle: string;
   pageDescription: string;
+  pageKeywords: PageKeywords;
 }
 
-const { pageTitle, pageDescription } = Astro.props;
+const { pageTitle, pageDescription, pageKeywords } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
@@ -20,7 +18,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("./og-image.png", Astro.site);
 const ogImageAlt = pageTitle;
 
-const keywords = processKeywords(essaysKeywords).keywords;
+const keywords = processKeywords(pageKeywords).keywords;
 ---
 
 <title>{pageTitle}</title>
@@ -30,7 +28,7 @@ const keywords = processKeywords(essaysKeywords).keywords;
 
 <link rel="canonical" href={canonicalURL} />
 
-{/* Open Graph / Facebook */}
+{/* Open Graph / Facebook / WhatsApp */}
 <meta property="og:title" content={pageTitle} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:description" content={pageDescription} />
@@ -45,7 +43,6 @@ const keywords = processKeywords(essaysKeywords).keywords;
 <meta property="fb:app_id" content="1548538199200247" />
 
 {/* SOLO PARA EL MAIN: NO HAY TAGS*/}
-{/* PARA TODAS MENOS EL MAIN */}
 <meta property="og:type" content="article" />
 {
   keywords &&

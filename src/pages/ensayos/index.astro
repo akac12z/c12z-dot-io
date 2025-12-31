@@ -3,17 +3,20 @@
 
 import { ESSAY_PAGE_INFO } from "@/global/pagesInfo";
 import MainLayout from "@layouts/MainLayout.astro";
-import EssaysPageSEO from "@analyticsComponents/SEO/pages/essays/EssaysPageSEO.astro";
 import GoBackInTop from "@sharedComponentsInPages/items/buttons/GoBackInTop.astro";
+import PagesSEO from "@/seo/PagesSEO.astro";
+
+import { essaysKeywords } from "@/components/pages/analytics/SEO/pages/essays/essays.keywords";
 
 // const essays = await getCollection("essay");
 ---
 
 <MainLayout>
-  <EssaysPageSEO
+  <PagesSEO
     slot="head"
     pageTitle={ESSAY_PAGE_INFO.title}
     pageDescription={ESSAY_PAGE_INFO.description}
+    pageKeywords={essaysKeywords}
   />
   <GoBackInTop headPage="/" title="ir a la home" />
   <section class="flex flex-col max-w-3xl">

@@ -1,15 +1,19 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
+import PagesSEO from "@/seo/PagesSEO.astro";
+
+import { behaviorKeywords } from "@/components/pages/analytics/SEO/pages/behavior/behavior.keywords";
 import { BEHAVIOR_PAGE_INFO } from "@/global/pagesInfo";
-import BehaviorPageSEO from "@analyticsComponents/SEO/pages/behavior/BehaviorPageSEO.astro";
+
 import BehaviorPage from "@behaviorPageComponents/BehaviorPage.astro";
 ---
 
 <MainLayout>
-  <BehaviorPageSEO
+  <PagesSEO
     slot="head"
     pageTitle={BEHAVIOR_PAGE_INFO.title}
     pageDescription={BEHAVIOR_PAGE_INFO.description}
+    pageKeywords={behaviorKeywords}
   />
   <BehaviorPage />
 </MainLayout>

@@ -1,18 +1,20 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
+import PagesSEO from "@/seo/PagesSEO.astro";
 
 import { CONTEXT_PAGE_INFO } from "@/global/pagesInfo";
-import ContextSEO from "@analyticsComponents/SEO/pages/context/ContextSEO.astro";
+import { contextKeywords } from "@/components/pages/analytics/SEO/pages/context/contextKeywords";
 
 import Context from "@basicPageComponents/context/Context.astro";
 import GoBackInTop from "@sharedComponentsInPages/items/buttons/GoBackInTop.astro";
 ---
 
 <MainLayout>
-  <ContextSEO
+  <PagesSEO
     slot="head"
     pageTitle={CONTEXT_PAGE_INFO.title}
     pageDescription={CONTEXT_PAGE_INFO.description}
+    pageKeywords={contextKeywords}
   />
   <section class="flex flex-col w-full md:min-w-3xl sm:min-w-xl mx-auto">
     <GoBackInTop headPage="/" title="ir a la home" />

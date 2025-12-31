@@ -2,16 +2,22 @@
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 
 import MainLayout from "@layouts/MainLayout.astro";
-import MainSEO from "@analyticsComponents/SEO/pages/MainSEO.astro";
 
 import Home from "@basicPageComponents/home/Home.astro";
+import PagesSEO from "@/components/common/seo/PagesSEO.astro";
+import type { PageKeywords } from "@/interfaces/keywords.interface";
+
+const homeKeywords: PageKeywords = {
+  keywords: ["chema ferrandez", "c12z", "cz"],
+};
 ---
 
 <MainLayout>
-  <MainSEO
+  <PagesSEO
     slot="head"
     pageTitle={SITE_DEFAULT_CONFIG.title}
     pageDescription={SITE_DEFAULT_CONFIG.description}
+    pageKeywords={homeKeywords}
   />
   <Home />
 </MainLayout>

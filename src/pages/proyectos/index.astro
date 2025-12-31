@@ -5,18 +5,25 @@ import GoBackInTop from "@sharedComponentsInPages/items/buttons/GoBackInTop.astr
 import { PROJECTS_PAGE } from "@/global/pagesInfo";
 import { PROJETCS_DATA } from "@projectPageComponents/data/projectsData";
 
-import ProjectPageSEO from "@analyticsComponents/SEO/pages/projects/ProjectPageSEO.astro";
 import ProjectPage from "@projectPageComponents/components/ProjectPage.astro";
 import ProjectCard from "@projectPageComponents/components/ProjectCard.astro";
+import PagesSEO from "@/components/common/seo/PagesSEO.astro";
+
+import type { PageKeywords } from "@/interfaces/keywords.interface";
+
+const projectsKeywords: PageKeywords = {
+  keywords: ["proyectos", "proyectos c12z", "proyectos chema ferrandez"],
+};
 
 const { LVM_es } = PROJETCS_DATA;
 ---
 
 <MainLayout>
-  <ProjectPageSEO
+  <PagesSEO
     slot="head"
     pageTitle={PROJECTS_PAGE.title}
     pageDescription={PROJECTS_PAGE.description}
+    pageKeywords={projectsKeywords}
   />
   <GoBackInTop headPage="/" title="ir a la home" />
   <h1>Proyectos</h1>

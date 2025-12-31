@@ -1,5 +1,5 @@
 import type { PageKeywords } from "@interfaces/keywords.interface";
 
-export const aboutKeywords: PageKeywords = {
-  keywords: ["quien es c12z", "quien es chema ferrandez"],
+export const contextKeywords: PageKeywords = {
+  keywords: ["quien es cz", "quien es chema ferrandez"],
 };

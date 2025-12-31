@@ -2,15 +2,17 @@
 import { LIBRARY_PAGE_INFO } from "@/global/pagesInfo";
 
 import MainLayout from "@layouts/MainLayout.astro";
-import LibrarySEO from "@analyticsComponents/SEO/pages/library/LibrarySEO.astro";
+import { libraryKeywords } from "@/components/pages/analytics/SEO/pages/library/library.keywords";
 import BookPage from "@bookPageComponents/components/BookPage.astro";
+import PagesSEO from "@/seo/PagesSEO.astro";
 ---
 
 <MainLayout>
-  <LibrarySEO
+  <PagesSEO
     slot="head"
     pageTitle={LIBRARY_PAGE_INFO.title}
     pageDescription={LIBRARY_PAGE_INFO.description}
+    pageKeywords={libraryKeywords}
   />
   <BookPage />
   <!-- <FooterBar client:only="react" /> -->
