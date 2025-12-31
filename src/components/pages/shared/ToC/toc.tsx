@@ -4,7 +4,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import type { DynamicTocProps } from "@sharedPageComponents/ToC/toc.interface";
+import type { DynamicTocProps } from "@/components/pages/shared/toc/toc.interface";
 
 import { throttle } from "es-toolkit";
 
