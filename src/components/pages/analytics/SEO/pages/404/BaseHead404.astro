@@ -2,18 +2,16 @@
 import { ClientRouter } from "astro:transitions";
 
 import "../../../../../../styles/global.css";
-import GA4 from "@analyticsComponents/crowlers/Google/GA4.astro";
-import GTMHead from "@analyticsComponents/crowlers/Google/GTMHead.astro";
-import Overtracking from "@analyticsComponents/crowlers/Overtracking/Overtracking.astro";
-import AhrefsAnalytics from "@analyticsComponents/crowlers/Ahrefs/AhrefsAnalytics.astro";
+
+import GA4 from "@/analytics/Google/GA4.astro";
+import GTMHead from "@/analytics/Google/GTMHead.astro";
+import Overtracking from "@/analytics/Overtracking/Overtracking.astro";
+import AhrefsAnalytics from "@/analytics/Ahrefs/AhrefsAnalytics.astro";
+
 import Favicons from "@analyticsComponents/SEO/shared/Favicons.astro";
 ---
 
 <head>
-  {
-    /*<GA4 />
-  <GTMHead />*/
-  }
   <GA4 />
   <GTMHead />
   <Overtracking />

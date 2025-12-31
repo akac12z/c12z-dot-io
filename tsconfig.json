@@ -4,11 +4,21 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "paths": {
+      "@/*": ["./src/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/common/*": ["./src/components/common/*"],
+      "@/analytics/*": ["./src/components/common/analytics/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      
+
       "@sharedComponentsInPages/*": [
         "./src/components/pages/shared/*"
       ],
       "@analytics/*": [
-        "./src/components/shared/analytics/*"
+        "./src/components/common/analytics/*"
       ],
       "@home/*": [
         "./src/components/static/home/*"
@@ -16,20 +26,11 @@
       "@data/*": [
         "./src/data/*"
       ],
-      "@layouts/*": [
-        "./src/layouts/*"
-      ],
       "@essay/*": [
         "./src/components/essay/*"
       ],
       "@lib/*": [
         "./src/lib/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@interfaces/*": [
-        "./src/interfaces/*"
       ],
       "@imageAssets/*": [
         "./src/assets/images/*"
@@ -79,9 +80,7 @@
         "./src/components/pages/analytics/*"
       ],
       
-      "@/*": [
-        "./src/*"
-      ]
+
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
