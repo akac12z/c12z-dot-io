@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 import TestLayout from "@layouts/TestLayout.astro";
 ---
 
@@ -8,7 +9,7 @@ import TestLayout from "@layouts/TestLayout.astro";
       <!-- <h1 class="mb-4">Aquí Chema F. · c12z</h1> -->
 
       <h1
-        class="underline decoration-cz-primary font-pixel text-center text-2xl xs:text-3xl mb-4 sm:mb-10"
+        class="subrayado font-pixel text-center text-2xl xs:text-3xl mb-4 sm:mb-10"
       >
         I'm a Growth who Program.
       </h1>
@@ -19,10 +20,10 @@ import TestLayout from "@layouts/TestLayout.astro";
           y LinkedIn, un "build in public" de mi día a día.
         </p>
         <p class="">
-          Me interesa <span class="underline decoration-cz-primary">EdTech</span
-          >, <span class="underline decoration-cz-primary">ClimateTech</span> y productos
-          con
-          <span class="underline decoration-cz-primary">Network Effects</span>.
+          Me interesa <span class="subrayado">EdTech</span>, <span
+            class="subrayado">ClimateTech</span
+          > y productos con
+          <span class="subrayado">Network Effects</span>.
         </p>
         <p class="">
           Por cierto, soy Chema ✌🏽. Un Growth & Dev, amante del arte callejero y
@@ -55,9 +56,9 @@ import TestLayout from "@layouts/TestLayout.astro";
           </button>
         </div>
         <section class="shadows">
-          <div class="shadow-none">
+          <div class="no-shadow">
             <h2>Level 0</h2>
-            <p>No shadow</p>
+            <p>None shadow</p>
           </div>
           <div class="shadow-s">
             <h2>Level 1</h2>
@@ -73,12 +74,6 @@ import TestLayout from "@layouts/TestLayout.astro";
           </div>
         </section>
       </section>
-
-      <!-- <section>
-        <h2 class="mt-8 text-pretty">Qué te vas a encontrar aquí?</h2>
-
-        <ShowSortContent />
-      </section> -->
     </section>
   </article>
 </TestLayout>
@@ -89,6 +84,7 @@ import TestLayout from "@layouts/TestLayout.astro";
   toggleBtn.addEventListener("click", toggle);
 
   function toggle() {
-    document.body.classList.toggle("light");
+    document.body.classList.toggle("light"); // añadir la clase light al body
+    document.documentElement.classList.toggle("light"); // añadir al HTML la clase light
   }
 </script>
