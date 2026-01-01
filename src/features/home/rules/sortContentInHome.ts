@@ -1,4 +1,4 @@
-import { SECTION_LISTS } from "@/components/pages/content/basics/home/section_lists/rules/sectionLists";
+import { SECTION_LISTS } from "./sectionLists";
 import { getCollection } from "astro:content";
 
 const libraryEntries = await getCollection("library");
