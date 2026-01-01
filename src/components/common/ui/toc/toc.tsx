@@ -1,10 +1,10 @@
 /**
  * This component was inspired by bepyan.me/en and its documentation.
- */
+*/
 
 import { useEffect, useRef, useState } from "react";
 
-import type { DynamicTocProps } from "@/components/pages/shared/toc/toc.interface";
+import type { DynamicTocProps } from "@/components/common/ui/toc/toc.interface";
 
 import { throttle } from "es-toolkit";
 
