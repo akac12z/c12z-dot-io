@@ -14,75 +14,7 @@
       "@layouts/*": ["./src/layouts/*"],
       "@utils/*": ["./src/utils/*"],
       "@interfaces/*": ["./src/interfaces/*"],
-      
-
-      "@sharedComponentsInPages/*": [
-        "./src/components/pages/shared/*"
-      ],
-      "@analytics/*": [
-        "./src/components/common/analytics/*"
-      ],
-      "@home/*": [
-        "./src/components/static/home/*"
-      ],
-      "@data/*": [
-        "./src/data/*"
-      ],
-      "@essay/*": [
-        "./src/components/essay/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ],
-      "@imageAssets/*": [
-        "./src/assets/images/*"
-      ],
-      "@test/*": [
-        "./src/components/test/*"
-      ],
-      
-      
-      "@sharedIcons/*": [
-        "./src/components/shared/icons/*"
-      ],
-      "@basicPageComponents/*": [
-        "./src/components/pages/content/basics/*"
-      ],
-      "@errorPageComponents/*": [
-        "./src/components/pages/content/404/*"
-      ],
-      "@bookPageComponents/*": [
-        "./src/components/pages/content/books/*"
-      ],
-      "@bookImages/*": [
-        "./src/components/assets/images/books/*"
-      ],
-      "@behaviorPageComponents/*": [
-        "./src/components/pages/content/behavior/components/*"
-      ],
-      "@biasPageComponents/*": [
-        "./src/components/pages/content/behavior/sub_pages/bias/*"
-      ],
-      "@essayPageComponents/*": [
-        "./src/components/pages/content/essay/*"
-      ],
-      "@projectPageComponents/*": [
-        "./src/components/pages/content/projects/*"
-      ],
-      "@sharedComponents/*": [
-        "./src/components/shared/*"
-      ],
-      // "@sharedPageComponents/*": [
-      //   "./src/components/pages/shared/*"
-      // ],
-      "@btnsharedPageComponents/*": [
-        "./src/components/pages/shared/buttons/*"
-      ],
-      "@analyticsComponents/*": [
-        "./src/components/pages/analytics/*"
-      ],
-      
-
+      "@/assets/*": ["./src/assets/*"],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
