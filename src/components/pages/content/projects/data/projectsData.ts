@@ -7,6 +7,8 @@ export const PROJETCS_DATA: Record<string, ProjectData> = {
     srcImage: "/projects/lavidamodernaes-dot-com.png",
     altImage: "Banner de la página de LaVidaModernaEs.com",
     projectTitle: "#LaVidaModerna es...",
+    publishDate: "26/06/2025",
+    lastTimeEdited: "26/06/2025",
     projectDescription:
       "Un homenaje a las frases y momentos de #Moderdonia, el programa que me marcó con humor y cutrez.",
     projectKeywords: {

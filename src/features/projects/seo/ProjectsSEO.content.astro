@@ -1,0 +1,40 @@
+---
+import ContentSEO from "@/components/common/seo/ContentSEO.astro";
+import { convertDateToISO8601 } from "@/utils/validatingDate";
+import processKeywords from "@utils/processKeywords";
+
+interface Props {
+  pageTitle: string;
+  pageDescription: string;
+  ogImage?: string;
+  keywordsInProjects: string[];
+  publishDate: string;
+  lastDateEdited: string;
+}
+
+const { pageTitle, pageDescription, ogImage, keywordsInProjects, publishDate } =
+  Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const ogImageURL = ogImage
+  ? new URL(ogImage, Astro.site)
+  : new URL("./og-image.png", Astro.site);
+const ogImageAlt = pageTitle;
+
+const projectKeywords = processKeywords(keywordsInProjects).keywords;
+
+const publisDateInISO = convertDateToISO8601(publishDate);
+const editedDate = publisDateInISO;
+---
+
+<ContentSEO
+  postName={pageTitle}
+  postDescription={pageDescription}
+  canonicalURL={canonicalURL}
+  justInCaseNoCoverSrc={ogImageURL}
+  justInCaseNoCoverAlt={ogImageAlt}
+  publisDateInISO={publisDateInISO}
+  lastTimeEditedInISO={editedDate}
+  keywords={projectKeywords}
+/>

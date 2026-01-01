@@ -6,7 +6,7 @@ import MainLayout from "@layouts/MainLayout.astro";
 
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
 
-import ProjectsSEO from "@analyticsComponents/SEO/pages/projects/ProjectsSEO.astro";
+import ProjectsSEO from "@/features/projects/seo/ProjectsSEO.content.astro";
 
 import TOC from "@/components/common/ui/toc/toc";
 
@@ -45,6 +45,9 @@ const LVM_headings = [
 ];
 const { LVM_es } = PROJETCS_DATA;
 const projectKeywords = processKeywords(LVM_es.projectKeywords).keywords;
+
+const publishDate = LVM_es.publishDate;
+const lastDateEdited = LVM_es.lastTimeEdited;
 ---
 
 <MainLayout>
@@ -54,6 +57,8 @@ const projectKeywords = processKeywords(LVM_es.projectKeywords).keywords;
     pageDescription={LVM_es.projectDescription}
     ogImage={LVMes.src}
     keywordsInProjects={projectKeywords}
+    publishDate={publishDate}
+    lastDateEdited={lastDateEdited}
   />
   <article class="flex flex-col w-full md:min-w-3xl sm:min-w-xl mx-auto">
     <GoBackInTop headPage="/proyectos" />

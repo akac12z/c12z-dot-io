@@ -7,16 +7,21 @@ import processKeywords from "@utils/processKeywords";
 interface Props {
   pageTitle: string;
   pageDescription: string;
+  ogImage?: string;
+  ogImageAlt?: string;
   pageKeywords: PageKeywords;
 }
 
-const { pageTitle, pageDescription, pageKeywords } = Astro.props;
+const { pageTitle, pageDescription, ogImage, ogImageAlt, pageKeywords } =
+  Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // TODO: CAMBIAR EL OG POR UNO PERSONALIZADO
-const ogImage = new URL("./og-image.png", Astro.site);
-const ogImageAlt = pageTitle;
+const ogImageUrl = ogImage
+  ? new URL(ogImage, Astro.site)
+  : new URL("./og-image.png", Astro.site);
+const ogImageUrlAlt = ogImageAlt || pageTitle;
 
 const keywords = processKeywords(pageKeywords).keywords;
 ---
@@ -34,8 +39,8 @@ const keywords = processKeywords(pageKeywords).keywords;
 <meta property="og:description" content={pageDescription} />
 <meta content={SITE_DEFAULT_CONFIG.title} property="og:site_name" />
 <meta content={SITE_DEFAULT_CONFIG.location} property="og:locale" />
-<meta property="og:image" content={ogImage} />
-<meta property="og:image:alt" content={ogImageAlt} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:alt" content={ogImageUrlAlt} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content={SITE_DEFAULT_CONFIG.location} />
@@ -54,8 +59,8 @@ const keywords = processKeywords(pageKeywords).keywords;
 {/* Twitter */}
 <meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content={pageDescription} />
-<meta name="twitter:image" content={ogImage} />
-<meta name="twitter:image:alt" content={ogImageAlt} />
+<meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:image:alt" content={ogImageUrlAlt} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@akac12z" />
 <meta name="twitter:creator" content="@akac12z" />

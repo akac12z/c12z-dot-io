@@ -7,4 +7,8 @@ export interface ProjectData {
   projectTitle: string;
   projectDescription: string;
   projectKeywords: PageKeywords;
+  publishDate: string;
+  lastTimeEdited: string;
 }
+
+// 01/12/2025
