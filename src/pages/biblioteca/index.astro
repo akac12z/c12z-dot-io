@@ -3,7 +3,8 @@ import { LIBRARY_PAGE_INFO } from "@/global/pagesInfo";
 
 import MainLayout from "@layouts/MainLayout.astro";
 import { libraryKeywords } from "@/features/library/seo/library.keywords";
-import BookPage from "@bookPageComponents/components/BookPage.astro";
+
+import BookPage from "@/features/books/components/BookPage.astro";
 import PagesSEO from "@/seo/PagesSEO.astro";
 ---
 
@@ -15,5 +16,4 @@ import PagesSEO from "@/seo/PagesSEO.astro";
     pageKeywords={libraryKeywords}
   />
   <BookPage />
-  <!-- <FooterBar client:only="react" /> -->
 </MainLayout>
