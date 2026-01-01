@@ -1,19 +1,4 @@
-/**
- * Social Links Interfaces
-*/
-export interface SocialLinksInterface  {
-  [key: string]: SocialLink;
-};
 
-interface SocialLink  {
-  name: string;
-  url: string;
-  userName: string;
-};
-
-/**
- * Sites interfaces
-*/
 export interface SiteDefaultConfigInterface {
   title: string;
   description: string;

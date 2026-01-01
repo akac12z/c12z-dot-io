@@ -1,20 +1,19 @@
 ---
+import { SOCIAL_LINKS } from "@/global/socialMediaLinks";
 import type { SocialIcons } from "@interfaces/socialIcons.interface";
+import SocialLink from "../SocialLink.astro";
 
 const {
   customColor = "text-cz-text-headers-dark",
   height = "16",
   width = "16",
 } = Astro.props as SocialIcons;
+
+const { substack } = SOCIAL_LINKS;
+const { url, title } = substack;
 ---
 
-<a
-  href="https://chemaferrandez.substack.com/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="Substack de Chema Ferrández - c12z"
-  class="group w-9 h-9 flex items-center justify-center hover:bg-cz-bg-light/10 rounded-md transition-colors duration-300"
->
+<SocialLink href={url} title={title}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -26,4 +25,4 @@ const {
       d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"
     ></path></svg
   >
-</a>
+</SocialLink>

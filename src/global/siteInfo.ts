@@ -1,7 +1,6 @@
 import type {
   Site404ConfigInterface,
   SiteDefaultConfigInterface,
-  SocialLinksInterface,
 } from "@interfaces/siteInfo.interface";
 
 export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
@@ -22,32 +21,4 @@ export const SITE_404_CONFIG: Site404ConfigInterface = {
   author: "Chema Ferrandez | cz",
   location: "es_ES",
   lang: "es-ES",
-};
-
-export const SOCIAL_LINKS: SocialLinksInterface = {
-  github: {
-    name: "Github",
-    url: "https://github.com/akac12z",
-    userName: "akac12z",
-  },
-  twitter: {
-    name: "Twitter/𝕏",
-    url: "https://x.com/akac12z",
-    userName: "@akac12z",
-  },
-  linkedin: {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/chemaferran/",
-    userName: "ChemaFerrandez",
-  },
-  substack: {
-    name: "Substack",
-    url: "https://chemaferrandez.substack.com",
-    userName: "@chemaferrandez",
-  },
-  goodreads: {
-    name: "Goodreads",
-    url: "goodreads.com/akac12z",
-    userName: "akac12z",
-  },
 };
