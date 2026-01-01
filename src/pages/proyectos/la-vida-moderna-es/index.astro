@@ -6,7 +6,8 @@ import MainLayout from "@layouts/MainLayout.astro";
 import GoBackInTop from "@sharedComponentsInPages/items/buttons/GoBackInTop.astro";
 
 import ProjectsSEO from "@analyticsComponents/SEO/pages/projects/ProjectsSEO.astro";
-import TOC from "@sharedPageComponents/toc/toc";
+
+import TOC from "@/components/pages/shared/toc/toc";
 
 import LVMes from "./_lavidamodernaes-banner.png";
 import Mezclar from "./_boton-mezclar.png";
@@ -16,6 +17,7 @@ import Loop from "./_viral-loop-lavidamodernaes.png";
 
 import { SquareArrowOutUpRight } from "@lucide/astro";
 import { PROJETCS_DATA } from "@projectPageComponents/data/projectsData";
+import processKeywords from "@/utils/processKeywords";
 
 const LVM_headings = [
   {
@@ -41,6 +43,7 @@ const LVM_headings = [
   },
 ];
 const { LVM_es } = PROJETCS_DATA;
+const projectKeywords = processKeywords(LVM_es.projectKeywords).keywords;
 ---
 
 <MainLayout>
@@ -49,7 +52,7 @@ const { LVM_es } = PROJETCS_DATA;
     pageTitle={LVM_es.projectTitle}
     pageDescription={LVM_es.projectDescription}
     ogImage={LVMes.src}
-    keywordsInProjects={LVM_es.projectKeywords}
+    keywordsInProjects={projectKeywords}
   />
   <article class="flex flex-col w-full md:min-w-3xl sm:min-w-xl mx-auto">
     <GoBackInTop headPage="/proyectos" />

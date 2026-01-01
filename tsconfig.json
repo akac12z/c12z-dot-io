@@ -72,9 +72,9 @@
       "@sharedComponents/*": [
         "./src/components/shared/*"
       ],
-      "@sharedPageComponents/*": [
-        "./src/components/pages/shared/*"
-      ],
+      // "@sharedPageComponents/*": [
+      //   "./src/components/pages/shared/*"
+      // ],
       "@btnsharedPageComponents/*": [
         "./src/components/pages/shared/buttons/*"
       ],

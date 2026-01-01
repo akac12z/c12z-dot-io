@@ -1,4 +1,5 @@
-import type { ProjectData } from "../rules/projectsData.interface";
+import type { ProjectData } from "@/features/projects/rules/projectsData.interface";
+
 
 export const PROJETCS_DATA: Record<string, ProjectData> = {
   LVM_es: {
@@ -8,7 +9,8 @@ export const PROJETCS_DATA: Record<string, ProjectData> = {
     projectTitle: "#LaVidaModerna es...",
     projectDescription:
       "Un homenaje a las frases y momentos de #Moderdonia, el programa que me marcó con humor y cutrez.",
-    projectKeywords: [
+    projectKeywords: {
+      keywords: [
       "la vida moderna",
       "la vida moderna es",
       "lvm",
@@ -17,6 +19,7 @@ export const PROJETCS_DATA: Record<string, ProjectData> = {
       "David Broncano",
       "Ignatius Farray",
       "Queque",
-    ],
+    ]
+    },
   },
-} as const;
+};
