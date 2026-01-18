@@ -5,16 +5,21 @@ interface Thoughts {
   first_paragraph: string[];
   second_paragraph?: string[];
   third_paragraph?: string[];
+  asset?: string;
 }
 
-const { first_paragraph, second_paragraph, third_paragraph } =
+const { first_paragraph, second_paragraph, third_paragraph, asset } =
   Astro.props as Thoughts;
 
 if (!first_paragraph) {
   throw new Error(
-    "At least, you need a first_paragraph in quote component. Then you can add a second_paragraph and a third_paragraph."
+    "At least, you need a first_paragraph in quote component. Then you can add a second_paragraph and a third_paragraph.",
   );
 }
+
+const paragraphs = [first_paragraph, second_paragraph, third_paragraph].filter(
+  Boolean,
+);
 ---
 
 <section
@@ -25,24 +30,22 @@ if (!first_paragraph) {
       <UnclearThought />
     </div>
     <section class="flex flex-col justify-center mb-0">
-      <p class="font-mono text-xs mb-0">
-        {first_paragraph}
-      </p>
       {
-        second_paragraph && (
-          <p class="font-mono text-xs mb-0 mt-2">{second_paragraph}</p>
-        )
+        paragraphs.map((paragraph, index) => (
+          <p class:list={["font-mono text-xs mb-0", { "mt-2": index > 0 }]}>
+            {paragraph}
+          </p>
+        ))
       }
       {
-        third_paragraph && (
-          <p class="font-mono text-xs mt-2 mb-0">{third_paragraph}</p>
+        asset && (
+          <section>
+            <p class="font-momo tracking-wide text-xs mt-2 mb-0">
+              <slot />
+            </p>
+          </section>
         )
       }
-      <section>
-        <p class="font-momo tracking-wide text-xs mt-2 mb-0">
-          <slot />
-        </p>
-      </section>
     </section>
   </section>
 </section>
