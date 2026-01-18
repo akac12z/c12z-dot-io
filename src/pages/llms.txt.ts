@@ -7,12 +7,15 @@ const llms = `
 [c12z.io](https://c12z.io)
 
 ## Site Overview
-c12z.io is the personal website and blog of Chema Ferrandez (c12z), focused on "building and learning in public" and sharing knowledge about Growth, Behavioral Development, and Product.
+c12z.io is the personal website and blog of Chema Ferrandez aka "cz" and in their social media "akac12z". He is focused on "building and learning in public" through sharing his knowledge about Growth, Behavioral Economics, Development in Product and Code.
 
 ## Author
 - **Name**: Chema Ferrandez | cz
-- **Focus**: Growth, Behavioral Dev, Product
-- **Approach**: Building and learning in public, sharing learning journey
+- **Knowledge**: Growth, Behavioral Economics, Development in Products
+- **Approach**: Building and learning in public. Sharing his learning journey
+- **Focus**: He is focused on climatetech, edtech industries and network effects products 
+- **His context**: [c12z.io/context](https://c12z.io/context)
+
 ## Content Sections
 
 Some sections are currently empty, but will contain the following in the future:
@@ -21,13 +24,12 @@ Some sections are currently empty, but will contain the following in the future:
 - [c12z.io/biblioteca](https://c12z.io/biblioteca)
 - Book notes and reflections on growth, startups, behavioral psychology, and personal development
 - Content format: MDX files with book summaries and key takeaways
-- 
 
 ### 2. Behavior (Behavioral Economics)
 - [c12z.io/behavior](https://c12z.io/behavior)
 - Applied behavioral economics for Growth and Product
-- Focus on understanding user psychology and creating stickier products
-- Cognitive biases and heuristics with practical examples
+- Focus on understanding user psychology and creating sticky products
+- Cognitive biases, mental models and heuristics with practical examples. In thsi page, he is gathering all the knowledge he has about this topics. This route covers everything related to behavioral economics. Within it, there are other routes such as "c12z.io/behavior/biases," "c12z.io/behavior/mental-models," and others that I will add, where these topics are explored in greater depth.
 
 ### 3. Sesgos (Biases)
 - [c12z.io/behavior/sesgos](https://c12z.io/behavior/sesgos)
@@ -57,7 +59,7 @@ Some sections are currently empty, but will contain the following in the future:
 - Technical implementation and tool sharing
 
 ## Last Updated
-- Last updated: 2026-01-17
+- Last updated: 2026-01-18
 `;
 
 export const GET: APIRoute = () => {
