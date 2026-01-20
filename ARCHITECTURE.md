@@ -19,7 +19,7 @@ La raíz de código vive en `src/` y se organiza así:
   - `common/`: piezas globales estructurales que se comparten entre los componentes (header, footer, SEO).
     - `common/ui/`: piezas visuales reusables.
       - `common/ui/buttons`: botones comunes a toda la marca.
-      - `common/ui/icons`: iconos comunes a toda la marca.
+      - `common/ui/icons`: iconos comunes a toda la marca. también pueden estar divididos en secciones si tiene algo característico entre ellos como AI o Social
       - `common/ui/content`: componentes que se insertan dentro del contenido.
       - `common/ui/toc`: componente para el "table of content" (está en una carpeta porque tiene varios componentes y se vería un archivo muy complejo si estuviera en un solo archivo).
     - `common/analytics/`: componentes de analytics como Google, AHrefs o Overtracking.
