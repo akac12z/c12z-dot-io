@@ -14,6 +14,7 @@ import TOC from "@/components/common/ui/toc/toc";
 
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
 import GoOut from "@/components/common/ui/icons/GoOut.astro";
+import SummarizeSection from "@/components/common/ui/content/SummarizeSection.astro";
 
 interface Props {
   entry: CollectionEntry<"library">;
@@ -72,6 +73,7 @@ const { Content, headings } = await render(entry);
         <p class="italic text-xs text-cz-text-content-dark">"{quote}"</p>
       </section>
     </section>
+    <SummarizeSection />
     <BookSpoiler entry={entry} />
     <section id="mdx-content" class="custom-prose mx-auto mdx">
       <Content />

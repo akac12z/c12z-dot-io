@@ -1,0 +1,70 @@
+---
+// contenido inspirado en el blog de https://joseramonbernabeu.com/tutorial/como-poner-botones-de-resumen-con-ia-a-tu-web/
+import Claude from "../icons/ai/Claude.astro";
+import Grok from "../icons/ai/Grok.astro";
+import ChatGPT from "../icons/ai/ChatGPT.astro";
+import DeepSeek from "../icons/ai/DeepSeek.astro";
+// import Gemini from "../icons/ai/Gemini.astro";
+
+// es un único btn pero tendrá como props link a la AI, el nomber de la ai y los estilos de cada uno de ellos con sus colores específicos dentro de un style.module.css
+
+interface Props {
+  ai: "chatgpt" | "claude" | "grok";
+  class?: string;
+}
+
+const { ai, class: className } = Astro.props;
+const currentUrl = new URL(Astro.url.pathname, Astro.site);
+console.log(currentUrl);
+
+const prompt = `Please summarize the following page ${currentUrl} and give me the main and key ideas. Please give me the answer in Spanish.`;
+console.log(prompt);
+
+const AI_CONFIGS = {
+  // gemini: {
+  //   name: "Gemini",
+  //   // url: `https://gemini.google.com/app?prompt=${prompt}`,
+  //   icon: Gemini,
+  //   colors:
+  //     "bg-blue-50 text-blue-700 inset-ring-blue-700/10 dark:bg-blue-400/10 dark:text-blue-400 dark:inset-ring-blue-400/30",
+  // },
+  chatgpt: {
+    name: "ChatGPT",
+    url: `https://chatgpt.com/?q=${prompt}`,
+    icon: ChatGPT,
+    colors:
+      "bg-emerald-50 text-emerald-700 inset-ring-emerald-700/10 dark:bg-emerald-400/10 dark:text-emerald-400 dark:inset-ring-emerald-400/30",
+  },
+  claude: {
+    name: "Claude",
+    url: `https://claude.ai/new?q=${prompt}`,
+    icon: Claude,
+    colors:
+      "bg-orange-50 text-orange-700 inset-ring-orange-700/10 dark:bg-orange-400/10 dark:text-orange-400 dark:inset-ring-orange-400/30",
+  },
+  grok: {
+    name: "Grok",
+    url: `https://grok.com/?q=${prompt}`,
+    icon: Grok,
+    colors:
+      "bg-gray-50 text-gray-900 inset-ring-gray-900/10 dark:bg-white/10 dark:text-white dark:inset-ring-white/20",
+  },
+};
+
+const config = AI_CONFIGS[ai];
+const Icon = config.icon;
+---
+
+<a
+  href={config.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    "cursor-pointer flex items-center gap-x-2 w-fit rounded-md px-2.5 py-1.5 text-sm font-semibold shadow-xs inset-ring hover:opacity-80 transition-opacity tracking-widest",
+    config.colors,
+    className,
+  ]}
+>
+  {Icon && <Icon class="w-4 h-4" />}
+  <span class="hidden xs:block">{config.name}</span>
+</a>

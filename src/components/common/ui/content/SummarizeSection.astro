@@ -1,0 +1,18 @@
+---
+import SummarizeLLMs from "../buttons/SummarizeLLMs.astro";
+---
+
+<section
+  class="max-w-2xl w-full mx-auto flex flex-col justify-center items-center gap-y-3 mb-8"
+>
+  <p
+    class="text-cz-text-headers-dark text-sm font-medium font-pixel tracking-widest antialiased"
+  >
+    Puedes resumirlo con:
+  </p>
+  <div class="flex flex-wrap items-center gap-4 xs:gap-2">
+    <SummarizeLLMs ai="chatgpt" />
+    <SummarizeLLMs ai="claude" />
+    <SummarizeLLMs ai="grok" />
+  </div>
+</section>
