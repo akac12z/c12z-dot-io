@@ -15,10 +15,8 @@ interface Props {
 
 const { ai, class: className } = Astro.props;
 const currentUrl = new URL(Astro.url.pathname, Astro.site);
-console.log(currentUrl);
 
 const prompt = `Please summarize the following page ${currentUrl} and give me the main and key ideas. Please give me the answer in Spanish.`;
-console.log(prompt);
 
 const AI_CONFIGS = {
   // gemini: {
