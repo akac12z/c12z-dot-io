@@ -1,0 +1,26 @@
+---
+import GoOut from "@/icons/GoOut.astro";
+import UnclearThought from "../icons/UnclearThought.astro";
+
+interface Props {
+  title_asset: string;
+  href_link: string;
+  title_link: string;
+  is_third_party?: boolean;
+}
+
+const { title_asset, title_link, href_link, is_third_party } = Astro.props;
+---
+
+<div class="mt-2 flex items-center gap-x-2">
+  <a
+    class="decoration-cz-primary pb-0 underline group hover:no-underline font-mono tracking-wide text-xs mt-2 mb-0"
+    target="_blank"
+    rel="noopener noreferrer"
+    title={title_link}
+    href={href_link}
+  >
+    {title_asset}
+  </a>
+  {is_third_party && <GoOut classes="w-4 h-4 mt-2" />}
+</div>
