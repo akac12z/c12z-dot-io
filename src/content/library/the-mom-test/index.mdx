@@ -41,6 +41,7 @@ buyItOnAmazon:
 ---
 
 import OwnThoughts from "../../../components/common/ui/content/OwnThoughts.astro";
+import Link from "../../../components/common/ui/content/Link.astro"
 
 <OwnThoughts first_paragraph="en este formato te vas a encontrar mis comentarios sobre el libro The Mom Test y alguna que otra cosa interesante. he modificado algunas cosas para poder entenderlas mejor y que tengan una mejor narrativa entre ellas y sea más sencillo leerlo." />
 
@@ -478,54 +479,40 @@ Vas a tener que estar hablando con usuarios mientras tu empresa siga en pie. Ten
 	third_paragraph="te dejo algunas tools aquí abajo de AI para hacer estas grabaciones y resúmenes (esto está escrito a 25 de Noviembre de 2025. estas son, a día de hoy, las más importantes)."
 />
 
-<a
-	class=" decoration-cz-primary pb-0 underline group hover:no-underline italic"
-	target="_blank"
-	title="ir a Plaud AI"
-	rel="noopener noreferrer"
-	href="https://www.plaud.ai/"
->
-	- Plaud AI
-</a>
-
-<a
-	class=" decoration-cz-primary pb-0 underline group hover:no-underline italic"
-	target="_blank"
-	title="ir a Granola AI"
-	rel="noopener noreferrer"
-	href="https://www.granola.ai/"
->
-	- Granola AI
-</a>
-
-<a
-	class=" decoration-cz-primary pb-0 underline group hover:no-underline italic"
-	target="_blank"
-	title="ir a Otter AI"
-	rel="noopener noreferrer"
-	href="https://otter.ai/"
->
-	- Otter AI
-</a>
-
-<a
-	class=" decoration-cz-primary pb-0 underline group hover:no-underline italic"
-	target="_blank"
-	title="ir a Notion"
-	rel="noopener noreferrer"
-	href="https://www.notion.com/product/ai-meeting-notes"
->
-	- Notion
-</a>
-
-<a
-	class=" decoration-cz-primary pb-0 underline group hover:no-underline italic"
-	target="_blank"
-	title="ir a TL;DV"
-	rel="noopener noreferrer"
-	href="https://tldv.io/"
->
-	- TL;DV
-</a>
-
 Gracias por leerlo y espero que te haya sido útil.
+
+<Link
+	title_asset="Plaud AI"
+	href_link="https://www.plaud.ai/"
+	title_link="ir a Plaud AI"
+	is_third_party
+/>
+
+<Link
+	title_asset="Granola AI"
+	href_link="https://www.granola.ai/"
+	title_link="ir a Granola AI"
+	is_third_party
+/>
+
+<Link
+	title_asset="Otter AI"
+	href_link="https://otter.ai/"
+	title_link="ir a Otter AI"
+	is_third_party
+/>
+
+<Link
+	title_asset="TL;DV"
+	href_link="https://tldv.io/"
+	title_link="ir a TL;DV"
+	is_third_party
+/>
+
+<Link
+	title_asset="Notion"
+	href_link="https://www.notion.com/product/ai-meeting-notes"
+	title_link="ir a Notion"
+	is_third_party
+/>
+
