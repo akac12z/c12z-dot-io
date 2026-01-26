@@ -4,7 +4,8 @@
 /* headers */
 @font-face {
   font-family: "MuseoModerno";
-  src: url("/src/assets/fonts/MuseoModerno-Medium.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/MuseoModerno-Medium.woff2") format("woff2"),
     url("/src/assets/fonts/MuseoModerno-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
@@ -12,7 +13,8 @@
 }
 @font-face {
   font-family: "MuseoModerno";
-  src: url("/src/assets/fonts/MuseoModerno-MediumItalic.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/MuseoModerno-MediumItalic.woff2") format("woff2"),
     url("/src/assets/fonts/MuseoModerno-MediumItalic.woff") format("woff");
   font-weight: 500;
   font-style: italic;
@@ -22,7 +24,8 @@
 /* text: normal*/
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-light-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-light-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-light-webfont.woff") format("woff");
   font-weight: 300;
   font-style: normal;
@@ -30,7 +33,8 @@
 }
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-regular-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-regular-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-regular-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -38,7 +42,8 @@
 }
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-medium-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-medium-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-medium-webfont.woff") format("woff");
   font-weight: 500;
   font-style: normal;
@@ -46,7 +51,8 @@
 }
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-bold-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-bold-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-bold-webfont.woff") format("woff");
   font-weight: 700;
   font-style: normal;
@@ -56,7 +62,8 @@
 /* text: italic */
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-lightitalic-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-lightitalic-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-lightitalic-webfont.woff") format("woff");
   font-weight: 300;
   font-style: italic;
@@ -64,7 +71,8 @@
 }
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-italic-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-italic-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-italic-webfont.woff") format("woff");
   font-weight: 400;
   font-style: italic;
@@ -72,7 +80,8 @@
 }
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-mediumitalic-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-mediumitalic-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-mediumitalic-webfont.woff") format("woff");
   font-weight: 500;
   font-style: italic;
@@ -80,7 +89,8 @@
 }
 @font-face {
   font-family: "Rubik";
-  src: url("/src/assets/fonts/rubik-bolditalic-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/rubik-bolditalic-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/rubik-bolditalic-webfont.woff") format("woff");
   font-weight: 700;
   font-style: italic;
@@ -90,7 +100,8 @@
 /* CODE */
 @font-face {
   font-family: "Cascadia";
-  src: url("/src/assets/fonts/cascadia-webfont.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/cascadia-webfont.woff2") format("woff2"),
     url("/src/assets/fonts/cascadia-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -100,7 +111,8 @@
 /* TAMAGO - PIXEL */
 @font-face {
   font-family: "Tamago";
-  src: url("/src/assets/fonts/Tamago.woff2") format("woff2"),
+  src:
+    url("/src/assets/fonts/Tamago.woff2") format("woff2"),
     url("/src/assets/fonts/Tamago.woff") format("woff");
   font-weight: 400;
   font-style: normal;
@@ -116,7 +128,8 @@
   --color-cz-bg-dark: #111;
   --color-cz-bg-light: #f5f2ee;
 
-  --color-cz-primary: #adfa1b;
+  /* --color-cz-primary: #adfa1b; */
+  --color-cz-primary: #ff2f92;
   --color-cz-secondary: #904fe7;
 
   /* --- DARKMODE --- */
