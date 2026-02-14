@@ -8,7 +8,7 @@ const { headPage, title } = Astro.props;
 
 if (!headPage.startsWith("/")) {
   throw new Error(
-    `Invalid href: "${headPage}". The href must start with a "/".`
+    `Invalid href: "${headPage}". The href must start with a "/".`,
   );
 }
 ---
