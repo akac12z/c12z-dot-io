@@ -4,40 +4,60 @@ import { STYLE_CLASSES } from "../rules/sectionLists.styles";
 
 const { href, style, label, description, items } = Astro.props as Section;
 
-const currentStyle = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
+const accentClass = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
+const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
 ---
 
-<section class="mt-4">
-  <h3 class="text-sm font-rubik font-light">
-    <a
-      href={href}
-      class={`${currentStyle} transition-colors underline underline-offset-2 hover:no-underline`}
-    >
-      <span class={currentStyle}>/</span>{label}
-    </a>
-    · {description}
-  </h3>
-  <ul
-    class="border-cz-text-relax-dark/20 ml-0.5 xs:ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-2 xs:pl-4"
-  >
-    {
-      items.length === 0 ? (
-        <li class="my-2 tracking-wider rounded w-fit border-2 border-dotted text-cz-text-content-dark border-cz-red-wip/50 px-2 py-1 text-xs font-semibold flex items-center justify-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full  bg-cz-red-wip "/> WIP
-        </li>
-      ) : (
-        items.map((items) => (
-          <li class="mb-2 line-clamp-2 ">
-            {/* <span>·</span>{" "} */}
+<section class="mx-auto w-full">
+  <section class="flex items-center justify-between pt-3  gap-4 ">
+    <div class="flex flex-col xs:flex-row items-baseline gap-1 xs:gap-3 min-w-0">
+      <a
+        href={href}
+        class={`font-pixel underline hover:no-underline tracking-widest text-sm transition-colors ${accentClass}`}
+      >
+        /{label}
+      </a>
+
+      <span class="font-rubik text-xs text-cz-text-relax-dark">
+        {description}
+      </span>
+    </div>
+
+    <div class="shrink-0">
+      {
+        count ? (
+          <span class="font-pixel text-xs text-cz-text-relax-dark">{count}</span>
+        ) : (
+          <span class="flex items-center gap-1.5 font-pixel text-xs tracking-widest border border-dashed border-cz-red-wip/50 text-cz-text-relax-dark px-2 py-0.5 rounded">
+            <span class="w-1 h-1 rounded-full bg-cz-red-wip" />
+            WIP
+          </span>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    items.length > 0 && (
+      <ul class="border-cz-text-relax-dark/20 border-l border-b rounded-bl-lg mb-1 ml-0 xs:ml-3 mt-2 flex flex-col gap-0.5">
+        {items.map((item) => (
+          <li class="flex items-center ml-2">
             <a
-              href={items.href}
-              class="underline font-pixel decoration-cz-text-relax-light hover:no-underline"
+              href={item.href}
+              class="w-full flex items-center justify-between gap-2 font-rubik text-sm text-cz-text-content-dark hover:text-cz-text-headers-dark transition-colors hover:bg-cz-surface-dark px-0 xs:px-3 py-1.5 rounded-md"
             >
-              {items.text}
+              <span class="text-cz-text-content-dark text-xs font-rubik font-medium">
+                ↳ {item.text}
+              </span>
+              <span class="font-rubik text-xs text-cz-text-relax-dark ">
+                {item.meta?.split("·")[0] ?? item.tag ?? ""}
+              </span>
             </a>
           </li>
-        ))
-      )
-    }
-  </ul>
+        ))}
+      </ul>
+    )
+  }
+
+  <!-- <div class="border-t border-cz-border-dark"></div> -->
 </section>

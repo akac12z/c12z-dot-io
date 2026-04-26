@@ -10,6 +10,7 @@ export const SECTION_LISTS: Section[] = [
 			{
 				text: "#LaVidaModerna es...",
 				href: "/proyectos/la-vida-moderna-es",
+				tag: "project",
 			},
 		],
 	},

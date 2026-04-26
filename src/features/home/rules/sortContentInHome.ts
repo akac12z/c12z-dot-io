@@ -6,44 +6,52 @@ const biasEntries = await getCollection("bias");
 
 // Create a copy of SECTION_LISTS and update items
 export let updatedSectionLists = SECTION_LISTS.map((section) => {
-  if (section.label === "biblioteca") {
-    const libraryItems = libraryEntries
-      .filter((entry) => entry.data.backlog === "upload")
-      .sort((a, b) => {
-        const dateA = new Date(
-          a.data.publishDate.split("/").reverse().join("-")
-        );
-        const dateB = new Date(
-          b.data.publishDate.split("/").reverse().join("-")
-        );
-        return dateB.getTime() - dateA.getTime();
-      })
-      .slice(0, 4)
-      .map((entry) => ({
-        text: entry.data.title,
-        href: `/biblioteca/${entry.id}`,
-      }));
-    return { ...section, items: libraryItems };
-  } else if (section.label === "behavior") {
-    const biasItems = biasEntries
-      .filter((entry) => entry.data.backlog === "upload")
-      .sort((a, b) => {
-        const dateA = new Date(
-          a.data.publishDate.split("/").reverse().join("-")
-        );
-        const dateB = new Date(
-          b.data.publishDate.split("/").reverse().join("-")
-        );
-        return dateB.getTime() - dateA.getTime();
-      })
-      .slice(0, 4)
-      .map((entry) => ({
-        text: entry.data.biasName,
-        href: `/${entry.collection}/${entry.id}`,
-      }));
-    return { ...section, items: biasItems };
-  }
-  return section;
+	if (section.label === "biblioteca") {
+		const libraryItems = libraryEntries
+			.filter((entry) => entry.data.backlog === "upload")
+			.sort((a, b) => {
+				const dateA = new Date(
+					a.data.publishDate.split("/").reverse().join("-"),
+				);
+				const dateB = new Date(
+					b.data.publishDate.split("/").reverse().join("-"),
+				);
+				return dateB.getTime() - dateA.getTime();
+			})
+			.slice(0, 4)
+			.map((entry) => {
+				const authors = Array.isArray(entry.data.authors)
+					? entry.data.authors
+					: [entry.data.authors];
+				const authorName = authors[0]?.name ?? "";
+				const year = entry.data.publishDate.split("/")[2];
+				return {
+					text: entry.data.title,
+					href: `/biblioteca/${entry.id}`,
+					meta: `${authorName} · ${year}`,
+				};
+			});
+		return { ...section, items: libraryItems };
+	} else if (section.label === "behavior") {
+		const biasItems = biasEntries
+			.filter((entry) => entry.data.backlog === "upload")
+			.sort((a, b) => {
+				const dateA = new Date(
+					a.data.publishDate.split("/").reverse().join("-"),
+				);
+				const dateB = new Date(
+					b.data.publishDate.split("/").reverse().join("-"),
+				);
+				return dateB.getTime() - dateA.getTime();
+			})
+			.slice(0, 4)
+			.map((entry) => ({
+				text: entry.data.biasName,
+				href: `/${entry.collection}/${entry.id}`,
+			}));
+		return { ...section, items: biasItems };
+	}
+	return section;
 });
 
 // Add a new section for recent contents
