@@ -1,35 +1,35 @@
 {
-  "name": "c12z",
-  "type": "module",
-  "version": "0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "0.9.6",
-    "@astrojs/mdx": "4.3.13",
-    "@astrojs/partytown": "2.1.4",
-    "@astrojs/react": "4.4.2",
-    "@astrojs/sitemap": "3.7.0",
-    "@astrojs/vercel": "9.0.4",
-    "@lucide/astro": "0.577.0",
-    "@tailwindcss/vite": "4.2.1",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "astro": "5.18.0",
-    "es-toolkit": "1.45.1",
-    "motion": "12.35.2",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "sharp": "0.34.5",
-    "tailwindcss": "4.2.1",
-    "typescript": "5.9.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/typography": "0.5.19"
-  }
+	"name": "c12z",
+	"type": "module",
+	"version": "0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "0.9.8",
+		"@astrojs/mdx": "5.0.4",
+		"@astrojs/partytown": "2.1.7",
+		"@astrojs/react": "5.0.4",
+		"@astrojs/sitemap": "3.7.2",
+		"@astrojs/vercel": "10.0.5",
+		"@lucide/astro": "1.11.0",
+		"@tailwindcss/vite": "4.2.4",
+		"@types/react": "19.2.14",
+		"@types/react-dom": "19.2.3",
+		"astro": "6.1.9",
+		"es-toolkit": "1.46.0",
+		"motion": "12.38.0",
+		"react": "19.2.5",
+		"react-dom": "19.2.5",
+		"sharp": "0.34.5",
+		"tailwindcss": "4.2.4",
+		"typescript": "6.0.3"
+	},
+	"devDependencies": {
+		"@tailwindcss/typography": "0.5.19"
+	}
 }
