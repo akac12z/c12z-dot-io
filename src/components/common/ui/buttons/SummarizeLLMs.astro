@@ -17,7 +17,7 @@ interface Props {
   class?: string;
 }
 
-const { ai, class: className } = Astro.props;
+const { ai } = Astro.props;
 const currentUrl = new URL(Astro.url.pathname, Astro.site);
 
 const prompt = `Please summarize the following page ${currentUrl} and give me the main and key ideas. Please give me the answer in Spanish.`;
