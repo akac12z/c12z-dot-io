@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 import { isValidDateFormat } from "@utils/validatingDate";
@@ -18,7 +19,7 @@ const essayCollection = defineCollection({
 		title: z.string().max(60),
 		description: z.string().min(110).max(160),
 		// essayImage: z.object({
-		//   src: z.union([z.string().url(), z.string()]),
+		//   src: z.union([z.string(), z.string()]),
 		//   alt: z.string(),
 		// }),
 		// keywords: z.array(z.string()),
@@ -79,14 +80,13 @@ const libraryCollection = defineCollection({
 					name: z.string(),
 					link: z
 						.string()
-						.url()
 						.refine(
 							(link) =>
 								link.startsWith("https://www.") || link.startsWith("https://"),
 							{
 								message:
 									"The author's URL must start with 'https://www.' or 'https://'",
-							}
+							},
 						),
 				}),
 				z.array(
@@ -94,7 +94,6 @@ const libraryCollection = defineCollection({
 						name: z.string(),
 						link: z
 							.string()
-							.url()
 							.refine(
 								(link) =>
 									link.startsWith("https://www.") ||
@@ -102,9 +101,9 @@ const libraryCollection = defineCollection({
 								{
 									message:
 										"The author's URL must start with 'https://www.' or 'https://'",
-								}
+								},
 							),
-					})
+					}),
 				),
 			]),
 			readingTime: z.number().optional(),
@@ -116,7 +115,6 @@ const libraryCollection = defineCollection({
 				.object({
 					spain: z
 						.string()
-						.url()
 						.refine(
 							(url) =>
 								url.startsWith("https://www.amazon.es") ||
@@ -124,11 +122,10 @@ const libraryCollection = defineCollection({
 							{
 								message:
 									"The URL must start with 'https://www.amazon.es' or 'https://amazon.es'.",
-							}
+							},
 						),
 					usa: z
 						.string()
-						.url()
 						.refine(
 							(url) =>
 								url.startsWith("https://www.amazon.com") ||
@@ -136,7 +133,7 @@ const libraryCollection = defineCollection({
 							{
 								message:
 									"The URL must start with 'https://www.amazon.com  or 'https://amazon.com'.",
-							}
+							},
 						)
 						.optional(),
 				})
@@ -182,13 +179,13 @@ const biasCollection = defineCollection({
 					.array(
 						z.object({
 							label: z.string(),
-							url: z.string().url(),
-						})
+							url: z.string(),
+						}),
 					)
 					.optional(),
 				readingTime: z.number().optional(),
 				category: z.array(
-					z.enum(["velocidad", "memoria", "percepción", "contexto", "juicio"])
+					z.enum(["velocidad", "memoria", "percepción", "contexto", "juicio"]),
 				),
 			})
 			.refine(
@@ -204,7 +201,7 @@ const biasCollection = defineCollection({
 					message:
 						"The field { lastTimeEdited } cannot be earlier than { publishDate }.",
 					path: ["lastTimeEdited"], // Indica el campo donde se muestra el error
-				}
+				},
 			),
 });
 
