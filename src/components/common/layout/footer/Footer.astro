@@ -1,5 +1,6 @@
 ---
 import SocialBlock from "@/components/common/ui/icons/social/SocialBlock.astro";
+import { SITE_VERSION } from "@/global/siteInfo";
 ---
 
 <footer class="flex flex-col items-center footer">
@@ -12,6 +13,14 @@ import SocialBlock from "@/components/common/ui/icons/social/SocialBlock.astro";
         title="Contexto de Chema Ferréndez - c12z">chema</a
       >
     </p>
-    <SocialBlock />
+
+    <section class="flex items-center justify-between gap-3">
+      <SocialBlock />
+      <span class="hidden xs:block font-pixel text-xxs tracking-widest text-cz-text-relax-dark border border-cz-border-dark rounded px-2 py-0.5">
+        {SITE_VERSION} · main
+      </span>
+
+    </section>
   </section>
+
 </footer>
