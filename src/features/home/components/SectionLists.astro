@@ -18,17 +18,17 @@ const currentStyle = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
     · {description}
   </h3>
   <ul
-    class="border-cz-text-relax-dark/20 ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-4"
+    class="border-cz-text-relax-dark/20 ml-0.5 xs:ml-3 rounded-bl-lg border-b border-l pt-1 pr-1 pl-2 xs:pl-4"
   >
     {
       items.length === 0 ? (
-        <li class="my-2 tracking-wider rounded w-fit bg-cz-red-wip/10 border border-cz-red-wip/50 text-cz-red-wip px-3 py-2 text-xs font-semibold flex items-center ">
-          🚧 WIP
+        <li class="my-2 tracking-wider rounded w-fit border-2 border-dotted text-cz-text-content-dark border-cz-red-wip/50 px-2 py-1 text-xs font-semibold flex items-center justify-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full  bg-cz-red-wip "/> WIP
         </li>
       ) : (
         items.map((items) => (
-          <li class="mb-2 line-clamp-2">
-            <span>·</span>{" "}
+          <li class="mb-2 line-clamp-2 ">
+            {/* <span>·</span>{" "} */}
             <a
               href={items.href}
               class="underline font-pixel decoration-cz-text-relax-light hover:no-underline"
