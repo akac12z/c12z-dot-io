@@ -101,7 +101,6 @@
 }
 
 @theme {
-	--font-museo_moderno: "MuseoModerno", sans-serif;
 	--font-rubik: "Rubik", system-ui, "sans-serif";
 	--font-code: "Cascadia", ui-monospace, monospace;
 	--font-pixel: "Tamago", sans-serif;
