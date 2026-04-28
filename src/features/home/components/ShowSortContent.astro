@@ -2,19 +2,9 @@
 import { updatedSectionLists } from "../rules/sortContentInHome";
 import SectionLists from "./SectionLists.astro";
 
-const totalCount = String(updatedSectionLists.length).padStart(2, "0");
 ---
 
 <section class="flex flex-col gap-y-4">
-  <!-- <div class="flex items-center justify-between mb-3 ">
-    <span class="font-pixel tracking-widest text-xs text-cz-text-relax-dark">
-      /index
-    </span>
-    <span class="font-pixel tracking-widest text-xs text-cz-text-relax-dark">
-      {totalCount} directorios
-    </span>
-  </div>
-  <div class="border-t border-cz-border-dark"></div> -->
 
   {
     updatedSectionLists.map(({ style, description, href, items, label }) => (
