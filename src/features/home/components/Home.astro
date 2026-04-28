@@ -1,11 +1,20 @@
 ---
 import SocialBlock from "@/components/common/ui/icons/social/SocialBlock.astro";
 import ShowSortContent from "./ShowSortContent.astro";
+import { SITE_VERSION } from "@/global/siteInfo";
 ---
 
 <section class="mx-auto flex flex-col justify-center">
+
+  <div class="place-self-end">
+    <span class="font-pixel text-xxs tracking-widest text-cz-text-relax-dark border border-cz-border-dark rounded px-2 py-0.5">
+      {SITE_VERSION} · main
+    </span>
+
+  </div>
+
   <h1
-    class="underline decoration-cz-primary text-balance font-pixel text-center text-3xl mb-8 sm:mb-10"
+    class="underline decoration-cz-primary text-balance font-pixel text-center text-3xl my-4 sm:mb-10"
   >
     I'm a Growth who Programs.
   </h1>
