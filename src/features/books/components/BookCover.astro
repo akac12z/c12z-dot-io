@@ -5,9 +5,10 @@ import type { CollectionEntry } from "astro:content";
 interface Props {
   entry: CollectionEntry<"library">;
   customClasses?: string;
+  eager?: boolean;
 }
 
-const { entry, customClasses = " md:max-w-40" } = Astro.props;
+const { entry, customClasses = " md:max-w-40", eager = false } = Astro.props;
 const { data, id } = entry;
 const { cover } = data;
 // class="max-w-28 xs:max-w-36 md:max-w-40 mx-auto h-fit w-fit rounded"
@@ -30,6 +31,8 @@ const { cover } = data;
       "max-w-28 xs:max-w-36 overflow-hidden object-cover w-fit h-fit max-h-48 xs:max-h-52 rounded",
       `${customClasses}`,
     ]}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
     quality="high"
     transition:name={`${id}-bookCover`}
   />

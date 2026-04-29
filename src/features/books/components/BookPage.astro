@@ -21,5 +21,5 @@ library.sort((a, b) => {
 <section class="grid mx-auto max-w-3xl">
   <GoBackInTop headPage="/" title="go home" />
   <BookHeader />
-  {library.map((book) => <BookCard entry={book} />)}
+  {library.map((book, index) => <BookCard entry={book} index={index} />)}
 </section>

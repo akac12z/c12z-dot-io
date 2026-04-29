@@ -6,6 +6,7 @@ import BookCover from "./BookCover.astro";
 
 interface Props {
   entry: CollectionEntry<"library">;
+  index: number;
 }
 
 export async function getStaticPaths() {
@@ -17,9 +18,10 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, index } = Astro.props;
 const { data, id } = entry;
 const { quote, title, readingTime, backlog } = data;
+const eager = index < 4;
 ---
 
 <section class="pb-10 flex flex-col justify-center items-center mx-auto">
@@ -35,6 +37,7 @@ const { quote, title, readingTime, backlog } = data;
           <BookCover
             customClasses="md:max-w-36"
             entry={entry}
+            eager={eager}
             transition:name={`${id}-bookCover`}
           />
         </a>
@@ -43,6 +46,7 @@ const { quote, title, readingTime, backlog } = data;
           <BookCover
             customClasses="xs:min-w-32 bg-white opacity-50 backdrop-grayscale"
             entry={entry}
+            eager={eager}
             transition:name={`${id}-bookCover`}
           />
         </div>
