@@ -1,0 +1,9 @@
+.bulb {
+	color: color-mix(in oklab, var(--accent) 80%, transparent);
+	width: var(--wdth-1);
+}
+
+.goOut {
+	width: var(--wdth-1);
+	height: var(--wdth-1);
+}
