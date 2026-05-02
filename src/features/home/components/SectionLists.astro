@@ -28,7 +28,7 @@ const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
         count ? (
           <span class="font-pixel text-xs text-cz-text-relax-dark">{count}</span>
         ) : (
-          <span class="flex items-center gap-1.5 font-pixel text-xs tracking-widest border border-dashed border-cz-red-wip/50 text-cz-text-relax-dark px-2 py-0.5 rounded">
+          <span class="flex items-center gap-1.5 font-pixel text-xs tracking-widest border border-dashed border-cz-red-wip/50 text-cz-text-relax-dark px-2 py-1 rounded">
             <span class="w-1 h-1 rounded-full bg-cz-red-wip" />
             WIP
           </span>
@@ -39,12 +39,12 @@ const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
 
   {
     items.length > 0 && (
-      <ul class="border-cz-text-relax-dark/20 border-l border-b rounded-bl-lg mb-1 ml-0 xs:ml-3 mt-2 flex flex-col gap-0.5">
+      <ul class="border-cz-text-relax-dark/20 border-l border-b rounded-bl-lg mb-1 ml-0 xs:ml-3 mt-2 flex flex-col ">
         {items.map((item) => (
           <li class="flex items-center ml-2">
             <a
               href={item.href}
-              class="w-full flex items-center justify-between gap-2 font-rubik text-sm text-cz-text-content-dark hover:text-cz-text-headers-dark transition-colors hover:bg-cz-surface-dark px-0 xs:px-3 py-1.5 rounded-md"
+              class="w-full flex items-center justify-between  font-rubik text-sm text-cz-text-content-dark hover:text-cz-text-headers-dark transition-colors hover:bg-cz-surface-dark px-1 xs:px-3 py-2 rounded-md"
             >
               <span class="text-cz-text-content-dark text-xs font-rubik font-medium">
                 ↳ {item.text}
@@ -59,5 +59,4 @@ const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
     )
   }
 
-  <!-- <div class="border-t border-cz-border-dark"></div> -->
 </section>
