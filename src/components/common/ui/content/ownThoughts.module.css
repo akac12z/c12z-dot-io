@@ -37,6 +37,7 @@
 	.otAsset {
 		margin-top: var(--sp-2);
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		column-gap: var(--sp-2);
 	}
@@ -48,6 +49,12 @@
 		letter-spacing: var(--tracking-wide);
 		font-size: var(--t-ui);
 		line-height: var(--lh-ui);
+
+		svg {
+			display: inline;
+			vertical-align: middle;
+			padding-left: var(--sp-1);
+		}
 
 		&:hover {
 			text-decoration: none;
