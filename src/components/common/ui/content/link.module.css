@@ -1,7 +1,7 @@
 .link {
 	font-family: var(--ff-pixel);
-	font-size: var(--t-mono-sm);
-	line-height: var(--lh-mono-sm);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
 	text-decoration: underline;
 	text-decoration-color: var(--accent);
 	letter-spacing: var(--tracking-wide);
