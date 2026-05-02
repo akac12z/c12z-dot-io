@@ -4,7 +4,7 @@
 	padding: var(--sp-2);
 	border-radius: var(--sp-2);
 	row-gap: var(--sp-1);
-	margin-block: var(--sp-4);
+	margin-block: var(--sp-5);
 	display: flex;
 	flex-direction: column;
 	margin-inline: auto;
@@ -28,6 +28,7 @@
 		font-size: var(--t-mono-sm);
 		line-height: var(--lh-mono-sm);
 		margin-top: var(--sp-2);
+		margin-bottom: 0;
 	}
 	.ot-texts {
 		margin-top: var(--sp-2);
@@ -50,6 +51,7 @@
 
 		&:hover {
 			text-decoration: none;
+			color: var(--fg);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ---
-// import "../../../../styles/new.css"
-// import styles from "./ownThoughts.module.css"
+import styles from "./ownThoughts.module.css"
 import GoOut from "@/icons/GoOut.astro";
 import UnclearThought from "../icons/UnclearThought.astro";
 
@@ -37,7 +36,7 @@ const paragraphs = [first_paragraph, second_paragraph, third_paragraph].filter(
 );
 ---
 
-<!-- <section
+<section
   class={`${styles.otSection}`}
 >
   <section class={`${styles.otGrid}`}>
@@ -62,14 +61,14 @@ const paragraphs = [first_paragraph, second_paragraph, third_paragraph].filter(
             >
               {title_asset}
             </a>
-            {is_third_party && <GoOut  />}
+            {is_third_party && <GoOut />}
           </section>
         )
       }
     </section>
   </section>
-</section> -->
-<section
+</section>
+<!-- <section
   class="border border-cz-border-dark bg-cz-surface-dark p-2 rounded-lg gap-y-1 my-4 flex flex-col mx-auto"
 >
   <section class="grid grid-cols-[auto_1fr] my-auto gap-x-3">
@@ -102,4 +101,4 @@ const paragraphs = [first_paragraph, second_paragraph, third_paragraph].filter(
       }
     </section>
   </section>
-</section>
+</section> -->
