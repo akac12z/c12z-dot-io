@@ -1,0 +1,21 @@
+.link {
+	font-family: var(--ff-pixel);
+	font-size: var(--t-mono-sm);
+	line-height: var(--lh-mono-sm);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+	letter-spacing: var(--tracking-wide);
+	margin-top: var(--sp-2);
+	color: var(--fg);
+
+	svg {
+		display: inline;
+		vertical-align: middle;
+		padding-left: var(--sp-1);
+	}
+
+	&:hover {
+		text-decoration: none;
+		color: var(--fg);
+	}
+}
