@@ -1,5 +1,5 @@
 export interface SocialIcons {
-  width: string;
-  height: string;
-  customColor: string;
+	width?: string;
+	height?: string;
+	customColor?: string;
 }

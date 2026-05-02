@@ -1,4 +1,5 @@
 ---
+import styles from "./social.module.css"
 interface Props {
   href: string;
   title: string;
@@ -12,7 +13,7 @@ const { href, title } = Astro.props;
   title={title}
   target="_blank"
   rel="noopener noreferrer"
-  class="group w-9 h-9 flex items-center justify-center hover:bg-cz-bg-light/10 rounded-md transition-colors duration-300"
+  class={styles.smLink}
 >
   <slot />
 </a>

@@ -1,13 +1,8 @@
 ---
-import { SOCIAL_LINKS } from "@/global/socialMediaLinks";
-import type { SocialIcons } from "@interfaces/socialIcons.interface";
-import SocialLink from "../SocialLink.astro";
+import styles from "./smicons.module.css"
 
-const {
-  customColor = "text-cz-text-headers-dark",
-  height = "14",
-  width = "14",
-} = Astro.props as SocialIcons;
+import { SOCIAL_LINKS } from "@/global/socialMediaLinks";
+import SocialLink from "../SocialLink.astro";
 
 const { substack } = SOCIAL_LINKS;
 const { url, title } = substack;
@@ -16,10 +11,8 @@ const { url, title } = substack;
 <SocialLink href={url} title={title}>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
+    class={styles.substack}
     viewBox="0 0 16 16"
-    class={customColor}
     ><path
       fill="currentColor"
       d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"

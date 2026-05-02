@@ -1,0 +1,22 @@
+.smBlock {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+.smLink {
+	width: var(--sp-7);
+	height: var(--sp-7);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--r-sm);
+	transition:
+		color 300ms var(--ease),
+		background-color 300ms var(--ease);
+
+	&:hover {
+		background-color: var(--surface-2);
+	}
+}
