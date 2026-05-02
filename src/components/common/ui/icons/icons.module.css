@@ -7,3 +7,30 @@
 	width: var(--wdth-1);
 	height: var(--wdth-1);
 }
+
+.logo {
+	display: flex;
+	width: fit-content;
+	height: fit-content;
+	flex-shrink: 0;
+
+	svg {
+		width: var(--wdth-2);
+		height: var(--wdth-2);
+	}
+}
+
+.yy {
+	width: var(--wdth-2);
+	height: var(--wdth-2);
+	cursor: pointer;
+
+	&:active {
+		scale: 95%;
+	}
+}
+
+.ut {
+	color: var(--accent);
+	width: var(--wdth-2);
+}
