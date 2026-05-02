@@ -1,0 +1,30 @@
+.gbit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--sp-1);
+	width: fit-content;
+	height: fit-content;
+	margin-bottom: var(--sp-5);
+
+	margin-block: var(--sp-4);
+	padding-inline: var(--sp-2);
+	padding-block: var(--sp-1);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	font-family: var(--ff-pixel);
+	letter-spacing: var(--tracking-widest);
+	color: var(--fg-3);
+
+	border-radius: var(--r-xs);
+	border: var(--wdth) solid color-mix(in srgb, var(--c-goback) 50%, transparent);
+
+	&:hover {
+		border-color: var(--c-goback);
+		color: var(--fg-2);
+	}
+
+	&:active {
+		scale: 95%;
+	}
+}

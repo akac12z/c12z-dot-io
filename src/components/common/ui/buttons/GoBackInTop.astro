@@ -1,4 +1,6 @@
 ---
+import styles from "./gbit.module.css"
+
 interface Props {
   headPage: string;
   title?: string;
@@ -13,4 +15,4 @@ if (!headPage.startsWith("/")) {
 }
 ---
 
-<a title={title} href={headPage} class="goback-in-top-btn"> ← Atrás </a>
+<a title={title} href={headPage} class={styles.gbit}> ← Atrás </a>
