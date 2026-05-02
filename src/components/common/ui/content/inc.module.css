@@ -1,0 +1,23 @@
+.inc {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.theImage {
+		margin: 0;
+		width: 80%;
+		height: auto;
+		border-radius: var(--wdth-05);
+		place-content: start;
+	}
+
+	.theCaption {
+		color: var(--fg-3);
+		font-size: var(--t-nano);
+		margin-top: 0;
+		place-content: start;
+		width: 80%;
+		overflow-wrap: break-word;
+	}
+}
