@@ -1,0 +1,27 @@
+.summary {
+	width: 100%;
+	max-width: var(--screen-sm);
+	margin-inline: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: var(--sp-3);
+	margin-bottom: var(--sp-6);
+
+	.what {
+		color: var(--fg);
+		font-size: var(--t-body);
+		line-height: var(--lh-body);
+		font-weight: 400;
+		font-family: var(--ff-pixel);
+		letter-spacing: var(--tracking-widest);
+	}
+
+	.llms {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--sp-4);
+	}
+}
