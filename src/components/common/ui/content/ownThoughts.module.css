@@ -15,6 +15,10 @@
 		grid-template-columns: auto 1fr;
 		margin-block: auto;
 		column-gap: var(--sp-3);
+
+		svg {
+			margin-top: var(--sp-2);
+		}
 	}
 
 	.otBody {
