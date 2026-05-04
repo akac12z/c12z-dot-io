@@ -1,0 +1,70 @@
+.bb {
+	position: fixed;
+	bottom: var(--sp-7);
+	right: 0;
+	left: 0;
+	z-index: 10;
+	max-width: var(--screen-md);
+	margin-inline: auto;
+	padding-inline: var(--sp-4);
+	pointer-events: none;
+	transition-property: opacity;
+	transition-duration: 300ms;
+
+	&.isvisible {
+		opacity: 100%;
+	}
+	&.isnotvisible {
+		opacity: 0;
+	}
+}
+
+.bar {
+	display: flex;
+	align-items: center;
+
+	&.unique {
+		justify-content: end;
+	}
+	&.both {
+		justify-content: space-between;
+	}
+}
+
+.gb {
+	width: var(--wdth-3);
+	height: var(--wdth-3);
+	border-radius: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--c-goback);
+	border: var(--wdth) solid var(--c-goback);
+	background-color: color-mix(in srgb, var(--c-goback) 10%, transparent);
+	transition-property: all;
+	pointer-events: auto;
+
+	&:active {
+		scale: 95%;
+	}
+}
+
+.gt {
+	width: var(--wdth-3);
+	height: var(--wdth-3);
+	border-radius: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: var(--wdth) solid var(--accent);
+	color: var(--accent);
+	background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+	pointer-events: auto;
+	transition-property: all;
+
+	&:active {
+		scale: 95%;
+	}
+}
