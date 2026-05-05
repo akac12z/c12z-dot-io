@@ -1,10 +1,11 @@
 ---
+import styles from "./header.module.css"
 import Logo from "@/common/ui/icons/Logo.astro";
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-cz-bg-dark">
-  <nav class="mx-auto max-w-4xl">
-    <div class="flex justify-between items-center m-3 max-w-4xl">
+<header class={styles.header}>
+  <nav class={styles.navbar}>
+    <div class={styles.navElements}>
       <Logo shouldGo="/" />
     </div>
   </nav>
