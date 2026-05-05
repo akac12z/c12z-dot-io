@@ -1,10 +1,11 @@
 ---
+import styles from "./showContent.module.css"
 import { updatedSectionLists } from "../rules/sortContentInHome";
 import SectionLists from "./SectionLists.astro";
 
 ---
 
-<section class="flex flex-col gap-y-4">
+<section class={styles.list}>
 
   {
     updatedSectionLists.map(({ style, description, href, items, label }) => (
