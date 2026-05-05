@@ -1,0 +1,178 @@
+.sectionList {
+	margin-inline: auto;
+	width: 100%;
+
+	& .activeContent {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: var(--sp-3);
+		gap: var(--sp-4);
+	}
+
+	& .contentBlock {
+		display: flex;
+		flex-direction: column;
+		align-items: baseline;
+		gap: var(--sp-1);
+		min-width: 0;
+
+		@media (width >= 28.75rem) {
+			gap: var(--sp-3);
+			flex-direction: row;
+		}
+	}
+
+	& .pages {
+		color: var(--fg);
+		font-family: var(--ff-pixel);
+		/* text-decoration: underline; */
+		letter-spacing: var(--tracking-widest);
+		font-size: var(--t-body);
+		line-height: var(--lh-body);
+	}
+
+	& .circle {
+		@media (width <= 28.75rem) {
+			display: none;
+		}
+	}
+
+	& .descPage {
+		font-family: var(--ff-rubik);
+		font-size: var(--t-mili);
+		line-height: var(--lh-mili);
+		color: var(--fg-2);
+	}
+
+	& .right {
+		flex-shrink: 0;
+
+		& .count {
+			color: var(--fg-2);
+			font-family: var(--ff-pixel);
+			font-size: var(--t-mili);
+			line-height: var(--lh-mili);
+		}
+
+		& .wip {
+			display: flex;
+			align-items: center;
+			gap: var(--sp-1);
+			font-family: var(--ff-pixel);
+			font-family: var(--ff-pixel);
+			font-size: var(--t-mili);
+			letter-spacing: var(--tracking-widest);
+
+			border: var(--wdth) dashed var(--c-wip);
+			color: var(--fg-2);
+
+			padding-inline: var(--sp-1);
+			padding-block: var(--sp-0);
+			border-radius: var(--r-xs);
+
+			& .ball {
+				width: var(--wdth-0);
+				height: var(--wdth-0);
+				border-radius: 100%;
+				background-color: var(--c-wip);
+			}
+		}
+	}
+
+	& .content {
+		border-color: color-mix(in oklab, var(--border-3) 20%, transparent);
+		border-left-width: var(--wdth);
+		border-bottom-width: var(--wdth);
+		border-bottom-left-radius: var(--sp-2);
+		padding-bottom: var(--sp-1);
+		margin-bottom: var(--sp-1);
+		margin-left: 0;
+		margin-top: var(--sp-2);
+		display: flex;
+		flex-direction: column;
+
+		& .pages {
+			display: flex;
+			align-items: center;
+			margin-left: var(--sp-2);
+			margin-bottom: var(--sp-1);
+
+			& .linkBar {
+				width: 100%;
+				padding-inline: var(--sp-1);
+				padding-block: var(--sp-2);
+				border-radius: var(--r-sm);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				color: var(--fg-2);
+				transition-property: color;
+				transition-duration: var(--t-base);
+				font-weight: 500;
+				font-size: var(--t-mili);
+				line-height: var(--lh-mili);
+
+				&:hover {
+					color: var(--fg);
+					background-color: var(--surface-1);
+				}
+
+				& .links {
+					font-family: var(--ff-rubik);
+				}
+
+				& .extra {
+					color: var(--fg-3);
+					font-family: var(--ff-rubik);
+				}
+			}
+		}
+	}
+}
+
+.essay {
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--c-essay) 50%, transparent);
+
+	&:hover {
+		text-decoration: none;
+		color: var(--c-essay);
+	}
+}
+.behavior {
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--c-behavior) 50%, transparent);
+
+	&:hover {
+		text-decoration: none;
+		color: var(--c-behavior);
+	}
+}
+.library {
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--c-library) 50%, transparent);
+
+	&:hover {
+		text-decoration: none;
+		color: var(--c-library);
+	}
+}
+.project {
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--c-project) 50%, transparent);
+
+	&:hover {
+		text-decoration: none;
+		color: var(--c-project);
+	}
+}
+.other {
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--c-note) 50%, transparent);
+
+	&:hover {
+		text-decoration: none;
+		color: var(--c-note);
+	}
+}

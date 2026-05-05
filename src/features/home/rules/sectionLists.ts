@@ -3,7 +3,7 @@ import type { Section } from "./sectionLists.interface";
 export const SECTION_LISTS: Section[] = [
 	{
 		href: "/proyectos",
-		style: "proyectos",
+		style: "project",
 		label: "proyectos",
 		description: "Cosas que voy creando y compartiendo",
 		items: [
@@ -16,14 +16,14 @@ export const SECTION_LISTS: Section[] = [
 	},
 	{
 		href: "/biblioteca",
-		style: "biblioteca",
+		style: "library",
 		label: "biblioteca",
 		description: "Notas de los libros que voy leyendo",
 		items: [],
 	},
 	{
 		href: "/ensayos",
-		style: "ensayos",
+		style: "essay",
 		label: "ensayos",
 		description: "Frameworks y pensamientos sobre Growth y Producto",
 		items: [],

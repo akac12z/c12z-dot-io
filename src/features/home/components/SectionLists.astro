@@ -1,35 +1,44 @@
 ---
+import styles from "./sectionLists.module.css"
 import type { Section } from "../rules/sectionLists.interface";
-import { STYLE_CLASSES } from "../rules/sectionLists.styles";
+
 
 const { href, style, label, description, items } = Astro.props as Section;
+
+const STYLE_CLASSES = {
+	essay: `${styles.essay}`,
+	behavior: `${styles.behavior}`,
+	library: `${styles.library}`,
+	project: `${styles.project}`,
+	other: `${styles.other}`,
+};
 
 const accentClass = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
 const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
 ---
 
-<section class="mx-auto w-full">
-  <section class="flex items-center justify-between pt-3  gap-4 ">
-    <div class="flex flex-col xs:flex-row items-baseline gap-1 xs:gap-3 min-w-0">
+<section class={styles.sectionList}>
+  <section class={styles.activeContent}>
+    <div class={styles.contentBlock}>
       <a
         href={href}
-        class={`font-pixel underline hover:no-underline tracking-widest text-sm transition-colors ${accentClass}`}
+        class={`${styles.pages} ${accentClass}`}
       >
         /{label}
       </a>
-
-      <span class="font-rubik text-xs text-cz-text-relax-dark">
+      <span class={styles.circle}>·</span>
+      <span class={styles.descPage}>
         {description}
       </span>
     </div>
 
-    <div class="shrink-0">
+    <div class={styles.right}>
       {
         count ? (
-          <span class="font-pixel text-xs text-cz-text-relax-dark">{count}</span>
+          <span class={styles.count}>{count}</span>
         ) : (
-          <span class="flex items-center gap-1.5 font-pixel text-xs tracking-widest border border-dashed border-cz-red-wip/50 text-cz-text-relax-dark px-2 py-1 rounded">
-            <span class="w-1 h-1 rounded-full bg-cz-red-wip" />
+          <span class={styles.wip}>
+            <span class={styles.ball} />
             WIP
           </span>
         )
@@ -39,17 +48,17 @@ const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
 
   {
     items.length > 0 && (
-      <ul class="border-cz-text-relax-dark/20 border-l border-b rounded-bl-lg mb-1 ml-0 xs:ml-3 mt-2 flex flex-col ">
+      <ul class={styles.content}>
         {items.map((item) => (
-          <li class="flex items-center ml-2">
+          <li class={styles.pages}>
             <a
               href={item.href}
-              class="w-full flex items-center justify-between  font-rubik text-sm text-cz-text-content-dark hover:text-cz-text-headers-dark transition-colors hover:bg-cz-surface-dark px-1 xs:px-3 py-2 rounded-md"
+              class={styles.linkBar}
             >
-              <span class="text-cz-text-content-dark text-xs font-rubik font-medium">
+              <span class={styles.links}>
                 ↳ {item.text}
               </span>
-              <span class="font-rubik text-xs text-cz-text-relax-dark ">
+              <span class={styles.extra}>
                 {item.meta?.split("·")[0] ?? item.tag ?? ""}
               </span>
             </a>
