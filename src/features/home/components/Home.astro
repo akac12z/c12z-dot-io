@@ -1,47 +1,48 @@
 ---
+import styles from "./home.module.css"
 import SocialBlock from "@/components/common/ui/icons/social/SocialBlock.astro";
 import ShowSortContent from "./ShowSortContent.astro";
 import { SITE_VERSION } from "@/global/siteInfo";
 ---
 
-<section class="mx-auto flex flex-col justify-center">
+<section class={styles.home}>
 
-  <div class="place-self-end">
-    <span class="font-pixel text-xxs tracking-widest text-cz-text-relax-dark border border-cz-border-dark rounded px-2 py-1">
+  <div class={styles.pillSection}>
+    <span class={styles.pill}>
       {SITE_VERSION} · main
     </span>
 
   </div>
 
   <h1
-    class="underline decoration-cz-primary text-balance font-pixel text-center text-3xl my-4 sm:mb-10"
+    class={styles.intro}
   >
     I'm a Growth who Programs.
   </h1>
-  <section class="text-pretty">
-    <p class="mt-2">
+  <section>
+    <p >
       Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code, con
       el fin de crear y escalar productos. Documento mi proceso en Substack y
       más de vez en cuando en LinkedIn y X en una especie de "learn in public"
       de mi día a día.
     </p>
-    <p class="mt-2">
+    <p >
       Me fascian la industria EdTech, ClimateTech y los productos con Network
       Effects.
     </p>
-    <p class="mt-4">
+    <p >
       Por cierto, soy Chema ✌🏽 amante del tattoo, del bonsai y compito en
       CrossFit.
     </p>
   </section>
 </section>
 
-<section class="mt-6 -ml-2">
+<section class={styles.socialBlock}>
   <SocialBlock />
 </section>
 
-<section class="text-pretty">
-  <h2 class="mt-8 xs:mt-10 mb-2">Aquello de lo que me gusta escribir</h2>
+<section class={styles.content}>
+  <h2 class={styles.contentTitle}>Aquello de lo que me gusta escribir</h2>
 
   <ShowSortContent />
 </section>

@@ -1,0 +1,50 @@
+.home {
+	margin-inline: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	& .pillSection {
+		place-self: end;
+
+		& .pill {
+			font-family: var(--ff-pixel);
+			font-size: var(--t-nano);
+			letter-spacing: var(--tracking-widest);
+			color: var(--fg-2);
+			border: var(--wdth) solid var(--border-3);
+			border-radius: var(--r-xs);
+			padding-inline: var(--sp-2);
+			padding-block: var(--sp-1);
+		}
+	}
+
+	& .intro {
+		text-decoration: underline;
+		text-decoration-color: var(--accent);
+		text-wrap: balance;
+		font-family: var(--ff-pixel);
+		text-align: center;
+		font-size: var(--t-intro);
+		line-height: var(--lh-intro);
+		margin-block: var(--sp-4);
+	}
+
+	p {
+		margin-top: var(--sp-2);
+
+		&:last-child {
+			margin-top: var(--sp-3);
+		}
+	}
+}
+.socialBlock {
+	margin-top: var(--sp-4);
+	margin-left: -var(--sp-2);
+}
+.content {
+	& .contentTitle {
+		margin-top: var(--sp-5);
+		margin-bottom: var(--sp-2);
+	}
+}
