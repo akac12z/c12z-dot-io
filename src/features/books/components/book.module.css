@@ -187,7 +187,7 @@
 	margin-inline: auto;
 	border: 1px solid var(--border-dark);
 	border-radius: var(--r-sm);
-	margin-bottom: var(--sp-8);
+	margin-bottom: var(--sp-4);
 
 	& .summary {
 		background-color: var(--surface-1);
