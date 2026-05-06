@@ -1,4 +1,5 @@
 ---
+import styles from "./book.module.css"
 import { getCollection, type CollectionEntry } from "astro:content";
 
 import BookScore from "./BookScore.astro";
@@ -24,27 +25,25 @@ const { quote, title, readingTime, backlog } = data;
 const eager = index < 4;
 ---
 
-<section class="pb-10 flex flex-col justify-center items-center mx-auto">
+<section class={styles.bookCard}>
   <div
-    class="relative flex flex-row w-full sm:px-10 sm:p-4 mx-auto rounded-lg transition-opacity"
+    class={styles.card}
   >
     {
       backlog === "upload" ? (
         <a
           href={`/biblioteca/${id}`}
-          class="min-w-28 xs:min-w-36 mx-auto h-fit w-fit rounded"
+          class={styles.link}
         >
           <BookCover
-            customClasses="md:max-w-36"
             entry={entry}
             eager={eager}
             transition:name={`${id}-bookCover`}
           />
         </a>
       ) : (
-        <div class="min-w-28 xs:min-w-36 w-fit h-fit mx-auto rounded ">
+        <div class={styles.noLink}>
           <BookCover
-            customClasses="xs:min-w-32 bg-white opacity-50 backdrop-grayscale"
             entry={entry}
             eager={eager}
             transition:name={`${id}-bookCover`}
@@ -53,14 +52,14 @@ const eager = index < 4;
       )
     }
 
-    <section class="flex flex-col items-start ml-5 gap-y-2">
+    <section class={styles.readSect}>
       {
         backlog === "upload" ? (
           <h2>
             <a href={`/biblioteca/${id}`}>{title}</a>
           </h2>
         ) : (
-          <h2 class="text-cz-text-relax-dark/60">{title}</h2>
+          <h2 class={styles.wip}>{title}</h2>
         )
       }
 
@@ -68,7 +67,7 @@ const eager = index < 4;
         backlog === "upload" ? (
           <>
             <BookScore entry={entry} />
-            <div class="flex flex-col gap-y-2 text-xs font-pixel text-cz-text-relax-dark/60">
+            <div class={styles.readindTime}>
               <span>Léelo en: {readingTime}min</span>
             </div>
             <p>"{quote}"</p>
@@ -76,9 +75,9 @@ const eager = index < 4;
         ) : (
 
             <BookScore entry={entry} />
-            <p class="text-cz-text-relax-dark">
+            <p class={styles.disclaimer}>
             "El resumen e insights de{" "}
-            <span class="font-rubik italic">{title}</span> aún no lo
+            <span class={styles.bookTitle}>{title}</span> aún no lo
             tengo listo. Estoy leyéndolo o en proceso de subirlo.
           </p>
         )
@@ -87,8 +86,8 @@ const eager = index < 4;
 
     {
       backlog !== "upload" && (
-        <div class="absolute inset-0 flex items-center justify-center ">
-          <span class="text-cz-text-headers-dark font-bold bg-cz-bg-dark/60 border-2 border-cz-red-wip px-2 py-1 rounded-lg shadow-md">
+        <div class={styles.availability}>
+          <span class={styles.apologies}>
             ¡No disponible por ahora!
           </span>
         </div>

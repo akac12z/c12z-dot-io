@@ -1,4 +1,5 @@
 ---
+import styles from "./book.module.css"
 import { getCollection } from "astro:content";
 import BookCard from "./BookCard.astro";
 import BookHeader from "./BookHeader.astro";
@@ -18,7 +19,7 @@ library.sort((a, b) => {
 });
 ---
 
-<section class="grid mx-auto max-w-3xl">
+<section class={styles.bookPage}>
   <GoBackInTop headPage="/" title="go home" />
   <BookHeader />
   {library.map((book, index) => <BookCard entry={book} index={index} />)}

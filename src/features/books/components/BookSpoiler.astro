@@ -1,4 +1,5 @@
 ---
+import styles from "./book.module.css"
 import type { CollectionEntry } from "astro:content";
 
 /* Este componente va enfocado a mostra el abstract del libro pero a su vez, 
@@ -18,17 +19,17 @@ const { abstract } = data;
 ---
 
 <details
-  class="max-w-2xl w-full mx-auto border border-cz-border-dark rounded-lg mb-8 group"
+  class={styles.bookSpoiler}
 >
   <summary
-    class="bg-neutral-900 py-2 px-4 cursor-pointer list-none rounded-lg group-open:rounded-br-none group-open:rounded-bl-none"
+    class={styles.summary}
   >
-    <h2 class="mb-0 flex items-center justify-center gap-x-2">
+    <h2 class={styles.title}>
       Spoiler
       <svg
         fill="none"
         stroke="currentColor"
-        class="w-4 h-4 transition-transform duration-700 group-open:rotate-180"
+        class={styles.arrow}
         viewBox="0 0 24 24"
         ><path
           stroke-linecap="round"
@@ -39,8 +40,8 @@ const { abstract } = data;
     </h2>
   </summary>
   <section
-    class="bg-cz-surface-dark py-2 px-4 border-t border-cz-border-dark rounded-b-lg"
+    class={styles.content}
   >
-    <p class="text-xs text-cz-text-content-dark">{abstract}</p>
+    <p class={styles.abstract}>{abstract}</p>
   </section>
 </details>
