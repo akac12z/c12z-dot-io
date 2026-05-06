@@ -5,11 +5,11 @@
 	gap: var(--sp-1);
 	width: fit-content;
 	height: fit-content;
-	margin-bottom: var(--sp-5);
+	/* margin-bottom: var(--sp-5); */
 
-	margin-block: var(--sp-4);
+	margin-block: var(--sp-6);
 	padding-inline: var(--sp-2);
-	padding-block: var(--sp-1);
+	padding-block: var(--sp-05);
 	font-size: var(--t-mili);
 	line-height: var(--lh-mili);
 	font-family: var(--ff-pixel);
@@ -26,5 +26,9 @@
 
 	&:active {
 		scale: 95%;
+	}
+
+	@media (width <= 28.75rem) {
+		margin-block: var(--sp-3);
 	}
 }
