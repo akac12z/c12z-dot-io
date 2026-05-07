@@ -1,17 +1,18 @@
 ---
+import styles from "./footer.module.css"
 import SocialBlock from "@/components/common/ui/icons/social/SocialBlock.astro";
-import { SITE_VERSION } from "@/global/siteInfo";
+
 ---
 
-<footer class="flex flex-col items-center footer">
-  <hr class="pb-3 h-px w-3/4 text-cz-text-headers-dark/50" />
-   <section class="flex items-center justify-between w-full">
-     <p class="text-xs text-center">
-       with 🖤 - <a
-         class="text-cz-primary"
-         href="/contexto"
-         title="Contexto de Chema Ferréndez - c12z">chema</a>
-      </p>
-    <SocialBlock />
-   </section>
+<footer class={styles.footer}>
+  <hr class={styles.divider} />
+  <section class={styles.elements}>
+    <p class={styles.love}>
+      with 🖤 - <a
+        class={styles.context}
+        href="/contexto"
+        title="Contexto de Chema Ferréndez - c12z">chema</a>
+    </p>
+  <SocialBlock />
+  </section>
 </footer>
