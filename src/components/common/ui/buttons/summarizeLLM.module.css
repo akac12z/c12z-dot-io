@@ -23,8 +23,8 @@
 }
 
 .grok {
-	--grok: rgb(255 255 255);
-	--grok-rgb: 255, 255, 255;
+	--grok: rgb(140 140 140);
+	--grok-rgb: 140, 140, 140;
 	background-color: rgba(var(--grok-rgb), 0.05);
 	color: var(--grok);
 	box-shadow: inset 0 0 0 0.5px var(--grok);
@@ -50,6 +50,7 @@
 	cursor: pointer;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: var(--sp-2);
 	width: fit-content;
 	border-radius: var(--r-sm);
