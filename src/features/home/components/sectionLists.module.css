@@ -115,7 +115,7 @@
 
 				&:hover {
 					color: var(--fg);
-					background-color: var(--surface-1);
+					background-color: var(--surface-2);
 				}
 
 				& .links {
