@@ -1,0 +1,98 @@
+.toc {
+	position: fixed;
+	top: var(--sp-5);
+	left: 50%;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	/* margin-inline: auto; */
+
+	& .motdiv {
+		padding-block: var(--sp-2);
+		padding-inline: var(--sp-2);
+		background-color: color-mix(in srgb, var(--surface-1) 65%, transparent);
+		backdrop-filter: blur(1.5rem);
+		-webkit-backdrop-filter: blur(1.5rem);
+		border: var(--wdth) solid var(--border-2);
+		color: var(--fg);
+		position: relative;
+		user-select: none;
+		max-width: calc(100vw - 2rem);
+		max-width: calc(100dvw - 2rem);
+
+		@media (width >= 40rem) {
+			max-width: var(--screen-n);
+		}
+	}
+
+	& .sectTitle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		& .title {
+			font-family: var(--ff-pixel);
+			letter-spacing: var(--tracking-widest);
+			margin-left: var(--sp-2);
+			display: inline-block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			font-size: var(--t-body);
+			line-height: var(--lh-body);
+			font-weight: bold;
+		}
+	}
+
+	& .content {
+		margin-top: var(--sp-4);
+		font-size: var(--t-mili);
+		line-height: var(--lh-mili);
+		max-height: var(--wdth-15);
+		overflow-y: auto;
+
+		& .point {
+			position: relative;
+			display: flex;
+			align-items: center;
+			margin-left: var(--sp-3);
+
+			& .a {
+				position: absolute;
+				left: 0;
+
+				& .theDot {
+					width: var(--wdth-0);
+					height: var(--wdth-0);
+					flex-shrink: 0;
+					border: var(--wdth) solid var(--accent);
+					border-radius: 100%;
+					background-color: var(--accent);
+				}
+			}
+		}
+		& .headingLink {
+			padding-block: var(--sp-05);
+			margin-left: var(--sp-2);
+			transition-property: all;
+			transition-duration: 200ms;
+			font-family: var(--ff-pixel);
+			transition-timing-function: var(--ease);
+			color: var(--fg-3);
+			letter-spacing: var(--tracking-widest);
+
+			&.here {
+				color: var(--fg);
+				font-weight: 600;
+			}
+		}
+	}
+}
+
+.circle {
+	position: relative;
+	border-radius: 100%;
+	color: var(--accent);
+}
