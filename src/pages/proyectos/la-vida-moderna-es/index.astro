@@ -60,39 +60,37 @@ const lastDateEdited = LVM_es.lastTimeEdited;
     publishDate={publishDate}
     lastDateEdited={lastDateEdited}
   />
-  <article class="flex flex-col w-full md:min-w-3xl sm:min-w-xl mx-auto">
-    <GoBackInTop headPage="/proyectos" />
+  <GoBackInTop headPage="/proyectos" />
+  <article class="projectPage lettering lvm">
     <TOC
       client:only="react"
       headings={LVM_headings}
       title={LVM_es.projectTitle}
     />
-    <section class="flex flex-col items-center justify-center">
-      <h1 transition:name={`${LVM_es.href}-project-title`} class="text-center">
+    <section class="projSect">
+      <h1 transition:name={`${LVM_es.href}-project-title`} class="projTitle">
         #LaVidaModerna es...
       </h1>
 
       <Picture
-        class="w-full h-auto mt-5"
+        class="projCover"
         src={LVMes}
-        width={1000}
-        height={1000}
         alt={"Banner del proyecto de Chema de LaVidaModerna es..."}
         transition:name={`${LVM_es.href}-project-image`}
       />
 
       <a
-        class="mt-2 underline decoration-wavy decoration-[#f9138e] text-xs flex items-center justify-center gap-1"
+        class="projLink lvmCustomLink"
         href="https://lavidamodernaes.com"
         target="_blank"
         rel="noopener noreferrer"
         >lavidamodernaes.com <SquareArrowOutUpRight size={12} />
       </a>
-      <section class="mt-12">
-        <h2 id="de-que-va-este-proyecto" class="mt-5 mb-4">
+      <section>
+        <h2 id="de-que-va-este-proyecto" >
           ¿De qué va este proyecto?
         </h2>
-        <p class="mb-2">
+        <p>
           Empezó como una tontería. En el antiguo programa de radio de la SER,
           La Vida Moderna, crearon un hashtag en Twitter, <span class="italic"
             >#LaVidaModerna es</span
@@ -100,31 +98,31 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           la ironía, sarcasmo y sátira de lo que puede llegar a ser (es) la vida
           (moderna).
         </p>
-        <p class="mb-2">
+        <p >
           Y aquí te quiero contar un poco cómo ha sido el detrás de cámaras.
         </p>
-        <h2 id="como-y-por-que-he-hecho-lo-que-he-hecho" class="mt-10 mb-2">
+        <h2 id="como-y-por-que-he-hecho-lo-que-he-hecho" >
           ¿Cómo y por qué he hecho lo que he hecho?
         </h2>
         <p>
           Todo lo que ves, tiene su sentido. No me gusta dejar las cosas al
           azar.
         </p>
-        <h3 id="diseño" class="mt-8 mb-2">Diseño</h3>
+        <h3 id="diseño" >Diseño</h3>
         <p>
           He intentado mantener en todo momento el espíritu 'keep it cutre' del
           programa, añadiendo algunos elementos sin perder la buena UX:
         </p>
-        <ul class="ml-4 sm:ml-8 mt-2 list-disc">
+        <ul >
           <li>
             Para hacer la página he seguido el estilo <a
               target="_blank"
               rel="noopener noreferrer"
-              class="underline decoration-wavy decoration-[#f9138e]"
+              class="lvmCustomLink"
               href="https://www.nngroup.com/articles/neobrutalism/"
               >Neobrutalism</a
             >.
-            <p class="mt-1">
+            <p >
               Me parecía un diseño sencillo y descuidado que podría servir para
               el proyecto.
             </p>
@@ -132,7 +130,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           <li>
             Las páginas las he dividido por Temporadas (T), y la Home (Todas),
             donde están todas las frases recopiladas.
-            <p class="mt-1">
+            <p >
               Vi necesario en la Home, hacer una mezcla aleatoria a la hora de
               hacer el deploy a producción pero no cada vez que un usuario
               entrase para no añadir complejidad.
@@ -142,23 +140,21 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             Para resolver el problema de "ver siempre lo mismo si no hago un
             deploy" y no añadir JavaScript innecesario, creé un botón para
             mezclar.
-            <p class="mt-1">
+            <p >
               Funciona con el <a
                 href="https://es.wikipedia.org/wiki/Algoritmo_de_Fisher-Yates"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="underline decoration-wavy decoration-[#f9138e]"
+                class="lvmCustomLink"
                 >algoritmo de "shuffle" de Fisher-Yates</a
               > y así crear siempre una sensación de novedad en el usuario.
             </p>
             <Image
               src={Mezclar}
-              width={1000}
-              height={1000}
-              class="w-3/4 h-auto py-2"
+              class="projImgs"
               alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
             />
-            <p class="mt-1">
+            <p >
               Hay 739 frases, lo último que quiero es obligar a hacer un scroll
               infinito si quieren ver algo nuevo.
             </p>
@@ -171,7 +167,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
               href="https://fonts.google.com/specimen/Comic+Neue?query=comic"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline decoration-wavy decoration-[#f9138e]"
+              class="lvmCustomLink"
               >Comic Neue.</a
             >
           </li>
@@ -188,13 +184,13 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
         </ul>
 
-        <h3 id="herramientas-que-he-usado" class="mt-8 mb-2">
+        <h3 id="herramientas-que-he-usado" >
           Herramientas que he usado:
         </h3>
-        <ul class="ml-4 sm:ml-8 mt-2 list-disc">
+        <ul>
           <li>
             <a
-              class="underline decoration-wavy decoration-[#f9138e]"
+              class="lvmCustomLink"
               href="https://astro.build/"
               target="_blank"
               rel="noopener noreferrer">Astro</a
@@ -204,7 +200,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
           <li>
             <a
-              class="underline decoration-wavy decoration-[#f9138e]"
+              class="lvmCustomLink"
               href="https://tailwindcss.com/"
               target="_blank"
               rel="noopener noreferrer">Tailwind</a
@@ -212,7 +208,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
           <li>
             <a
-              class="underline decoration-wavy decoration-[#f9138e]"
+              class="lvmCustomLink"
               target="_blank"
               rel="noopener noreferrer"
               href="https://lovable.dev/">Lovable</a
@@ -220,7 +216,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
           <li>
             <a
-              class="underline decoration-wavy decoration-[#f9138e]"
+              class="lvmCustomLink"
               target="_blank"
               rel="noopener noreferrer"
               href="https://cursor.com/">Cursor</a
@@ -231,7 +227,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             Twitter y YouTube como fuentes para coger y buscar las frases.
           </li>
         </ul>
-        <h3 id="cosas-interesantes-que-he-anadido" class="mt-8 mb-2">
+        <h3 id="cosas-interesantes-que-he-anadido" >
           Cosas interesantes que he añadido
         </h3>
         <p>
@@ -239,10 +235,10 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           adquisición y retención. Aunque este solo era para divertirme pero,
           siempre está la mentalidad.
         </p>
-        <ul class="ml-4 sm:ml-8 mt-2 list-disc">
+        <ul >
           <li>
             SEO
-            <p class="mt-1">
+            <p >
               Soy un friki del SEO y se la importancia que puede llegar a tener
               unos buenos OpenGraph o una buena tarjeta de Twitter, así que
               decidí invertirle tiempo a ello con tal de que cada vez que
@@ -251,39 +247,34 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             </p>
             <Image
               src={OG}
-              width={1000}
-              height={1000}
-              class="w-2/4 h-auto py-2"
+              class="projImgs"
               alt="Imagen del open graph de lavidamodernaes.com"
             />
-            <p class="mt-1">
+            <p >
               E incluso pensé en la página 404 que para mí, es una de las más
               divertidas y donde aún habiendo un error, puedes no perder al
               usuario y hacer que se enganche de nuevo.
             </p>
             <Image
               src={OGErrorPage}
-              width={1000}
-              height={1000}
-              class="w-2/4 h-auto py-2"
+              class="projImgs"
               alt="Imagen del open graph de la página de error de lavidamodernaes.com"
             />
           </li>
           <li>
             "Viralidad"
-            <p class="mt-1"></p>
+            <p>
             Quería añadir un par de botones para que la gente pudiera compartir tanto
             en Twitter como en Instagram pero lo vi demasiado elaborado y simplemente
             coloqué un botón que incentiva a hacer un pantallazo.
-            <p class="mt-1">
+            </p>
+            <p >
               Se difumina el fondo y aparece la marca como una especie de "Loop
               Viral" de contacto casual.
             </p>
             <Image
               src={Loop}
-              width={1000}
-              height={1000}
-              class="w-full h-auto py-2"
+              class="projImgs"
               alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
             />
           </li>
@@ -291,7 +282,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             Monetización
             <p>
               Este proyecto es totalmente gratis y de <a
-                class="underline decoration-wavy decoration-[#f9138e]"
+                class="lvmCustomLink"
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/akac12z/lavidamodernaes-dot-com"
@@ -299,7 +290,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
               > pero yo tengo que comer, así que puse un
               <a
                 target="_blank"
-                class="underline decoration-wavy decoration-amber-500"
+                class="buyMeACoffeeLink"
                 rel="noopener noreferrer"
                 href="https://buymeacoffee.com/akac12z">Buy Me A Coffee</a
               > para quien quiera apoyar al proyecto 😁.
