@@ -20,6 +20,7 @@
 	}
 
 	& .intro {
+		color: var(--fg);
 		text-decoration: underline;
 		text-decoration-color: var(--accent);
 		text-wrap: balance;
@@ -31,6 +32,7 @@
 	}
 
 	p {
+		color: var(--fg-2);
 		margin-top: var(--sp-2);
 
 		&:last-child {
@@ -43,7 +45,8 @@
 	margin-left: -var(--sp-2);
 }
 .content {
-	& .contentTitle {
+	& .what {
+		color: var(--fg);
 		margin-top: var(--sp-5);
 		margin-bottom: var(--sp-2);
 	}
