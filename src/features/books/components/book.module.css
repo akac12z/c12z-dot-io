@@ -84,6 +84,10 @@
 			row-gap: var(--sp-2);
 			margin-left: var(--sp-4);
 
+			& .bookTitle {
+				color: var(--fg);
+			}
+
 			& .wip {
 				opacity: 50%;
 				backdrop-filter: grayscale(100%);

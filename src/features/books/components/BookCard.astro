@@ -56,7 +56,7 @@ const eager = index < 4;
       {
         backlog === "upload" ? (
           <h2>
-            <a href={`/biblioteca/${id}`}>{title}</a>
+            <a class={styles.bookTitle} href={`/biblioteca/${id}`}>{title}</a>
           </h2>
         ) : (
           <h2 class={styles.wip}>{title}</h2>
