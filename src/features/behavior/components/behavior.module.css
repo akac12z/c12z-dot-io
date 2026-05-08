@@ -1,0 +1,40 @@
+.behaviorPage {
+	display: grid;
+	margin-inline: auto;
+	max-width: var(--screen-md);
+
+	& .contentPage {
+		margin-inline: auto;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		& .intro {
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			justify-content: center;
+			margin-bottom: var(--sp-4);
+
+			& .title {
+				margin-bottom: var(--sp-2);
+			}
+		}
+
+		& .content {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		& .behaviorPageLink {
+			color: var(--c-bias);
+			text-decoration: underline;
+			text-decoration-color: var(--c-bias);
+			text-underline-offset: var(--sp-1);
+		}
+	}
+}
