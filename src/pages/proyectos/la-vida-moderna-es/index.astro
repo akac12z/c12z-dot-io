@@ -1,4 +1,6 @@
 ---
+import styles from "@/features/projects/components/project.module.css"
+import projectStyles from "@/features/projects/components/projectStyles/projects.module.css"
 import { Image } from "astro:assets";
 import { Picture } from "astro:assets";
 
@@ -60,27 +62,27 @@ const lastDateEdited = LVM_es.lastTimeEdited;
     publishDate={publishDate}
     lastDateEdited={lastDateEdited}
   />
-  <GoBackInTop headPage="/proyectos" />
-  <article class="projectPage ">
+  <article class={styles.theProject}>
+    <GoBackInTop headPage="/proyectos" />
     <TOC
       client:only="react"
       headings={LVM_headings}
       title={LVM_es.projectTitle}
     />
-    <section class="projSect lettering lvm">
-      <h1 transition:name={`${LVM_es.href}-project-title`} class="projTitle">
+    <section class={`${styles.projSect} ${projectStyles.lvm} lettering `}>
+      <h1 transition:name={`${LVM_es.href}-project-title`} class={styles.projTitle}>
         #LaVidaModerna es...
       </h1>
 
       <Picture
-        class="projCover"
+        class={styles.projCover}
         src={LVMes}
         alt={"Banner del proyecto de Chema de LaVidaModerna es..."}
         transition:name={`${LVM_es.href}-project-image`}
       />
 
       <a
-        class="projLink lvmCustomLink"
+        class={`${styles.projLink} ${projectStyles.lvmCustomLink}`}
         href="https://lavidamodernaes.com"
         target="_blank"
         rel="noopener noreferrer"
@@ -118,7 +120,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             Para hacer la página he seguido el estilo <a
               target="_blank"
               rel="noopener noreferrer"
-              class="lvmCustomLink"
+              class={projectStyles.lvmCustomLink}
               href="https://www.nngroup.com/articles/neobrutalism/"
               >Neobrutalism</a
             >.
@@ -145,13 +147,13 @@ const lastDateEdited = LVM_es.lastTimeEdited;
                 href="https://es.wikipedia.org/wiki/Algoritmo_de_Fisher-Yates"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="lvmCustomLink"
+                class={projectStyles.lvmCustomLink}
                 >algoritmo de "shuffle" de Fisher-Yates</a
               > y así crear siempre una sensación de novedad en el usuario.
             </p>
             <Image
               src={Mezclar}
-              class="projImgs"
+              class={styles.projImgs}
               alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
             />
             <p >
@@ -167,13 +169,13 @@ const lastDateEdited = LVM_es.lastTimeEdited;
               href="https://fonts.google.com/specimen/Comic+Neue?query=comic"
               target="_blank"
               rel="noopener noreferrer"
-              class="lvmCustomLink"
+              class={projectStyles.lvmCustomLink}
               >Comic Neue.</a
             >
           </li>
           <li>
             El color, por supuesto, tenía que ser el Rosa Moderdonia: <span
-              class="text-[#f9138e]">#f9138e</span
+              class={projectStyles.color}>#f9138e</span
             >, copiado de la bandera.
           </li>
           <li>El logo debía ser la bandera.</li>
@@ -190,7 +192,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
         <ul>
           <li>
             <a
-              class="lvmCustomLink"
+              class={projectStyles.lvmCustomLink}
               href="https://astro.build/"
               target="_blank"
               rel="noopener noreferrer">Astro</a
@@ -200,7 +202,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
           <li>
             <a
-              class="lvmCustomLink"
+              class={projectStyles.lvmCustomLink}
               href="https://tailwindcss.com/"
               target="_blank"
               rel="noopener noreferrer">Tailwind</a
@@ -208,7 +210,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
           <li>
             <a
-              class="lvmCustomLink"
+              class={projectStyles.lvmCustomLink}
               target="_blank"
               rel="noopener noreferrer"
               href="https://lovable.dev/">Lovable</a
@@ -216,7 +218,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
           </li>
           <li>
             <a
-              class="lvmCustomLink"
+              class={projectStyles.lvmCustomLink}
               target="_blank"
               rel="noopener noreferrer"
               href="https://cursor.com/">Cursor</a
@@ -247,7 +249,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             </p>
             <Image
               src={OG}
-              class="projImgs"
+              class={styles.projLittleImgs}
               alt="Imagen del open graph de lavidamodernaes.com"
             />
             <p >
@@ -257,7 +259,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             </p>
             <Image
               src={OGErrorPage}
-              class="projImgs"
+              class={styles.projLittleImgs}
               alt="Imagen del open graph de la página de error de lavidamodernaes.com"
             />
           </li>
@@ -274,7 +276,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             </p>
             <Image
               src={Loop}
-              class="projImgs"
+              class={styles.projImgs}
               alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
             />
           </li>
@@ -282,7 +284,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
             Monetización
             <p>
               Este proyecto es totalmente gratis y de <a
-                class="lvmCustomLink"
+                class={projectStyles.lvmCustomLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/akac12z/lavidamodernaes-dot-com"
@@ -290,7 +292,7 @@ const lastDateEdited = LVM_es.lastTimeEdited;
               > pero yo tengo que comer, así que puse un
               <a
                 target="_blank"
-                class="buyMeACoffeeLink"
+                class={projectStyles.buyMeACoffeeLink}
                 rel="noopener noreferrer"
                 href="https://buymeacoffee.com/akac12z">Buy Me A Coffee</a
               > para quien quiera apoyar al proyecto 😁.

@@ -1,0 +1,20 @@
+.lvm {
+	--moderdonia: #f9138e;
+	--gold: #e5ab0c;
+
+	& .lvmCustomLink {
+		text-decoration: underline;
+		text-decoration-style: wavy;
+		text-decoration-color: var(--moderdonia);
+	}
+
+	& .color {
+		color: var(--moderdonia);
+	}
+
+	& .buyMeACoffeeLink {
+		text-decoration: underline;
+		text-decoration-style: wavy;
+		text-decoration-color: var(--gold);
+	}
+}
