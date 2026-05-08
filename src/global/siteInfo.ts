@@ -3,7 +3,7 @@ import type {
 	SiteDefaultConfigInterface,
 } from "@interfaces/siteInfo.interface";
 
-export const SITE_VERSION = "v1.4.42";
+export const SITE_VERSION = "v1.4.43";
 
 export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
 	title: "Chema Ferrandez - c12z",
