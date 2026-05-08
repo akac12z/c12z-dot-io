@@ -1,10 +1,10 @@
-.bookPage {
+.libraryPage {
 	display: grid;
 	margin-inline: auto;
 	max-width: var(--screen-md);
 }
 
-.bookHeader {
+.libraryHeader {
 	margin-bottom: var(--sp-4);
 
 	.title {
@@ -236,5 +236,87 @@
 
 	&[open] .arrow {
 		transform: rotate(180deg);
+	}
+}
+
+.bookPage {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-inline: auto;
+
+	@media (width >= 48rem) {
+		min-width: var(--screen-md);
+	}
+	@media (width >= 40rem) {
+		min-width: var(--screen-sm);
+	}
+
+	& .introSection {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		margin-bottom: var(--sp-3);
+		align-items: start;
+	}
+
+	& .review {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		row-gap: var(--sp-05);
+
+		& .author {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: var(--sp-2);
+			font-weight: 600;
+			font-family: var(--ff-pixel);
+			font-size: var(--t-mili);
+			line-height: var(--lh-mili);
+			letter-spacing: var(--tracking-widest);
+			color: var(--fg-2);
+		}
+
+		& .history {
+			display: flex;
+			flex-direction: column;
+			margin-top: var(--sp-2);
+			font-family: var(--ff-pixel);
+			font-size: var(--t-mili);
+			line-height: var(--lh-mili);
+			font-family: var(--ff-pixel);
+			color: var(--fg-2);
+			row-gap: var(--sp-01);
+		}
+	}
+	& .quote {
+		max-width: var(--screen-sm);
+		grid-column: span 2 / span 2;
+		margin-top: var(--sp-4);
+		margin-inline: auto;
+
+		& .theQuote {
+			font-style: italic;
+			font-size: var(--t-mili);
+			line-height: var(--lh-mili);
+			font-family: var(--ff-pixel);
+			color: var(--fg-2);
+		}
+	}
+
+	.author {
+		display: flex;
+		align-items: center;
+		column-gap: var(--sp-1);
+		margin-bottom: var(--sp-2);
+
+		.authorLink {
+			font-size: var(--t-body);
+			line-height: var(--lh-body);
+			display: flex;
+			align-items: center;
+			margin-bottom: var(--sp-2);
+			column-gap: var(--sp-1);
+		}
 	}
 }

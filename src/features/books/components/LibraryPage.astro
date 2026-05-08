@@ -2,7 +2,7 @@
 import styles from "./book.module.css"
 import { getCollection } from "astro:content";
 import BookCard from "./BookCard.astro";
-import BookHeader from "./BookHeader.astro";
+import LibraryHeader from "./LibraryHeader.astro";
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
 
 const library = await getCollection("library");
@@ -19,8 +19,8 @@ library.sort((a, b) => {
 });
 ---
 
-<section class={styles.bookPage}>
+<section class={styles.libraryPage}>
   <GoBackInTop headPage="/" title="go home" />
-  <BookHeader />
+  <LibraryHeader />
   {library.map((book, index) => <BookCard entry={book} index={index} />)}
 </section>
