@@ -1,6 +1,6 @@
 .otSection {
 	border: var(--wdth) solid var(--border);
-	background-color: var(--surface-1);
+	background-color: var(--surface-2);
 	padding: var(--sp-2);
 	border-radius: var(--sp-2);
 	row-gap: var(--sp-1);
