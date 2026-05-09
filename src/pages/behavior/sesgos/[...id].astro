@@ -4,6 +4,8 @@
  */
 // export const prerender = true;
 
+import styles from "@/features/bias/components/bias.module.css"
+
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
 import MainLayout from "@layouts/MainLayout.astro";
@@ -38,17 +40,17 @@ const { Content, headings } = await render(entry);
 
 <MainLayout>
   <BiasSEO slot="head" entry={entry} />
-  <section class="mx-auto">
+  <section class={styles.bias}>
     <TOC client:only="react" headings={headings} title={biasName}/>
     <GoBackInTop headPage="/behavior/sesgos" title="ir a la página de behavior" />
 
-    <article class="flex flex-col justify-center ">
-      <section class="text-center">
-        <h1 transition:name=`${id}-name` class="text-base text-center mb-2 underline">
+    <article class={styles.intro}>
+      <section class={styles.textAlign}>
+        <h1 transition:name=`${id}-name` class={styles.biasName}>
           {biasName}
         </h1>
-        <h2 class="xs:text-2xl text-xl text-cz-text-headers-dark tracking-wider">{biasQuestion}</h2>
-        <section class="flex flex-col justify-center items-center text-center my-4 gap-y-2">
+        <h2 class={styles.biasQuestion}>{biasQuestion}</h2>
+        <section class={styles.categoriesSect}>
           {
             category.length > 1
               ? <p>Categorías del sesgo:</p>
@@ -56,15 +58,15 @@ const { Content, headings } = await render(entry);
           }
           <BiasCategory category={category} />
         </section>
-        <section class="flex items-center justify-between text-cz-text-relax-dark mb-6">
+        <section class={styles.publish}>
           {
             lastTimeEdited && lastTimeEdited !== publishDate
               ? (
-                <span class="text-xs">Publicado: {publishDate}</span>
-                <span class="text-xs">Editado: {lastTimeEdited}</span>
+                <span class={styles.text}>Publicado: {publishDate}</span>
+                <span class={styles.text}>Editado: {lastTimeEdited}</span>
               )
               : (
-                <span class="text-xs">Publicado: {publishDate}</span>
+                <span class={styles.text}>Publicado: {publishDate}</span>
               )
           }
         </section>
