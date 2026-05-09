@@ -22,17 +22,17 @@ export const SECTION_LISTS: Section[] = [
 		items: [],
 	},
 	{
-		href: "/ensayos",
-		style: "essay",
-		label: "ensayos",
-		description: "Frameworks y pensamientos sobre Growth y Producto",
-		items: [],
-	},
-	{
 		href: "/behavior",
 		style: "behavior",
 		label: "behavior",
 		description: "Cómo y por qué hacemos lo que hacemos",
+		items: [],
+	},
+	{
+		href: "/ensayos",
+		style: "essay",
+		label: "ensayos",
+		description: "Frameworks y pensamientos sobre Growth y Producto",
 		items: [],
 	},
 ];
