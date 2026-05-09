@@ -4,19 +4,17 @@
 	& .thePage {
 		display: flex;
 		flex-direction: column;
-		row-gap: var(--sp-2);
 
 		& .action {
 			font-size: var(--t-body);
 			line-height: var(--lh-body);
-			margin-bottom: var(--sp-2);
 		}
 
 		& .biasesGrid {
 			display: grid;
 			grid-template-columns: repeat(1, minmax(0, 1fr));
 			margin-inline: auto;
-			margin-block: var(--sp-4);
+			margin-block: var(--sp-2);
 			gap: var(--sp-4);
 
 			@media (width >= 28.75rem) {
