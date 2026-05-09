@@ -194,7 +194,7 @@
 	margin-bottom: var(--sp-4);
 
 	& .summary {
-		background-color: var(--surface-1);
+		background-color: var(--surface-3);
 		padding: var(--sp-2) var(--sp-4);
 		cursor: pointer;
 		list-style: none;
@@ -217,7 +217,7 @@
 	}
 
 	& .content {
-		background-color: var(--surface-1);
+		background-color: var(--surface-3);
 		padding: var(--sp-2) var(--sp-4);
 
 		border-top: var(--wdth) solid var(--border-2);
