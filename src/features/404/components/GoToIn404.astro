@@ -1,37 +1,13 @@
 ---
-
+import styles from "./pageError.module.css"
 ---
 
-<section class="flex flex-col justify-center items-center mt-6 mx-auto">
-  <p class="pb-2 text-sm">Pero por ahora, te puedo sugerir algunas a mano:</p>
-  <div class="flex justify-center items-center gap-x-4 mx-auto">
-    <a
-      href="/"
-      class="bg-cz-primary/20 text-xs rounded py-0.5 px-2 text-cz-primary hover:underline
-        decoration-cz-primary underline-offset-4 hover:cursor-pointer transition-all
-        hover:decoration-cz-primary/70 inline-block"
-      >/home</a
-    >
-    <a
-      href="/biblioteca"
-      class="bg-cz-biblioteca-dark/20 text-xs rounded py-0.5 px-2 text-cz-biblioteca-dark hover:underline
-        decoration-cz-neon-gold underline-offset-4 hover:cursor-pointer transition-all
-        hover:decoration-cz-biblioteca-dark/70 inline-block"
-      >/library</a
-    >
-    <!-- <a
-      href="/ensayos"
-      class="bg-cz-neon-pink/20 text-xs rounded py-0.5 px-2 text-cz-neon-pink  hover:underline
-        decoration-cz-neon-pink underline-offset-4 hover:cursor-pointer transition-all
-        hover:decoration-cz-neon-pink/70 inline-block"
-      >/Ensayos</a
-    > -->
-    <a
-      href="/behavior"
-      class="bg-cz-behavior-dark/20 text-xs rounded py-0.5 px-2 text-cz-behavior-dark hover:underline
-        decoration-cz-neon-violet underline-offset-4 hover:cursor-pointer transition-all
-        hover:decoration-cz-behavior-dark/70 inline-block"
-      >/behavior</a
-    >
+<section class={styles.goTo}>
+  <p class={styles.suggestion}>Pero por ahora, te puedo sugerir algunas a mano:</p>
+  <div class={styles.links}>
+    <a href="/" class={`${styles.link} ${styles.linkHome}`}>/home</a>
+    <a href="/biblioteca" class={`${styles.link} ${styles.linkLibrary}`}>/library</a>
+    <a href="/ensayos" class={`${styles.link} ${styles.linkNotes}`}>/notes</a>
+    <a href="/behavior" class={`${styles.link} ${styles.linkBehavior}`}>/behavior</a>
   </div>
 </section>

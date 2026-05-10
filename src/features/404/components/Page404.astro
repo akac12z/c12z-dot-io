@@ -1,37 +1,29 @@
 ---
+import styles from "./pageError.module.css";
 import { Image } from "astro:assets";
 
 import Courege from "@/assets/images/404/courage-404-error.gif";
 import GoToIn404 from "./GoToIn404.astro";
 ---
 
-<section
-  class="flex text-center justify-center items-center flex-col gap-y-6 mx-auto max-w-xl"
->
-  <h1 class="">Ups... hay un 404 entre manos 😅</h1>
+<section class={styles.errorPage}>
+  <h1>Ups... hay un 404 entre manos 😅</h1>
   <Image
-    class="rounded-lg h-auto"
+    class={styles.errorImage}
     src={Courege}
     width={400}
     alt="courage dog terror gif to 404 page for c12z"
     quality="low"
     loading="eager"
   />
-  <article class="flex flex-col text-cz-text-content-dark text-center mb-6">
-    <!-- <h1 class="mb-6">Ups... hay un 404 entre manos 😅</h1> -->
+  <article class={styles.errorContent}>
     <p>
-      La ruta <span
-        id="error-in-path"
-        class="text-xs rounded py-0.5 px-2 bg-cz-red-wip/10 text-cz-red-wip font-code hover:underline decoration-cz-red-wip underline-offset-4 hover:cursor-help transition-all hover:decoration-cz-neon-red/70 inline-block"
-      ></span> no existe.
+      La ruta <span id="error-in-path" class={styles.errorPath}></span> no existe.
     </p>
     <p>
-      ¿Es posible que hayas querido ir a <span
-        class="bg-cz-orange-goback/20 text-xs rounded py-0.5 px-2 text-cz-orange-goback font-code hover:underline decoration-cz-orange-goback underline-offset-4 hover:cursor-pointer transition-all hover:decoration-cz-orange-goback/70 inline-block"
-        >/ruta-sugerida-por-AI</span
-      >?
+      ¿Es posible que hayas querido ir a <span class={styles.suggestedPath}>/ruta-sugerida-por-AI</span>?
     </p>
-    <p class="mt-4 text-xxs text-cz-text-relax-dark">
+    <p class={styles.errorNote}>
       Esto, a futuro, funcionará con AI y te mostrará la ruta a la cual querías
       ir. Hasta entonces, solo te puedo decir que te fijes un poco más en las
       rutas o si ha sido un error mio, me avises 😁
