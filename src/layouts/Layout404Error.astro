@@ -1,5 +1,7 @@
 ---
-import "../styles/global.css";
+// import "../styles/global.css";
+import "../styles/new.css";
+import "../styles/typo.css";
 
 import BaseHead from "@/seo/BaseHead.astro";
 
@@ -14,9 +16,9 @@ const { lang } = SITE_404_CONFIG;
   <BaseHead>
     <slot name="head" />
   </BaseHead>
-  <body class="mx-auto px-3 max-w-3xl min-h-screen">
+  <body>
     <GTMBody />
-    <main class="my-5 overflow-x-hidden">
+    <main>
       <slot />
     </main>
   </body>
