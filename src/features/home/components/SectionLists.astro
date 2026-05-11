@@ -3,7 +3,7 @@ import styles from "./sectionLists.module.css"
 import type { Section } from "../rules/sectionLists.interface";
 
 
-const { href, style, label, description, items } = Astro.props as Section;
+const { href, style, label, description, items, totalCount } = Astro.props as Section;
 
 const STYLE_CLASSES = {
 	essay: `${styles.essay}`,
@@ -14,7 +14,8 @@ const STYLE_CLASSES = {
 };
 
 const accentClass = STYLE_CLASSES[style as keyof typeof STYLE_CLASSES];
-const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
+const displayCount = totalCount ?? items.length;
+const count = displayCount > 0 ? String(displayCount).padStart(2, "0") : null;
 ---
 
 <section class={styles.sectionList}>

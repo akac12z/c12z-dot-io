@@ -14,8 +14,10 @@ const [libraryEntries, biasEntries] = await Promise.all([
 	getCollection("bias"),
 ]);
 
-const recentLibrary: SectionItem[] = libraryEntries
-	.filter((e) => e.data.backlog === "upload")
+const uploadedLibrary = libraryEntries.filter((e) => e.data.backlog === "upload");
+const uploadedBias = biasEntries.filter((e) => e.data.backlog === "upload");
+
+const recentLibrary: SectionItem[] = uploadedLibrary
 	.sort(byNewest)
 	.slice(0, 4)
 	.map((entry) => {
@@ -29,8 +31,7 @@ const recentLibrary: SectionItem[] = libraryEntries
 		};
 	});
 
-const recentBias: SectionItem[] = biasEntries
-	.filter((e) => e.data.backlog === "upload")
+const recentBias: SectionItem[] = uploadedBias
 	.sort(byNewest)
 	.slice(0, 4)
 	.map((entry) => ({
@@ -39,13 +40,13 @@ const recentBias: SectionItem[] = biasEntries
 		meta: `/${entry.collection}`,
 	}));
 
-const sectionUpdates: Record<string, SectionItem[]> = {
-	biblioteca: recentLibrary,
-	behavior: recentBias,
+const sectionUpdates: Record<string, { items: SectionItem[]; totalCount: number }> = {
+	biblioteca: { items: recentLibrary, totalCount: uploadedLibrary.length },
+	behavior: { items: recentBias, totalCount: uploadedBias.length },
 };
 
 export const updatedSectionLists = SECTION_LISTS.map((section) =>
 	section.label in sectionUpdates
-		? { ...section, items: sectionUpdates[section.label] }
+		? { ...section, ...sectionUpdates[section.label] }
 		: section,
 );

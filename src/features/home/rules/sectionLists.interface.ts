@@ -10,4 +10,5 @@ export interface Section {
 	label: string;
 	description: string;
 	items: SectionItem[];
+	totalCount?: number;
 }
