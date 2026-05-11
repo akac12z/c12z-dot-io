@@ -59,7 +59,7 @@ const count = items.length > 0 ? String(items.length).padStart(2, "0") : null;
                 ↳ {item.text}
               </span>
               <span class={styles.extra}>
-                {item.meta?.split("·")[0] ?? item.tag ?? ""}
+                {item.meta?.split("·")[0]}
               </span>
             </a>
           </li>

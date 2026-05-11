@@ -1,59 +1,51 @@
 import { SECTION_LISTS } from "./sectionLists";
 import { getCollection } from "astro:content";
+import type { SectionItem } from "./sectionLists.interface";
 
-const libraryEntries = await getCollection("library");
-const biasEntries = await getCollection("bias");
+const parseDate = (d: string) =>
+	new Date(d.split("/").reverse().join("-")).getTime();
+const byNewest = (
+	a: { data: { publishDate: string } },
+	b: { data: { publishDate: string } },
+) => parseDate(b.data.publishDate) - parseDate(a.data.publishDate);
 
-// Create a copy of SECTION_LISTS and update items
-export let updatedSectionLists = SECTION_LISTS.map((section) => {
-	if (section.label === "biblioteca") {
-		const libraryItems = libraryEntries
-			.filter((entry) => entry.data.backlog === "upload")
-			.sort((a, b) => {
-				const dateA = new Date(
-					a.data.publishDate.split("/").reverse().join("-"),
-				);
-				const dateB = new Date(
-					b.data.publishDate.split("/").reverse().join("-"),
-				);
-				return dateB.getTime() - dateA.getTime();
-			})
-			.slice(0, 4)
-			.map((entry) => {
-				const authors = Array.isArray(entry.data.authors)
-					? entry.data.authors
-					: [entry.data.authors];
-				const authorName = authors[0]?.name ?? "";
-				const year = entry.data.publishDate.split("/")[2];
-				return {
-					text: entry.data.title,
-					href: `/biblioteca/${entry.id}`,
-					meta: `${authorName} · ${year}`,
-				};
-			});
-		return { ...section, items: libraryItems };
-	} else if (section.label === "behavior") {
-		const biasItems = biasEntries
-			.filter((entry) => entry.data.backlog === "upload")
-			.sort((a, b) => {
-				const dateA = new Date(
-					a.data.publishDate.split("/").reverse().join("-"),
-				);
-				const dateB = new Date(
-					b.data.publishDate.split("/").reverse().join("-"),
-				);
-				return dateB.getTime() - dateA.getTime();
-			})
-			.slice(0, 4)
-			.map((entry) => ({
-				text: entry.data.biasName,
-				href: `/${entry.collection}/${entry.id}`,
-			}));
-		return { ...section, items: biasItems };
-	}
-	return section;
-});
+const [libraryEntries, biasEntries] = await Promise.all([
+	getCollection("library"),
+	getCollection("bias"),
+]);
 
-// Add a new section for recent contents
+const recentLibrary: SectionItem[] = libraryEntries
+	.filter((e) => e.data.backlog === "upload")
+	.sort(byNewest)
+	.slice(0, 4)
+	.map((entry) => {
+		const authors = Array.isArray(entry.data.authors)
+			? entry.data.authors
+			: [entry.data.authors];
+		return {
+			text: entry.data.title,
+			href: `/biblioteca/${entry.id}`,
+			meta: `${authors[0]?.name ?? ""} · ${entry.data.publishDate.split("/")[2]}`,
+		};
+	});
 
-updatedSectionLists = [...updatedSectionLists];
+const recentBias: SectionItem[] = biasEntries
+	.filter((e) => e.data.backlog === "upload")
+	.sort(byNewest)
+	.slice(0, 4)
+	.map((entry) => ({
+		text: entry.data.biasName,
+		href: `/behavior/sesgos/${entry.id}`,
+		meta: `/${entry.collection}`,
+	}));
+
+const sectionUpdates: Record<string, SectionItem[]> = {
+	biblioteca: recentLibrary,
+	behavior: recentBias,
+};
+
+export const updatedSectionLists = SECTION_LISTS.map((section) =>
+	section.label in sectionUpdates
+		? { ...section, items: sectionUpdates[section.label] }
+		: section,
+);
