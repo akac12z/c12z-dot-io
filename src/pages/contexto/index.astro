@@ -1,4 +1,5 @@
 ---
+import styles from "@/features/context/components/context.module.css"
 import MainLayout from "@layouts/MainLayout.astro";
 import PagesSEO from "@/seo/PagesSEO.astro";
 
@@ -17,7 +18,7 @@ import Context from "@/features/context/components/context.mdx";
     pageDescription={CONTEXT_PAGE_INFO.description}
     pageKeywords={contextKeywords}
   />
-  <section class="contextPage ">
+  <section class={styles.contextPage}>
     <GoBackInTop headPage="/" title="ir a la home" />
     <article class="lettering">
       <Context />
