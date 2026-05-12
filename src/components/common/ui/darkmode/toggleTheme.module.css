@@ -1,0 +1,17 @@
+.themeToggle {
+	cursor: pointer;
+	color: var(--fg);
+
+	&:active {
+		scale: 0.9;
+	}
+	.yy {
+		width: var(--wdth-2);
+		height: var(--wdth-2);
+		transition: transform var(--t-slow) var(--ease);
+	}
+
+	:global([data-theme="light"]) .yy {
+		transform: rotate(180deg);
+	}
+}

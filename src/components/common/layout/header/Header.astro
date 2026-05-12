@@ -1,52 +1,14 @@
 ---
 import styles from "./header.module.css"
 import Logo from "@/common/ui/icons/Logo.astro";
+import ToggleTheme from "@/common/ui/darkmode/ToggleTheme.astro";
 ---
 
 <header class={styles.header}>
   <nav class={styles.navbar}>
     <div class={styles.navElements}>
       <Logo shouldGo="/" />
+      <ToggleTheme />
     </div>
   </nav>
-
-  <!-- <script>
-    document.addEventListener("astro:page-load", () => {
-      const primaryNav = document.querySelector(
-        ".navigation-mobile-menu"
-      ) as HTMLUListElement;
-      const navToggle = document.querySelector(
-        ".mobile-nav-toggle"
-      ) as HTMLButtonElement;
-
-      const toggleMenu = () => {
-        const visibility = primaryNav.getAttribute("data-visible");
-        if (visibility === "false") {
-          primaryNav.setAttribute("data-visible", "true");
-          navToggle.setAttribute("aria-expanded", "true");
-        } else {
-          primaryNav.setAttribute("data-visible", "false");
-          navToggle.setAttribute("aria-expanded", "false");
-        }
-      };
-
-      const closeMenu = () => {
-        primaryNav.setAttribute("data-visible", "false");
-        navToggle.setAttribute("aria-expanded", "false");
-      };
-
-      navToggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      document.addEventListener("click", (e) => {
-        const isClickInsideMenu = primaryNav.contains(e.target as Node);
-        const isClickInsideButton = navToggle.contains(e.target as Node);
-        if (!isClickInsideMenu && !isClickInsideButton) {
-          closeMenu();
-        }
-      });
-    });
-  </script> -->
 </header>
