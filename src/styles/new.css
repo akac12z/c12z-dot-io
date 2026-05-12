@@ -1,0 +1,487 @@
+/* ---- Fonts ------------------------------------------------ */
+
+/* Rubik — body */
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-light-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-light-webfont.woff") format("woff");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-regular-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-regular-webfont.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-medium-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-medium-webfont.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-bold-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-bold-webfont.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-lightitalic-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-lightitalic-webfont.woff") format("woff");
+	font-weight: 300;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-italic-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-italic-webfont.woff") format("woff");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-mediumitalic-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-mediumitalic-webfont.woff") format("woff");
+	font-weight: 500;
+	font-style: italic;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Rubik";
+	src:
+		url("/src/assets/fonts/rubik-bolditalic-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/rubik-bolditalic-webfont.woff") format("woff");
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* Cascadia — monospace / código */
+@font-face {
+	font-family: "Cascadia";
+	src:
+		url("/src/assets/fonts/cascadia-webfont.woff2") format("woff2"),
+		url("/src/assets/fonts/cascadia-webfont.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Tamago — display / pixel / headings */
+@font-face {
+	font-family: "Tamago";
+	src:
+		url("/src/assets/fonts/Tamago.woff2") format("woff2"),
+		url("/src/assets/fonts/Tamago.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	/* ---- Palette: burntpaper (default) -------------------- */
+	--bg: #0b0b0c;
+	--surface-1: #121215;
+	--surface-2: #1b1b20;
+	--surface-3: #232328;
+	--border: #26262c;
+	--border-2: #34343b;
+	--border-3: #5d5d60;
+
+	--fg: #f5f4f0;
+	--fg-2: #cac9c5;
+	--fg-3: #6e6d68;
+	--fg-inverse: #17161a;
+
+	/* ---- Accents ---------------------------------------- */
+	--accent: #a2ce12; /* raspberry — editorial pink */
+	--accent-ink: #7ea10d;
+	--accent-soft: rgba(214, 51, 108, 0.12);
+
+	/* Second accent */
+	--accent-2: #904fe7; /* purple */
+
+	/* Content section colors */
+	--c-behavior: #e22ef6;
+	--c-essay: #33ffe8;
+	--c-library: #ffa424;
+	--c-project: #ff3838;
+	--c-note: #7f80e1;
+
+	/* Cognitive bias category colors */
+	--c-bias-category-speed: #e72424;
+	--c-bias-category-memory: #8b5cce;
+	--c-bias-category-judgment: #4c9dff;
+	--c-bias-category-context: #2bb639;
+	--c-bias-category-perception: #ce6d12;
+
+	/* Bias neutral scale */
+	--c-bias-soft: #c3b4c6;
+	--c-bias: #a58faa;
+	--c-bias-dark: #756679;
+
+	/* UI utility */
+	--c-goback: #f16f0e;
+	--c-wip: #ff4d4d;
+
+	--ok: #6a9e6a;
+	--warn: #c8a24a;
+	--err: #c86a5c;
+
+	/* ---- Type families ---------------------------------- */
+	--ff-pixel: "Tamago", sans-serif;
+	--ff-rubik: "Rubik", system-ui, sans-serif;
+	--ff-mono: "Cascadia", ui-monospace, monospace;
+
+	/* ---- Type scale (size / line-height) ---------------- */
+	--t-display: 4.5rem;
+	--lh-display: 1.02;
+	--t-intro: 1.875rem; /* only for intro title */
+	--lh-intro: 1.2; /* only for intro title */
+	--t-h1: 1.5rem;
+	--lh-h1: 1.35;
+	--t-h2: 1.25rem;
+	--lh-h2: 1.4;
+	--t-h3: 1.125rem;
+	--lh-h3: 1.6;
+	--t-h4: 1rem;
+	--lh-h4: 1.5;
+	--t-h5: 1rem;
+	--lh-h5: 1.4;
+	--t-h6: 1rem;
+	--lh-h6: 1.4;
+
+	--t-body: 0.875rem;
+	--lh-body: 1.5;
+
+	--t-mili: 0.75rem;
+	--lh-mili: 1.4;
+	--t-micro: 0.6875rem;
+	--lh-micro: 1.4;
+	--t-nano: 0.625rem;
+	--lh-nano: 1.4;
+
+	--tracking-wide: 0.025em; /* tracking-wide     */
+	--tracking-wider: 0.05em; /* tracking-wider    */
+	--tracking-eyebrow: 0.08em; /* uppercase labels  */
+	--tracking-widest: 0.1em; /* tracking-widest   */
+
+	/* ---- Spacing (4pt) ---------------------------------- */
+	--sp-0: 0rem; /* 0px */
+	--sp-05: 0.125rem; /* 2px */
+	--sp-1: 0.25rem; /*   4px */
+	--sp-2: 0.5rem; /*   8px */
+	--sp-3: 0.75rem; /*  12px */
+	--sp-4: 1rem; /*  16px */
+	--sp-5: 1.5rem; /*  24px */
+	--sp-6: 2rem; /*  32px */
+	--sp-7: 2.5rem; /*  40px */
+	--sp-8: 3rem; /*  48px */
+	--sp-9: 3.5rem; /*  56px */
+	--sp-10: 4rem; /*  64px */
+	--sp-11: 4.5rem; /*  72px */
+	--sp-12: 5rem; /*  80px */
+	--sp-13: 5.5rem; /*  88px */
+	--sp-14: 6rem; /*  96px */
+	--sp-15: 6.5rem; /* 104px */
+	--sp-16: 7rem; /* 112px */
+	--sp-17: 7.5rem; /* 120px */
+	--sp-18: 8rem; /* 128px */
+
+	/* ---- Widths ------------------------------------------ */
+	--wdth: 0.0625rem; /* 1px */
+	--wdth-0: 0.25rem; /*  4px — icon inline         */
+	--wdth-05: 0.5rem; /*  8px — icon inline         */
+	--wdth-1: 1rem; /*  16px — icon inline             */
+	--wdth-pill: 1.25rem; /* 20 px for pills */
+	--wdth-2: 1.5rem; /*  24px — icon button, badge      */
+	--wdth-3: 2rem; /*  32px — avatar sm, social btn   */
+	--wdth-4: 2.5rem; /*  40px — avatar md               */
+	--wdth-5: 3rem; /*  48px — avatar lg               */
+	--wdth-6: 3.5rem; /*  56px — touch target            */
+	--wdth-7: 4rem; /*  64px — avatar xl, header slot  */
+	--wdth-8: 5rem; /*  80px — tag, chip row           */
+	--wdth-9: 6rem; /*  96px — thumbnail sm            */
+	--wdth-10: 7rem; /* 112px — portada libro sm        */
+	--wdth-11: 9rem; /* 144px — portada libro lg        */
+	--wdth-12: 12rem; /* 192px — card narrow             */
+	--wdth-13: 16rem; /* 256px — card sm                 */
+	--wdth-14: 18rem; /* 288px — sidebar, TOC            */
+	--wdth-15: 24rem; /* 384px — panel, drawer           */
+	--wdth-16: 28.75rem; /* 460px — modal xs                */
+	--wdth-17: 32rem; /* 512px — modal sm                */
+
+	/* ---- Screens -----------------------------------------*/
+	--screen-xs: 28.75rem; /*  460px — mobile large     */
+	--screen-sm: 40rem; /*  640px — tablet portrait  */
+	--screen-md: 48rem; /*  768px — tablet landscape */
+	--screen-n: 56rem; /* 896px - normal view */
+	--screen-lg: 64rem; /* 1024px — desktop          */
+	--screen-xl: 80rem; /* 1280px — desktop wide     */
+	--screen-2xl: 96rem; /* 1536px — desktop ultrawide*/
+
+	/* ---- Height ------------------------------------------*/
+	--viewport-full: 100vh;
+	--viewport-full-new: 100dvh;
+
+	/* ---- Radio ------------------------------------------ */
+	--r-xs: 0.25rem;
+	--r-sm: 0.5rem;
+	--r-md: 0.75rem;
+	--r-lg: 1.25rem;
+	--r-pill: 60rem;
+
+	/* ---- Elevation / lines ------------------------------ */
+	--hairline: 0.0625rem solid var(--border);
+	--hairline-2: 0.0625rem solid var(--border-2);
+	--shadow-1: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
+	--shadow-2: 0 0.75rem 2rem -1rem rgba(0, 0, 0, 0.4);
+	--inset-top: inset 0 0.0625rem 0 rgba(255, 255, 255, 0.06);
+
+	/* ---- Motion ----------------------------------------- */
+	--ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+	--t-fast: 120ms;
+	--t-base: 200ms;
+	--t-slow: 400ms;
+
+	/* ---- Layout ----------------------------------------- */
+	--maxw: 75rem;
+	--maxw-prose: 68ch;
+	--maxw-hero: 45rem;
+	--header-h: 4rem;
+}
+
+/* ---- RecycledPaper mode ------------------------------------------ */
+[data-theme="light"] {
+	--bg: #f6f4ee;
+	--surface-1: #ffffff;
+	--surface-2: #eeebe2;
+	--surface-3: #e6e2d8;
+	--border: #e6e2d8;
+	--border-2: #d4cec0;
+	--fg: #17161a;
+	--fg-2: #55544f;
+	--fg-3: #86847d;
+	--fg-inverse: #f5f4f0;
+	--accent: #a2ce12;
+	--accent-ink: #8ab00b;
+	--accent-soft: rgba(214, 51, 108, 0.1);
+	--inset-top: inset 0 0.0625rem 0 rgba(255, 255, 255, 0.8);
+
+	/* Content section colors (light mode) */
+	--c-behavior: #80008e;
+	--c-essay: #016c60;
+	--c-library: #d0a01c;
+	--c-project: #ac0a0a;
+	--c-note: #4649e0;
+}
+
+/* === RESET ====================== */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+*:not(dialog) {
+	margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		interpolate-size: allow-keywords;
+	}
+}
+
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+}
+p {
+	text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+	line-height: 1.1;
+}
+
+#root,
+#__next {
+	isolation: isolate;
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+}
+
+button {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+:root {
+	color-scheme: light dark;
+}
+
+/* ========================= */
+
+html,
+body {
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	-webkit-font-smoothing: antialiased;
+	text-wrap: pretty;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	transition:
+		background-color 0.4s var(--ease),
+		color 0.4s var(--ease);
+}
+
+body {
+	margin-inline: auto;
+	padding: var(--sp-4);
+	padding-inline: var(--sp-3);
+	max-width: var(--screen-n);
+	min-height: var(--viewport-full);
+	min-height: var(--viewport-full-new);
+	display: flex;
+	flex-direction: column;
+
+	&::selection {
+		background-color: var(--accent-ink);
+		color: var(--fg);
+	}
+}
+
+main {
+	flex: 1;
+	margin-top: var(--sp-7);
+	padding-bottom: var(--sp-9);
+	max-width: var(--screen-md);
+	margin-inline: auto;
+	transition: color 0.4s var(--ease);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+	font-family: var(--ff-pixel);
+	color: var(--fg);
+}
+
+/* ANIMATIONS */
+.au {
+	animation: fadeUp 0.5s var(--ease) both;
+}
+
+@keyframes fadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+::view-transition-old(root) {
+	animation: theme-fade-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+::view-transition-new(root) {
+	animation: theme-fade-in 400ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes theme-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes theme-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(3px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

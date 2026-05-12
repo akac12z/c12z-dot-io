@@ -5,10 +5,9 @@
 	margin-top: auto;
 
 	& .divider {
-		padding-bottom: var(--sp-3);
-		height: var(--wdth);
+		border-top: var(--wdth) solid var(--border-2);
+		margin-bottom: var(--sp-3);
 		width: 75%;
-		color: var(--border-2);
 	}
 
 	& .elements {

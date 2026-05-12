@@ -2,7 +2,7 @@
 import { defineConfig, envField } from 'astro/config';
 
 // import tailwind from '@astrojs/tailwind';
-import tailwindcss from '@tailwindcss/vite';
+// import tailwindcss from '@tailwindcss/vite';
 
 import mdx from '@astrojs/mdx';
 
@@ -22,7 +22,7 @@ import partytown from '@astrojs/partytown';
 export default defineConfig( {
   site: 'https://c12z.io',
   vite: {
-    plugins: [ tailwindcss() ],
+    // plugins: [ tailwindcss() ],
   },
   integrations: [
     mdx(),

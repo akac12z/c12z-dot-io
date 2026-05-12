@@ -1,6 +1,4 @@
 ---
-import "../styles/global.css";
-
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 
 import Header from "@/components/common/layout/header/Header.astro";
@@ -19,10 +17,10 @@ const { lang } = SITE_DEFAULT_CONFIG;
   <BaseHead>
     <slot name="head" />
   </BaseHead>
-  <body class="body-layout-classes">
+  <body>
     <GTMBody />
     <Header />
-    <main class="mt-10 pb-14 max-w-3xl mx-auto">
+    <main>
       <slot />
       <BottomBar client:only="react" />
     </main>

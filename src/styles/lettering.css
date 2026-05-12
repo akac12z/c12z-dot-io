@@ -1,0 +1,248 @@
+.lettering h1,
+.lettering h2,
+.lettering h3,
+.lettering h4,
+.lettering h5,
+.lettering h6 {
+	color: var(--fg);
+	font-family: var(--ff-pixel);
+	letter-spacing: var(--tracking-wider);
+	font-weight: 600;
+	text-wrap: balance;
+}
+
+.lettering h2 {
+	font-size: var(--t-h2);
+	line-height: var(--lh-h2);
+	margin-top: var(--sp-6);
+	margin-bottom: var(--sp-3);
+}
+
+.lettering h3 {
+	font-size: var(--t-h3);
+	line-height: var(--lh-h3);
+	margin-top: var(--sp-5);
+	margin-bottom: var(--sp-3);
+}
+
+.lettering h4 {
+	font-size: var(--t-h4);
+	line-height: var(--lh-h4);
+	margin-top: var(--sp-4);
+	margin-bottom: var(--sp-3);
+}
+
+.lettering h5,
+.lettering h6 {
+	font-size: var(--t-h5);
+	line-height: var(--lh-h5);
+	margin-top: var(--sp-3);
+	margin-bottom: var(--sp-3);
+}
+
+/* == FOR PARAGRAPHS == */
+
+.lettering p {
+	color: var(--fg-2);
+
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	letter-spacing: var(--tracking-wide);
+	font-weight: 400;
+	text-wrap: pretty;
+
+	margin-top: 0;
+	margin-bottom: var(--sp-4);
+}
+
+.lettering strong {
+	color: var(--fg-2);
+	font-weight: 600;
+}
+
+.lettering em {
+	font-style: italic;
+}
+
+/* == FOR ANCHOR == */
+
+.lettering a {
+	color: var(--fg);
+	font-family: var(--ff-pixel);
+	letter-spacing: var(--tracking-widest);
+	text-decoration: underline;
+	text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
+	border-bottom: none;
+	transition:
+		color var(--t-fast) var(--ease),
+		text-decoration-color var(--t-fast) var(--ease);
+
+	&:hover {
+		text-decoration: none;
+		/* color: var(--accent); */
+	}
+}
+
+/* == FOR BLACKQUOTE == */
+
+.lettering blockquote {
+	color: var(--fg-2);
+	border-left: var(--sp-1) solid var(--border);
+	padding-left: var(--sp-4);
+	margin-top: var(--sp-2);
+	margin-bottom: var(--sp-2);
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+
+	p {
+		margin-bottom: 0;
+	}
+}
+
+/* == FOR LIST ITEMS == */
+
+.lettering ul,
+.lettering ol {
+	margin-top: 0;
+	margin-bottom: var(--sp-4);
+	padding-left: var(--sp-5);
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	font-weight: 400;
+	letter-spacing: var(--tracking-wide);
+	color: var(--fg-2);
+}
+
+.lettering ul {
+	list-style-type: disc;
+}
+.lettering ol {
+	list-style-type: decimal;
+}
+
+.lettering li {
+	color: var(--fg-2);
+	margin-top: 0;
+	margin-bottom: var(--sp-1);
+}
+.lettering li p {
+	margin-bottom: var(--sp-1);
+}
+
+.lettering ul > li::marker,
+.lettering ol > li::marker {
+	color: var(--fg);
+}
+
+/* == FOR PRE == */
+
+.lettering code {
+	font-family: var(--ff-mono);
+	font-size: 0.875em;
+	color: var(--accent);
+	background-color: var(--bg-2);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	padding: 0.1em 0.35em;
+}
+
+.lettering pre {
+	margin-top: 0;
+	margin-bottom: var(--sp-4);
+	padding: var(--sp-4) var(--sp-2);
+	border-radius: var(--radius-md);
+	border: var(--wdth) solid var(--border);
+	background-color: var(
+		--surface-2
+	) !important; /* Shiki inyecta background inline */
+	overflow-x: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+.lettering pre::-webkit-scrollbar {
+	height: 4px;
+}
+.lettering pre::-webkit-scrollbar-track {
+	background: transparent;
+}
+.lettering pre::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: var(--r-xs);
+}
+
+/* Shiki también inyecta background-color inline en el <code> hijo */
+.lettering pre code {
+	background-color: transparent !important;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	font-size: var(--t-sm);
+	line-height: var(--lh-body);
+	color: inherit;
+}
+
+/* == FOR TABLES == */
+
+.lettering table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	margin-top: 0;
+	margin-bottom: var(--sp-5);
+}
+
+.lettering thead tr {
+	border-bottom: var(--sp-1) solid var(--border-2);
+}
+
+.lettering th {
+	text-align: left;
+	font-weight: 500;
+	font-size: var(--t-mili);
+	letter-spacing: var(--tracking-wider);
+	text-transform: uppercase;
+	color: var(--fg);
+	padding: var(--sp-2) var(--sp-3) var(--sp-2) 0;
+}
+
+.lettering th:last-child {
+	padding-right: 0;
+}
+
+.lettering td {
+	color: var(--fg-2);
+	padding: var(--sp-2) var(--sp-3) var(--sp-2) 0;
+	border-bottom: var(--sp-05) solid var(--border);
+	vertical-align: top;
+}
+
+.lettering td:last-child {
+	padding-right: 0;
+}
+
+.lettering tbody tr:last-child td {
+	border-bottom: none;
+}
+
+/* == FOR IMAGES == */
+.lettering img {
+	border-radius: var(--r-sm);
+	margin-top: 0;
+	height: auto;
+	max-width: 100%;
+}
+
+.lettering figure {
+	margin: var(--sp-4) 0;
+}
+
+.lettering figcaption {
+	font-size: var(--t-micro);
+	color: var(--fg-3);
+	margin-top: var(--sp-1);
+}

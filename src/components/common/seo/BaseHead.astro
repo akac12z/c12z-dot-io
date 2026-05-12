@@ -6,7 +6,9 @@
  */
 import { ClientRouter } from "astro:transitions";
 
-import "../../../styles/global.css";
+import "../../../styles/new.css";
+import "../../../styles/lettering.css";
+import "../../../styles/typo.css";
 
 import GA4 from "@/analytics/Google/GA4.astro";
 import GTMHead from "@/analytics/Google/GTMHead.astro";
@@ -17,6 +19,20 @@ import Favicons from "./Favicons.astro";
 ---
 
 <head>
+  <script is:inline>
+    const getTheme = () =>
+      localStorage.getItem("theme") ??
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+
+    document.documentElement.setAttribute("data-theme", getTheme());
+
+    document.addEventListener("astro:before-swap", (e) => {
+      e.newDocument.documentElement.setAttribute("data-theme", getTheme());
+    });
+  </script>
+
   <ClientRouter />
   <Favicons />
 

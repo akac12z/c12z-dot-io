@@ -81,14 +81,13 @@
 	}
 
 	& .content {
-		border-color: color-mix(in oklab, var(--border-3) 20%, transparent);
-		border-left-width: var(--wdth);
-		border-bottom-width: var(--wdth);
+		border-left: var(--wdth) solid var(--border-2);
+		border-bottom: var(--wdth) solid var(--border-2);
 		border-bottom-left-radius: var(--sp-2);
-		padding-bottom: var(--sp-1);
+		padding-block: var(--sp-1);
 		margin-bottom: var(--sp-1);
 		margin-left: 0;
-		margin-top: var(--sp-2);
+		/* margin-top: var(--sp-2); */
 		display: flex;
 		flex-direction: column;
 

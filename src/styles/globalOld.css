@@ -293,21 +293,32 @@
 	.navigation-desktop-link {
 		@apply mb-0;
 	}
+}
 
-	/* BIAS CATEGORIES */
-	.speed-bias-category {
-		@apply font-pixel border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-speed border-cz-bias-category-speed bg-cz-bias-category-speed/10;
+::view-transition-old(root) {
+	animation: theme-fade-out 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+::view-transition-new(root) {
+	animation: theme-fade-in 400ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes theme-fade-out {
+	from {
+		opacity: 1;
 	}
-	.memory-bias-category {
-		@apply font-pixel border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-memory border-cz-bias-category-memory bg-cz-bias-category-memory/10;
+	to {
+		opacity: 0;
 	}
-	.judgment-bias-category {
-		@apply font-pixel border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-judgment border-cz-bias-category-judgment bg-cz-bias-category-judgment/10;
+}
+
+@keyframes theme-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(3px);
 	}
-	.context-bias-category {
-		@apply font-pixel border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-context border-cz-bias-category-context bg-cz-bias-category-context/10;
-	}
-	.perception-bias-category {
-		@apply font-pixel border py-0.5 px-1 w-fit rounded-lg tracking-widest capitalize text-xxs text-cz-bias-category-perception border-cz-bias-category-perception bg-cz-bias-category-perception/10;
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
