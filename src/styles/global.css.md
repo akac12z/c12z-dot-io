@@ -1,4 +1,4 @@
-# Colores — new.css
+# Colores — global.css
 
 ---
 
