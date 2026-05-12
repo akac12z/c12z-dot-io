@@ -1,23 +1,23 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"],
-      "@/features/*": ["./src/features/*"],
-      "@/global/*": ["./src/global/*"],
-      "@/ui/*": ["./src/components/ui/*"],
-      "@/common/*": ["./src/components/common/*"],
-      "@/icons/*": ["./src/components/common/ui/icons/*"],
-      "@/seo/*": ["./src/components/common/seo/*"],
-      "@/analytics/*": ["./src/components/common/analytics/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@interfaces/*": ["./src/interfaces/*"],
-      "@/assets/*": ["./src/assets/*"],
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"paths": {
+			"@/*": ["./src/*"],
+			"@/features/*": ["./src/features/*"],
+			"@/global/*": ["./src/global/*"],
+			"@/ui/*": ["./src/components/ui/*"],
+			"@/common/*": ["./src/components/common/*"],
+			"@/icons/*": ["./src/components/common/ui/icons/*"],
+			"@/seo/*": ["./src/components/common/seo/*"],
+			"@/analytics/*": ["./src/components/common/analytics/*"],
+			"@layouts/*": ["./src/layouts/*"],
+			"@utils/*": ["./src/utils/*"],
+			"@interfaces/*": ["./src/interfaces/*"],
+			"@/assets/*": ["./src/assets/*"]
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	}
 }
