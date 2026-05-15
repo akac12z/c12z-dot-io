@@ -7,10 +7,9 @@ interface Props {
 	src: any;
 	alt: string;
 	caption: string;
-	width?: number;
 }
 
-const { src, alt, caption, width } = Astro.props as Props;
+const { src, alt, caption } = Astro.props as Props;
 ---
 
 <div class={styles.inc}>

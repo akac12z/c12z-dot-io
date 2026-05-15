@@ -9,36 +9,41 @@ import ContentSEO from "@/components/common/seo/ContentSEO.astro";
 const { entry } = Astro.props;
 
 const project = entry as CollectionEntry<"projects">;
-const {data} = project;
-const {cover, keywords, publishDate, projectTitle, projectDescription, lastTimeEdited } = data;
+const { data } = project;
+const {
+	cover,
+	keywords,
+	publishDate,
+	projectTitle,
+	projectDescription,
+	lastTimeEdited,
+} = data;
 
 const projectName = `Proyecto: ${projectTitle}`;
 const projectDesc = `${projectDescription}`;
 
 const ogImage = cover.src?.src
-  ? new URL(cover.src?.src, Astro.site)
-  : new URL("./og-image.png", Astro.site);
+	? new URL(cover.src?.src, Astro.site)
+	: new URL("./og-image.png", Astro.site);
 const ogImageAlt = cover.alt ? cover.alt : `imagen del proyecto ${projectName}`;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const justInCaseNoCoverSrc =
-  `${SITE_DEFAULT_CONFIG.url}${cover.src?.src}` || ogImage;
-const justInCaseNoCoverAlt = cover.alt || projectName;
-
+	`${SITE_DEFAULT_CONFIG.url}${cover.src?.src}` || ogImage;
+const justInCaseNoCoverAlt = ogImageAlt || projectName;
 
 const publisDateInISO = convertDateToISO8601(publishDate);
 const lastTimeEditedInISO = lastTimeEdited ? lastTimeEdited : publisDateInISO;
-
 ---
 
 <ContentSEO
-  postName={projectName}
-  postDescription={projectDesc}
-  canonicalURL={canonicalURL}
-  justInCaseNoCoverSrc={justInCaseNoCoverSrc}
-  justInCaseNoCoverAlt={justInCaseNoCoverAlt}
-  publisDateInISO={publisDateInISO}
-  lastTimeEditedInISO={lastTimeEditedInISO}
-  keywords={keywords}
+	postName={projectName}
+	postDescription={projectDesc}
+	canonicalURL={canonicalURL}
+	justInCaseNoCoverSrc={justInCaseNoCoverSrc}
+	justInCaseNoCoverAlt={justInCaseNoCoverAlt}
+	publisDateInISO={publisDateInISO}
+	lastTimeEditedInISO={lastTimeEditedInISO}
+	keywords={keywords}
 />

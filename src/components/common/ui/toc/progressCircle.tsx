@@ -9,7 +9,6 @@ import { motion } from "motion/react";
 export default function ProgressCircle({
 	progress,
 	strokeWidth = 4,
-	className,
 }: ProgressCircleProps) {
 	return (
 		<span className={styles.circle}>
