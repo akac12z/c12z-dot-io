@@ -1,0 +1,115 @@
+---
+projectTitle: "#LaVidaModerna es..."
+projectDescription: "Un homenaje al programa de radio y a las frases y momentos de #Moderdonia, el programa que me marcó con humor y cutrez durante años."
+projectUrl: "https://lavidamodernaes.com"
+cover:
+  src: "./lavidamodernaes.png"
+  alt: "Banner de la página de LaVidaModernaEs.com"
+backlog: "upload"
+publishDate: 26/06/2025
+tags: ["side project", "web", "comedy"]
+language: "es"
+styleClass: "lvm"
+why: "for_fun"
+keywords:
+  - "la vida moderna"
+  - "la vida moderna es"
+  - "lvm"
+  - "moderdonia"
+  - "programa de radio de la Cadena SER"
+  - "Ignatius Farray"
+---
+
+import ImgAndCap from "../../../components/common/ui/content/ImgAndCap.astro";
+
+import ShuffleBtn from "./boton-mezclar.png";
+import OG from "./opengraph-lvmes.png";
+import OGError from "./opengraph-lvmes-error-page.png";
+import Virality from "./viral-loop-lavidamodernaes.png";
+
+## ¿De qué va este proyecto?
+
+Empezó como una tontería. En el antiguo programa de radio de la SER, La Vida Moderna, crearon un hashtag en Twitter, _#LaVidaModerna es_, donde creabas frases que empezaran con ese hashtag y que tuvieranla ironía, sarcasmo y sátira de lo que puede llegar a ser (es) la vida (moderna).
+
+Y aquí te quiero contar un poco cómo ha sido el detrás de cámaras.
+
+## ¿Cómo y por qué he hecho lo que he hecho?
+
+He intentado mantener en todo momento el espíritu 'keep it cutre' del programa, añadiendo algunos elementos sin perder la buena UX:
+
+- Para hacer la página he seguido el estilo [Neobrutalism](https://www.nngroup.com/articles/neobrutalism/)
+
+  Me parecía un diseño sencillo y descuidado que podría servir para el proyecto.
+
+- Las páginas las he dividido por Temporadas (T), y la Home (Todas), donde están todas las frases recopiladas.
+
+  Vi necesario en la Home, hacer una mezcla aleatoria a la hora de hacer el deploy a producción pero no cada vez que un usuario entrase para no añadir complejidad.
+
+- Para resolver el problema de "ver siempre lo mismo si no hago un deploy" y no añadir JavaScript innecesario, creé un botón para mezclar.
+
+  Funciona con el [algoritmo de "shuffle" de Fisher-Yates](https://es.wikipedia.org/wiki/Algoritmo_de_Fisher-Yates) y así crear siempre una sensación de novedad en el usuario.
+
+  Hay 739 frases, lo último que quiero es obligar a hacer un scroll infinito si quieren ver algo nuevo.
+
+<ImgAndCap
+	src={ShuffleBtn}
+	alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
+
+    caption="Botón de Mezclar"
+
+/>
+
+- La fuente intenté que fuera **Comic Sans** como fuente cutre por antonomasia, pero al ser de pago, tuve que usar la "hermana" gratuita de Google, [Comic Neue](https://fonts.google.com/specimen/Comic+Neue?query=comic).
+- El color, por supuesto, tenía que ser el Rosa Moderdonia: _#f9138e_ copiado de la propia bandera.
+- El logo debía ser la bandera.
+- Para mantener un poco más el espíritu "Keep it cutre", las tarjetas debían estar como cuadros mal colgados de manera aleatoria entre -rotation-3 y rotation-3.
+
+### Herramientas que he usado:
+
+- [Astro](https://astro.build/) como framework para construir la web con páginas estáticas. No hacía falta más.
+- [Tailwind](https://tailwindcss.com/) como framework de CSS para ir más rápido diseñando.
+- [Lovable](https://lovable.dev/) para coger ideas para la UI.
+- [Cursor](https://cursor.com/) como editor para ir más rápido programando y ayudarme a hacer algunas cosas más complejas.
+- Twitter y YouTube como fuentes para coger y buscar las frases.
+
+### Cosas interesantes que he añadido
+
+Como Growth, me gusta tenerlo todo atado y tener algún sistema de adquisición y retención. Aunque este solo era para divertirme pero, siempre está la mentalidad.
+
+- SEO
+
+  Soy un friki del SEO y se la importancia que puede llegar a tener unos buenos OpenGraph o una buena tarjeta de Twitter, así que decidí invertirle tiempo a ello con tal de que cada vez que compartiera una la web o alguna página se viera bien. E incluso pensé en la página 404 que para mí, es una de las más divertidas y donde aún habiendo un error, puedes no perder al usuario y hacer que se enganche de nuevo.
+
+<ImgAndCap
+	src={OG}
+	alt="Imagen del open graph de lavidamodernaes.com"
+
+    caption="Open Graph"
+
+/>
+
+<ImgAndCap
+	src={OGError}
+	alt="Imagen del open graph de lavidamodernaes.com"
+
+    caption="Open Graph del 404"
+
+/>
+
+- "Viralidad"
+
+  Quería añadir un par de botones para que la gente pudiera compartir tanto en Twitter como en Instagram pero lo vi demasiado elaborado y simplemente coloqué un botón que incentiva a hacer un pantallazo.
+
+  Se difumina el fondo y aparece la marca como una especie de "Loop Viral" de contacto casual.
+
+<ImgAndCap
+	src={Virality}
+	alt="Imagen del botón de mezclar de la página lavidamodernaes.com"
+
+    caption="Botón que puede generar 'viralidad'"
+
+/>
+
+- Monetización
+
+  Este proyecto es totalmente gratis y de [código abierto](https://github.com/akac12z/lavidamodernaes-dot-com) pero yo tengo que comer, así que puse un [Buy Me A Coffee](https://buymeacoffee.com/akac12z) para quien quiera apoyar al proyecto 😁.
