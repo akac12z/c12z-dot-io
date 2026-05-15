@@ -6,13 +6,7 @@ export const SECTION_LISTS: Section[] = [
 		style: "project",
 		label: "proyectos",
 		description: "Cosas que voy creando y compartiendo",
-		items: [
-			{
-				text: "#LaVidaModerna es...",
-				href: "/proyectos/la-vida-moderna-es",
-				meta: "2025",
-			},
-		],
+		items: [],
 	},
 	{
 		href: "/biblioteca",
