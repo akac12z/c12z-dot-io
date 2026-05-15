@@ -72,6 +72,19 @@ a {
 	text-decoration: none;
 }
 
+.lettering a[href^="https"]::after {
+	content: "";
+	display: inline-block;
+	width: var(--wdth-1);
+	height: var(--wdth-1);
+	margin-left: var(--sp-1);
+	vertical-align: middle;
+	background-color: currentColor;
+	mask-image: url("/icons/go-out.svg");
+	mask-size: contain;
+	mask-repeat: no-repeat;
+}
+
 /* == FOR BLACKQUOTE == */
 
 blockquote {
