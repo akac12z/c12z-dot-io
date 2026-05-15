@@ -1,9 +1,9 @@
 ---
-import styles from "./sectionLists.module.css"
+import styles from "./sectionLists.module.css";
 import type { Section } from "../rules/sectionLists.interface";
 
-
-const { href, style, label, description, items, totalCount } = Astro.props as Section;
+const { href, style, label, description, items, totalCount } =
+	Astro.props as Section;
 
 const STYLE_CLASSES = {
 	essay: `${styles.essay}`,
@@ -19,54 +19,49 @@ const count = displayCount > 0 ? String(displayCount).padStart(2, "0") : null;
 ---
 
 <section class={styles.sectionList}>
-  <section class={styles.activeContent}>
-    <div class={styles.contentBlock}>
-      <a
-        href={href}
-        class={`${styles.pages} ${accentClass}`}
-      >
-        /{label}
-      </a>
-      <span class={styles.circle}>·</span>
-      <span class={styles.descPage}>
-        {description}
-      </span>
-    </div>
+	<section class={styles.activeContent}>
+		<div class={styles.contentBlock}>
+			<a
+				href={href}
+				class={`${styles.pages} ${accentClass}`}
+			>
+				/{label}
+			</a>
+			<span class={styles.circle}>·</span>
+			<span class={styles.descPage}>
+				{description}
+			</span>
+		</div>
 
-    <div class={styles.right}>
-      {
-        count ? (
-          <span class={styles.count}>{count}</span>
-        ) : (
-          <span class={styles.wip}>
-            <span class={styles.ball} />
-            WIP
-          </span>
-        )
-      }
-    </div>
-  </section>
+		<div class={styles.right}>
+			{
+				count ? (
+					<span class={styles.count}>{count}</span>
+				) : (
+					<span class={styles.wip}>
+						<span class={styles.ball} />
+						WIP
+					</span>
+				)
+			}
+		</div>
+	</section>
 
-  {
-    items.length > 0 && (
-      <ul class={styles.content}>
-        {items.map((item) => (
-          <li class={styles.pages}>
-            <a
-              href={item.href}
-              class={styles.linkBar}
-            >
-              <span class={styles.links}>
-                ↳ {item.text}
-              </span>
-              <span class={styles.extra}>
-                {item.meta?.split("·")[0]}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    )
-  }
-
+	{
+		items.length > 0 && (
+			<ul class={styles.content}>
+				{items.map((item) => (
+					<li class={styles.pages}>
+						<a
+							href={item.href}
+							class={styles.linkBar}
+						>
+							<span class={styles.links}>↳ {item.text}</span>
+							<span class={styles.extra}>{item.meta?.split("·")[0]}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		)
+	}
 </section>
