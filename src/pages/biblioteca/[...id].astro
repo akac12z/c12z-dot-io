@@ -1,5 +1,5 @@
 ---
-import styles from "@/features/books/components/book.module.css"
+import styles from "@/features/books/components/book.module.css";
 // export const prerender = true;
 
 import type { CollectionEntry } from "astro:content";
@@ -18,16 +18,16 @@ import GoOut from "@/components/common/ui/icons/GoOut.astro";
 import SummarizeSection from "@/components/common/ui/content/SummarizeSection.astro";
 
 interface Props {
-  entry: CollectionEntry<"library">;
+	entry: CollectionEntry<"library">;
 }
 
 export async function getStaticPaths() {
-  const library = await getCollection("library");
+	const library = await getCollection("library");
 
-  return library.map((entry) => ({
-    params: { id: entry.id },
-    props: { entry },
-  }));
+	return library.map((entry) => ({
+		params: { id: entry.id },
+		props: { entry },
+	}));
 }
 
 const { entry } = Astro.props;
@@ -40,62 +40,70 @@ const { Content, headings } = await render(entry);
 ---
 
 <MainLayout>
-  <BooksSEO slot="head" entry={entry} />
-  <article class={styles.bookPage}>
-    <TOC client:only="react" headings={headings} title={title} />
-    <GoBackInTop headPage="/biblioteca" title="ir a la página biblioteca" />
+	<BooksSEO
+		slot="head"
+		entry={entry}
+	/>
+	<article class={styles.bookPage}>
+		<TOC
+			client:only="react"
+			headings={headings}
+			title={title}
+		/>
+		<GoBackInTop
+			headPage="/biblioteca"
+			title="ir a la página biblioteca"
+		/>
 
-    <section class={styles.introSection}>
-      <BookCover entry={entry} />
+		<section class={styles.introSection}>
+			<BookCover entry={entry} />
 
-      <section class={styles.review}>
-        <h1 >
-          {title}
-        </h1>
-        <span class={styles.author}>
-          de {authorsInArry[0].name}
-        </span>
-        <BookScore
-          entry={entry}
-          transition:name={`${id}-bookScore-${score}`}
-        />
-        <section
-          class={styles.history}
-        >
-          <span>Publicado el {publishDate}</span>
-          <span>Léelo en {readingTime} min.</span>
-        </section>
-      </section>
-      <section class={styles.quote}>
-        <p class={styles.theQuote}>"{quote}"</p>
-      </section>
-    </section>
+			<section class={styles.review}>
+				<h1>
+					{title}
+				</h1>
+				<span class={styles.author}>
+					de {authorsInArry[0].name}
+				</span>
+				<BookScore
+					entry={entry}
+					transition:name={`${id}-bookScore-${score}`}
+				/>
+				<section class={styles.history}>
+					<span>Publicado el {publishDate}</span>
+					<span>Léelo en {readingTime} min.</span>
+				</section>
+			</section>
+			<section class={styles.quote}>
+				<p class={styles.theQuote}>"{quote}"</p>
+			</section>
+		</section>
 
-    <section >
-      <SummarizeSection />
-      <BookSpoiler entry={entry} />
-    </section>
-    
-    <section class="lettering">
-      <Content />
-    </section>
-    <section class="lettering">
-      <h2>Autor(es)</h2>
-      {
-        authorsInArry.map((author) => (
-          <div class={styles.author}>
-            <a
-              class={styles.authorLink}
-              href={author.link}
-              target="_blank"
-              rel="noopener"
-            >
-              {author.name}
-              <GoOut  />
-            </a>
-          </div>
-        ))
-      }
-    </section>
-  </article>
+		<section>
+			<SummarizeSection />
+			<BookSpoiler entry={entry} />
+		</section>
+
+		<section class="lettering">
+			<Content />
+		</section>
+		<section class="lettering">
+			<h2>Autor(es)</h2>
+			{
+				authorsInArry.map((author) => (
+					<div class={styles.author}>
+						<a
+							class={styles.authorLink}
+							href={author.link}
+							target="_blank"
+							rel="noopener"
+						>
+							{author.name}
+							<GoOut />
+						</a>
+					</div>
+				))
+			}
+		</section>
+	</article>
 </MainLayout>
