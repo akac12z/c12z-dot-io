@@ -1,31 +1,26 @@
 ---
-import styles from "./inc.module.css"
+import styles from "./inc.module.css";
 import { Image } from "astro:assets";
 
 // Define props interface (inline for simplicity; consider moving to a separate .ts file for reusability)
 interface Props {
-  src: any; // Use proper type like ImageMetadata if importing assets, or string for URLs
-  alt: string;
-  caption: string;
-  width?: number;
-  // height?: number;
+	src: any;
+	alt: string;
+	caption: string;
+	width?: number;
 }
 
-// Destructure props with defaults
-const { src, alt, caption, width = 400} = Astro.props as Props;
+const { src, alt, caption, width } = Astro.props as Props;
 ---
 
 <div class={styles.inc}>
-  <Image
-    src={src}
-    alt={alt}
-    width={width}
-    loading="lazy"
-    class={styles.theImage}
-  />
-  <p
-    class={styles.theCaption}
-  >
-    {caption}
-  </p>
+	<Image
+		src={src}
+		alt={alt}
+		loading="lazy"
+		class={styles.theImage}
+	/>
+	<p class={styles.theCaption}>
+		{caption}
+	</p>
 </div>

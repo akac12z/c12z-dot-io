@@ -1,23 +1,30 @@
 .inc {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	gap: var(--sp-2);
 
 	.theImage {
-		margin: 0;
 		width: 80%;
 		height: auto;
 		border-radius: var(--wdth-05);
-		place-content: start;
+
+		@media (width >= 28.75rem) {
+			width: 50%;
+		}
 	}
 
 	.theCaption {
-		color: var(--fg-3);
-		font-size: var(--t-nano);
-		margin-top: 0;
-		place-content: start;
 		width: 80%;
+		color: var(--fg-3);
+		font-size: var(--t-micro);
+		line-height: var(--lh-mili);
+		font-style: italic;
+
 		overflow-wrap: break-word;
+
+		@media (width >= 28.75rem) {
+			width: 50%;
+		}
 	}
 }
