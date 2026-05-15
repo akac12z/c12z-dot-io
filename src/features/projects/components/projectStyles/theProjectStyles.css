@@ -1,0 +1,21 @@
+.lvm {
+	--moderdonia: #f9138e;
+	--gold: #e5ab0c;
+
+	/* Todos los links del proyecto con subrayado ondulado */
+	& a {
+		text-decoration: underline;
+		text-decoration-style: wavy;
+		text-decoration-color: var(--moderdonia);
+
+		&:hover {
+			text-decoration: underline;
+			text-decoration-color: var(--moderdonia);
+		}
+	}
+
+	/* El link de Buy Me a Coffee en dorado */
+	& a[href*="buymeacoffee"] {
+		text-decoration-color: var(--gold);
+	}
+}

@@ -1,40 +1,44 @@
 ---
-import ContentSEO from "@/components/common/seo/ContentSEO.astro";
+import type { CollectionEntry } from "astro:content";
+
 import { convertDateToISO8601 } from "@/utils/validatingDate";
-import processKeywords from "@utils/processKeywords";
+import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 
-interface Props {
-  pageTitle: string;
-  pageDescription: string;
-  ogImage?: string;
-  keywordsInProjects: string[];
-  publishDate: string;
-  lastDateEdited: string;
-}
+import ContentSEO from "@/components/common/seo/ContentSEO.astro";
 
-const { pageTitle, pageDescription, ogImage, keywordsInProjects, publishDate } =
-  Astro.props;
+const { entry } = Astro.props;
+
+const project = entry as CollectionEntry<"projects">;
+const {data} = project;
+const {cover, keywords, publishDate, projectTitle, projectDescription, lastTimeEdited } = data;
+
+const projectName = `Proyecto: ${projectTitle}`;
+const projectDesc = `${projectDescription}`;
+
+const ogImage = cover.src?.src
+  ? new URL(cover.src?.src, Astro.site)
+  : new URL("./og-image.png", Astro.site);
+const ogImageAlt = cover.alt ? cover.alt : `imagen del proyecto ${projectName}`;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const ogImageURL = ogImage
-  ? new URL(ogImage, Astro.site)
-  : new URL("./og-image.png", Astro.site);
-const ogImageAlt = pageTitle;
+const justInCaseNoCoverSrc =
+  `${SITE_DEFAULT_CONFIG.url}${cover.src?.src}` || ogImage;
+const justInCaseNoCoverAlt = cover.alt || projectName;
 
-const projectKeywords = processKeywords(keywordsInProjects).keywords;
 
 const publisDateInISO = convertDateToISO8601(publishDate);
-const editedDate = publisDateInISO;
+const lastTimeEditedInISO = lastTimeEdited ? lastTimeEdited : publisDateInISO;
+
 ---
 
 <ContentSEO
-  postName={pageTitle}
-  postDescription={pageDescription}
+  postName={projectName}
+  postDescription={projectDesc}
   canonicalURL={canonicalURL}
-  justInCaseNoCoverSrc={ogImageURL}
-  justInCaseNoCoverAlt={ogImageAlt}
+  justInCaseNoCoverSrc={justInCaseNoCoverSrc}
+  justInCaseNoCoverAlt={justInCaseNoCoverAlt}
   publisDateInISO={publisDateInISO}
-  lastTimeEditedInISO={editedDate}
-  keywords={projectKeywords}
+  lastTimeEditedInISO={lastTimeEditedInISO}
+  keywords={keywords}
 />

@@ -1,0 +1,29 @@
+---
+import styles from "./project.module.css";
+import { Picture } from "astro:assets";
+
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	entry: CollectionEntry<"projects">;
+	eager?: boolean;
+}
+
+const { entry, eager = false } = Astro.props as Props;
+const { data, id } = entry;
+const { cover } = data;
+---
+
+<div class={styles.projectCover}>
+	<Picture
+		src={cover.src}
+		width={cover.src?.width}
+		height={cover.src?.height}
+		formats={["avif", "webp", "jpeg", "png"]}
+		alt={cover.alt}
+		transition:name={`${id}-project-image`}
+		quality="high"
+		loading={eager ? "eager" : "lazy"}
+		fetchpriority={eager ? "high" : "auto"}
+	/>
+</div>

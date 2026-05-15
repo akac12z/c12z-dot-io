@@ -1,21 +1,39 @@
 ---
-import styles from "./project.module.css"
+import { getCollection } from "astro:content";
+import ProjectHeader from "./ProjectHeader.astro";
+
+import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+import styles from "./project.module.css";
+
+const projects = await getCollection("projects");
+projects.sort((a, b) => {
+	const dateA = new Date(
+		a.data.publishDate.split("/").reverse().join("-"),
+	).getTime();
+	const dateB = new Date(
+		b.data.publishDate.split("/").reverse().join("-"),
+	).getTime();
+	return dateB - dateA;
+});
 ---
 
 <section class={styles.projectPage}>
-  <p class={styles.intro}>
-    Recopilación de proyectos que he ido (y voy) haciendo como hobby o
-    herramientas útiles que he ido creando en mi tiempo libre. Aquí te expico
-    cómo los he construido, qué herramientas he usado y el porqué detrás de cada
-    decisión.
-  </p>
-  <section class={styles.page}>
-    <div class={styles.projectsView}>
-      <section
-        class={styles.grids}
-      >
-        <slot />
-      </section>
-    </div>
-  </section>
+	<GoBackInTop
+		headPage="/"
+		title="go home"
+	/>
+	<ProjectHeader />
+
+	<section class={styles.grids}>
+		{
+			projects.map((book, index) => (
+				<ProjectCard
+					entry={book}
+					index={index}
+				/>
+			))
+		}
+	</section>
 </section>

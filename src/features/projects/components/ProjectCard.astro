@@ -1,48 +1,43 @@
 ---
-import styles from "./project.module.css"
-import { Picture } from "astro:assets";
-import { PROJETCS_DATA } from "../data/projectsData";
+import styles from "./project.module.css";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import ProjectCover from "./ProjectCover.astro";
 
 interface Props {
-  href: string;
-  srcImage: string;
-  altImage: string;
-  projectTitle: string;
-  projectDescription: string;
+	entry: CollectionEntry<"projects">;
+	index: number;
 }
 
-const {
-  href,
-  srcImage = "/og-image.png",
-  altImage = "La imagen de Open Graph de c12z.io, Chema Ferrández",
-  projectTitle,
-  projectDescription,
-} = Astro.props;
-const { LVM_es } = PROJETCS_DATA;
+export async function getStaticPaths() {
+	const library = await getCollection("projects");
+
+	return library.map((entry) => ({
+		params: { id: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry, index } = Astro.props;
+const { data, id } = entry;
+const { projectTitle, projectDescription } = data;
+const eager = index < 6;
 ---
 
-<article class={styles.projectCard}>
-  <div class={styles.view}>
-    <a href={`/proyectos/${href}`}>
-      <Picture
-        src={srcImage}
-        width={1000}
-        height={1000}
-        alt={altImage}
-        class={styles.picture}
-        transition:name={`${LVM_es.href}-project-image`}
-      />
-    </a>
-    <h2
-      class={styles.title}
-      transition:name={`${LVM_es.href}-project-title`}
-    >
-      {projectTitle}
-    </h2>
-  </div>
-  <div class={styles.desc}>
-    <p>
-      {projectDescription}
-    </p>
-  </div>
-</article>
+<section class={styles.projectCard}>
+	<a href={`/proyectos/${id}`}>
+		<ProjectCover
+			entry={entry}
+			eager={eager}
+		/>
+		<h2
+			class={styles.title}
+			transition:name={`${id}-project-title`}
+		>
+			{projectTitle}
+		</h2>
+		<p class={styles.desc}>
+			{projectDescription}
+		</p>
+	</a>
+</section>
