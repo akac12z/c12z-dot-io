@@ -141,6 +141,39 @@ const libraryCollection = defineCollection({
 		}),
 });
 
+const projectCollection = defineCollection({
+	loader: glob({
+		pattern: "**/*.{md,mdx}",
+		base: "./src/content/project",
+	}),
+	schema: ({ image }) =>
+		z.object({
+			projectTitle: z.string().max(80),
+			projectDescription: z.string().min(110).max(160),
+			projectUrl: z.string().startsWith("https://"),
+			cover: z.object({
+				src: image(),
+				alt: z.string(),
+			}),
+			why: z.string().max(20),
+			backlog: z.enum(["wip", "upload"]),
+			publishDate: z.string().refine(isValidDateFormat),
+			lastTimeEdited: z
+				.string()
+				.refine(isValidDateFormat)
+				.refine((val) => (val ? isValidDateFormat(val) : true))
+				.transform((val, ctx) => {
+					const publishDate = ctx;
+					return val ?? publishDate;
+				})
+				.optional(),
+			tags: z.array(z.string()),
+			language: z.enum(["es"]),
+			keywords: z.array(z.string()),
+			styleClass: z.string().optional(),
+		}),
+});
+
 const biasCollection = defineCollection({
 	// type: "content",
 	loader: glob({
@@ -205,30 +238,9 @@ const biasCollection = defineCollection({
 			),
 });
 
-const projectCollections = defineCollection({
-	loader: glob({
-		pattern: "**/*.{md,mdx}",
-		base: "./src/content/projects",
-	}),
-	/*schema: ({ image }) =>
-      z.object({
-        project: z.string(),
-        description: z.string().min(110).max(140),
-        cover: z.object({
-          src: image(),
-          alt: z.string(),
-        }),
-        publishDate: z.string().refine(isValidDateFormat),
-        keywords: z.array(z.string()),
-        backlog: z.enum(["wip", "upload"]),
-        isDraft: z.boolean().default(true).optional(),
-				isIndexed: z.boolean().default(false),
-      }),*/
-});
-
 export const collections = {
 	bias: biasCollection,
 	library: libraryCollection,
+	projects: projectCollection,
 };
 // essay: essayCollection,
-// projects: projectCollections
