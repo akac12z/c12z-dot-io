@@ -8,13 +8,14 @@ import SectionLists from "./SectionLists.astro";
 <section class={styles.list}>
 
   {
-    updatedSectionLists.map(({ style, description, href, items, label }) => (
+    updatedSectionLists.map(({ style, description, href, items, label, totalCount }) => (
       <SectionLists
         href={href}
         style={style}
         label={label}
         description={description}
         items={items}
+        totalCount={totalCount}
       />
     ))
   }
