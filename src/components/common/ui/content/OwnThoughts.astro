@@ -1,70 +1,59 @@
 ---
-import styles from "./ownThoughts.module.css"
+import styles from "./ownThoughts.module.css";
 import GoOut from "@/icons/GoOut.astro";
 import UnclearThought from "../icons/UnclearThought.astro";
 
 interface Thoughts {
-  first_paragraph: string[];
-  second_paragraph?: string[];
-  third_paragraph?: string[];
-  asset?: boolean;
-  title_asset: string;
-  href_link?: string;
-  title_link?: string;
-  is_third_party?: boolean;
+	first_paragraph: string[];
+	second_paragraph?: string[];
+	third_paragraph?: string[];
+	asset?: boolean;
+	title_asset: string;
+	href_link?: string;
+	title_link?: string;
 }
 
 const {
-  first_paragraph,
-  second_paragraph,
-  third_paragraph,
-  asset,
-  title_asset,
-  title_link,
-  href_link,
-  is_third_party,
+	first_paragraph,
+	second_paragraph,
+	third_paragraph,
+	asset,
+	title_asset,
+	title_link,
+	href_link,
 } = Astro.props as Thoughts;
 
 if (!first_paragraph) {
-  throw new Error(
-    "At least, you need a first_paragraph in quote component. Then you can add a second_paragraph and a third_paragraph.",
-  );
+	throw new Error(
+		"At least, you need a first_paragraph in quote component. Then you can add a second_paragraph and a third_paragraph.",
+	);
 }
 
 const paragraphs = [first_paragraph, second_paragraph, third_paragraph].filter(
-  Boolean,
+	Boolean,
 );
 ---
 
-<section
-  class={`${styles.otSection}`}
->
-  <section class={`${styles.otGrid}`}>
-    <UnclearThought />
-    <section class={`${styles.otBody}`}>
-      {
-        paragraphs.map((paragraph) => (
-          <p class={styles.otText}>
-            {paragraph}
-          </p>
-        ))
-      }
-      {
-        asset && (
-          <section class={styles.otAsset}>
-            <a
-              class={styles.otLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={title_link}
-              href={href_link}
-            >
-              
-              {title_asset} {is_third_party && <GoOut />}
-            </a>
-          </section>
-        )
-      }
-    </section>
-  </section>
+<section class={`${styles.otSection}`}>
+	<section class={`${styles.otGrid}`}>
+		<UnclearThought />
+		<section class={`${styles.otBody}`}>
+			{paragraphs.map((paragraph) => <p class={styles.otText}>{paragraph}</p>)}
+			{
+				asset && (
+					<section class={styles.otAsset}>
+						<a
+							class={`lettering ${styles.otLink}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							title={title_link}
+							href={href_link}
+						>
+							{title_asset}
+						</a>
+					</section>
+				)
+			}
+		</section>
+	</section>
 </section>

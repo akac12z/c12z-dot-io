@@ -2,18 +2,18 @@
 import { LIBRARY_PAGE_INFO } from "@/global/pagesInfo";
 
 import MainLayout from "@layouts/MainLayout.astro";
-import { libraryKeywords } from "@/features/library/seo/library.keywords";
+import { libraryKeywords } from "@/features/books/seo/library.keywords.ts";
 
 import LibraryPage from "@/features/books/components/LibraryPage.astro";
 import PagesSEO from "@/seo/PagesSEO.astro";
 ---
 
 <MainLayout>
-  <PagesSEO
-    slot="head"
-    pageTitle={LIBRARY_PAGE_INFO.title}
-    pageDescription={LIBRARY_PAGE_INFO.description}
-    pageKeywords={libraryKeywords}
-  />
-  <LibraryPage />
+	<PagesSEO
+		slot="head"
+		pageTitle={LIBRARY_PAGE_INFO.title}
+		pageDescription={LIBRARY_PAGE_INFO.description}
+		pageKeywords={libraryKeywords}
+	/>
+	<LibraryPage />
 </MainLayout>
