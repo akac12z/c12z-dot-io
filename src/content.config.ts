@@ -63,6 +63,16 @@ const libraryCollection = defineCollection({
 			abstract: z.string().min(250).max(410),
 			backlog: z.enum(["wip", "upload"]),
 			quote: z.string().max(150),
+			category: z.enum([
+				"health",
+				"product",
+				"culture",
+				"psychology",
+				"economics",
+				"creativity",
+				"philosophy",
+				"other",
+			]),
 			score: z
 				.number()
 				.min(1, {
