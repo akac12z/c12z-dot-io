@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
 
+import { unified, rehypeExternalLinks } from '@astrojs/markdown-remark';
+
 // import tailwind from '@astrojs/tailwind';
 // import tailwindcss from '@tailwindcss/vite';
 
@@ -14,7 +16,7 @@ import react from '@astrojs/react';
 
 import partytown from '@astrojs/partytown';
 
-import rehypeExternalLinks from 'rehype-external-links';
+// import rehypeExternalLinks from 'rehype-external-links';
 
 // Este es provisional hasta que Vercel arregle el problema con sitemap
 // import { sitemapCopier } from './sitemap-copier';
@@ -38,15 +40,17 @@ export default defineConfig( {
     } ) ],
   output: 'static',
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener', 'noreferrer']
-        }
+    processor: unified( {
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: [ 'noopener', 'noreferrer' ]
+          }
+        ],
       ],
-    ]
+    } ),
   },
   env: {
     schema: {
