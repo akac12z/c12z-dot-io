@@ -11,26 +11,26 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "0.9.9",
-		"@astrojs/mdx": "5.0.4",
+		"@astrojs/mdx": "6.0.3",
 		"@astrojs/partytown": "2.1.7",
-		"@astrojs/react": "5.0.4",
-		"@astrojs/sitemap": "3.7.2",
-		"@astrojs/vercel": "10.0.6",
-		"@lucide/astro": "1.14.0",
+		"@astrojs/react": "5.0.7",
+		"@astrojs/sitemap": "3.7.3",
+		"@astrojs/vercel": "10.0.8",
+		"@lucide/astro": "1.17.0",
 		"@tailwindcss/vite": "4.3.0",
-		"@types/react": "19.2.14",
+		"@types/react": "19.2.17",
 		"@types/react-dom": "19.2.3",
-		"astro": "6.3.1",
-		"es-toolkit": "1.46.1",
-		"motion": "12.38.0",
-		"react": "19.2.6",
-		"react-dom": "19.2.6",
+		"astro": "6.4.5",
+		"es-toolkit": "1.47.0",
+		"motion": "12.40.0",
+		"react": "19.2.7",
+		"react-dom": "19.2.7",
 		"rehype-external-links": "3.0.0",
 		"sharp": "0.34.5",
 		"tailwindcss": "4.3.0",
 		"typescript": "6.0.3"
 	},
 	"devDependencies": {
-		"@tailwindcss/typography": "0.5.19"
+		"@tailwindcss/typography": "0.5.20"
 	}
 }
