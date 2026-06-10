@@ -1,0 +1,16 @@
+---
+import styles from "./book.module.css";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	entry: CollectionEntry<"library">;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { category } = data;
+---
+
+<span class={`${styles.bookCategory} ${styles[category]}`}>
+	{category}
+</span>
