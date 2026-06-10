@@ -1,22 +1,14 @@
 ---
 import styles from "./book.module.css"
-import { getCollection, type CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 import BookScore from "./BookScore.astro";
 import BookCover from "./BookCover.astro";
+import BookCategory from "./BookCategory.astro";
 
 interface Props {
   entry: CollectionEntry<"library">;
   index: number;
-}
-
-export async function getStaticPaths() {
-  const library = await getCollection("library");
-
-  return library.map((entry) => ({
-    params: { id: entry.id },
-    props: { entry },
-  }));
 }
 
 const { entry, index } = Astro.props;
@@ -70,16 +62,23 @@ const eager = index < 4;
             <div class={styles.readindTime}>
               <span>Léelo en: {readingTime}min</span>
             </div>
+            <BookCategory 
+              entry={entry}
+            />
             <p>"{quote}"</p>
           </>
         ) : (
 
             <BookScore entry={entry} />
+            <BookCategory 
+              entry={entry}
+            />
             <p class={styles.disclaimer}>
             "El resumen e insights de{" "}
             <span class={styles.bookTitle}>{title}</span> aún no lo
             tengo listo. Estoy leyéndolo o en proceso de subirlo.
           </p>
+
         )
       }
     </section>
