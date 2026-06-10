@@ -44,9 +44,9 @@ buyItOnAmazon:
 import OwnThoughts from "../../../components/common/ui/content/OwnThoughts.astro";
 import Link from "../../../components/common/ui/content/Link.astro";
 
-<OwnThoughts first_paragraph="en este formato te vas a encontrar mis comentarios sobre el libro The Mom Test y alguna que otra cosa interesante. he modificado algunas cosas para poder entenderlas mejor y que tengan una mejor narrativa entre ellas y sea más sencillo leerlo." />
+<OwnThoughts paragraphs={["en este formato te vas a encontrar mis comentarios sobre el libro The Mom Test y alguna que otra cosa interesante. he modificado algunas cosas para poder entenderlas mejor y que tengan una mejor narrativa entre ellas y sea más sencillo leerlo."]} />
 
-<OwnThoughts first_paragraph="este libro te da una perspectiva sobre cómo crear producto. la premisa es 'no tienes ni puta idea de lo que tu posible usuario quiere. investiga y ya construirás cuando sepas más.'" />
+<OwnThoughts paragraphs={["este libro te da una perspectiva sobre cómo crear producto. la premisa es 'no tienes ni puta idea de lo que tu posible usuario quiere. investiga y ya construirás cuando sepas más.'"]} />
 
 El objetivo de este libro es encontrar la información contrastada antes de lanzar cualquier idea al mercado.
 
@@ -105,8 +105,10 @@ Si la mayoría de tus reuniones acaban en cumplidos, no estarás cerrando tratos
 Las conversaciones no debes acabarlas con lo que quieres oír. Solo quieres encontrar información verídica y útil para resolver las dudas acerca de si tu producto encaja en el mercado aunque la respuesta sea un no. Sé objetivo contigo mismo/a y no te enamores de tu producto/idea, te ahorrará tiempo y dinero.
 
 <OwnThoughts
-	first_paragraph="tienes que interiorizar qué es lo que ha pasado dejando a un lado tu ego. no te vale de nada pensar 'esa persona es idiota y no sabe de lo que habla'. sé crítico e imparcial contigo mismo/a e intenta sacar enseñanzas de la conversación y reflexiona sobre qué ha pasado."
-	second_paragraph="no guardes rencor. recuerda que no están en contra de tu persona, sino de aquello que crees que les hace falta y que posiblemente no han entendido o que en el mejor de los casos, si lo han entendido y por tanto, no son tu cliente y no pierdes el tiempo."
+	paragraphs={[
+		"tienes que interiorizar qué es lo que ha pasado dejando a un lado tu ego. no te vale de nada pensar 'esa persona es idiota y no sabe de lo que habla'. sé crítico e imparcial contigo mismo/a e intenta sacar enseñanzas de la conversación y reflexiona sobre qué ha pasado.",
+		"no guardes rencor. recuerda que no están en contra de tu persona, sino de aquello que crees que les hace falta y que posiblemente no han entendido o que en el mejor de los casos, si lo han entendido y por tanto, no son tu cliente y no pierdes el tiempo.",
+	]}
 />
 
 ### Ancla la información
@@ -141,11 +143,7 @@ Cuando recibes peticiones de los usuarios, **es tu deber entender las razones de
 
 Las señales emocionales son una de las formas más fiables de percibir la magnitud del impacto de un problema en ese usuario. Obsérvalas. Pregunta sobre ellas. Hazlas visibles y tangibles a través de etiquetarlas.
 
-<OwnThoughts
-	first_paragraph="aquí me salgo un poco de este libro y voy al de Chris Voss, _Never Split The Difference_ donde explica la regla del etiquetado."
-	second_paragraph="las ideas son: percibir las emociones de la persona y preguntarle por ellas a través de frases que podrían empezar con: 'Da la sensación de que...', 'Parece que...' o 'Suena a que...' y después, añades la emoción que consideras que está teniendo."
-	third_paragraph="cuando lo hagas, NUNCA las formules en primera persona ('Siento que...', 'Me da la sensación de...'). parecerá que estás opinando, juzgando y acusando cosa que te hará que se cierre y se ponga a la defensiva."
-/>
+<OwnThoughts paragraphs={["aquí me salgo un poco de este libro y voy al de Chris Voss, _Never Split The Difference_ donde explica la regla del etiquetado.","las ideas son: percibir las emociones de la persona y preguntarle por ellas a través de frases que podrían empezar con: 'Da la sensación de que...', 'Parece que...' o 'Suena a que...' y después, añades la emoción que consideras que está teniendo.",  "cuando lo hagas, NUNCA las formules en primera persona ('Siento que...', 'Me da la sensación de...'). parecerá que estás opinando, juzgando y acusando cosa que te hará que se cierre y se ponga a la defensiva.",]}/>
 
 Hacerle ver sus emociones hará que se abra y pueda explicarte por qué se siente así. A las personas les encanta hablar de sus vidas, y que les escuchen. Hablar de sus emociones proporciona un espacio seguro donde puede soltar todo lo que sienten y piensan.
 
@@ -156,15 +154,17 @@ Hacerle ver sus emociones hará que se abra y pueda explicarte por qué se sient
 La principal fuente de cumplidos es la búsqueda de aprobación.
 
 <OwnThoughts
-	first_paragraph="piensa que tú estás dispuesto a encontrar una respuesta sea como sea. estás yendo doblemente sesgado porque 1) consideras que tu producto es útil, y 2) quieres corroborar que estás en lo cierto."
-	second_paragraph="estás cayendo en el sesgo de confirmación, este describe la tendencia que tienes a buscar o favorecer tendencias que confirmen tus creencias."
+	paragraphs={[
+		"piensa que tú estás dispuesto a encontrar una respuesta sea como sea. estás yendo doblemente sesgado porque 1) consideras que tu producto es útil, y 2) quieres corroborar que estás en lo cierto.",
+		"estás cayendo en el sesgo de confirmación, este describe la tendencia que tienes a buscar o favorecer tendencias que confirmen tus creencias.",
+	]}
 />
 
 Una de las formas de evitar la aprobación de los demás, es evitar mostrar tus sentimientos respecto a aquello que estás intentando construir. Cuando las personas sienten que pueden herirte, lo evitarán diciendo lo que quieres oír.
 
 > Si mencionas tu idea, le gente va a intentar proteger tus sentimientos.
 
-<OwnThoughts first_paragraph="con esto último no estoy del todo de acuerdo. contar tu idea no es malo. es necesario, sino ¿cómo sabes si de verdad es un problema o no? la clave reside una vez más en cómo lo haces. una cosa es forzar a que vean que tienen el problema que resuelves y otra, hablarles del problema que estás resolviendo y preguntarles por sus experiencias." />
+<OwnThoughts paragraphs={["con esto último no estoy del todo de acuerdo. contar tu idea no es malo. es necesario, sino ¿cómo sabes si de verdad es un problema o no? la clave reside una vez más en cómo lo haces. una cosa es forzar a que vean que tienen el problema que resuelves y otra, hablarles del problema que estás resolviendo y preguntarles por sus experiencias."]} />
 
 ## Capítulo 3 - Haz preguntas importantes
 
@@ -204,7 +204,7 @@ El éxito de tu idea depende de muchos factores que requieren respuestas antes d
 Una buena práctica es tener, al menos, 3 preguntas importantes por cada tipo de persona que vayas a entrevistar. Usuarios, inversores, desarrolladores, o cualquier persona que puedas llegar a tener que le afecte tu producto.
 
 <OwnThoughts
-	first_paragraph="hay un framework, **The 4 Fits**, de Brian Balfor de Reforge, que te ayudará a pensar en relación entre tu producto, el mercado y cómo y dónde venderlo. todavía no tengo el framework en mi blog explicado pero, hasta entonces, te dejo aquí abajo el link a su ensayo."
+	paragraphs={["hay un framework, **The 4 Fits**, de Brian Balfor de Reforge, que te ayudará a pensar en relación entre tu producto, el mercado y cómo y dónde venderlo. todavía no tengo el framework en mi blog explicado pero, hasta entonces, te dejo aquí abajo el link a su ensayo."]}
 	asset
 	href_link="https://brianbalfour.com/four-fits-growth-framework"
 	title_link="ir al ensayo de Brian Balfor sobre los 4 Fits Growth Framework"
@@ -242,7 +242,7 @@ Es muy parecido a un embudo de ventas, donde pueden pasar 2 cosas:
 
 Ambas son igual de buenas en este punto, te permiten aprender e invertir tiempo en aquellos que merecen la pena.
 
-<OwnThoughts first_paragraph="aunque en este último, tienes que diferenciar distintos 'noes'. los hay que te llevan a conversaciones (y posible venta) porque puedes entender qué realmente quiere y el porqué no estaba funcionando y modificar tu discurso para adaptarlo a él y su problema o aquellos que te muestran que de verdad tu producto no hace fit con esa persona." />
+<OwnThoughts paragraphs={["aunque en este último, tienes que diferenciar distintos 'noes'. los hay que te llevan a conversaciones (y posible venta) porque puedes entender qué realmente quiere y el porqué no estaba funcionando y modificar tu discurso para adaptarlo a él y su problema o aquellos que te muestran que de verdad tu producto no hace fit con esa persona."]} />
 
 No todo producto es para todo el mundo. Cuando hayas conseguido la información que buscabas, la conversación, por el momento, ha acabado.
 
@@ -294,8 +294,10 @@ El problema de esta (y que en su momento también me tocó vivir) es que si no l
 Lo contrario a esto, es hacer que las personas hablen de ellos mismos. De sus problemas. De su día a día. Encontrar los momentos, las excusas o estar atento a la serendipia para mostrar interés genuino en ellos te hace ser una persona más interesante y será más probable que entablen una conversación contigo.
 
 <OwnThoughts
-	first_paragraph="una de las cosas que más admiro de los buenos founders es que siempre están vendiendo, y muchas veces de manera sutil. cuando hablas con ellos, y más si eres su target, no sabes cómo pero te han llevado a su terreno. tienen un conocimiento profundo del problema, y no tanto de la solución, como para poder llevar una conversación a la 'zona de aprendizaje'."
-	second_paragraph="su éxito que radica en que dejan de hablar de ellos y empieza a hablar su usuario de su problema. te dejo un artículo científico donde puedes ver cómo afecta a las personas hablar de sí mismos y porqué pienso que los buenos founders hacen esto:"
+	paragraphs={[
+		"una de las cosas que más admiro de los buenos founders es que siempre están vendiendo, y muchas veces de manera sutil. cuando hablas con ellos, y más si eres su target, no sabes cómo pero te han llevado a su terreno. tienen un conocimiento profundo del problema, y no tanto de la solución, como para poder llevar una conversación a la 'zona de aprendizaje'.",
+		"su éxito que radica en que dejan de hablar de ellos y empieza a hablar su usuario de su problema. te dejo un artículo científico donde puedes ver cómo afecta a las personas hablar de sí mismos y porqué pienso que los buenos founders hacen esto:",
+	]}
 	asset
 	href_link="https://www.pnas.org/doi/10.1073/pnas.1202129109"
 	title_link="ir al artículo científico sobre hablar de sí mismo en el PNAS"
@@ -331,7 +333,7 @@ Algunas de las recomendaciones que da Rob:
 La comunidad UX afirma que debes seguir hablando con personas hasta que dejes de escuchar nueva información. Lo que se llama _saturación de datos_.
 
 <OwnThoughts
-	first_paragraph="te dejo un artículo donde puedes leer más sobre Saturación de Datos de NN/Group:"
+	paragraphs={["te dejo un artículo donde puedes leer más sobre Saturación de Datos de NN/Group:"]}
 	asset
 	href_link="https://www.nngroup.com/articles/interview-sample-size/"
 	title_link="ir al artículo de NN/Group sobre cuántas entrevistas necesitas"
@@ -353,16 +355,18 @@ Si comienzas con un público demasiado genérico y amplio todo esfuerzo se diluy
 - El feedback es variado y contradictorio
 
 <OwnThoughts
-	first_paragraph="un ejemplo de esto es lo que en CrossFit llamamos Tape (para los fisios: cintas kinesiológicas). son las bandas que, en ocasiones, los fisios ponen en la zona que te han tratado para dar soporte muscular. los que hacemos CrossFit lo usamos para vendarnos los dedos para no hacernos daño con la fricción a la hora de coger las barras."
-	second_paragraph="pensando fríamente, son 2 públicos parecidos. ambos relacionados con el mundo de la salud y el deporte, en ambos casos se podría decir que se usa como ayuda para moverte mejor. mundos parecidos pero 2 casos de uso totalmente distintos."
-	third_paragraph="imagina si tuvieras que hacer una estrategia para vender estas cintas sin haber segmentado bien. ¿qué tipo de contenido creas? ¿qué tipo de mensaje? ¿qué tipo de enfoque? ¿qué tipo de marketing? ¿qué tipo de ventas? ¿cuántas conversaciones? un caos si no haces bien el trabajo, ¿no?"
+	paragraphs={[
+		"un ejemplo de esto es lo que en CrossFit llamamos Tape (para los fisios: cintas kinesiológicas). son las bandas que, en ocasiones, los fisios ponen en la zona que te han tratado para dar soporte muscular. los que hacemos CrossFit lo usamos para vendarnos los dedos para no hacernos daño con la fricción a la hora de coger las barras.",
+		"pensando fríamente, son 2 públicos parecidos. ambos relacionados con el mundo de la salud y el deporte, en ambos casos se podría decir que se usa como ayuda para moverte mejor. mundos parecidos pero 2 casos de uso totalmente distintos.",
+		"imagina si tuvieras que hacer una estrategia para vender estas cintas sin haber segmentado bien. ¿qué tipo de contenido creas? ¿qué tipo de mensaje? ¿qué tipo de enfoque? ¿qué tipo de marketing? ¿qué tipo de ventas? ¿cuántas conversaciones? un caos si no haces bien el trabajo, ¿no?",
+	]}
 />
 
 El foco te permite reducir ruido aunque sientas que estás dejando mucha parte del pastel.
 
 > Si no tienes claro a quién estás vendiendo, no tienes claro qué estás vendiendo. Encuentra un problema y usuario concreto.
 
-<OwnThoughts first_paragraph="hacer un producto regular para varios segmentos no es lo mismo que hacer un producto increible para uno concreto. seguir estrategias de _Go-To-Market (GTM)_ y junto a los 4 fits que he mencionado antes de Brian, te ayudará a encontrar estos segmentos. y ya después de haber encontrado y escalado, podrás volver a buscar nuevos casos de uso para seguir creciendo y coger más pastel." />
+<OwnThoughts paragraphs={["hacer un producto regular para varios segmentos no es lo mismo que hacer un producto increible para uno concreto. seguir estrategias de _Go-To-Market (GTM)_ y junto a los 4 fits que he mencionado antes de Brian, te ayudará a encontrar estos segmentos. y ya después de haber encontrado y escalado, podrás volver a buscar nuevos casos de uso para seguir creciendo y coger más pastel."]} />
 
 Una manera útil de encontrar estos segmentos es dividir a los propios usuarios en subgrupos preguntándote:
 
@@ -416,9 +420,11 @@ Después de la conversación, revisa tus notas y actualiza (o afianza) tus creen
 No solo revises las respuestas, si no también las propias preguntas. Hacer una metarevisión sobre cuáles funcionaron mejor, cómo mejorarlas, si alguna tuvo especial relevancia, etc.
 
 <OwnThoughts
-	first_paragraph="e incluso sería bueno tener un apartado en tus notas donde puedas hablar acerca de cómo crees se ha sentido, su lenguaje corporal o cómo ha sido el tuyo. cualquier cosa que te ayude a mejorar y averiguar aquellas cosas que no se ven a simple vista. lo que se llama 'Cisne Negro'."
-	second_paragraph="una anécdota que me pasó en una startup cuando estaba llamando a una clienta para intentar vender el producto y a su vez entender nuestro target, fue escuchar de fondo a un niño llorando. a priori, no podría significar nada pero gracias al haber pensado en esto, pudimos acotar más nuestro usuario y poder tener un mensaje más específico y tener más casos de uso relacionados a ese insight en un futuro."
-	third_paragraph="con esto quiero decir que no solo busques solo responder esas preguntas. pueden haber otros insights, que no se ven y que si estás pendiente y escuchas de manera activa, te pueden dar información valiosa que no se te habría ocurrido. solo tienes que estar atento."
+	paragraphs={[
+		"e incluso sería bueno tener un apartado en tus notas donde puedas hablar acerca de cómo crees se ha sentido, su lenguaje corporal o cómo ha sido el tuyo. cualquier cosa que te ayude a mejorar y averiguar aquellas cosas que no se ven a simple vista. lo que se llama 'Cisne Negro'.",
+		"una anécdota que me pasó en una startup cuando estaba llamando a una clienta para intentar vender el producto y a su vez entender nuestro target, fue escuchar de fondo a un niño llorando. a priori, no podría significar nada pero gracias al haber pensado en esto, pudimos acotar más nuestro usuario y poder tener un mensaje más específico y tener más casos de uso relacionados a ese insight en un futuro.",
+		"con esto quiero decir que no solo busques solo responder esas preguntas. pueden haber otros insights, que no se ven y que si estás pendiente y escuchas de manera activa, te pueden dar información valiosa que no se te habría ocurrido. solo tienes que estar atento.",
+	]}
 />
 
 #### 3. **Toma buenos apuntes**
@@ -454,9 +460,11 @@ Y por último, no puedes dedicarle meses a solo preparar y tener reuniones. Invi
 Vas a tener que estar hablando con usuarios mientras tu empresa siga en pie. Ten el hábito para hacer este tipo de charlas durante todo tu camino.
 
 <OwnThoughts
-	first_paragraph="el libro que yo tengo fue publicado en 2019, lejos de AI. aunque todo lo relacionado con hacer preguntas sigue y seguirá vigente, este último apartado ha cambiado. mucho. y traigo algunas herramientas que considero útiles para hacer entrevistas."
-	second_paragraph="ahora existen herramientas que pueden grabar, resumir y coger insights de las entrevistas online. pero hay una startup muy útil para hacer entrevistas offline que me voló la cabeza de lo bien integrado que está y lo fácil que es de usar, Plaud AI. no me llevo nada por nombrarla (eso quisiera yo), simplemente te intento hacer la vida más fácil teniendo entrevistas offline."
-	third_paragraph="te dejo algunas tools aquí abajo de AI para hacer estas grabaciones y resúmenes (esto está escrito a 25 de Noviembre de 2025. estas son, a día de hoy, las más importantes)."
+	paragraphs={[
+		"el libro que yo tengo fue publicado en 2019, lejos de AI. aunque todo lo relacionado con hacer preguntas sigue y seguirá vigente, este último apartado ha cambiado. mucho. y traigo algunas herramientas que considero útiles para hacer entrevistas.",
+		"ahora existen herramientas que pueden grabar, resumir y coger insights de las entrevistas online. pero hay una startup muy útil para hacer entrevistas offline que me voló la cabeza de lo bien integrado que está y lo fácil que es de usar, Plaud AI. no me llevo nada por nombrarla (eso quisiera yo), simplemente te intento hacer la vida más fácil teniendo entrevistas offline.",
+		"te dejo algunas tools aquí abajo de AI para hacer estas grabaciones y resúmenes (esto está escrito a 25 de Noviembre de 2025. estas son, a día de hoy, las más importantes).",
+	]}
 />
 
 Gracias por leerlo y espero que te haya sido útil.
