@@ -13,30 +13,30 @@ export default function ProgressCircle({
 	return (
 		<span className={styles.circle}>
 			<svg
-				className=""
 				width="20"
 				height="20"
 				viewBox="0 0 20 20"
-				style={{ transform: "rotate(-90deg)" }}
 			>
 				<circle
 					cx="10"
 					cy="10"
 					r="8"
-					strokeWidth={strokeWidth}
-					stroke="text-gray-300"
 					fill="none"
+					stroke="currentColor"
+					className={styles.unfill}
 					strokeLinecap="round"
+					strokeOpacity={0.2}
+					strokeWidth={strokeWidth}
 				/>
 				<motion.circle
 					cx="10"
 					cy="10"
 					r="8"
-					strokeWidth={strokeWidth}
-					stroke="currentColor"
 					fill="none"
-					strokeDasharray="50"
+					stroke="currentColor"
+					className={styles.fill}
 					strokeLinecap="round"
+					strokeWidth={strokeWidth}
 					style={{
 						pathLength: progress,
 					}}

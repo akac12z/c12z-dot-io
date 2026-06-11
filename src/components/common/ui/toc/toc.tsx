@@ -274,16 +274,7 @@ function useExpanded() {
 }
 
 function useArticleScrollProgress() {
-	const articleRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		articleRef.current = document.querySelector<HTMLDivElement>("#mdx-content");
-	}, []);
-
-	const { scrollYProgress } = useScroll({
-		target: articleRef,
-		offset: ["start start", "end end"],
-	});
+	const { scrollYProgress } = useScroll();
 	const progress = useSpring(scrollYProgress, {
 		stiffness: 100,
 		damping: 30,
