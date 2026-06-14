@@ -128,7 +128,7 @@
 	margin-bottom: var(--sp-1);
 }
 .lettering li p {
-	margin-bottom: var(--sp-1);
+	margin-bottom: var(--sp-2);
 }
 
 .lettering ul > li::marker,
