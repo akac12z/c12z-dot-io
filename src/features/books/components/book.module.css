@@ -335,11 +335,11 @@
 	align-items: center;
 	gap: 6px;
 	border-radius: var(--sp-10);
-	font-size: var(--t-mili);
+	font-size: var(--t-micro);
 	font-weight: 500;
 	line-height: 0;
 	letter-spacing: var(--tracking-wider);
-	padding: var(--sp-2) var(--sp-3);
+	padding: var(--sp-2);
 	white-space: nowrap;
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
@@ -347,8 +347,8 @@
 	&::before {
 		content: "";
 		display: block;
-		width: 6px;
-		height: 6px;
+		width: var(--sp-1);
+		height: var(--sp-1);
 		border-radius: 50%;
 		flex-shrink: 0;
 	}
