@@ -173,7 +173,11 @@ export default function TOC({ title, headings }: DynamicTocProps) {
 												</AnimatePresence>
 												<a
 													href={`#${slug}`}
-													onClick={(e) => e.stopPropagation()}
+													onClick={(e) => {
+														e.preventDefault();
+														e.stopPropagation();
+														document.getElementById(slug)?.scrollIntoView({ behavior: "smooth" });
+													}}
 													className={`${styles.headingLink} ${
 														slug === activeSlug ? styles.here : styles.notHere
 													}`}
