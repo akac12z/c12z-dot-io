@@ -1,0 +1,1077 @@
+---
+titleTag: "The Cold Start Problem. Resumen y anotaciones."
+title: "The Cold Start Problem"
+description: "Resumen de The Cold Start Problem de Andrew Chen: red atómica, tipping point, escape velocity y las 5 fases de efectos de red con ejemplos reales."
+abstract: "The Cold Start Problem explica cómo los productos con efectos de red —Uber, Slack, Airbnb— resolvieron el mayor obstáculo de su crecimiento: arrancar sin usuarios. Chen desglosa las cinco fases que atraviesa cualquier red, desde el lanzamiento hasta la escala masiva, y muestra por qué el crecimiento viral no es magia sino una estrategia que se puede diseñar."
+quote: "Si no tienes claro a quién estás vendiendo, no tienes claro qué estás vendiendo. Encuentra un problema y usuario concreto."
+category: "product"
+score: 5
+cover:
+  src: the-cold-start-problem-using-network-effects-to-scale-your-product-by-andrew-chen-summarized-in-c12z.jpg
+  alt: "Portada del libro de Andrew Chen, The cold start problem"
+readingTime: 56
+keywords:
+  - "network effects"
+  - "efectos de red"
+  - "cold start problem"
+  - "cómo resolver el cold start problem"
+  - "cómo arrancar un producto con efectos de red"
+  - "qué es una red atómica"
+  - "cuáles son las fases de los efectos de red"
+  - "libro Andrew Chen efectos de red resumen"
+tags: ["network effects", "books"]
+language: es
+publishDate: 15/06/2026
+authors:
+  - name: Andrew Chen
+    link: https://andrewchen.com/about/
+isDraft: false
+isIndexed: true
+backlog: upload
+buyItOnAmazon:
+  spain: https://www.amazon.es/Cold-Start-Problem-Network-Effects/dp/1847942792/ref=sr_1_1?crid=KKN3HTEPAWS4&dib=eyJ2IjoiMSJ9.GGqR0DHAs9SHv2UXfgYSsd5QhJlIWasLjv7v9avA1Ryxm0-Zm8N9qQfmZFnfxOFXD1zDzx5TsAeebnLHjTWFl9KawPWaB0SitNIGvoZF_g5KAwa28g6szyHU_UmJ0JHY.dxVZgGISQuFr-kK4Q4iwj2tCB-J2blrfKpqJR2NPaHQ&dib_tag=se&keywords=the+cold+start+problem&qid=1781427634&sprefix=the+cold+%2Caps%2C99&sr=8-1
+---
+
+import OwnThoughts from "@/components/common/ui/content/OwnThoughts.astro";
+import ImgAndCap from "@/components/common/ui/content/ImgAndCap.astro";
+
+import AlleeGraph from "./population-graph-with-Allee-threshold-in-c12z.webp";
+import ChartNetworkSize from "./chart-network-size-vs-important-parameters-in-uber-c12.webp";
+import PyramidCreators from "./pyramid-comparison-creators-synthesizers-and-consumers-c12z.webp";
+import DomainPrice from "./cz-dot-io-domain-price.webp"
+import ToolNetworkGraph from "./come-for-the-tool-stay-for-the-network-graph-in-c12z.webp"
+import FlinstoneFamily from "./the-flintstones-on-the-flintmobile-in-c12z.webp"
+import EscapeVelocity from "./escape-velocity-graph-c12z.webp"
+import RetentionCurves from "./retention-curves-comparation-c12z.webp"
+import kfactorCompa from "./comparison-k-factor-c12z.webp"
+import TheMoat from "./the-moat-c12z.webp"
+import SocialMediaLoop from "./social-media-creator-loop.webp"
+import MarketplaceLoop from "./marketplace-amazon-flywheel-c12z.webp"
+import UseCasesCurves from "./use-cases-s-curve.webp"
+import TippingPoint from "./tipping-point-c12z.webp"
+import ColdStart from "./cold-start-c12z.webp"
+import Roof from "./the-roof-c12z.webp"
+import StravaLoop from "./strava-metrics-loops.webp"
+
+<OwnThoughts
+	paragraphs={[
+		"este es un resumen no del todo al uso del libro 'Cold Start Problem' de Andrew Chen. intento ser lo más fiel posible a lo que dice pero por la naturaleza de mi trabajo como Growth, me veo obligado a indagar en elementos, ideas u otros assets que el libro quizá toque por encima, y que sé que son interesantes y útiles para complementar las ideas.",
+		"es una biblia para aquellos que hacemos Growth pero a su vez un 'must' para cualquier persona que trabaje en Startups. necesitas entender qué son los flywheels, efectos de red, loops, economía de escala y cómo crearlos.",
+		"y como no voy a parar de hacer referencias al (antiguo) blog de Chen, te dejo aquí abajo el link donde tiene gran parte de las enseñanzas de este libro más detalladas. léete absolutamente todo. toma notas. estúdialo.",
+	]}
+	asset
+	href_link="https://andrewchen.com"
+	title_link="ir al blog de Chen"
+	title_asset="Blog de Chen"
+/>
+
+<OwnThoughts
+	paragraphs={[
+		"y sí, lo sé. es casi una hora de lectura pero es necesario este conocimiento :)",
+	]}
+/>
+
+Todo se basa en _efectos de red_ y en entender la dinámica de redes aunque pocos entienden qué son, cómo funcionan y cómo se crean y miden.
+
+En algunos casos la dinámica de red se basa en encontrar la relación entre conductores y pasajeros, los tiempos y la fijación de precios, como el caso Uber y en el que Chen trabajó. En otros la dinámica se basa en la relación entre los canales, notificaciones y descubrimientos como Slack.
+
+Y aunque hay muchas dinámicas distintas, tantas como productos con efectos de red, la mayoría responden a los mismos patrones y se generan las mismas preguntas.
+
+## Contexto: Los efectos de red
+
+La teoría de Chen se basa en 5 etapas que todo producto con efectos de red debe atravesar:
+
+1. El problema de arrancar en frío
+2. El punto de inflexión
+3. La velocidad de escape
+4. El techo
+5. El foso (moat)
+
+Aunque antes que nada pase, debes saber qué son los efectos de red y de dónde vienen. Spoiler: matemáticas y ecología.
+
+### ¿Qué son los efectos de red?
+
+En su definición clásica, los efectos de red describen lo que ocurre cuando un producto aumenta su valor a medida que más personas lo utilizan y que consta de 2 componentes:
+
+- La red, es decir, las personas.
+- El producto, ya sea software o hardware.
+
+Uno no existe sin el otro.
+
+Muchas de las empresas más grandes del mundo (como Facebook, Uber o la App Store) no es el producto en sí lo que las hace valiosas, sino haber sabido construir y activar una red alrededor de esos productos. Es la simbiosis entre la red y el producto lo que las hace difíciles de replicar. Las hace "defensibles".
+
+Y más ahora que el código se ha vuelto una _commodity_, no basta con ser una aplicación buena o útil: necesitas capturar atención -y mantenerla. La barrera de entrada dejó de ser la capacidad que tienes de crear algo, gracias (?) Claude Code, y cambió a qué tan bueno eres en atraer y retener personas.
+
+### Una breve historia
+
+En los albores de la web, 1995, y antes de la crisis de las puntocom ya se hablaba de "el ganador se lo lleva todo" (winner takes all), "las ventajas de ser el primero" y "las curvas J" (_Hockey Stick Curves_).
+
+La ley que defendía que si una startup conseguía ser la primera y tener la mayor red, se volvería "teóricamente" imparable era la Ley de Metcalfe.
+
+#### Ley de Metcalfe
+
+Esta ley narra que _el valor de una red aumenta proporcionalmente al cuadrado del número de usuarios del sistema_.
+
+Es decir, cada vez que un número _n_ de usuarios se une a un producto -que tiene efectos de red-, el valor de la aplicación crece _n^2_. Por ejemplo, si tu app tiene una red de 100 nodos y la duplicas a 200, el número de nodos se duplica 2x, pero el valor de la red crece 4x.
+
+Es una ley bonita **en papel**, y en la época de los 2000 pero con carencias (que se vieron solo a posteriori, porque nadie pudo predecir qué podría pasar... 👀):
+
+- Solo se basaba en el número de dispositivos conectados a la red
+- No servía cuando no había nadie en la red al inicio
+- No se basaba en la calidad de los usuarios ni en su actividad dentro de esta
+- Ni servía para cuando una red estaba colapsada
+
+Muchas inconsistencias que Chen intenta suplir a través de usar otra ley, Ley de Meerkat y de cómo se organizan en la naturaleza los suricatas, las abejas, y la mayoría de seres sociales.
+
+#### Ley de Meerkat: matemáticas y ecología
+
+Imagina un grupo de suricatas en la sabana. Hay comida, pero también depredadores.
+
+Para sobrevivir, el grupo necesita un mínimo de integrantes. Cuantos más ojos vigilen, más probable es que alguien detecte al depredador acercarse, se ponga sobre sus dos patitas y avise a los demás. Lo mismo ocurre con la búsqueda de alimento: más ojos, más territorio cubierto.
+
+Ese número mínimo que evita el colapso del grupo se llama _umbral de Allee_, en honor a su descubridor Warder Clyde Allee. Por encima de ese umbral, el grupo crece de forma sostenible: incluso cuando aparece un depredador, el grupo tiene recursos suficientes para absorber la pérdida.
+
+Pero ese crecimiento no puede durar para siempre.
+
+A medida que el grupo crece, los recursos (insectos, frutas, o el territorio) empiezan a escasear. Aparece entonces un segundo límite: la capacidad de carga. Es el techo que la naturaleza impone. Si la población lo supera y sigue creciendo, el grupo colapsa.
+
+El equilibrio vive entre esos dos umbrales: lo suficientemente grande para no desaparecer, lo suficientemente pequeño para no agotar lo que lo sostiene.
+
+<ImgAndCap
+	src={AlleeGraph}
+	alt="imagen de la gráfica del umbral de allee"
+	caption="Gráfica del Umbral de Allee"
+/>
+
+En la tecnología, y seguramente en la sociedad humana, pasa algo parecido. El colapso ocurre cuando hay una saturación de usuarios o personas. Sea por parte de la oferta, o demanda. Con ambas se va a la mierda.
+
+Chen lo explica con Uber:
+
+> Existe una fina línea entre la cantidad de conductores y pasajeros. A más conductores en la red, el tiempo de espera y llegada y el precio por viaje del pasajero, disminuye. Por el otro lado, a más número de pasajeros, más conductores habrán satisfecho la oferta y más dinero podrán hacer ya que más viajes podrán hacer.
+>
+> Existe un equilibrio.
+
+Pero ¿qué pasaría si hubiera más conductores que pasajeros para hacer viajes? ¿Y si hubiera más pasajeros que conductores?
+
+## Parte 1. El problema de arrancar en frío.
+
+Los inicios siempre son lo más jodido. Pero en los productos con efectos de red, lo son todavía más: la mayoría cae antes incluso de su salida al mercado, Go-To-Market.
+
+<ImgAndCap 
+	src={ColdStart}
+	alt="gráfica de la primera parte del problema de arrancar en frío"
+	caption="Primera parte: Arrancar en frío"
+/>
+
+Mirando en retrospectiva a las compañías que tienen efectos de red y han sido exitosas, todas comparten algunas características:
+
+- Empiezan con una única red. Una red atómica que es lo suficientemente pequeña para construirla, y lo suficientemente densa como para que se queden en ella.
+- Suelen existir, como mínimo, 2 bandos: comprador / vendedor, creador / consumidor, conductor / pasajero.
+- Uno de los bandos siempre es el lado duro y el otro el fácil.
+- Siempre empiezan atrayendo y reteniendo al lado duro. Porque las redes siguen la _Ley de Pareto_, el 20% de la red produce el 80% del trabajo de una comunidad.
+- Suelen ser simples, _lean_, y priorizan la interacción entre las personas.
+
+Y mirando a las que no lo han sido, siempre ha existido una fuerza común que las lleva a colapsar, lo que Chen llama **efectos antirred**.
+
+Fuerzas que, sin una masa crítica de usuarios en los inicios, generan círculos viciosos donde la red colapsa sobre sí misma, se agota y termina desapareciendo.
+
+Y esto es lo que Chen llama _el problema de arrancar en frío_, encontrar esa mínima masa crítica que necesitas para poder arrancar.
+
+Y aunque hay varias formas de encontrar cuánto es suficiente, todas ellas dependen de tu producto.
+
+Para calcular esto de manera **aproximada**, y por ahora, de forma **cualitativa**, puedes crear una gráfica donde compares el tamaño de tu red —eje X— contra los parámetros que definen la calidad o funcionalidades de tu producto —eje Y. Es decir, tu supuesta red vs. qué hace que tu red permanezca, aka las "features".
+
+<ImgAndCap
+	src={ChartNetworkSize}
+	alt="imagen del gráfico de tamaño de red vs. parámetros de Uber"
+	caption="Red de Uber: tamaño de red vs. parámetros clave"
+/>
+
+Cuantos más parámetros y/o features añadas más fácil te será encontrar el punto de inflexión y ver cuál es la densidad de red mínima y el umbral que necesitas para aumentar el uso.
+
+En este caso ficticio para Uber, con una red entre 400 y 600 conductores empieza a aparecer el punto de inflexión del aumento de pasajeros y a partir de los 1100, los incrementos se vuelven marginales.
+
+Este umbral es sumamente importante y difícil de calcular porque cada producto y red es de su padre y de su madre y es más difícil en los inicios porque necesitas hacer suposiciones.
+
+Algunos necesitarán redes minúsculas, como Zoom o WhatsApp, que con 2 personas la red podría funcionar. Otros como marketplaces o redes sociales, que son productos asimétricos, donde existen 2 bandos como Amazon, necesitarán redes mucho mayores para alcanzar el umbral.
+
+Como estás viendo, la solución al problema de arrancar en frío empieza por entender:
+
+- Cómo incorporar la densidad mínima de usuarios que utilicen el producto
+- Las mínimas funcionalidades que encuentren valor en este, y
+- Una forma de que haya interconexiones entre los usuarios de la red.
+
+Consiguiendo esto, habrás creado una **red atómica**. La mínima red estable a partir de la cual podrás construir todas las demás.
+
+### La red atómica
+
+**Todo** producto exitoso con efectos de red en sus inicios comparte rasgos, a priori, antiintuitivos:
+
+- Una escala pequeña. Buscaban tener la mínima densidad de usuarios posibles.
+- Una propuesta de valor simple. Una o dos features clave.
+
+El objetivo es:
+
+> Construir algo lo más simple posible con un número mínimo de factores externos para crear una densidad mínima de usuarios alrededor del producto con tal de conseguir el impulso, y el conocimiento, que necesitas sin pensar en escalar o ser rentable.
+
+<OwnThoughts
+	paragraphs={[
+		"esto último considero que hay que cogerlo con pinzas. es verdad que no debes pensar en escala o ser rentable para crear la red atómica, pero sí tienes que tener un plan para serlo. la época donde daban dinero por un PowerPoint y luego ya veremos se acabó.",
+		"aunque ahora lo dan por tener un .ai, en su defensa diré que estos productos monetizan desde el día 1 y de verdad hay negocio detrás de estas, otra cosa es que los unit economics den.",
+	]}
+/>
+
+Una de las formas más sencillas de encontrar tu red atómica es buscar un **nicho**: un grupo de personas pequeño, con un interés común, unas necesidades específicas y un problema concreto.
+
+Este tipo de grupos puede ser más pequeña y específica de lo que crees. Del orden de cientos de personas y en un momento concreto del tiempo. Por ejemplo: lanzar tarjetas de crédito en una sola ciudad (Bank of America), ejecutivos de algunas empresas al final de la jornada (Uber) o personas que quieren ir a un evento en concreto y no hay hoteles (Airbnb).
+
+Lo que está claro es que cuantos más usuarios necesites para llegar a la red atómica, más difícil será crearla.
+
+<OwnThoughts
+	paragraphs={[
+		"si lo piensas bien, sobre todo Airbnb, son putas locuras que nadie habría tomado en serio, quedarse en el salón de alguien en un colchón hinchable...",
+		"te dejo también un ensayo de Paul Graham, el cofounder de Y Combinator, una de las aceleradoras más importantes del mundo, donde expone por qué es importante hacer cosas que no escalen (invirtieron en Airbnb cuando no eran nada)",
+	]}
+	asset
+	href_link="https://paulgraham.com/ds.html"
+	title_link="ir al blog de Paul Graham"
+	title_asset="Blog de Paul Graham"
+/>
+
+### El lado duro de la red
+
+Como ya te he estado diciendo, en todos los inicios de una red atómica, mires la que mires, siempre va a haber 2 partes distintas:
+
+1. El lado duro. Los que hacen el trabajo y contribuyen a la red.
+2. El lado fácil. Los espectadores. Consumidores.
+
+Todos los productos de red tienen esta segmentación. En Instagram, los creadores son la parte dura. En Airbnb, los anfitriones. Wikipedia, los redactores.
+
+Y en todas ellas, para que funcionen, tuvieron que captar al lado duro y mantenerlos satisfechos.
+
+#### Lado duro vs lado fácil
+
+Que existan, como mínimo, 2 lados en un producto con efecto de red es inherente a la naturaleza de estos efectos.
+
+Y a su vez, uno de estos siempre será el duro, el que cuesta más atraer, el que tiene flujos más complejos, el que exige un beneficio claro a cambio. Estatus. Dinero. Ventas.
+
+Sus expectativas son mayores pero a cambio, crean y aportan más valor a la red. Siguen la regla de Pareto.
+
+Por eso, cuando estás empezando un producto con estos efectos, tienes que identificar a priori **quiénes van a ser tu lado duro** y **cómo vas a satisfacer sus necesidades**.
+
+Algunas preguntas que te pueden dar pistas:
+
+- ¿Por qué utilizaría el producto?
+- ¿Qué Job-To-Be-Done resuelves?
+- ¿Cómo utilizará el producto?
+- ¿Cuál es la propuesta de valor para el lado duro? ¿Y para el fácil?
+- ¿Cómo se llega a la aplicación por primera vez, cómo se le introduce (onboarding) y en qué contexto?
+- ¿Cómo harás la retención y el engagement?
+- ¿Cuáles van a ser tus estrategias de "defensibility" para la red ante los nuevos productos y competidores?
+
+<OwnThoughts
+	paragraphs={[
+		"esto de las preguntas no es broma. en serio. en empresas en las que he trabajado, una de cosas que me ha tocado hacer es pensar en qué y cómo vamos a medir el comportamiento de los usuarios dentro de la app, qué hacen y cómo les llevo a hacer las acciones clave para que se activen, entren las 'habit loop' y se retengan.",
+		"como dato, he estado usando Amplitude como tool para medirlo y una de las claves que dan en sus guías, antes de ponerte a medir a lo loco, es pensar en la 'burning questions' y me parece un acercamiento muy interesante.",
+	]}
+	asset
+	href_link="https://amplitude.com/blog/event-tracking-decisions"
+	title_link="ir al blog de amplitude para ver las burning questions"
+	title_asset="Burning Questions de Amplitude"
+/>
+
+Responder estas preguntas requiere un conocimiento profundo del comportamiento y motivaciones de tus posibles usuarios. Qué es lo que quieren, esperan y por qué. No se trata tanto de entender qué hacen, eso te lo da la analítica de producto (en nuestro caso Amplitude) sino de entender el porqué lo hacen. Entender las motivaciones detrás de las acciones. Sus modelos mentales. Sesgos.
+
+La mejor solución para llegar a entenderlos, hablar con ellos. Necesitas que te digan aquello que quieres saber (las preguntas que quieres resolver) evitando falsos cumplidos o que te mientan a la cara y que no te des cuenta.
+
+Para sacar información y no datos, hay un libro que te recomiendo que leas y del cual tengo un resumen, [_The Mom Test_ de Rob Fitzpatrick](/biblioteca/the-mom-test). Échale un vistazo. :)
+
+#### El lado duro de las Redes Sociales (RRSS)
+
+En las RRSS es especialmente interesante el lado duro. Si te paras a pensar, las RRSS no son más que tres funcionalidades: crear, compartir y consumir. Todo lo demás gira en torno a esto.
+
+Pero ni todos los usuarios ni todas las features contribuyen por igual, Bradley Horowitz, ex-VP de Producto de Google, explicó en un ensayo cómo funcionan estas dinámicas:
+
+> 1. Solo el 1% de los usuarios (creadores) tienen la capacidad de crear contenido desde cero,
+> 2. El 10% de la población de usuarios participa activamente en las publicaciones pudiendo volverse algún día creadores, y
+> 3. El 100% de los usuarios se benefician de las contribuciones de los primeros.
+>
+> Es evidente que hay que eliminar las barreras de entrada y reducir la fricción para ser creador pero tienes que entender que no todos van a llegar a serlo por mucho que se optimice. Y está bien. No necesitas que todos los usuarios sean creadores para que la red sea valiosa.
+
+<ImgAndCap
+	src={PyramidCreators}
+	alt="imagen de la pirámide de Creators Synthesizers y Customers"
+	caption="pirámide que ejemplifica la diferencia entre creadores de contenido, lo que aporta y se pueden convertir en creadores y los espectadores. Fuente: andrewchen.com"
+/>
+
+<OwnThoughts
+	paragraphs={[
+		"esta ley también la puedes haber visto como 'La Regla del 1%' o 'La regla del 90-9-1'",
+	]}
+	asset
+	href_link="https://pubmed.ncbi.nlm.nih.gov/24496109/"
+	title_link="ir al blog donde explica la regla del 1%"
+	title_asset="Estudio donde explican la regla del 1%"
+/>
+
+Estas dinámicas generan lo que se conoce como curvas de influencia o _power law_: el 20% de los creadores acaban concentrando la mayor parte de la participación, algo muy similar al Principio de Pareto aunque esto describe lo que ocurre, pero no el porqué.
+
+Evan Spiegel, cofundador de Snapchat, abordó precisamente eso en la _Digital Design Conference_ de 2020 en Múnich comparando Snapchat, Instagram y TikTok para explicar cómo entiende él la pirámide de contenido:
+
+> Imagina que tienes una especie de pirámide donde se pueda representar las tecnologías de la comunicación. La parte más amplia, la base, son las relacionadas a la autoexpresión y la comunicación. Aquello con lo que las personas se sienten cómodas como es hablar con sus amigos todos los días. Eso es lo que hace Snapchat.
+>
+> A medida que la pirámide se estrecha, se llega a la siguiente capa, que sería el "estatus" y donde redes como Instagram brillan. Representan quién eres para el mundo. Estas tienen una frecuencia más limitada porque la gente no hace cosas "cool" todos los días.
+>
+> Y en la cima de la pirámide estaría TikTok. El talento real. Gente que ha pasado 2 horas aprendiendo un baile nuevo o piensa una nueva forma divertida y creativa de contar una historia. Son personas que realmente están creando cosas para entretener a otros. Y eso es aún más limitado.
+>
+> El contenido basado en el talento suele ser más interesante que el contenido basado en estatus [...] Todos están interesados en lo que hacen sus amigos, pero a medida que empiezas a mirar una audiencia más amplia, como influencers o gente desconocida, genera más interés el contenido que se basa en el talento que en el estatus.
+
+<OwnThoughts
+	paragraphs={[
+		"te dejo aquí el link a la conferencia. en el minuto 31 habla de esto",
+	]}
+	asset
+	href_link="https://www.youtube.com/watch?v=rW8mDQYrOnw&t=1860s"
+	title_link="conferencia de Evan Spiegel explicando la pirámide de contenido"
+	title_asset="Pirámide de contenido, Evan Spiegel"
+/>
+
+Lo complejo de esta pirámide es que la relación es inversamente proporcional, cuanto más difícil sea acceder al lado duro de la red, mayor será el valor que ofrece pero menor será el porcentaje de usuarios que participen.
+
+En las RRSS **todo** gira en torno a los creadores: qué herramientas les das para construir una audiencia y qué tan bien cierra tu producto el bucle entre el creador y su audiencia.
+
+### El producto killer
+
+Como estás viendo, entender quién es el lado duro y tener una tesis clara de por qué tu producto les va a atraer y retener no es opcional. Sin ese grupo crítico, la red atómica colapsa.
+
+Tu tesis tiene que partir de un sitio concreto: **encontrar un problema importante para el lado duro que nadie está resolviendo bien**. Lo que se encuentra en los márgenes. Lo que la gente hace por las noches después de su trabajo. Un par de ejemplos:
+
+- Imagina a creadores de contenido como Elena Verna que escriben en LinkedIn. Esta plataforma cualquier día podría cambiar y su audiencia podría verse afectada. La solución, Substack. Resuelven un problema de nicho, personas que escriben pero que quieren ser dueñas de sus audiencias.
+
+- O ponte en la situación de que tienes que hacer el viaje Valencia-Madrid de forma recurrente en coche. A la larga, los gastos gasolina, peajes y el desgaste mismo del coche se te va acumulando. ¿Qué tan dispuesto/a estarías a "vender" un asiento de tu coche que te ayude a cubrir esos gastos? Pues esto es lo que hizo BlaBlaCar.
+
+En este tipo de productos aparte de tener el problema y las partes de la red, hay algo en común: el producto que lo hizo posible era increíblemente simple.
+
+Los productos con efectos de red facilitan ante todo la **experiencia que los usuarios tienen entre sí**. Al inicio pueden parecer hasta memes de lo simple que son y las pocas cosas que se pueden hacer con ellos. No tienen defensibilidad ninguna y flirtean con lo gratuito.
+
+Es evidente que no es casualidad. Elegir un modelo en el que tienes que cobrar desde el día uno es una forma sencilla de crear fricción en una red que ya es compleja de arrancar. Las RRSS son gratuitas para la gran mayoría. Los productos SaaS y de IA siguen modelos _freemium_, uso limitado, funcionalidades restringidas, pero entrada sin barreras.
+
+Todo producto necesitará ser rentable, pero ese es un problema que tu yo del futuro resolverá después de haber construido la red, no antes.
+
+### Los momentos (anti) mágicos
+
+En este punto ya has encontrado la red mínima, tienes el producto mínimo construido y las personas que llegan encuentran valor y se quedan. Lo que en la industria se conoce, y es tan difícil de definir y medir, como tener "_Product-Market Fit_".
+
+El siguiente reto es acortar el camino entre cuando un usuario llega por primera vez y el momento en que realmente entiende y experimenta el valor de por qué existe el producto. Lo que se llama "_aha moment_", y es el destino al que tienes que llevar a cada usuario desde el primer contacto.
+
+El problema es que no sueles poder medir cuándo ha pasado y rara vez es una única acción. Y aunque Chen está de acuerdo con esto, lo que encontraron en Uber fueron métricas que te decían cuándo **no** había pasado. Lo llamaron "_zero moment_".
+
+Estos se daban cuando la red se rompía. En Uber era concreto: cuando un viajero quería hacer un viaje y no había ningún conductor cerca. La red falla, el valor desaparece y el usuario con él.
+
+Y lo jodido de estos productos con efecto de red es que los _zeros_ siguen surgiendo aún cuando tienes una red sólida y densa. El problema de arrancar en frío no es algo que solo resuelvas una vez, **tienes que abordarlo múltiples veces**.
+
+De aquí viene la importancia de construir una red de redes y no una única red. Cuando empiezas a encadenar redes es cuando los efectos de red se amplifican y la defensibilidad empieza a surgir: más crecimiento viral, más retención, una monetización más sólida.
+
+Es cuando este ciclo se vuelve repetitivo, cuando alcanzas el punto de inflexión, _tipping point_. A partir de aquí, la red empieza a crecer sola.
+
+## Parte 2 - El punto de inflexión (_tipping point_)
+
+El _tipping point_ es la segunda parte de la teoría de Chen.
+
+<ImgAndCap 
+	src={TippingPoint}
+	alt="gráfica de la velocidad del punto de inflexión"
+	caption="Segunda parte: Tipping Point"
+/>
+
+Sucede cuando el impulso empieza a ir a tu favor y necesitas enfocar las estrategias hacia grandes mercados en vez de ir por las redes pequeñas (atómicas).
+
+Chen habla aquí de 4 estrategias para ganar mercados:
+
+- _Solo por invitación_
+- _Pagar por lanzamiento_
+- _Ven por la herramienta, quédate por la red_
+- _Picapedreando_
+
+### Solo por invitación - Caso LinkedIn
+
+Unos dicen que limita el crecimiento, otros que lo hacen para corregir errores antes de escalar, y otros que es para generar expectación. Todos tienen razón. Pero es una forma sencilla de hacer que la propia red se multiplique a sí misma.
+
+Un simple link.
+
+La mayoría de estas técnicas tienen en común el "miedo a perderse algo" (_FOMO - Fear Of Missing Out_) pero no es el principal motor por el cual funcionan tan bien. Hay más factores que están en juego:
+
+- **La experiencia de bienvenida**
+
+  Las mecánicas de _solo por invitación_ generan una mejor experiencia para los nuevos usuarios.
+
+  Imagina lo siguiente:
+
+  Tu mejor amigo/a te invita a tomar unas cervezas a un bar nuevo que acaba de abrir.
+
+  Cuando llegáis tu amigo se encuentra con muchas personas que conoce pero tú a ninguna. Pero como has ido con él, te presenta e introduce a la conversación.
+
+  Al cabo de unas horas, y unas tantas cervezas, sales del bar con más amigos/conocidos que antes, habiéndotelo pasado bien y quizá, en un futuro, traigas a un amigo tuyo que sabes que podría encajar en la próxima quedada.
+
+  Ahora imagina el escenario contrario:
+
+  Tu amigo te invita a ir a ese mismo bar que acaban de abrir pero te dice que vayas entrando y haciendo amigos que él llega un tanto tarde.
+
+  Aún si eres una persona extrovertida (cosa que yo no soy), la experiencia de llegar a un lugar, de la mano de alguien y que este te presente a los que están dentro es mucho más sencillo y placentero que partir de cero con desconocidos.
+
+  Redes como LinkedIn, Slack o Facebook, en sus inicios, hicieron algo parecido. Encontraron a personas bien conectadas, que pudieran y quisieran invitar a sus amigos a formar parte de sus propias redes.
+
+  Cuanto mejor conectada estuviera una persona, antes sería invitada y a su vez, invitaría a más gente igual de bien conectada, creando un círculo virtuoso.
+
+  Para este tipo de productos, tener una acción principal que estimula al usuario **de forma activa** a conectar con otros genera una mejor experiencia inicial.
+
+- **Lanzamiento publicitario y exclusividad**
+
+  La escasez crea deseo —quien tiene acceso se siente especial, quien no lo tiene, lo quiere.
+
+  Y el deseo se contagia. Los que están dentro publican sus opiniones, comparten sus primeras impresiones, generan conversación. Los que están fuera piden invitación, hacen ruido, amplifican el producto sin que tú hagas nada. Es marketing gratuito con lista de espera incluida.
+
+  Pero más allá del ruido, el acceso temprano otorga **estatus**. Y el estatus engancha. En muchas redes sociales, llegar primero te permite elegir un nombre corto y limpio. En las webs los dominios _.com_.
+
+	<OwnThoughts
+		paragraphs={[
+			"en mi caso, me gustaría tener el dominio cz.com o cz.io pero mira lo que me costaría por no haber sido el primero. ambos posicionan igual pero es cuestión de estatus.",
+		]}/>
+
+<ImgAndCap
+	src={DomainPrice}
+	alt="imagen de lo que cuesta el dominio cz.io"
+	caption="imagen del precio que un proveedor o particular le ha puesto al dominio cz.io"
+/>
+
+- **Selecciona y mejora una red de alta calidad**
+
+	"Garbage In, Garbage Out" o "Quality In, Quality Out".
+
+	La calidad de un producto en red depende directamente de la calidad de su red inicial —y por eso las primeras incorporaciones no se dejan al azar.
+
+  Las empresas que lo hacen bien eligen a sus primeros usuarios a dedo, especialmente al lado duro.
+
+	A veces es una _waitlist_ donde los candidatos explican qué esperan del producto o qué funcionalidades necesitan, lo que permite filtrar manualmente a quienes encajan con la visión inicial. Otras veces es más directo aún: vas tú a buscarlos.
+
+	Son acciones que no escalan. Y no pasa nada, no tienen que escalar. Su función es asegurarte una red inicial sólida, de personas que entienden el producto y que, por su perfil, atraerán a otras personas igual de buenas. La calidad llama a la calidad.
+
+	<OwnThoughts
+		paragraphs={[
+			"me ha tocado hablar y llamar a usuarios más de una vez en las startups en las que he trabajado y es duro pero gratificante cuando empieza a traccionar", "esto es un gran dicho que tienen en YCombinator: _do things that don't scale_. antes, en la parte de 'La red atómica' te he dejado un escrito de Paul Graham, co-founder de YCombinator, ahora te dejo un video de Gary Tan, actual presidente y CEO de YC explicando el porqué de esto:"]}
+			asset
+			href_link="https://www.youtube.com/watch?v=IjPDIjge81o&t=19s"
+			title_link="video de youtube donde se discute el make something do not scale"
+			title_asset="Video de YouTube donde lo explica"
+		/>
+
+### Ven por la herramienta, quédate por la red - Caso Instagram
+
+Esto sería una definición vaga de un producto _killer_. Una herramienta tan útil y fácil de usar en comparación al resto, que no se puede pasar por alto.
+
+La ejemplificación de esto podría ser Instagram:
+
+En 2009 Ryan Dorshorst y Lucas Buick publicaron en la App Store Hipstamatic, una herramienta donde podías hacerte fotos y aplicarle filtros y aunque generaba fricción al usarla, tardaba 10 segundos entre foto y foto, costaba cada una de ellas 1,99$ y tenías que publicarlas en otras redes. Aún así, un año después fueron nombrados como una de las mejores 4 aplicaciones según _Apps of the Year_.
+
+Por esa misma época, al otro lado de Estados Unidos, Kevin Systrom y Mike Krieger, creaban Burbn. Una aplicación para registrar lugares, hacer planes con amigos y compartir fotos.
+
+Era funcional pero como estaban empezando a ser costosa de entender decidieron hacer una nueva versión, dejando solo las funcionalidades más importantes: subir fotos, comentar y dar _likes_. Con esta simplificación llevaron la app a 100.000 descargas en la primera semana.
+
+Y aún siendo un éxito rotundo, se dieron cuenta de que la mayoría de los usuarios no seguían a otros, sino que la usaban como un _Hipstamatic_ gratuito y con mejor diseño.
+
+Este _pivot_ de Burbn fue el _killer_ que desbancó a Hipstamatic, y que después fue adquirida por 1.000 millones por Facebook. Y sí, en el _pivot_ también cambiaron su nombre de Burbn a Instagram.
+
+Hipstamatic era una buena herramienta pero al hacer Burbn el pivot, la única defensibilidad que tenía Hipstamatic desapareció y fue desbancada porque además de ser similar, tenía una red detrás.
+
+<OwnThoughts
+	paragraphs={[
+		"este es el artículo del que saca Chen el 'Ven por la herramienta, quédate por la red'"]}
+	asset
+	href_link="https://cdixon.org/2015/01/31/come-for-the-tool-stay-for-the-network"
+	title_link="link donde se explica el concepto 'ven por la herramienta'"
+	title_asset="Post de CDixon"
+/>
+
+Esta estrategia ayuda al producto a que la gente llegue a él y lo usen, aunque no haya nadie en la red.
+
+<ImgAndCap 
+	src={ToolNetworkGraph}
+	alt="imagen de la gráfica de ven por la herramienta y quédate por la red"
+	caption="Intersección entre tool/network"
+/>
+
+Para productos que combinan desde un inicio herramienta + red, y siendo la herramienta el principal canal de adquisición, el reto reside en: _¿cómo rompes la barrera de solo usar la herramienta y que empiecen a formar parte de la red?_
+
+La respuesta a esta pregunta, es con otra pregunta: _¿qué tan integrada está la herramienta a la red_?
+
+La brecha entre el producto y la red debe ser lo más pequeña posible. Necesitas construir un puente que sea inevitable cruzar y esto **solo depende de producto**. No marketing. No publicidad. No dinero.
+
+Luego podrás usar marketing, publicidad y dinero para que crucen más rápido, pero si no está construido y no es fácil e intuitivo cruzar, no lo harán.
+
+Muchos productos que han resuelto estas preguntas siguen el patrón de _subir contenido - interactuar con el contenido_:
+
+| Patrón                                       | Red                             |
+| :------------------------------------------------ | :------------------------------ |
+| Crear + compartir con otros                       | Instagram, YouTube, Strava      |
+| Organizar + colaborar con otros                   | Pinterest, Figma, Notion        |
+| Sistema de registro + mantenerse al día con otros | OpenTable, GitHub, Monday       |
+| Buscar + contribuir con otros                     | Trustpilot, TripAdvisor, Reddit |
+
+### Pagar por lanzamiento - Los cupones
+
+Crear una red es caro. Muy caro. Y al inicio, aún más caro.
+
+No hay nada ni nadie. Necesitas crear inercia al inicio que haga que este _flywheel_ y la primera red empiecen a andar. El objetivo es alcanzar el punto de inflexión lo antes posible, tener efectos de red positivos y, solo entonces, empezar a pensar en rentabilidad y cómo cortar ciertos incentivos económicos que has tenido que usar para arrancar.
+
+Este es el motivo principal por lo que es tan caro crear redes.
+
+Hay muchos incentivos económicos que puedes usar para acelerar el crecimiento, pagar a creadores, dar dinero o, la que inventó CocaCola en 1888, dar cupones.
+
+CocaCola tenía la hipótesis de: si la gente probaba su producto, se volvería adicta. La forma que se les ocurrió fue dar unas tarjetas canjeables en tiendas que tenían dispensadores que decían: _Esta tarjeta te da derecho a un vaso de CocaCola_.
+
+Se canjearon unos 8,5 millones de vasos pero el objetivo lo cumplieron: llegar a todos los estados de EE.UU.
+
+En el caso de Uber y los modelos de negocio de este estilo, abrir nuevas ciudades consiste en comprar la parte dura de la red. En Uber compraron un listado en la sección de empleos de Craigslist ofreciendo un pago de 30€/hora independientemente de los viajes que hicieran por inscribirse.
+
+Más adelante, cuando consiguieron la masa crítica, el siguiente incentivo fueron las recomendaciones _Regala \$200 y gana \$200 cuando un amigo se inscriba para conducir_ y las tarifas dinámicas.
+
+Conforme vas ganando mercado y relevancia, las estrategias se van sofisticando pero casi siempre puedes recurrir a **si tienes el problema del huevo y la gallina, compra la gallina**.
+
+Pero **las palancas financieras como forma de crecimiento** son movimiento peligroso y solo debe ejecutarse en el momento adecuado, aquí el _disclaimer_:
+
+> Mientras estableces una red inicial no tiene sentido que si eres empresa emergente con pocos recursos inviertas mucho dinero en empezar. En su lugar, los equipos deben centrarse en lo básico: averiguar el mercado objetivo adecuado y crear las funcionalidades iniciales del producto.
+>
+> Necesitas dar con el producto estrella y demostrar que se puede conseguir una red atómica antes de echar mano de la palanca financiera.
+>
+> Y solo después de haber conseguido lanzar de forma **fiable** la primera red, puedes usar estas palancas financieras para generar velocidad y momento.
+
+### Picapedreando - Caso Reddit
+
+Este concepto viene de la serie _Los Picapiedra_, concretamente de su coche, _el troncomóvil_, un coche hecho de piedra, troncos y pieles pero que funcionaba con tracción animal. Concretamente las piernas de Pedro, el protagonista, que para hacerlo funcionar tenía que correr. Ineficiente, pero útil.
+
+<ImgAndCap 
+	src={FlinstoneFamily}
+	alt="imagen de la familia picapiedra en el troncomovil"
+	caption="Picapiedras en el troncomóvil"
+/>
+
+Se aplica cuando ya entiendes tu producto y sabes quién es el lado duro, pero necesitas moverlo manualmente para que arranque. Reddit, Quora y DoorDash son el ejemplo perfecto: los fundadores de Reddit crearon cuentas falsas para simular actividad; los de Quora publicaban ellos mismos preguntas y respuestas; y en DoorDash mostraban restaurantes sin su conocimiento, compraban la comida en persona y la repartían ellos mismos.
+
+No escalaba pero validaba.
+
+Este _picapedreo_, se puede hacer de 3 formas:
+
+1. Totalmente manual.
+2. Híbrido. Donde el software o la Inteligencia Artificial (AI) sugiere qué hacer y la persona ejecuta.
+3. Totalmente automatizado. Los algoritmos lo hacen todo.
+
+Hoy, con herramientas como n8n o Claude Code, tiene poco sentido quedarse en el manual puro. La automatización te libera para centrarte en entender tu producto y a los usuarios.
+
+Eso sí esta estrategia, al igual que la de los incentivos con cupones u ofertas, tiene fecha de caducidad. Al igual que necesitas una estrategia de entrada, necesitas una de salida. El objetivo es arrancar la rueda, no empujarla para siempre.
+
+## Parte 3 - Velocidad de escape
+
+Cuando un producto tiene éxito y empieza a escalar, a menudo se dice que ha alcanzado la **velocidad de escape**. La leyenda dice que a partir de este punto, el producto empieza a crecer en forma de "J" y todo es más sencillo.
+
+Adivina. No es tan así.
+
+El reto en esta fase no es llegar a la velocidad de escape, es mantenerla. Y eso requiere un enfoque distinto, porque lo que llevó al producto de 0 a 1 no es lo que lo llevará de 1 a 10.
+
+Los efectos de red pasan a ser el motor principal de crecimiento, y la definición clásica _a más usuarios, más valor_ se queda corta. Para Chen, los efectos de red se descomponen en tres subefectos: retención, adquisición y monetización.
+
+<ImgAndCap 
+	src={EscapeVelocity}
+	alt="gráfica de la velocidad de escape"
+	caption="Tercera parte: Velocidad de Escape"
+/>
+
+### El trío de fuerzas
+
+Hablar de los efectos de red en general es útil para entender los conceptos mínimos necesarios, pero para poder actuar sobre ellos, necesitas desglosarlos y actuar sobre **todos** ellos.
+
+- Los **efectos de adquisición** son la capacidad de un producto de aprovechar su red para adquirir nuevos usuarios a través de ella reduciendo los costes de adquisición.
+
+- Los **efectos de retención** describen la capacidad que tiene una red de retener a los usuarios cuanto más densa es esta. Entendiéndose densidad no solo como cantidad de usuarios sino también a la cantidad de casos de uso del propio producto y el valor que los usuarios perciben de él.
+
+- Y los **efectos de monetización** son la capacidad de un producto de red acelerar su monetización, reducir costes y mejorar el modelo de negocio a medida que la red crece encontrando así más puntos de contacto para dicha monetización.
+
+Este trío de fuerzas es tan importantes porque los resultados clave para el equipo de producto siempre son: **usuarios activos e ingresos**. Siendo los ingresos un subproducto de los usuarios activos y los ingresos medios que genera cada uno de estos usuarios.
+
+Los equipos de producto usan estos _inputs_ en 3 "simples" fórmulas para calcular los _outputs_ que les interesan: ganancia, pérdida y retención de usuarios y los ingresos (revenue):
+
+- **NNU (Net New Users)** — Mide el crecimiento neto del periodo:
+
+$$
+\text{NNU} = \text{Usuarios Adquiridos} - \text{Churn} + \text{Usuarios Resucitados}
+$$
+
+- **Active Users** — Mide el total de usuarios activos sumando el crecimiento neto a los usuarios que lograste retener:
+
+$$
+\text{Active Users} = \text{NNU} + \text{Usuarios retenidos (mes pasado)}
+$$
+
+- **Revenue** — Mide los ingresos totales multiplicando tu base activa por el gasto promedio:
+
+$$
+\text{Revenue} = \text{Active Users} \times \text{ARPU}
+$$
+
+Donde ARPU es _Average Revenue per User_ o ingreso promedio por usuario.
+
+Y para los productos con una red densa y activa, estos _outputs_ se ven beneficiados.
+
+#### Efectos de retención
+
+La **retención es la métrica más importante** para entender el valor real de un producto. Y la realidad, la mayoría de las veces, es dura: el 70% de los usuarios que instalan una app por primera vez no vuelven al día siguiente. A los tres meses, el 96% ya no está activo.
+
+Una curva de retención sana debería aplanarse en algún punto antes de llegar a cero. Eso rara vez ocurre y tienes que dar por sentado que vas a perder más del 80% de tus usuarios al inicio.
+
+Como punto de referencia para entender qué es buena o mala retención, Chen en Andreessen Horowitz (a16z) suele invertir en empresas que tengan curvas de retención similares a:
+
+- 60% de la retención el primer día
+- 30% después del séptimo día, y
+- 15% después del día 30.
+
+Esto tómatelo como una meta mínima a la que llegar aunque siempre hay mayores o incluso que se dan la vuelta y forman una sonrisa (significa que los usuarios perdidos están volviendo). Este último sería un caso ideal, pero que puede pasar.
+
+Aunque los porcentajes de Chen en a16z y las curvas en forma de sonrisa son _outliers_, hay ciertas estrategias que les permiten aumentar la retención:
+
+- Nuevos casos de uso
+- Loops de retención
+- Resurrección de usuarios
+
+Pero recuerda siempre que _si un usuario no está retenido es porque no ha conseguido ver el valor del producto_ y antes de ponerte a crear nuevos casos de uso, deberías hablar con tus usuarios y entender por qué está pasando.
+
+<OwnThoughts
+	paragraphs={[
+		"apostaría lo que fuera, y estoy seguro de que no me equivocaría, que gran parte de estos outliers de a16z tienen al menos 1 de los 4 fits que Brian Balfour nombra en su ensayo:"]}
+	asset
+	href_link="https://brianbalfour.com/four-fits-growth-framework"
+	title_link="link a 4 fits de brian balfour"
+	title_asset="Four Fits For $100M+ Growth"
+/>
+
+<OwnThoughts
+	paragraphs={[
+		"también escribió otro ensayo relacionado a los 4 fits pero actualizado para la era de la AI"]}
+	asset
+	href_link="https://www.reforge.com/blog/four-fits-growth-framework"
+	title_link="link a 4 fits en la era de la IA de brian balfour"
+	title_asset="Four Fits For $100M+ Growth in the AI Era"
+/>
+
+**Los nuevos casos de uso impulsan la retención**
+
+Los casos de uso son las diferentes formas en las que los usuarios obtienen valor a través de usar tu producto. Cuanto más valor puedas aportar en distintos contextos de ese usuario, más razones tendrá él para volver.
+
+Y esto depende casi enteramente de los equipos de producto, igual que reducir la brecha entre la red y el propio producto. Marketing puede ayudar en la adquisición, pero es el producto en sí, cómo está construido, para qué está hecho, lo que determina con qué frecuencia vuelve un usuario y por qué.
+
+Para trabajar en los casos de uso, el equipo de producto necesita segmentar. Y aunque puede parecer atractivo segmentar por ingresos por usuario, no es lo mismo que segmentar por valor recibido.
+
+Por tanto, la segmentación útil parte de las **métricas que hayas definido como valor real para el usuario** como _lifetime value_, frecuencia de uso, o algunas acciones o conjuntos de estas en un determinado periodo de tiempo.
+
+<OwnThoughts
+	paragraphs={[
+		"sería un ejercicio parecido al de definir la _North Star Metric_, donde tienes que encontrar una métrica que englobe tanto el valor para el usuario, o grupo de estos en el caso de redes o marketplaces, como para tu negocio"
+	]} 
+/>
+
+Encontrar estas métricas y segmentar a los usuarios en cohortes acorde a ellas se consiguen a través de un conocimiento profundo tanto de los usuarios (por lo general, hablando con ellos), como del producto y el problema que resuelves.
+
+La importancia de hablar bien con usuarios te permite entender qué ven y qué acciones realizan los segmentos con mayor compromiso para poder extrapolarlo a los segmentos con menor engage.
+
+Una de las formas más comunes de crear este engage es educando a los usuarios. Mostrar cómo otros usan el producto y cómo les pueden ayudar. Tienes que hacerles ver qué pueden hacer más cosas (de forma natural y orgánica) con tu producto.
+
+**Loops de retención**
+
+Para cada producto, hay un loop distinto. Por ejemplo y de manera muy simplificada:
+
+- **Redes sociales**:
+
+	<ImgAndCap 
+		src={SocialMediaLoop}
+		alt="loop para redes sociales"
+		caption="Loop simple de creadores de contenido"
+	/>
+
+- **Marketplaces**:
+
+	<ImgAndCap 
+		src={MarketplaceLoop}
+		alt="loop para marketplace"
+		caption="Loop simple del marketplace de amazon del libro Good To Great"
+	/>
+
+Conceptualizar los loops de esta forma te ayuda a entender, de manera muy básica, cómo funcionan y cómo puedes incidir y mejorar cada una de las etapas.
+
+<OwnThoughts
+	paragraphs={[
+		"un libro muy bueno para indagar más sobre loops y flywheels es Good to Great que estoy pendiente de subir el resumen :) pero por ahora te dejo el link a Amazon"]}
+	asset
+	href_link="https://www.amazon.es/Good-Great-Monograf%C3%ADas-Jim-Collins/dp/8417963170/ref=sr_1_1"
+	title_link="link a amazon españa para comprar el libro"
+	title_asset="Link a Amazon (sin afiliados) para comprar el libro"
+/>
+
+Aunque para indagar en cada uno de los pasos necesitas hacerte preguntas. Una lluvia de ideas, un framework de priorización y unos conceptos mínimos de experimentación.
+
+<OwnThoughts
+	paragraphs={[
+		"la experimentación no siempre puede ser un A/B testing. cuando no tienes una masa de usuarios suficiente, no te servirá de nada. nunca vas a encontrar significancia estadística, es decir, no te dirá qué funciona o no.", "en casos así es más sencillo, y viable, probar con otros métodos más 'predecibles' como causal impact o before/after."]}
+	asset
+	href_link="https://google.github.io/CausalImpact/CausalImpact.html"
+	title_link="link al repo de google de causal impact"
+	title_asset="Repo de Google para implementar Causal Impact en R"
+/>
+
+**Resurrección de usuarios**
+
+Trabajar con usuarios que han hecho churn es complejo y difícil de ver una mejora. Más allá de la utilidad para entender los motivos de por qué se fueron y trabajar en ellos en los siguientes cohorts, la conversión es ínfima.
+
+Las personas que deciden abandonar un producto, **después de haberlo usado**, son complejas de recuperar. Suelen tener una opinión bien formada de por qué se van.
+
+<OwnThoughts
+	paragraphs={[
+		"hago énfasis en 'después de haberlo usado' porque son las personas que tienen esa decisión formada.", "podemos agrupar a los usuarios que te abandonan en 3 grupos: los que por algún motivo entraron al producto pero no son el usuario target, usuarios que, siendo el target, abandonan el producto sin hacer ninguna acción relevante en él, y los usuarios que, después de haber experimentado el valor del producto y haber hecho las acciones core, se van.", "los primeros te deberían darte igual, es ruido. en el segundo caso, tu prioridad es entender cómo puedes hacerles llegar antes ese 'aha moment' reduciendo el 'time to value'. y en estos últimos es en los que tienes que centrar tu atención, han experimentado el valor, saben qué haces y qué problema resuelves y aún así han decidido irse.", "necesitas entender los motivos de estos últimos. necesitas poder hablar con ellos, que te concedan una charla, aunque para ello necesites hacer alguna transacción a cambio."]}
+/>
+
+Y aunque la resurrección es igual de complicada en todos los productos, los que tienen efectos de red tienen una ventaja oculta. Pueden usar el propio producto y la red del usuario "muerto" para incentivar su regreso.
+
+Haciendo que la curva de retención pueda llegar a darse incluso la vuelta y tomar una forma de sonrisa.
+
+<ImgAndCap 
+	src={RetentionCurves}
+	alt="gráfica de comparación entre curvas de retención"
+	caption="Comparación entre curvas de retención"
+/>
+
+#### Efectos de adquisición
+
+Es la capacidad de un producto de traer nuevos usuarios a medida que este escala. Y aunque hay varias formas, una de las más poderosas que tienen las redes es la viralidad.
+
+<OwnThoughts
+	paragraphs={[
+		"te vuelvo a insistir, la viralidad SOLO funciona gracias al producto. es la forma en la que está construido y pensado la que tiene la capacidad de incentivar la viralidad. no marketing. no publicidad. no incentivos. :)"]}
+/>
+
+Chen distingue entre la viralidad como "marketing viral" y la viralidad orientada por el producto. En la primera, marketing toma un producto sin efectos de red y construye una campaña alrededor. En la segunda, la viralidad nace de la propia experiencia: el producto, por cómo está construido, genera adquisición por sí mismo.
+
+Este segundo tipo de loops tiene una métrica maestra una _lagging metric_ que mide qué tan viral es el producto: el _k-factor_, o factor viral.
+
+$$
+\text{k-factor} = \text{invitaciones} \times \text{conversion}
+$$
+
+El problema con las lagging metrics es que no puedes actuar sobre ellas directamente, son el resultado, no la causa. Necesitas encontrar las _leading metrics_: las palancas que sí puedes mover, y que repercuten en el k-factor.
+
+La forma más sencilla de encontrarlas es bajar el loop a tierra. Coge papel y dibuja el bucle divídelo en los pasos más pequeños posibles, cada uno es una acción única que hace un usuario y que irremediablemente lo lleva al siguiente hasta cerrar el bucle y cada conexión entre pasos tiene que ser una _leading metric_ en la que puedes actuar de manera directa.
+
+<ImgAndCap 
+	src={StravaLoop}
+	alt="loop viral de adquisición de strava ejemplificado con métricas"
+	caption="Loop viral de adquisición de Strava"
+/>
+
+Este es un caso simple de cómo Strava, gracias a tener la capacidad de descargar estadísticas, consigue un loop de adquisición viral gratis. Donde los cuadrados naranjas son las métricas que podrían medir el equipo de producto para llegar de un paso a otro.
+
+#### Efectos de monetización
+
+La tesis de la monetización se basa en: aumentando la retención y adquisición de usuarios aumentas la rentabilidad tanto del producto como de los usuarios individuales.
+
+Al principio, el lado duro necesita incentivos para unirse pero a medida que la red crece y su valor aumenta, esos incentivos pueden reducirse. El propio crecimiento de la red con los nuevos usuarios y la mayor retención, empieza a compensar la inversión inicial.
+
+Para muchos de estos productos, el modelo de negocio es algún tipo de conversión: de _free_ a _premium_, aumentar el número de transacciones o el tiempo que pasan en el producto. Y a medida que creces, las economías de escala salen a la luz y más eficiente se vuelve reteniendo, adquiriendo y por último, monetizando. Este es el orden correcto.
+
+Y aún teniendo el _expertise_ y la escala, pueden salir muchas cosas mal.
+
+## Parte 4 - El techo
+
+<ImgAndCap 
+	src={Roof}
+	alt="gráfica de la cuarta parte del problema de arrancar en frío, el techo"
+	caption="Cuarta parte: El techo"
+/>
+
+Ninguna curva de ningún producto tiene un crecimiento constante. Van a trompicones, escalones. A medida que alcanza ciertas escalas, hitos o a una saturación, las curvas tienden a aplanarse y a debilitarse los efectos de red con ello.
+
+Se las conoce como _curvas S_ y son el bendito problema que los equipos de producto deben solventar a través de nuevos productos, casos de uso e innovación para impulsar la siguiente curva de crecimiento.
+
+<ImgAndCap 
+	src={UseCasesCurves}
+	alt="gráfica de comparación entre el caso de uso y el aumento de retención. curvas s"
+	caption="Superposición de casos de uso y curva S"
+/>
+
+No todas las desaceleraciones tienen los mismos motivos pero algunos de los comunes son:
+
+- Velocidad de crecimiento
+- Saturación
+- Degradación de los canales
+- Problemas con la parte dura
+- Malos contextos
+- Malos algoritmos
+
+### Falta de velocidad de crecimiento
+
+El mundo startup requiere un crecimiento y una ingesta de capital exponencial con tal de contrarrestar fuerzas como: competidores e incumbentes, degradación de la red al inicio o encontrar _Product-Market Fit_.
+
+Sumado a esto, para que una startup pueda levantar capital de _VCs_ (venture capital, inversores privados) tiene que demostrar que puede alcanzar valoraciones de mínimo $1.000 millones (condición de unicornio) en plazos de 7 a 10 años.
+
+<OwnThoughts
+	paragraphs={[
+		"para que a un VC le salga rentable la inversión, espera que en esos años, como mínimo, le hagas un x10"]}
+/>
+
+Siendo consciente de estas premisas, necesitas hacer ingeniería inversa y trazar un plan para encontrar cuáles van a ser las métricas y los _Unit Economics_ que necesitas alcanzar año tras año para llegar como mínimo a esa valoración (suponiendo que quieres inversión externa).
+
+Y aunque cada industria tiene unos crecimientos esperados, Chen propone una fórmula genérica, tasa de crecimiento, para llegar a ese estado de unicornio:
+
+$$
+\text{Growth Rate} = \left(\frac{\text{TR} - \text{IR}}{\text{IR}}\right)^{\frac{1}{Y}}
+$$
+
+Donde:
+
+- **TR - Target Revenue. Ingresos objetivo:** ingresos a los que tienes que llegar para concederte el estatus de unicornio. Cada industria tiene unos estándares, para un SaaS es 100 millones de ingresos recurrentes anuales (_ARR - annual recurring revenue_), para un marketplace son 200 millones.
+
+- **IR - Initial Revenue. Ingresos iniciales:** son los ingresos recurrentes anuales con los que partes. Lo puedes calcular únicamente después de haber llegado a _Product Market Fit_, si no, es humo.
+
+- **Y - Years. Años:** número de años que te quedan desde que has empezado a tener ARR hasta llegar al décimo año. Por ejemplo, si tardas 2 años en tener un ARR **predecible**, te quedan 8 años (X = 10años - 2años).
+
+Imagina que tienes una marketplace y que tardas 4 años en encontrar _Product Market Fit_ y tener un ARR de \$1 millón. Partiendo del objetivo de facturar mínimo \$200M para entrar en la condición de unicornio en menos de 10 años:
+
+$$
+\text{Tasa de Crecimiento} = \left(\frac{200M - 1M}{1M}\right)^{\frac{1}{6}} \approx 2.4
+$$
+
+Una tasa de crecimiento de mínimo x2.4 año tras año durante los próximos 6 años.
+
+Aunque puede no ser lineal, también podrías crecer x5, x4, x3, x2, x1.5 y x1.5. Lo importante es llegar y no tanto el cómo lo hagas.
+
+Si quieres levantar capital y avanzar más rápido necesitas conocer el juego del _VC_ y los estándares que esperan en cada industria.
+
+<OwnThoughts
+	paragraphs={[
+		"no crecer al ritmo que un VC espera, no significa que la startup no sea valiosa. solo que para ellos no creces lo suficientemente rápido o existen otros factores como cuota de mercado o rentabilidad que hacen que no puedas devolverle su inversión en un x10 en menos de 10 años.",
+		"es un caso de 'no eres tú, soy yo'.",
+	]}
+/>
+
+### Saturación
+
+> La saturación del mercado limita el número total de personas en la red. Mientras que la saturación de la red, degrada la eficacia de la retención y engagement a largo plazo.
+
+El éxito tiene un efecto secundario inevitable: la saturación. Cuando llegas a ese punto, la tentación es optimizar, una pequeña mejora puede traducirse en ingresos significativos a corto plazo pero a la larga, la relación esfuerzo-beneficio se vuelve negativa y la única opción es innovar, alrededor del producto, de la red, o de ambos.
+
+**Evolución del producto**:
+
+La innovación en producto se basa en encontrar nuevos **casos de uso** que permitan a los usuarios usar el producto de más formas con tal de aumentar la retención. Buscas **superponer curvas de crecimiento**.
+
+<OwnThoughts
+	paragraphs={[
+		"tengo pendiente hablar sobre 'cómo encontrar casos de uso'. actualizaré este resumen y pondré aquí un enlace en un futuro :) mientras tanto, te dejo un enlace a Figma donde lo explica",
+	]}
+	asset
+	href_link="https://www.figma.com/resource-library/what-is-a-use-case/"
+	title_link="ir al blog de Figma para descubrir qué son los use cases"
+	title_asset="¿Qué son los casos de uso?"
+/>
+
+**Evolución de la red**:
+
+Es contraintuitivo, pero **cuanto más crece una red, menos vale cada nueva conexión**. El engagement cae y las interacciones se vuelven más superficiales, no aporta lo mismo la conexión número 7 que la número 1.000.
+
+Las redes iniciales son las más maduras y valiosas, es donde se concentra el core del negocio porque el producto se construyó alrededor de ellas. Y el problema acaba siendo el mismo que con los casos de uso: la red está tan optimizada que cualquier acción adicional se vuelve marginal.
+
+Para seguir creciendo cuando la red llega a este punto, tienes 2 estrategias:
+
+- **Teoría de los Usuarios Adyacentes**
+
+  Esta estrategia la propuso Bangaly Kaba, ex VP de Growth de Instagram, y se basa en la siguiente tesis: dentro del producto existen redes adyacentes a la red principal que, por alguna razón, tienen una experiencia deficiente o no están del todo integradas. El objetivo es identificar ese cohorte, "olvidarte" de core y convertir este nuevo grupo de usuarios en tu foco con tal de igualar la experiencia y engagement.
+
+  Puede haber varios conjuntos de "nuevos" usuarios y que cada uno de ellos sea deficiente por un motivo. Features que aún no existen. Creadores de contenido o celebridades que aún no se han unido a la red. O incluso el idioma. Y se vuelve aún más complejo cuando esta red adyacente forma parte del lado duro, porque necesitarás evolucionar el producto y la oferta para atender esas nuevas necesidades.
+
+  Cada red adyacente trae consigo unas virtudes y problemas que tendrás que tener en cuenta cuando vayas a priorizar el segmento al que atacar.
+
+  Dentro de la red de un producto existen redes más pequeñas que comparten ciertos aspectos: idioma, cultura o comportamientos que los hacen parte del mismo cohorte que pueden no estar tan optimizadas como la red principal.
+
+  <OwnThoughts
+  	paragraphs={[
+  		"te dejo un link al post que escribió Chen sobre esto por si quieres indagar más sobre esta teoría:",
+  	]}
+  	asset
+  	href_link="https://andrewchen.com/the-adjacent-user-theory/"
+  	title_link="ir al blog de Chen para ver la teoría de los usuarios adyacentes"
+  	title_asset="Teoría de Usuarios Adyacentes"
+  />
+
+- **Evolución geográfica**
+
+  El mismo principio aplica al territorio: expándete hacia redes directamente adyacentes a la actual, no saltes a mercados sin conexión.
+
+  Para un producto hiperlocalizado esto es obvio — se expande ciudad a ciudad. Pero para otros, las "nuevas geografías" pueden significar añadir nuevos idiomas o nuevas formas de pago, lo que se podría llamarse tropicalización del producto.
+
+  Tinder empezó en la University of Southern California y se fue expandiendo a través de otras universidades: los mismos estudiantes de la USC podían estar conectados con estudiantes de Stanford, haciendo que la red adyacente más natural fueran otras comunidades universitarias. Slack siguió un patrón similar pero no físico: las redes adyacentes eran empresas del mismo sector donde los trabajadores se conocen y comparten grupos.
+
+  Para que una red sea adyacente, tienen que compartir características psicológicas y/o demográficas con casos de uso y Jobs To Be Done en común, no tiene por qué haber proximidad geográfica. España y México aún con un mismo idioma, los mercados no tienen mucho en común.
+
+### Degradación de los canales
+
+Todos los canales de marketing se degradan con el tiempo. Todos, email, redes sociales, SEO. Y aunque tienen ventaja y un cierto retraso en la degradación, les llega.
+
+El loop de adquisición en estos productos es simple en teoría: un usuario descubre el producto a través de una invitación, lo usa y a su vez invita a otros. Una cadena que se retroalimenta sola.
+
+El problema es que esa cadena es frágil. Si el producto envía demasiadas notificaciones o emails, los usuarios empiezan a ignorarlos. Y cuando eso pasa, los que los enviaban dejan de hacerlo porque no sirven de nada. El loop se rompe y el k-factor cae.
+
+Imagina que tienes 100 usuarios y tu _k_ = .75:
+
+Con los primeros 100 usuarios, atraerías a 75 nuevos. Estos 75, traerían a 56 nuevos, que a su vez atraerían a 42 y así sucesivamente hasta agotar el loop trayendo un total aproximado de 290 nuevos usuarios por cada 100.
+
+Imagina que tu canal se degrada un 50%, _k-factor_ = 0.35.
+
+De 100 usuarios iniciales, solo atraes a 55 nuevos.
+
+Una disminución aproximada del 50% en _k_ en ese canal se traduce en alrededor de 80% menos de nuevos usuarios. El bucle se agota 3x antes. Para agotar el bucle de _k_ = .75 necesitas 14 ciclos mientras que para _k_ = .35, solo 4 ciclos.
+
+<ImgAndCap 
+	src={kfactorCompa}
+	alt="gráfica de comparación k factors"
+	caption="Comparación entre k-factor"
+/>
+
+La solución a la degradación es:
+
+1. Aceptar que va a pasar, y
+2. Añadir nuevos canales.
+
+La degradación de los canales es inevitable. Va a pasar. Lo único que puedes hacer es anticiparte e investigar qué canales se adaptan mejor a tu producto y contratar personas que hayan jugado en este terreno.
+
+### Problemas con la parte dura
+
+La mayoría de productos con dos lados han tenido problemas con el lado duro en algún momento. Los hosts de Airbnb cuando se modifican las condiciones de la plataforma. Los vendedores de Amazon cuando cambian las políticas. Los creadores de Instagram cuando toca el algoritmo. En todos los casos, cuando la plataforma toma una decisión y el lado duro la sufre.
+
+La única forma de anticiparse a estas fricciones es cultivar y cuidar esa relación antes de que surjan. El lado duro es la columna vertebral de la red y tratarlo como tal significa algo concreto: impulsarlo hacia la profesionalización. Animar a los actores más exitosos a seguir creciendo, acompañarlos en ese proceso, profesionalizarlos.
+
+**¿Cómo profesionalizar la parte dura de la red?**
+
+Tienes 2 vías:
+
+1. **A través de profesionales desarrollados por la propia red**
+
+   Algunos usuarios empiezan de forma discreta, vendiendo poco, con pocos seguidores, atrayendo pocos usuarios. Con el tiempo escalan, entienden cómo funciona el canal y aprenden el _playbook_. Los más exitosos acaban convirtiéndolo en su trabajo, y algunos llegan a construir marcas o empresas enteras sobre esa red.
+
+2. **Mediante profesionales externos a la red**
+
+   Cuando una red se hace grande, rica y diversa, deja de ser una plataforma y pasa a ser una **Economía**. El ecosistema es lo suficientemente estable como para que actores externos entren y ofrezcan servicios a sus usuarios, algo especialmente valioso cuando la adquisición del lado duro empieza a ralentizarse. El ejemplo más claro es cuando Microsoft empezó a desarrollar apps para iOS.
+
+Hay un matiz importante en todo esto. Los primeros miembros del lado duro llegaron por curiosidad o por diversión. Los que llegan después, vienen a resolver un problema concreto, y si no los preparas para usar tu producto, se irán. La saturación cambia el perfil del lado duro, y si no evoluciona el producto con él, la red se resiente.
+
+Y la profesionalización conlleva una simbiosis de poder entre tú, como producto, y el lado duro. Puedes aceptarlo y trabajar en ellos o negarte y ver cómo la red se degrada con el tiempo.
+
+### Malos contextos
+
+Toda red crea en sus inicios una filosofía y una forma de actuar no escrita, una cultura implícita que hace que sus usuarios se sientan parte de algo. Pero con el tiempo, esa cultura puede volverse frágil y susceptible al colapso de contexto: un problema sutil y casi exclusivo de los productos en internet.
+
+Ocurre cuando demasiados contextos distintos convergen en un mismo espacio. Lo que antes era una red con normas claras y un ambiente seguro se convierte en un lugar donde los usuarios piensan dos veces antes de publicar porque puede volverse en su contra. LinkedIn es el ejemplo más claro, una red donde la gente sube contenido de su trabajo con su nombre real, lo que digan afecta directamente a su reputación.
+
+Aunque hay algunas características que permiten a los productos navegar el colapso del contexto:
+
+- **Redes de redes**
+
+  Los productos que permiten a sus usuarios reagruparse en comunidades cerradas o semiprivadas tienen una resistencia natural al colapso. Aunque haya millones de usuarios, cada persona puede encontrar un espacio donde el contexto esté controlado y se sienta segura participando.
+
+  Las apps de mensajería son el ejemplo más obvio: da igual cuántos usuarios tenga WhatsApp, eso no afecta a lo que dices en un grupo de amigos. Incluso en redes sociales como Instagram existe una regulación del contexto a través del producto: mejores amigos, grupos privados, o cuentas secundarias.
+
+- **Autorregulación**
+
+  Otro fenómeno que aparece con la escala es el spam y los trolls. Cuando sucede, la propia red empieza a degradarse y los usuarios empiezan a desconfiar de personas que no conocen, lo que suele acabar con la propia red.
+
+  Una solución escalable es aprovechar la propia red para contrarrestar los abusos: dar a los usuarios herramientas para moderar el contenido y a otros usuarios —denunciar, silenciar, bloquear. Lo que hace que esto funcione es que los moderadores suelen hacerlo de forma altruista, motivados por el sentimiento de pertenencia a su comunidad y quizá un poco por el poder también.
+
+  Twitch es un buen ejemplo: los creadores nombran moderadores para sus canales que, por lo general, no cobran por ello. Reddit, por su parte, deja que sean los propios usuarios quienes decidan qué contenido vale y cuál no a través de sus _upvotes_ y _downvotes_.
+
+### Malos algoritmos
+
+La saturación funciona de manera distinta para creadores y consumidores. Unos tienen un problema de _¿cómo me hago destacar_? y otros _¿cómo encuentro más rápido lo que necesito?_.
+
+Al principio, cuando los primeros creadores llegan a una red nueva, los algoritmos los recompensan de forma natural, hay poco contenido, poca competencia, y el que aporta valor destaca. Pero con el tiempo se unen más creadores, el volumen de contenido crece y aparece el apego referencial: los sistemas de recomendación premian a los nodos más conectados, es decir, a los creadores ya establecidos. Cuanto más conectado estás, más probable es que recibas nuevos enlaces.
+
+Esto no es malo en sí mismo, los creadores que generan contenido de calidad merecen esa visibilidad. El problema aparece cuando esa cohorte inicial, para no perder relevancia, empieza a tomar atajos que sacrifican la calidad. Y cuando pasa, la red empieza a resentirse.
+
+La solución evoluciona con la escala.
+
+Al principio basta con poca organización: los nichos son estables y los usuarios se autogestionan. Después entran los moderadores, usuarios con permisos elevados que ayudan a gestionar una red más amplia. Y cuando eso deja de ser suficiente, llegan los datos y los algoritmos.
+
+En ese punto necesitas entender el comportamiento de tus usuarios, predecir qué buscan y decidir qué les muestras para que se queden. Lo que significa invertir en tres cosas: búsqueda, relevancia y recomendación algorítmica.
+
+## Parte 5 - El moat (foso defensivo)
+
+<ImgAndCap 
+	src={TheMoat}
+	alt="gráfica del foso defensivo"
+	caption="Quinta Parte: Moat o Foso defensivo"
+/>
+
+Y la última pregunta que tienes que resolver es _¿cómo consigo que mi producto tenga más defensibilidad?_ porque si tu producto tiene efectos de red, el de tus competidores también los tienen por lo que te llevará a luchar por la red y el que gane será el que tenga una mejor defensa.
+
+Esto es justo lo que les pasó a la gente de Airbnb en sus inicios con Wimdu. Eran idénticas, una en EE.UU. y la otra, una copia de esta, en Europa. Y aunque el final es evidente, es una historia larga pero resumida en una frase de Brian Chesky:
+
+> _No toda la oferta se crea igual [...] Al principio, cuando éramos nuevos (Airbnb) los huéspedes iban con pocas expectativas pero quedaban maravillados por la experiencia. 
+>
+> Necesitas un Net Promoter Score (NPS) alto para que la gente se lo cuente a sus amigos [...] y aunque Wimdu fue capaz de registrar cifras impresionantes, ni el lado duro de la red, los anfitriones, ni el fácil, los huéspedes, reflejaban calidad. 
+>
+> Priorizaron velocidad por calidad a través de marketing pagado [...] Catalizar ambos lados de la red a la vez puede funcionar si las redes atómicas se forman rápido también._
+
+<OwnThoughts
+	paragraphs={[
+		"y para culminar este extracto del libro te comparto uno de los consejos que Paul Graham, co-founder de YCombinator, le dio a Brian Chesky, co-founder de Airbnb: 'es mejor que 100 personas amen tu producto a que les gustes a 1000 personas' y donde puedes entender mejor esta frase de arriba:",
+	]}
+	asset
+	href_link="https://www.youtube.com/watch?v=W608u6sBFpo&t=1349s"
+	title_link="ir a youtube para ver la entrevista de Brian Chesky"
+	title_asset="entrevista a Brian Chesky por Greylock para Blitzscaling"
+/>
+
+La historia de Airbnb y Wimdu ilustra exactamente lo que es un moat: una red consolidada que defiende su territorio usando los propios efectos de red como barrera. No hace falta bloquear a la competencia, basta con que la calidad de tu red sea tan superior que entrar a competir sea, de entrada, una batalla perdida. La teoría del _Cold Start Problem_ lo predice: cuando dos redes compiten, se crea simultáneamente un círculo virtuoso para el ganador y uno vicioso para el perdedor. Y la distancia entre ambos no deja de crecer.
+
+**Es un juego de suma cero. _Winner takes all_.**
+
+Todos los _moats_ tienen su _Caballo de Troya_. Las redes dominantes siempre tienen puntos ciegos, partes desatendidas, segmentos ignorados, usuarios mal servidos. Y ahí es exactamente donde se puede entrar:
+
+- **_Cherry Picking_**
+
+  Todas las redes dominantes, por invencibles que parezcan, tienen puntos ciegos. El principio de red de redes lo predice: siempre existe alguna parte de la red más vulnerable o desatendida. Esta estrategia se basa en encontrarla y atacarla.
+
+  La red atómica con la que entras tiene que cumplir dos condiciones aparentemente contradictorias: lo suficientemente grande para ser rentable y poder crecer, y lo suficientemente pequeña para que puedas conocerla mejor que nadie.
+
+  La ventaja de aplicar esta estrategia es que no empiezas desde cero. La red ya existe, las personas ya entienden el problema, y están conectadas entre sí. Si llegas con un mensaje, un producto o una experiencia mejor que la del original, el _flywheel_ puede arrancar muy pronto porque la reacción ya tiene combustible.
+
+  Y la desventaja es que no puedes depender por completo de la plataforma. Esta se puede dar cuenta y modificar ciertos elementos, como una API, y que tu modelo de negocio desaparezca.
+
+- **El lado duro**
+
+  Pelear por el lado duro es la siguiente de las palanca útil tanto si ya tienes una red establecida que está compitiendo con otra, como si empiezas de cero. Luchar y conseguir mercado en la parte dura de la red a la que apuntas siempre es una ventaja competitiva.
+
+O puedes dejar que los incumbentes se destruyan solos:
+
+- **Lanzamientos de _Big Bang_**
+
+  Es la estrategia favorita de las grandes empresas consolidadas para entrar en nuevos mercados. Tienen base de usuarios, canales de distribución y capital para quemar en ingeniería, ventas y marketing. Todo parece una ventaja.
+
+  El problema es que lanzan directamente a una red general, ignorando por completo la lógica de las redes atómicas. Son generalistas por defecto: usuarios de todo tipo, sin nada en común, conectados en papel pero desconectados en la práctica. Cuando no encuentran valor real, se van. Y lo único que queda es un conjunto de métricas infladas al inicio que no dicen nada, las _vanity metrics_.
+
+**Los efectos de red se construyen con calidad, no con cantidad**. La diferencia entre Microsoft Teams y Slack lo ilustra mejor que cualquier explicación: uno es una delicia usarlo, el otro...
+
+## Otros escritos de Chen que te recomiendo leer
+
+- [Creator Economy 2.0](https://andrewchen.com/creator-economy-20/)
+- [Growth Stalls](https://andrewchen.com/growth-stalls/)
+- [Product Death Cycle](https://andrewchen.com/this-is-the-product-death-cycle-why-it-happens-and-how-to-break-out-of-it/)
+- [Keys to Mobile Growth (Flurry)](https://www.flurry.com/blog/keys-to-mobile-growth-with-andrew-chen-from-uber)
+
+Y en general todos los posts de su blog andrewchen.com
+
+## Recomendaciones de otros autores
+
+- [How to conduct aha moment](https://medium.com/egyptian-startup-manual/how-to-conduct-aha-moment-aka-magic-moment-analysis-without-knowledge-of-statistics-or-data-10e59c38ee5)
