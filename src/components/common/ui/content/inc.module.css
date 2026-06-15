@@ -3,15 +3,12 @@
 	flex-direction: column;
 	align-items: center;
 	gap: var(--sp-2);
+	text-align: left;
 
 	.theImage {
 		width: 80%;
 		height: auto;
 		border-radius: var(--wdth-05);
-
-		@media (width >= 28.75rem) {
-			width: 50%;
-		}
 	}
 
 	.theCaption {
@@ -22,9 +19,5 @@
 		font-style: italic;
 
 		overflow-wrap: break-word;
-
-		@media (width >= 28.75rem) {
-			width: 50%;
-		}
 	}
 }
