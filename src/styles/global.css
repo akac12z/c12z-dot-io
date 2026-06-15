@@ -119,6 +119,10 @@
 	/* Second accent */
 	--accent-2: #904fe7; /* purple */
 
+	/* text selection */
+	--accent-selection-fg: hsl(74, 85%, 16%);
+	--accent-selection-bg: hsl(74, 84%, 71%);
+
 	/* Content section colors */
 	--c-behavior: #e22ef6;
 	--c-essay: #33ffe8;
@@ -139,14 +143,14 @@
 	--c-bias-dark: #756679;
 
 	/* Books category colors */
-	--c-book-health:     #13c985;
-	--c-book-product:    #5ba4f5;
-	--c-book-culture:    #f0a830;
+	--c-book-health: #13c985;
+	--c-book-product: #5ba4f5;
+	--c-book-culture: #f0a830;
 	--c-book-psychology: #a67ee8;
-	--c-book-economics:  #4fbb6a;
+	--c-book-economics: #4fbb6a;
 	--c-book-creativity: #ff6a3e;
 	--c-book-philosophy: #e0709a;
-	--c-book-other:      #8c96a3;
+	--c-book-other: #8c96a3;
 
 	/* UI utility */
 	--c-goback: #f16f0e;
@@ -427,8 +431,8 @@ body {
 	flex-direction: column;
 
 	&::selection {
-		background-color: var(--accent-ink);
-		color: var(--fg);
+		background-color: var(--accent-selection-bg);
+		color: var(--accent-selection-fg);
 	}
 }
 
