@@ -246,3 +246,12 @@
 	color: var(--fg-3);
 	margin-top: var(--sp-1);
 }
+
+/*	 
+	this line solve the katex overflow-x problem in mobile screen
+	the problem was the default value: nowrap who force the screen to adjust to the formula size
+	https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/white-space
+*/
+.lettering .katex-display > .katex {
+	white-space: normal;
+}
