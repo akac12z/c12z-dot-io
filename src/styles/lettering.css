@@ -96,7 +96,7 @@
 	font-size: var(--t-body);
 
 	p {
-		margin-bottom: 0;
+		margin-bottom: var(--sp-2);
 	}
 }
 
