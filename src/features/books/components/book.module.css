@@ -305,10 +305,9 @@
 		margin-inline: auto;
 
 		& .theQuote {
-			font-style: italic;
 			font-size: var(--t-mili);
 			line-height: var(--lh-mili);
-			font-family: var(--ff-pixel);
+			letter-spacing: var(--tracking-wider);
 			color: var(--fg-2);
 		}
 	}
