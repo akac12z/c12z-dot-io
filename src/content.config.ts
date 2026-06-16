@@ -83,6 +83,15 @@ const libraryCollection = defineCollection({
 				})
 				.int("The numbers must be integer"),
 			publishDate: z.string().refine(isValidDateFormat),
+			lastTimeEdited: z
+				.string()
+				.refine(isValidDateFormat)
+				.refine((val) => (val ? isValidDateFormat(val) : true))
+				.transform((val, ctx) => {
+					const publishDate = ctx;
+					return val ?? publishDate;
+				})
+				.optional(),
 			tags: z.array(z.string()).optional(),
 			language: z.enum(["es", "en"]),
 			authors: z.union([
