@@ -33,7 +33,15 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { data, id } = entry;
 
-const { title, score, authors, readingTime, publishDate, quote } = data;
+const {
+	title,
+	score,
+	authors,
+	readingTime,
+	publishDate,
+	quote,
+	lastTimeEdited,
+} = data;
 const authorsInArry = Array.isArray(authors) ? authors : [authors];
 
 const { Content, headings } = await render(entry);
@@ -71,6 +79,7 @@ const { Content, headings } = await render(entry);
 				/>
 				<section class={styles.history}>
 					<span>Publicado el {publishDate}</span>
+					{lastTimeEdited && <span>Editado: {lastTimeEdited}</span>}
 					<span>Léelo en {readingTime} min.</span>
 				</section>
 			</section>
