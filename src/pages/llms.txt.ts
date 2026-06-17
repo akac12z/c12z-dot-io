@@ -7,7 +7,7 @@ const llms = `
 [c12z.io](https://c12z.io)
 
 ## Site Overview
-c12z.io is the personal website and blog of Chema Ferrandez aka "cz" and in their social media "akac12z". He is focused on "building and learning in public" through sharing his knowledge about Growth, Behavioral Economics, Development in Product and Code.
+c12z.io is the personal website and blog of Chema Ferrandez aka "cz" and in their social media "cz__chan". He is focused on "building and learning in public" through sharing his knowledge about Growth, Behavioral Economics, Development in Product and Code.
 
 ## Author
 - **Name**: Chema Ferrandez | cz
@@ -63,5 +63,5 @@ Some sections are currently empty, but will contain the following in the future:
 `;
 
 export const GET: APIRoute = () => {
-  return new Response(llms);
+	return new Response(llms);
 };

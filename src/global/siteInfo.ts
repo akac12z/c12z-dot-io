@@ -1,9 +1,9 @@
 import type {
 	Site404ConfigInterface,
 	SiteDefaultConfigInterface,
-} from "@interfaces/siteInfo.interface";
+} from "@interfaces/siteInfo.interface.ts";
 
-export const SITE_VERSION = "v1.07.05";
+export const SITE_VERSION = "v1.07.06";
 
 export const SITE_DEFAULT_CONFIG: SiteDefaultConfigInterface = {
 	title: "Chema Ferrandez - c12z",
