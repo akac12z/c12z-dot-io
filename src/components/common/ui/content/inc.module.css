@@ -6,7 +6,7 @@
 	text-align: left;
 
 	.theImage {
-		width: 80%;
+		width: 90%;
 		height: auto;
 		border-radius: var(--wdth-05);
 	}
