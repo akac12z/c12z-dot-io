@@ -12,7 +12,7 @@
 	}
 
 	.theCaption {
-		width: 80%;
+		width: 90%;
 		color: var(--fg-3);
 		font-size: var(--t-micro);
 		line-height: var(--lh-mili);
