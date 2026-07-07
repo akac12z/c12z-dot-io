@@ -2,7 +2,7 @@
 import { type CollectionEntry } from "astro:content";
 
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
-import { convertDateToISO8601 } from "@utils/validatingDate";
+import { convertDateToISO8601 } from "@/utils/validating-date.ts";
 
 import ContentSEO from "@/seo/ContentSEO.astro";
 
@@ -27,12 +27,12 @@ const lastTimeEditedInISO = publisDateInISO;
 ---
 
 <ContentSEO
-  postName={postName}
-  postDescription={postDescription}
-  canonicalURL={canonicalURL}
-  ogImageSrc={ogImageSrc}
-  ogImageAlt={ogImageAlt}
-  publisDateInISO={publisDateInISO}
-  lastTimeEditedInISO={lastTimeEditedInISO}
-  keywords={keywords}
+	postName={postName}
+	postDescription={postDescription}
+	canonicalURL={canonicalURL}
+	ogImageSrc={ogImageSrc}
+	ogImageAlt={ogImageAlt}
+	publisDateInISO={publisDateInISO}
+	lastTimeEditedInISO={lastTimeEditedInISO}
+	keywords={keywords}
 />

@@ -5,7 +5,7 @@
 
 import ContentSEO from "@/seo/ContentSEO.astro";
 import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
-import { convertDateToISO8601 } from "@utils/validatingDate";
+import { convertDateToISO8601 } from "@/utils/validating-date.ts";
 import { type CollectionEntry } from "astro:content";
 
 const { entry } = Astro.props;
@@ -13,7 +13,7 @@ const { entry } = Astro.props;
 const bias = entry as CollectionEntry<"bias">;
 const { data, id } = bias;
 const { cover, description, keywords, publishDate, lastTimeEdited, titleTag } =
-  data;
+	data;
 
 const postName = `${titleTag} - ${SITE_DEFAULT_CONFIG.title}`;
 
@@ -22,26 +22,23 @@ const postDescription = `${description} - ${SITE_DEFAULT_CONFIG.title}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // OG dinámico generado en build time (src/pages/og/behavior/sesgos/[...id].png.ts)
-const ogImageSrc = new URL(
-  `/og/behavior/sesgos/${id}.png`,
-  Astro.site
-);
+const ogImageSrc = new URL(`/og/behavior/sesgos/${id}.png`, Astro.site);
 const ogImageAlt = cover.alt || postName;
 
 // Validación de fechas. lastTimeEdited puede ser undefined en la collection pero en la práctica no pero para evitar el error hago la validación
 const publisDateInISO = convertDateToISO8601(publishDate);
 const lastTimeEditedInISO = convertDateToISO8601(
-  !lastTimeEdited ? publishDate : lastTimeEdited
+	!lastTimeEdited ? publishDate : lastTimeEdited,
 );
 ---
 
 <ContentSEO
-  postName={postName}
-  postDescription={postDescription}
-  canonicalURL={canonicalURL}
-  ogImageSrc={ogImageSrc}
-  ogImageAlt={ogImageAlt}
-  publisDateInISO={publisDateInISO}
-  lastTimeEditedInISO={lastTimeEditedInISO}
-  keywords={keywords}
+	postName={postName}
+	postDescription={postDescription}
+	canonicalURL={canonicalURL}
+	ogImageSrc={ogImageSrc}
+	ogImageAlt={ogImageAlt}
+	publisDateInISO={publisDateInISO}
+	lastTimeEditedInISO={lastTimeEditedInISO}
+	keywords={keywords}
 />

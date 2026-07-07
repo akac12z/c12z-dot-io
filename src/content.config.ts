@@ -2,7 +2,8 @@ import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
-import { isValidDateFormat } from "@utils/validatingDate";
+import { isValidDateFormat } from "@/utils/validating-date.ts";
+
 // import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
 
 /**
