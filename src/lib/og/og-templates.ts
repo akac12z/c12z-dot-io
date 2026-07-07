@@ -1,4 +1,4 @@
-import { backgroundDataUri, logoDataUri } from "./ogAssets.ts";
+import { backgroundDataUri, logoDataUri } from "./og-assets.ts";
 
 /**
  * Árboles de nodos (formato Satori, sin JSX) para los 4 templates OG:
@@ -67,7 +67,7 @@ type OgNode = {
 const COLOR_TITLE = "#fcf8f1";
 const COLOR_TEXT = "#dfdbd5";
 
-/** Ancho de la caja de la carátula (ver loadCover.ts); centra en horizontal. */
+/** Ancho de la caja de la carátula (ver load-cover.ts); centra en horizontal. */
 const COVER_BOX_WIDTH = 260;
 
 const background: OgNode = {

@@ -1,10 +1,10 @@
 import { ImageResponse } from "@vercel/og";
 import sharp from "sharp";
 
-import { cascadiaFont, tamagoFont } from "./ogAssets.ts";
+import { cascadiaFont, tamagoFont } from "./og-assets.ts";
 
 /**
- * Rasteriza un árbol de nodos (ogTemplates) a PNG 1200×630 con las dos
+ * Rasteriza un árbol de nodos (og-templates) a PNG 1200×630 con las dos
  * fuentes del diseño ya registradas. El PNG RGBA que devuelve ImageResponse
  * se recomprime con paleta de 256 colores (~50% menos peso, sin pérdida
  * visual apreciable) manteniendo formato PNG por compatibilidad con los
