@@ -19,8 +19,8 @@ const postDescription = `Resumen e insights de ${title} - ${SITE_DEFAULT_CONFIG.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // OG dinámico generado en build time (src/pages/og/biblioteca/[...id].png.ts)
-const justInCaseNoCoverSrc = new URL(`/og/biblioteca/${id}.png`, Astro.site);
-const justInCaseNoCoverAlt = cover.alt || postName;
+const ogImageSrc = new URL(`/og/biblioteca/${id}.png`, Astro.site);
+const ogImageAlt = cover.alt || postName;
 
 const publisDateInISO = convertDateToISO8601(publishDate);
 const lastTimeEditedInISO = publisDateInISO;
@@ -30,8 +30,8 @@ const lastTimeEditedInISO = publisDateInISO;
   postName={postName}
   postDescription={postDescription}
   canonicalURL={canonicalURL}
-  justInCaseNoCoverSrc={justInCaseNoCoverSrc}
-  justInCaseNoCoverAlt={justInCaseNoCoverAlt}
+  ogImageSrc={ogImageSrc}
+  ogImageAlt={ogImageAlt}
   publisDateInISO={publisDateInISO}
   lastTimeEditedInISO={lastTimeEditedInISO}
   keywords={keywords}

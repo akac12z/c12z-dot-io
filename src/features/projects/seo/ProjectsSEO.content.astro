@@ -21,13 +21,13 @@ const {
 const projectName = `Proyecto: ${projectTitle}`;
 const projectDesc = `${projectDescription}`;
 
-const ogImageAlt = cover.alt ? cover.alt : `imagen del proyecto ${projectName}`;
+const coverAlt = cover.alt ? cover.alt : `imagen del proyecto ${projectName}`;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // OG dinámico generado en build time (src/pages/og/proyectos/[...id].png.ts)
-const justInCaseNoCoverSrc = new URL(`/og/proyectos/${id}.png`, Astro.site);
-const justInCaseNoCoverAlt = ogImageAlt || projectName;
+const ogImageSrc = new URL(`/og/proyectos/${id}.png`, Astro.site);
+const ogImageAlt = coverAlt || projectName;
 
 const publisDateInISO = convertDateToISO8601(publishDate);
 const lastTimeEditedInISO = lastTimeEdited ? lastTimeEdited : publisDateInISO;
@@ -37,8 +37,8 @@ const lastTimeEditedInISO = lastTimeEdited ? lastTimeEdited : publisDateInISO;
 	postName={projectName}
 	postDescription={projectDesc}
 	canonicalURL={canonicalURL}
-	justInCaseNoCoverSrc={justInCaseNoCoverSrc}
-	justInCaseNoCoverAlt={justInCaseNoCoverAlt}
+	ogImageSrc={ogImageSrc}
+	ogImageAlt={ogImageAlt}
 	publisDateInISO={publisDateInISO}
 	lastTimeEditedInISO={lastTimeEditedInISO}
 	keywords={keywords}

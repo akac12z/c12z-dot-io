@@ -22,11 +22,11 @@ const postDescription = `${description} - ${SITE_DEFAULT_CONFIG.title}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // OG dinámico generado en build time (src/pages/og/behavior/sesgos/[...id].png.ts)
-const justInCaseNoCoverSrc = new URL(
+const ogImageSrc = new URL(
   `/og/behavior/sesgos/${id}.png`,
   Astro.site
 );
-const justInCaseNoCoverAlt = cover.alt || postName;
+const ogImageAlt = cover.alt || postName;
 
 // Validación de fechas. lastTimeEdited puede ser undefined en la collection pero en la práctica no pero para evitar el error hago la validación
 const publisDateInISO = convertDateToISO8601(publishDate);
@@ -39,8 +39,8 @@ const lastTimeEditedInISO = convertDateToISO8601(
   postName={postName}
   postDescription={postDescription}
   canonicalURL={canonicalURL}
-  justInCaseNoCoverSrc={justInCaseNoCoverSrc}
-  justInCaseNoCoverAlt={justInCaseNoCoverAlt}
+  ogImageSrc={ogImageSrc}
+  ogImageAlt={ogImageAlt}
   publisDateInISO={publisDateInISO}
   lastTimeEditedInISO={lastTimeEditedInISO}
   keywords={keywords}
