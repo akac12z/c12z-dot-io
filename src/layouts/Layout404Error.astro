@@ -1,8 +1,7 @@
 ---
-
 import BaseHead from "@/seo/BaseHead.astro";
 
-import { SITE_404_CONFIG } from "@/global/siteInfo";
+import { SITE_404_CONFIG } from "@/global/site-info";
 import GTMBody from "@/analytics/Google/GTMBody.astro";
 
 const { lang } = SITE_404_CONFIG;
@@ -10,13 +9,13 @@ const { lang } = SITE_404_CONFIG;
 
 <!doctype html>
 <html lang={lang}>
-  <BaseHead>
-    <slot name="head" />
-  </BaseHead>
-  <body>
-    <GTMBody />
-    <main>
-      <slot />
-    </main>
-  </body>
+	<BaseHead>
+		<slot name="head" />
+	</BaseHead>
+	<body>
+		<GTMBody />
+		<main>
+			<slot />
+		</main>
+	</body>
 </html>

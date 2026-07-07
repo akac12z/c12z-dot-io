@@ -1,5 +1,5 @@
 ---
-import { SITE_404_CONFIG } from "@/global/siteInfo";
+import { SITE_404_CONFIG } from "@/global/site-info";
 
 import CourageError404Image from "@/assets/images/OpenGraph/404/og-404-error.png";
 
@@ -10,11 +10,11 @@ import Error404SEO from "@/seo/404/Error404SEO.astro";
 ---
 
 <Layout404Error>
-  <Error404SEO
-    slot="head"
-    pageTitle={SITE_404_CONFIG.errorTitle}
-    pageDescription={SITE_404_CONFIG.errorDescription}
-    pageThumbnail={CourageError404Image.src}
-  />
-  <Page404 />
+	<Error404SEO
+		slot="head"
+		pageTitle={SITE_404_CONFIG.errorTitle}
+		pageDescription={SITE_404_CONFIG.errorDescription}
+		pageThumbnail={CourageError404Image.src}
+	/>
+	<Page404 />
 </Layout404Error>

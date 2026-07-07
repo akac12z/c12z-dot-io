@@ -1,5 +1,5 @@
 ---
-import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
+import { SITE_DEFAULT_CONFIG } from "@/global/site-info";
 
 import Header from "@/components/common/layout/header/Header.astro";
 import Footer from "@/components/common/layout/footer/Footer.astro";
@@ -14,16 +14,16 @@ const { lang } = SITE_DEFAULT_CONFIG;
 
 <!doctype html>
 <html lang={lang}>
-  <BaseHead>
-    <slot name="head" />
-  </BaseHead>
-  <body>
-    <GTMBody />
-    <Header />
-    <main>
-      <slot />
-      <BottomBar client:only="react" />
-    </main>
-    <Footer />
-  </body>
+	<BaseHead>
+		<slot name="head" />
+	</BaseHead>
+	<body>
+		<GTMBody />
+		<Header />
+		<main>
+			<slot />
+			<BottomBar client:only="react" />
+		</main>
+		<Footer />
+	</body>
 </html>

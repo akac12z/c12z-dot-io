@@ -1,48 +1,42 @@
 ---
-import styles from "./home.module.css"
+import styles from "./home.module.css";
 import SocialBlock from "@/components/common/ui/icons/social/SocialBlock.astro";
 import ShowSortContent from "./ShowSortContent.astro";
-import { SITE_VERSION } from "@/global/siteInfo";
+import { SITE_VERSION } from "@/global/site-info";
 ---
 
 <section class={styles.home}>
+	<div class={styles.pillSection}>
+		<span class={styles.pill}>
+			{SITE_VERSION} · main
+		</span>
+	</div>
 
-  <div class={styles.pillSection}>
-    <span class={styles.pill}>
-      {SITE_VERSION} · main
-    </span>
-
-  </div>
-
-  <h1
-    class={styles.intro}
-  >
-    I'm a Growth who Programs.
-  </h1>
-  <section>
-    <p >
-      Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code, con
-      el fin de crear y escalar productos. Documento mi proceso en Substack y
-      más de vez en cuando en LinkedIn y X en una especie de "learn in public"
-      de mi día a día.
-    </p>
-    <p >
-      Me fascian la industria EdTech, ClimateTech y los productos con Network
-      Effects.
-    </p>
-    <p >
-      Por cierto, soy Chema ✌🏽 amante del tattoo, del bonsai y compito en
-      CrossFit.
-    </p>
-  </section>
+	<h1 class={styles.intro}>I'm a Growth who Programs.</h1>
+	<section>
+		<p>
+			Comparto aquello que sé, aprendo y hago sobre Growth, Behavior & Code, con
+			el fin de crear y escalar productos. Documento mi proceso en Substack y
+			más de vez en cuando en LinkedIn y X en una especie de "learn in public"
+			de mi día a día.
+		</p>
+		<p>
+			Me fascian la industria EdTech, ClimateTech y los productos con Network
+			Effects.
+		</p>
+		<p>
+			Por cierto, soy Chema ✌🏽 amante del tattoo, del bonsai y compito en
+			CrossFit.
+		</p>
+	</section>
 </section>
 
 <section class={styles.socialBlock}>
-  <SocialBlock />
+	<SocialBlock />
 </section>
 
 <section class={styles.content}>
-  <h2 class={styles.what}>Aquello de lo que me gusta escribir</h2>
+	<h2 class={styles.what}>Aquello de lo que me gusta escribir</h2>
 
-  <ShowSortContent />
+	<ShowSortContent />
 </section>

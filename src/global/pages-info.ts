@@ -12,7 +12,7 @@
 
 import { z } from "astro/zod";
 
-import { SITE_DEFAULT_CONFIG } from "./siteInfo";
+import { SITE_DEFAULT_CONFIG } from "./site-info";
 
 // Servidas tal cual desde public/ (sin pasar por astro:assets): ya vienen
 // pre-renderizadas a 1200x630, no necesitan optimización/resize.
