@@ -1,15 +1,14 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import { convertDateToISO8601 } from "@/utils/validatingDate";
-import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
+import { convertDateToISO8601 } from "@/utils/validatingDate.ts";
 
 import ContentSEO from "@/components/common/seo/ContentSEO.astro";
 
 const { entry } = Astro.props;
 
 const project = entry as CollectionEntry<"projects">;
-const { data } = project;
+const { data, id } = project;
 const {
 	cover,
 	keywords,
@@ -22,15 +21,12 @@ const {
 const projectName = `Proyecto: ${projectTitle}`;
 const projectDesc = `${projectDescription}`;
 
-const ogImage = cover.src?.src
-	? new URL(cover.src?.src, Astro.site)
-	: new URL("./og-image.png", Astro.site);
 const ogImageAlt = cover.alt ? cover.alt : `imagen del proyecto ${projectName}`;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const justInCaseNoCoverSrc =
-	`${SITE_DEFAULT_CONFIG.url}${cover.src?.src}` || ogImage;
+// OG dinámico generado en build time (src/pages/og/proyectos/[...id].png.ts)
+const justInCaseNoCoverSrc = new URL(`/og/proyectos/${id}.png`, Astro.site);
 const justInCaseNoCoverAlt = ogImageAlt || projectName;
 
 const publisDateInISO = convertDateToISO8601(publishDate);
