@@ -27,7 +27,7 @@ export const SOCIAL_LINKS: SocialLinksInterface = {
 	},
 	goodreads: {
 		name: "Goodreads",
-		url: "goodreads.com/akac12z",
+		url: "goodreads.com/cz__chan",
 		userName: "akac12z",
 		title: "ir a Goodreads de Chema Ferrández - cz",
 	},

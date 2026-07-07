@@ -1,21 +1,24 @@
 ---
-import styles from "./smicons.module.css"
+import styles from "./smicons.module.css";
 
-import { SOCIAL_LINKS } from "@/global/socialMediaLinks";
+import { SOCIAL_LINKS } from "@/global/socialmedia-links";
 import SocialLink from "../SocialLink.astro";
 
 const { substack } = SOCIAL_LINKS;
 const { url, title } = substack;
 ---
 
-<SocialLink href={url} title={title}>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class={styles.substack}
-    viewBox="0 0 16 16"
-    ><path
-      fill="currentColor"
-      d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"
-    ></path></svg
-  >
+<SocialLink
+	href={url}
+	title={title}
+>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		class={styles.substack}
+		viewBox="0 0 16 16"
+		><path
+			fill="currentColor"
+			d="M15 3.604H1v1.891h14v-1.89ZM1 7.208V16l7-3.926L15 16V7.208zM15 0H1v1.89h14z"
+		></path></svg
+	>
 </SocialLink>
