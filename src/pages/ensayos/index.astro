@@ -1,7 +1,7 @@
 ---
 // import { getCollection } from "astro:content";
 
-import { ESSAY_PAGE_INFO } from "@/global/pagesInfo";
+import { PAGES } from "@/global/pagesInfo";
 import MainLayout from "@layouts/MainLayout.astro";
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
 
@@ -15,8 +15,10 @@ import { essaysKeywords } from "@/features/essay/seo/essays.keywords";
 <MainLayout>
   <PagesSEO
     slot="head"
-    pageTitle={ESSAY_PAGE_INFO.title}
-    pageDescription={ESSAY_PAGE_INFO.description}
+    pageTitle={PAGES.essay.title}
+    pageDescription={PAGES.essay.description}
+    ogImage={PAGES.essay.ogImage}
+    ogImageAlt={PAGES.essay.ogImageAlt}
     pageKeywords={essaysKeywords}
   />
   <GoBackInTop headPage="/" title="ir a la home" />

@@ -20,7 +20,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // TODO: CAMBIAR EL OG POR UNO PERSONALIZADO
 const ogImageUrl = ogImage
 	? new URL(ogImage, Astro.site)
-	: new URL("./og-image.png", Astro.site);
+	: new URL("./og-image.webp", Astro.site);
 const ogImageUrlAlt = ogImageAlt || pageTitle;
 
 const keywords = processKeywords(pageKeywords).keywords;

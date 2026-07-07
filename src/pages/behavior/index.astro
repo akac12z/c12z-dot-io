@@ -2,7 +2,7 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import PagesSEO from "@/seo/PagesSEO.astro";
 
-import { BEHAVIOR_PAGE_INFO } from "@/global/pagesInfo";
+import { PAGES } from "@/global/pagesInfo";
 
 import BehaviorPage from "@/features/behavior/components/BehaviorPage.astro";
 import { behaviorKeywords } from "@/features/behavior/seo/behavior.keywords";
@@ -11,8 +11,10 @@ import { behaviorKeywords } from "@/features/behavior/seo/behavior.keywords";
 <MainLayout>
   <PagesSEO
     slot="head"
-    pageTitle={BEHAVIOR_PAGE_INFO.title}
-    pageDescription={BEHAVIOR_PAGE_INFO.description}
+    pageTitle={PAGES.behavior.title}
+    pageDescription={PAGES.behavior.description}
+    ogImage={PAGES.behavior.ogImage}
+    ogImageAlt={PAGES.behavior.ogImageAlt}
     pageKeywords={behaviorKeywords}
   />
   <BehaviorPage />

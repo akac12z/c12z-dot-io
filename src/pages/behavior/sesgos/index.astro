@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
-import { BIAS_PAGE_INFO } from "@/global/pagesInfo";
+import { PAGES } from "@/global/pagesInfo";
 
 import { biasKeywords } from "@/features/bias/seo/biasPage.keywords";
 import BiasPage from "@/features/bias/components/BiasPage.astro";
@@ -11,8 +11,10 @@ import PagesSEO from "@/seo/PagesSEO.astro";
 <MainLayout>
   <PagesSEO
     slot="head"
-    pageTitle={BIAS_PAGE_INFO.title}
-    pageDescription={BIAS_PAGE_INFO.description}
+    pageTitle={PAGES.bias.title}
+    pageDescription={PAGES.bias.description}
+    ogImage={PAGES.bias.ogImage}
+    ogImageAlt={PAGES.bias.ogImageAlt}
     pageKeywords={biasKeywords}
   />
   <BiasPage />

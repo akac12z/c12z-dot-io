@@ -1,7 +1,7 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
 
-import { PROJECTS_PAGE } from "@/global/pagesInfo";
+import { PAGES } from "@/global/pagesInfo.ts";
 
 import ProjectPage from "@/features/projects/components/ProjectPage.astro";
 import PagesSEO from "@/components/common/seo/PagesSEO.astro";
@@ -10,11 +10,13 @@ import { projectPageKeywords } from "@/features/projects/seo/projectPage.keyword
 ---
 
 <MainLayout>
-  <PagesSEO
-    slot="head"
-    pageTitle={PROJECTS_PAGE.title}
-    pageDescription={PROJECTS_PAGE.description}
-    pageKeywords={projectPageKeywords}
-  />
-  <ProjectPage/>
+	<PagesSEO
+		slot="head"
+		pageTitle={PAGES.projects.title}
+		pageDescription={PAGES.projects.description}
+		ogImage={PAGES.projects.ogImage}
+		ogImageAlt={PAGES.projects.ogImageAlt}
+		pageKeywords={projectPageKeywords}
+	/>
+	<ProjectPage />
 </MainLayout>

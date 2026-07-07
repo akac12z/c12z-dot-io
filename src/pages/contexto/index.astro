@@ -3,7 +3,7 @@ import styles from "@/features/context/components/context.module.css"
 import MainLayout from "@layouts/MainLayout.astro";
 import PagesSEO from "@/seo/PagesSEO.astro";
 
-import { CONTEXT_PAGE_INFO } from "@/global/pagesInfo";
+import { PAGES } from "@/global/pagesInfo";
 
 import { contextKeywords } from "@/features/context/seo/contextKeywords";
 
@@ -14,8 +14,10 @@ import Context from "@/features/context/components/context.mdx";
 <MainLayout>
   <PagesSEO
     slot="head"
-    pageTitle={CONTEXT_PAGE_INFO.title}
-    pageDescription={CONTEXT_PAGE_INFO.description}
+    pageTitle={PAGES.context.title}
+    pageDescription={PAGES.context.description}
+    ogImage={PAGES.context.ogImage}
+    ogImageAlt={PAGES.context.ogImageAlt}
     pageKeywords={contextKeywords}
   />
   <section class={styles.contextPage}>
