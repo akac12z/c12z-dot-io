@@ -1,0 +1,542 @@
+---
+import { DEFAULT_LAYOUT } from "@/features/og/ogTemplates.ts";
+
+/**
+ * HERRAMIENTA DE DESARROLLO — playground del layout OG.
+ * Sliders para cada medida de DEFAULT_LAYOUT; cada cambio re-renderiza la
+ * imagen real vía /og-playground/preview.png (pipeline completo de Satori).
+ * Solo es interactiva en `pnpm dev`; en producción la imagen no cambia
+ * porque los query params no existen en rutas estáticas.
+ */
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+		/>
+		<meta
+			name="robots"
+			content="noindex, nofollow"
+		/>
+		<title>OG Playground — c12z.io</title>
+	</head>
+	<body>
+		<main>
+			<aside id="controls">
+				<h1>OG Playground</h1>
+				<p class="hint">
+					Mueve los sliders y la imagen se re-renderiza con el pipeline real
+					(Satori + Tamago). Solo funciona en <code>pnpm dev</code>.
+				</p>
+
+				<fieldset>
+					<legend>Template</legend>
+					<div
+						class="radios"
+						id="template-radios"
+					>
+						<label
+							><input
+								type="radio"
+								name="template"
+								value="A"
+							/> A · texto</label
+						>
+						<label
+							><input
+								type="radio"
+								name="template"
+								value="B"
+								checked
+							/> B · texto + subtítulo</label
+						>
+						<label
+							><input
+								type="radio"
+								name="template"
+								value="C"
+							/> C · carátula</label
+						>
+						<label
+							><input
+								type="radio"
+								name="template"
+								value="D"
+							/> D · hero proyecto</label
+						>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Textos</legend>
+					<div id="text-inputs"></div>
+				</fieldset>
+
+				<div id="slider-groups"></div>
+
+				<fieldset>
+					<legend>Valores modificados</legend>
+					<p class="hint">
+						Copia esto en <code>DEFAULT_LAYOUT</code> de
+						<code>src/features/og/ogTemplates.ts</code> para hacerlo permanente:
+					</p>
+					<pre id="changed-values">(nada modificado aún)</pre>
+					<button id="reset">↺ Restaurar valores por defecto</button>
+				</fieldset>
+			</aside>
+
+			<section id="preview">
+				<div class="preview-sticky">
+					<img
+						id="og-img"
+						width="1200"
+						height="630"
+						alt="preview OG"
+					/>
+					<p class="status">
+						<span id="render-time">—</span> · 1200×630 ·
+						<span
+							id="current-url"
+							title="query actual"
+						></span>
+					</p>
+				</div>
+			</section>
+		</main>
+
+		<script is:inline define:vars={{ DEFAULTS: DEFAULT_LAYOUT }}>
+			// ---- Configuración de los controles -------------------------------
+			const GROUPS = [
+				{
+					name: "Header (logo + breadcrumb)",
+					params: {
+						headerTop: { min: 0, max: 200 },
+						headerLeft: { min: 0, max: 300 },
+						headerGap: { min: 0, max: 80 },
+						logoSize: { min: 24, max: 160 },
+						headerFontSize: { min: 16, max: 80 },
+					},
+				},
+				{
+					name: "Título (Templates A/B)",
+					templates: ["A", "B"],
+					params: {
+						titleTop: { min: 80, max: 400 },
+						titleLeft: { min: 0, max: 300 },
+						titleWidth: { min: 300, max: 1150 },
+					},
+				},
+				{
+					name: "Título (tipografía, todos)",
+					params: {
+						titleFontSize: {
+							min: 0,
+							max: 130,
+							note: "0 = auto según longitud",
+						},
+						titleLineHeight: { min: 0.8, max: 2.5, step: 0.05 },
+					},
+				},
+				{
+					name: "Subtítulo (Template B)",
+					templates: ["B"],
+					params: {
+						subtitleMarginTop: { min: 0, max: 120 },
+						subtitleFontSize: { min: 14, max: 60 },
+					},
+				},
+				{
+					name: "Footer (URL)",
+					params: {
+						footerBottom: { min: 0, max: 200 },
+						footerRight: { min: 0, max: 300 },
+						footerFontSize: { min: 12, max: 48 },
+					},
+				},
+				{
+					name: "Carátula (Template C)",
+					templates: ["C"],
+					params: {
+						coverTop: { min: 40, max: 300 },
+						coverLeft: { min: 0, max: 400 },
+						coverTextTop: { min: 40, max: 350 },
+						coverTextLeft: { min: 300, max: 800 },
+						coverTextWidth: { min: 250, max: 850 },
+						coverSubtitleMarginTop: { min: 0, max: 100 },
+						coverSubtitleFontSize: { min: 14, max: 60 },
+					},
+				},
+				{
+					name: "Hero (Template D)",
+					templates: ["D"],
+					params: {
+						heroTop: { min: 40, max: 350 },
+						heroWidth: { min: 300, max: 1150 },
+						heroHeight: { min: 150, max: 500 },
+						heroBorderWidth: { min: 0, max: 12 },
+						heroTitleBottom: { min: 0, max: 200 },
+						heroTitleFontSize: {
+							min: 0,
+							max: 130,
+							note: "0 = auto según longitud",
+						},
+						heroUrlTop: { min: 0, max: 200 },
+					},
+				},
+			];
+
+			// Textos de ejemplo por template; se aplican al cambiar de template
+			// salvo que ya hayas editado el campo a mano
+			const TEXTS_BY_TEMPLATE = {
+				A: {
+					title: "#LaVidaModerna es...",
+					subtitle: "",
+					breadcrumb: "c12z.io/proyectos",
+					footerUrl: "c12z.io/proyectos/la-vida-moderna-es",
+				},
+				B: {
+					title: "Sesgo de anclaje",
+					subtitle:
+						"¿Por qué comparamos todo con la primera información que recibimos?",
+					breadcrumb: "c12z.io/behavior/sesgos",
+					footerUrl: "c12z.io/behavior/sesgos/sesgo-de-anclaje",
+				},
+				C: {
+					title: "The Mom Test",
+					subtitle: "Rob Fitzpatrick",
+					breadcrumb: "c12z.io",
+					footerUrl: "c12z.io/biblioteca/the-mom-test",
+				},
+				D: {
+					title: "#LaVidaModerna es...",
+					subtitle: "",
+					breadcrumb: "c12z.io/proyectos",
+					footerUrl: "c12z.io/proyectos/la-vida-moderna-es",
+				},
+			};
+			const TEXTS = TEXTS_BY_TEMPLATE.B;
+
+			// ---- Construcción del DOM -----------------------------------------
+			const slidersRoot = document.getElementById("slider-groups");
+			const textsRoot = document.getElementById("text-inputs");
+
+			for (const [name, value] of Object.entries(TEXTS)) {
+				const row = document.createElement("label");
+				row.className = "text-row";
+				row.dataset.textParam = name;
+				row.innerHTML = `<span>${name}</span>`;
+				const input = document.createElement("input");
+				input.type = "text";
+				input.name = name;
+				input.value = value;
+				row.appendChild(input);
+				textsRoot.appendChild(row);
+			}
+
+			for (const group of GROUPS) {
+				const fieldset = document.createElement("fieldset");
+				if (group.templates)
+					fieldset.dataset.templates = group.templates.join(",");
+				fieldset.innerHTML = `<legend>${group.name}</legend>`;
+
+				for (const [param, cfg] of Object.entries(group.params)) {
+					const def = DEFAULTS[param];
+					const row = document.createElement("div");
+					row.className = "slider-row";
+					row.innerHTML = `
+						<label for="in-${param}">${param}${cfg.note ? ` <em>(${cfg.note})</em>` : ""}</label>
+						<div class="slider-line">
+							<input id="in-${param}" name="${param}" type="range"
+								min="${cfg.min}" max="${cfg.max}" step="${cfg.step ?? 1}"
+								value="${def}" data-default="${def}" />
+							<output for="in-${param}">${def}</output>
+						</div>`;
+					fieldset.appendChild(row);
+				}
+				slidersRoot.appendChild(fieldset);
+			}
+
+			// ---- Render en vivo -------------------------------------------------
+			const img = document.getElementById("og-img");
+			const renderTime = document.getElementById("render-time");
+			const currentUrl = document.getElementById("current-url");
+			const changedPre = document.getElementById("changed-values");
+
+			const currentTemplate = () =>
+				document.querySelector('input[name="template"]:checked').value;
+
+			const collectParams = () => {
+				const params = new URLSearchParams();
+				params.set("template", currentTemplate());
+				for (const input of document.querySelectorAll("#text-inputs input")) {
+					params.set(input.name, input.value);
+				}
+				for (const input of document.querySelectorAll('input[type="range"]')) {
+					if (input.value !== input.dataset.default) {
+						params.set(input.name, input.value);
+					}
+				}
+				return params;
+			};
+
+			const updateChangedSnippet = () => {
+				const lines = [];
+				for (const input of document.querySelectorAll('input[type="range"]')) {
+					if (input.value !== input.dataset.default) {
+						lines.push(`${input.name}: ${input.value},`);
+					}
+				}
+				changedPre.textContent = lines.length
+					? lines.join("\n")
+					: "(nada modificado aún)";
+			};
+
+			const updateVisibility = () => {
+				const t = currentTemplate();
+				for (const fs of document.querySelectorAll(
+					"fieldset[data-templates]",
+				)) {
+					fs.style.display = fs.dataset.templates.split(",").includes(t)
+						? ""
+						: "none";
+				}
+				// El header del Template C es "c12z.io" fijo; el subtítulo no aplica en A/D
+				document.querySelector('[data-text-param="breadcrumb"]').style.display =
+					t === "C" ? "none" : "";
+				document.querySelector('[data-text-param="subtitle"]').style.display =
+					t === "A" || t === "D" ? "none" : "";
+			};
+
+			const applyTemplateTexts = (t) => {
+				for (const input of document.querySelectorAll("#text-inputs input")) {
+					if (!input.dataset.dirty) {
+						input.value = TEXTS_BY_TEMPLATE[t][input.name];
+					}
+				}
+			};
+
+			let abortController = null;
+			const render = async () => {
+				const params = collectParams();
+				currentUrl.textContent = `?${params}`;
+				updateChangedSnippet();
+
+				abortController?.abort();
+				abortController = new AbortController();
+				const started = performance.now();
+				img.style.opacity = "0.4";
+				try {
+					const res = await fetch(`/og-playground/preview.png?${params}`, {
+						signal: abortController.signal,
+					});
+					const blob = await res.blob();
+					img.src = URL.createObjectURL(blob);
+					renderTime.textContent = `render: ${Math.round(performance.now() - started)}ms`;
+					img.style.opacity = "1";
+				} catch (err) {
+					if (err.name !== "AbortError") {
+						renderTime.textContent = "error — ¿estás en pnpm dev?";
+						img.style.opacity = "1";
+					}
+				}
+			};
+
+			let debounceId = null;
+			const scheduleRender = () => {
+				clearTimeout(debounceId);
+				debounceId = setTimeout(render, 200);
+			};
+
+			document.querySelector("main").addEventListener("input", (event) => {
+				const el = event.target;
+				if (el.type === "range") {
+					el.closest(".slider-line").querySelector("output").textContent =
+						el.value;
+				}
+				if (el.type === "text") el.dataset.dirty = "1";
+				if (el.name === "template") {
+					applyTemplateTexts(el.value);
+					updateVisibility();
+				}
+				scheduleRender();
+			});
+
+			document.getElementById("reset").addEventListener("click", () => {
+				for (const input of document.querySelectorAll('input[type="range"]')) {
+					input.value = input.dataset.default;
+					input.closest(".slider-line").querySelector("output").textContent =
+						input.value;
+				}
+				scheduleRender();
+			});
+
+			updateVisibility();
+			render();
+		</script>
+
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				background: #111;
+				color: #dfdbd5;
+				font-family: ui-sans-serif, system-ui, sans-serif;
+				font-size: 14px;
+			}
+			main {
+				display: grid;
+				grid-template-columns: 400px 1fr;
+				gap: 24px;
+				padding: 24px;
+				max-width: 1800px;
+				margin: 0 auto;
+			}
+			h1 {
+				color: #fcf8f1;
+				font-size: 20px;
+				margin: 0 0 4px;
+			}
+			.hint {
+				color: #9d9b98;
+				font-size: 12px;
+				margin: 4px 0 10px;
+			}
+			code {
+				font-family: ui-monospace, monospace;
+				color: #ff2f92;
+				font-size: 12px;
+			}
+			fieldset {
+				border: 1px solid #2e2e2e;
+				border-radius: 0 0 0 12px;
+				background: #1a1a1a;
+				margin: 0 0 14px;
+				padding: 10px 14px 14px;
+			}
+			legend {
+				color: #fcf8f1;
+				font-size: 12px;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				padding: 0 6px;
+			}
+			.radios {
+				display: flex;
+				gap: 14px;
+				flex-wrap: wrap;
+			}
+			.radios label {
+				cursor: pointer;
+			}
+			.radios input {
+				accent-color: #ff2f92;
+			}
+			.text-row {
+				display: flex;
+				flex-direction: column;
+				gap: 3px;
+				margin-bottom: 10px;
+			}
+			.text-row span {
+				font-family: ui-monospace, monospace;
+				font-size: 11px;
+				color: #9d9b98;
+			}
+			.text-row input {
+				background: #111;
+				border: 1px solid #2e2e2e;
+				border-radius: 6px;
+				color: #dfdbd5;
+				padding: 6px 8px;
+				font-size: 13px;
+			}
+			.slider-row {
+				margin-bottom: 8px;
+			}
+			.slider-row label {
+				font-family: ui-monospace, monospace;
+				font-size: 12px;
+				color: #dfdbd5;
+			}
+			.slider-row em {
+				color: #9d9b98;
+				font-style: normal;
+				font-size: 11px;
+			}
+			.slider-line {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+			.slider-line input[type="range"] {
+				flex: 1;
+				accent-color: #ff2f92;
+			}
+			.slider-line output {
+				font-family: ui-monospace, monospace;
+				font-size: 12px;
+				color: #ff2f92;
+				min-width: 44px;
+				text-align: right;
+			}
+			#changed-values {
+				background: #111;
+				border: 1px solid #2e2e2e;
+				border-radius: 6px;
+				padding: 10px;
+				font-family: ui-monospace, monospace;
+				font-size: 12px;
+				color: #33ffe8;
+				white-space: pre-wrap;
+			}
+			#reset {
+				background: #2e2e2e;
+				color: #dfdbd5;
+				border: none;
+				border-radius: 6px;
+				padding: 8px 12px;
+				cursor: pointer;
+				font-size: 13px;
+			}
+			#reset:hover {
+				background: #ff2f92;
+				color: #111;
+			}
+			.preview-sticky {
+				position: sticky;
+				top: 24px;
+			}
+			#og-img {
+				width: 100%;
+				height: auto;
+				max-width: 1200px;
+				border: 1px solid #2e2e2e;
+				border-radius: 8px;
+				transition: opacity 0.15s;
+				background: #1a1a1a;
+			}
+			.status {
+				font-family: ui-monospace, monospace;
+				font-size: 11px;
+				color: #9d9b98;
+				overflow-wrap: anywhere;
+			}
+			#render-time {
+				color: #ffa424;
+			}
+			@media (max-width: 1100px) {
+				main {
+					grid-template-columns: 1fr;
+				}
+				.preview-sticky {
+					position: static;
+				}
+			}
+		</style>
+	</body>
+</html>
