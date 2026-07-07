@@ -5,8 +5,8 @@ interface Props {
 	postName: string;
 	postDescription: string;
 	canonicalURL: URL;
-	justInCaseNoCoverSrc: string | URL;
-	justInCaseNoCoverAlt: string;
+	ogImageSrc: string | URL;
+	ogImageAlt: string;
 	publisDateInISO: string;
 	lastTimeEditedInISO: string;
 	keywords: string[];
@@ -15,10 +15,10 @@ interface Props {
 const {
 	keywords,
 	canonicalURL,
-	justInCaseNoCoverAlt,
+	ogImageSrc,
+	ogImageAlt,
 	postDescription,
 	postName,
-	justInCaseNoCoverSrc,
 	publisDateInISO,
 	lastTimeEditedInISO,
 } = Astro.props;
@@ -77,11 +77,11 @@ const {
 
 <meta
 	property="og:image"
-	content={justInCaseNoCoverSrc}
+	content={ogImageSrc}
 />
 <meta
 	property="og:image:alt"
-	content={justInCaseNoCoverAlt}
+	content={ogImageAlt}
 />
 <meta
 	property="og:image:width"
@@ -133,11 +133,11 @@ const {
 />
 <meta
 	name="twitter:image"
-	content={justInCaseNoCoverSrc}
+	content={ogImageSrc}
 />
 <meta
 	name="twitter:image:alt"
-	content={justInCaseNoCoverAlt}
+	content={ogImageAlt}
 />
 <meta
 	name="twitter:site"
