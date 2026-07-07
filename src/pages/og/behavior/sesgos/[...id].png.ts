@@ -1,0 +1,34 @@
+import type { APIRoute } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import { textOgTemplate } from "@/features/og/ogTemplates.ts";
+import { renderOgImage } from "@/features/og/renderOgImage.ts";
+
+export const prerender = true;
+
+interface Props {
+	entry: CollectionEntry<"bias">;
+}
+
+export async function getStaticPaths() {
+	const biases = await getCollection("bias");
+
+	return biases.map((entry) => ({
+		params: { id: entry.id },
+		props: { entry },
+	}));
+}
+
+// Template B: título + subtítulo (la pregunta del sesgo), sin carátula
+export const GET: APIRoute<Props> = async ({ props }) => {
+	const { entry } = props;
+
+	return renderOgImage(
+		textOgTemplate({
+			breadcrumb: "c12z.io/behavior/sesgos",
+			title: entry.data.biasName,
+			subtitle: entry.data.biasQuestion,
+			footerUrl: `c12z.io/behavior/sesgos/${entry.id}`,
+		}),
+	);
+};
