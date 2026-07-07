@@ -1,8 +1,8 @@
 import type { APIRoute } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
-import { textOgTemplate } from "@/features/og/ogTemplates.ts";
-import { renderOgImage } from "@/features/og/renderOgImage.ts";
+import { textOgTemplate } from "@/lib/og/ogTemplates.ts";
+import { renderOgImage } from "@/lib/og/renderOgImage.ts";
 
 export const prerender = true;
 

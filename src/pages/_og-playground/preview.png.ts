@@ -1,15 +1,15 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
-import { loadCover, loadProjectHero } from "@/features/og/loadCover";
+import { loadCover, loadProjectHero } from "@/lib/og/loadCover";
 import {
 	DEFAULT_LAYOUT,
 	coverOgTemplate,
 	heroOgTemplate,
 	textOgTemplate,
 	type OgLayoutOverrides,
-} from "@/features/og/ogTemplates";
-import { renderOgImage } from "@/features/og/renderOgImage";
+} from "@/lib/og/ogTemplates";
+import { renderOgImage } from "@/lib/og/renderOgImage";
 
 /**
  * HERRAMIENTA DE DESARROLLO — pareja de /og-playground.
