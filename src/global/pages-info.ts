@@ -16,12 +16,13 @@ import { SITE_DEFAULT_CONFIG } from "./site-info";
 
 // Servidas tal cual desde public/ (sin pasar por astro:assets): ya vienen
 // pre-renderizadas a 1200x630, no necesitan optimización/resize.
-const OG_IMAGE_DEFAULT = "/og/og-image.webp";
-const OG_IMAGE_LIBRARY = "/og/pages/og-image-library.webp";
-const OG_IMAGE_BEHAVIOR = "/og/pages/og-image-behavior.webp";
-const OG_IMAGE_BIAS = "/og/pages/og-image-bias.webp";
-const OG_IMAGE_ESSAY = "/og/pages/og-image-essay.webp";
-const OG_IMAGE_PROJECTS = "/og/pages/og-image-projects.webp";
+const OG_IMAGE_DEFAULT = "/og/og-image.avif";
+const OG_IMAGE_LIBRARY = "/og/pages/og-image-library.avif";
+const OG_IMAGE_BEHAVIOR = "/og/pages/og-image-behavior.avif";
+const OG_IMAGE_BIAS = "/og/pages/og-image-bias.avif";
+const OG_IMAGE_MENTAL_MODEL = "/og/pages/og-image-mental-models.avif";
+const OG_IMAGE_ESSAY = "/og/pages/og-image-essay.avif";
+const OG_IMAGE_PROJECTS = "/og/pages/og-image-projects.avif";
 
 const PAGE_INFO_SCHEMA = z.object({
 	title: z.string().min(50).max(60),
@@ -33,14 +34,6 @@ const PAGE_INFO_SCHEMA = z.object({
 
 export type PagesInfo = z.infer<typeof PAGE_INFO_SCHEMA>;
 
-/**
- * context: página "mi contexto" (about)
- * library: biblioteca y notas de libros
- * behavior: behavioral economics aplicado a growth
- * bias: sesgos y heurísticas
- * essay: ensayos y guías
- * projects: proyectos personales
- */
 export const PAGES = z.record(z.string(), PAGE_INFO_SCHEMA).parse({
 	context: {
 		title: "Mi contexto: quién soy, qué hago y por qué - c12z ✌🏽",
@@ -124,6 +117,23 @@ export const PAGES = z.record(z.string(), PAGE_INFO_SCHEMA).parse({
 			"ensayos sobre desarrollo y producto",
 			"ideas sobre growth behavioral economics y desarrollo",
 			"blog de growth y economía conductual",
+		],
+	},
+	notes: {
+		title: "Notas: apuntes cortos de growth, producto y diseño - c12z",
+		description:
+			"Notas cortas y apuntes rápidos sobre growth, producto y behavioral economics. Ideas sueltas que voy capturando antes de que se conviertan en ensayos.",
+		ogImage: OG_IMAGE_DEFAULT,
+		ogImageAlt: "Notas y apuntes cortos - c12z",
+		keywords: [
+			"notas cortas",
+			"apuntes de growth",
+			"notas sobre producto",
+			"apuntes de behavioral economics",
+			"notas rápidas de growth y producto",
+			"ideas sueltas sobre startups",
+			"apuntes cortos de diseño de producto",
+			"notas de chema ferrandez",
 		],
 	},
 	projects: {
