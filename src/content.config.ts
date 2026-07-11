@@ -4,13 +4,6 @@ import { glob } from "astro/loaders";
 
 import { isValidDateFormat } from "@/utils/validating-date.ts";
 
-// import { SITE_DEFAULT_CONFIG } from "@/global/siteInfo";
-
-/**
- * ? Los slug: z.string(), en las colecciones dan error porque ya los está creando astro por defecto. Por ende, al desestructurarlo te dará error si los tienes.
- * Las comento para que no me den errores
- */
-
 const essayCollection = defineCollection({
 	loader: glob({
 		pattern: "**/*.{md,mdx}",
@@ -195,7 +188,6 @@ const projectCollection = defineCollection({
 });
 
 const biasCollection = defineCollection({
-	// type: "content",
 	loader: glob({
 		pattern: "**/*.{md,mdx}",
 		base: "./src/content/bias",
@@ -248,19 +240,60 @@ const biasCollection = defineCollection({
 						const lastTimeEditedObj = new Date(data.lastTimeEdited);
 						return lastTimeEditedObj >= publishDateObj;
 					}
-					return true; // Si no hay lastTimeEdited, no aplica la validación en el frontmatter pero cuando se crea el componente, se le añade en el componente del {blog/bias/essay}SEO.astro para los metatags
+					return true; // If `lastTimeEdited` is missing, the validation isn't applied in the frontmatter, but when the component is created, it's added to the `{book/bias/essay}SEO.astro` component for the meta tags.
 				},
 				{
 					message:
 						"The field { lastTimeEdited } cannot be earlier than { publishDate }.",
-					path: ["lastTimeEdited"], // Indica el campo donde se muestra el error
+					path: ["lastTimeEdited"], // Indicates the field where the error is displayed
 				},
 			),
+});
+
+const notesCollection = defineCollection({
+	loader: glob({
+		pattern: "**/*.{md,mdx}",
+		base: "./src/content/notes",
+	}),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string().max(80),
+			excerpt: z.string().min(50).max(300),
+			keywords: z.array(z.string()),
+			publishDate: z.string().refine(isValidDateFormat),
+			lastTimeEdited: z
+				.string()
+				.refine(isValidDateFormat)
+				.refine((val) => (val ? isValidDateFormat(val) : true))
+				.transform((val, ctx) => {
+					const publishDate = ctx;
+					return val ?? publishDate;
+				})
+				.optional(),
+			tags: z.array(z.string()).default([]),
+			sources: z
+				.array(
+					z.object({
+						label: z.string(),
+						url: z.string(),
+					}),
+				)
+				.default([]),
+			illustration: z
+				.array(
+					z.object({
+						src: image(),
+						alt: z.string(),
+					}),
+				)
+				.default([]),
+		}),
 });
 
 export const collections = {
 	bias: biasCollection,
 	library: libraryCollection,
 	projects: projectCollection,
+	notes: notesCollection,
 };
 // essay: essayCollection,
