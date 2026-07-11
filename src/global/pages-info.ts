@@ -23,6 +23,7 @@ const OG_IMAGE_BIAS = "/og/pages/og-image-bias.avif";
 const OG_IMAGE_MENTAL_MODEL = "/og/pages/og-image-mental-models.avif";
 const OG_IMAGE_ESSAY = "/og/pages/og-image-essay.avif";
 const OG_IMAGE_PROJECTS = "/og/pages/og-image-projects.avif";
+const OG_IMAGE_NOTES = "/og/pages/og-image-notes.avif";
 
 const PAGE_INFO_SCHEMA = z.object({
 	title: z.string().min(50).max(60),
@@ -102,6 +103,23 @@ export const PAGES = z.record(z.string(), PAGE_INFO_SCHEMA).parse({
 			"heurísticas de decisión en marketing y producto",
 		],
 	},
+	mentalModel: {
+		title: "Modelos mentales aplicados a growth y producto - c12z",
+		description:
+			"Modelos mentales explicados con ejemplos para pensar con más claridad, tomar mejores decisiones y aplicarlos al mundo de growth y producto.",
+		ogImage: OG_IMAGE_MENTAL_MODEL,
+		ogImageAlt: "Modelos mentales aplicados a growth y producto - c12z",
+		keywords: [
+			"modelos mentales",
+			"mental models",
+			"modelos mentales explicados con ejemplos",
+			"modelos mentales aplicados a growth",
+			"modelos mentales aplicados a producto",
+			"lista de modelos mentales",
+			"modelos mentales para tomar decisiones",
+			"cómo pensar mejor con modelos mentales",
+		],
+	},
 	essay: {
 		title: "Guias sobre Growth, Behavioral Economics y Producto - c12z",
 		description:
@@ -123,7 +141,7 @@ export const PAGES = z.record(z.string(), PAGE_INFO_SCHEMA).parse({
 		title: "Notas: apuntes cortos de growth, producto y diseño - c12z",
 		description:
 			"Notas cortas y apuntes rápidos sobre growth, producto y behavioral economics. Ideas sueltas que voy capturando antes de que se conviertan en ensayos.",
-		ogImage: OG_IMAGE_DEFAULT,
+		ogImage: OG_IMAGE_NOTES,
 		ogImageAlt: "Notas y apuntes cortos - c12z",
 		keywords: [
 			"notas cortas",
