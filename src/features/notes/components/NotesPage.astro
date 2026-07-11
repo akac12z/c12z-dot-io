@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+
+import styles from "./notes.module.css";
+import { parseNoteDate } from "../data/format-note-date.ts";
+import Timeline from "./Timeline.astro";
+import SortToggle from "./SortToggle.tsx";
+
+import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
+
+const notes = await getCollection("notes");
+
+const sortedNotes = notes.sort(
+	(a, b) =>
+		parseNoteDate(b.data.publishDate).getTime() -
+		parseNoteDate(a.data.publishDate).getTime(),
+);
+---
+
+<section class={styles.notesPage}>
+	<GoBackInTop
+		headPage="/"
+		title="ir a la home"
+	/>
+
+	<section class={styles.notesHeader}>
+		<h1 class={styles.title}>Notas</h1>
+		<p>
+			Apuntes cortos o ideas más o menos desarrolladas que he ido cogiendo de
+			gente más lista que yo que considero bueno tener a mano sobre temas que me
+			interesan. Algunas pueden ser ideas sueltas antes de que se conviertan en
+			ensayos.
+		</p>
+	</section>
+
+	{
+		sortedNotes.length > 0 ? (
+			<>
+				<section class={styles.controls}>
+					<SortToggle
+						client:load
+						listId="notes-timeline"
+					/>
+				</section>
+				<Timeline notes={sortedNotes} />
+			</>
+		) : (
+			<p>Por ahora no hay ninguna nota publicada. Pronto habrá contenido. 🙂</p>
+		)
+	}
+</section>

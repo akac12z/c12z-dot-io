@@ -1,0 +1,40 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+import { SITE_DEFAULT_CONFIG } from "@/global/site-info.ts";
+import { convertDateToISO8601 } from "@/utils/validating-date.ts";
+
+import ContentSEO from "@/seo/ContentSEO.astro";
+
+const { entry } = Astro.props;
+
+const note = entry as CollectionEntry<"notes">;
+const { data, id } = note;
+const { title, excerpt, publishDate, lastTimeEdited, keywords } = data;
+
+const postName = `${title} - ${SITE_DEFAULT_CONFIG.title}`;
+
+const postDescription = excerpt;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// OG dinámico generado en build time (src/pages/og/notes/[...id].png.ts)
+const ogImageSrc = new URL(`/og/notes/${id}.png`, Astro.site);
+const ogImageAlt = postName;
+
+const publisDateInISO = convertDateToISO8601(publishDate);
+const lastTimeEditedInISO = lastTimeEdited
+	? convertDateToISO8601(lastTimeEdited)
+	: publisDateInISO;
+---
+
+<ContentSEO
+	postName={postName}
+	postDescription={postDescription}
+	canonicalURL={canonicalURL}
+	ogImageSrc={ogImageSrc}
+	ogImageAlt={ogImageAlt}
+	publisDateInISO={publisDateInISO}
+	lastTimeEditedInISO={lastTimeEditedInISO}
+	keywords={keywords}
+/>

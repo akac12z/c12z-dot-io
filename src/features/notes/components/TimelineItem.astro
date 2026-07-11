@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Picture } from "astro:assets";
+
+import styles from "./notes.module.css";
+import { convertDateToISO8601 } from "@utils/validating-date.ts";
+import { formatNoteDate } from "../data/format-note-date.ts";
+import SourceBadges from "./SourceBadges.astro";
+
+interface Props {
+	entry: CollectionEntry<"notes">;
+	index: number;
+}
+
+const { entry, index } = Astro.props;
+const { title, excerpt, publishDate, sources, illustration } = entry.data;
+---
+
+<li
+	class:list={[styles.item, "au"]}
+	style={`animation-delay: ${index * 80}ms`}
+>
+	<span
+		class={styles.node}
+		aria-hidden="true"
+		>x</span
+	>
+	{
+		illustration.length > 0 && (
+			<figure class={styles.figure}>
+				{illustration.map((item) => (
+					<span class={styles.illustrationItem}>
+						<Picture
+							src={item.src}
+							alt={item.alt}
+							width={280}
+							formats={["avif", "webp"]}
+							quality="mid"
+							loading={index < 2 ? "eager" : "lazy"}
+						/>
+					</span>
+				))}
+			</figure>
+		)
+	}
+	<div class={styles.content}>
+		<p class={styles.meta}>
+			<time datetime={convertDateToISO8601(publishDate)}>
+				{formatNoteDate(publishDate)}
+			</time>
+			<!-- TODO: CATEGORY COMPONENT -->
+			<span class={styles.pill}>Nota</span>
+		</p>
+		<h2
+			class={styles.title}
+			transition:name={`${entry.id}-note-title`}
+		>
+			<a href={`/notas/${entry.id}`}>{title}</a>
+		</h2>
+		<p class={styles.excerpt}>{excerpt}</p>
+		<a
+			class={styles.readLink}
+			href={`/notas/${entry.id}`}
+			>Leer nota</a
+		>
+		{
+			sources.length > 0 && (
+				<SourceBadges
+					sources={sources}
+					maxVisible={4}
+				/>
+			)
+		}
+	</div>
+</li>

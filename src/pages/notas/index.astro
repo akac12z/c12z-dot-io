@@ -1,0 +1,21 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import PagesSEO from "@/seo/PagesSEO.astro";
+
+import { PAGES } from "@/global/pages-info.ts";
+
+import NotesPage from "@/features/notes/components/NotesPage.astro";
+import { notesKeywords } from "@/features/notes/seo/notes.keywords.ts";
+---
+
+<MainLayout>
+	<PagesSEO
+		slot="head"
+		pageTitle={PAGES.notes.title}
+		pageDescription={PAGES.notes.description}
+		ogImage={PAGES.notes.ogImage}
+		ogImageAlt={PAGES.notes.ogImageAlt}
+		pageKeywords={notesKeywords}
+	/>
+	<NotesPage />
+</MainLayout>

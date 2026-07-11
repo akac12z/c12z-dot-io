@@ -1,0 +1,59 @@
+---
+import styles from "./notes.module.css";
+
+interface Props {
+	sources: {
+		label: string;
+		url: string;
+	}[];
+	maxVisible?: number;
+}
+
+const { sources, maxVisible } = Astro.props;
+
+const visibleSources = maxVisible ? sources.slice(0, maxVisible) : sources;
+const hiddenCount = sources.length - visibleSources.length;
+---
+
+<ul
+	class={styles.sources}
+	role="list"
+>
+	{
+		visibleSources.map(({ label, url }) => {
+			const domain = new URL(url).hostname;
+
+			return (
+				<li>
+					<a
+						class={styles.chip}
+						href={url}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+							alt=""
+							width="16"
+							height="16"
+							loading="lazy"
+						/>
+						<span>{label}</span>
+					</a>
+				</li>
+			);
+		})
+	}
+	{
+		hiddenCount > 0 && (
+			<li>
+				<span
+					class={styles.chipMore}
+					title={`y ${hiddenCount} ${hiddenCount === 1 ? "fuente más" : "fuentes más"}`}
+				>
+					…
+				</span>
+			</li>
+		)
+	}
+</ul>

@@ -1,0 +1,425 @@
+/* ============================================================
+ * NotesPage.astro
+* ============================================================ */
+
+.notesPage {
+	display: grid;
+	margin-inline: auto;
+	max-width: var(--screen-md);
+
+	& .notesHeader {
+		display: flex;
+		flex-direction: column;
+		gap: var(--sp-3);
+		margin-bottom: var(--sp-4);
+	}
+
+	& .controls {
+		display: flex;
+		justify-content: center;
+		margin-bottom: var(--sp-8);
+	}
+}
+
+/* ============================================================
+ * Timeline.astro + TimelineItem.astro
+ *
+ * Dos regímenes responsive:
+ *   - mobile/tablet (< 48rem / 768px): solo texto, sin collage de emojis
+ *   - desktop (>= 48rem / 768px): dos columnas alternadas con línea central
+ *     y collage de emojis en el lado opuesto al texto
+ * ============================================================ */
+
+.timeline {
+	list-style: none;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-4);
+	padding-left: var(--sp-6);
+
+	/* the dashed line */
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: var(--sp-2);
+		border-left: var(--wdth) dashed var(--border-2);
+	}
+
+	@media (width >= 48rem) {
+		gap: var(--sp-8);
+		padding-left: 0;
+
+		&::before {
+			left: 50%;
+		}
+	}
+}
+
+.item {
+	position: relative;
+	display: grid;
+	gap: var(--sp-4);
+
+	/* the X node over the dashed line */
+	& .node {
+		position: absolute;
+		top: 0;
+		/* Compensates for the padding-left of .timeline so it aligns exactly with the line */
+		left: calc(var(--sp-2) - var(--sp-6) + 0.1rem);
+		transform: translateX(-50%); /* center the "x" on the line */
+
+		display: block;
+		width: var(--sp-5);
+		text-align: center;
+		font-family: var(--ff-mono);
+		font-size: var(--t-body);
+		line-height: 1;
+		color: var(--fg-3);
+		background-color: var(--bg);
+		padding: var(--sp-1);
+		transition: color var(--t-base) var(--ease);
+	}
+	&:hover .node {
+		color: var(--c-note);
+	}
+
+	& .content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--sp-3);
+	}
+
+	/*
+	*	Emoji collage. The height is determined by the aspect ratio (there is no `height` property);
+	* the children are positioned absolutely with percentages relative to this container,
+	* so everything scales together when the width changes.
+	* Solo visible en desktop (>= 48rem); oculto en mobile/tablet.
+	*/
+
+	& .figure {
+		position: relative;
+		display: none;
+		margin: 0;
+		aspect-ratio: 4/1;
+
+		/* Cada emoji: top/left = posición, width = tamaño (% del figure),
+		 * rotate = inclinación, z-index = cuál queda encima al solaparse */
+		& .illustrationItem {
+			position: absolute;
+			display: block;
+			margin: 0;
+			width: 15%; /* all mobile emoji size */
+
+			&:nth-child(1) {
+				top: 0;
+				left: 8%;
+				transform: rotate(-8deg);
+				z-index: 2;
+			}
+
+			&:nth-child(2) {
+				top: 38%;
+				left: 22%;
+				transform: rotate(8deg);
+				z-index: 1;
+			}
+
+			&:nth-child(3) {
+				top: 4%;
+				left: 40%;
+				transform: rotate(6deg);
+				z-index: 3;
+			}
+
+			&:nth-child(4) {
+				top: 45%;
+				left: 4%;
+				transform: rotate(4deg);
+				z-index: 1;
+			}
+		}
+
+		/* The image fills its .illustrationItem; its actual size is controlled by the width property above */
+		& img {
+			display: block;
+			width: 100%;
+			height: auto;
+			border-radius: var(--r-sm);
+		}
+	}
+
+	/* Desktop: dos columnas alternadas a los lados de la línea central */
+	@media (width >= 48rem) {
+		grid-template-columns: 1fr 1fr;
+		column-gap: var(--sp-8); /* hueco central por donde pasa la línea */
+
+		& .node {
+			left: 50.1%; /* sobre la línea central (50% + ajuste óptico) */
+		}
+
+		/* content y figure comparten fila; la columna la decide odd/even (abajo) */
+		& .content {
+			grid-row: 1;
+		}
+
+		/* Tamaño fijo (tope 18rem) en vez de fluido: el collage no encoge
+		 * con la columna y el diseño no se deforma cerca del breakpoint */
+		& .figure {
+			grid-row: 1;
+			position: relative;
+			display: block;
+			/* width: min(100%, 14rem); */
+			aspect-ratio: 1/1;
+			justify-self: center;
+		}
+
+		& .illustrationItem {
+			position: absolute;
+			margin: 0;
+			width: 34%;
+
+			/* emojis size and rotation */
+			&:nth-child(1) {
+				top: 0;
+				left: 5%;
+				width: 26%;
+				z-index: 2;
+			}
+
+			&:nth-child(2) {
+				top: 45%;
+				left: 30%;
+				width: 23%;
+				z-index: 1;
+			}
+
+			&:nth-child(3) {
+				top: 8%;
+				left: 45%;
+				width: 24%;
+				z-index: 3;
+			}
+
+			&:nth-child(4) {
+				top: 55%;
+				left: 3%;
+				width: 27%;
+				z-index: 1;
+			}
+		}
+
+		/* zigzag: odd → text left / emojis right; reversed pairs */
+		&:nth-child(odd) {
+			& .content {
+				grid-column: 1;
+				align-items: flex-end; /* aligns the text with the center line */
+				text-align: right;
+			}
+
+			& .figure {
+				grid-column: 2;
+			}
+		}
+
+		&:nth-child(even) {
+			& .content {
+				grid-column: 2;
+			}
+
+			& .figure {
+				grid-column: 1;
+			}
+		}
+	}
+}
+
+.meta {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-2);
+
+	& time {
+		font-family: var(--ff-mono);
+		font-size: var(--t-mili);
+		line-height: var(--lh-mili);
+		color: var(--fg-3);
+	}
+}
+
+/* TODO: THIS PILL IS GOING TO BE COMMENTED FOR A CATEGORY COMPONENT */
+.pill {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: 0;
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--c-note);
+	border: var(--hairline);
+	border-radius: var(--r-pill);
+	padding: 0.625rem var(--sp-3);
+}
+
+.title {
+	font-size: var(--t-h1);
+	line-height: var(--lh-h1);
+
+	& a {
+		color: var(--fg);
+		text-decoration: none;
+		transition: color var(--t-base) var(--ease);
+
+		&:hover {
+			color: var(--c-note);
+		}
+	}
+}
+
+.excerpt {
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	color: var(--fg-2);
+}
+
+.readLink {
+	font-family: var(--ff-rubik);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--c-note);
+	text-decoration: underline;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+/* ============================================================
+ * SourceBadges.astro — fila de chips de fuente (la usan tanto
+ * TimelineItem como el footer de src/pages/notas/[...id].astro)
+ * ============================================================ */
+
+.sources {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-2);
+
+	& .chip {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--sp-1);
+		background-color: var(--surface-2);
+		border: var(--hairline);
+		border-radius: var(--r-sm);
+		padding: var(--sp-1) var(--sp-2);
+		font-family: var(--ff-rubik);
+		font-size: var(--t-micro);
+		line-height: var(--lh-micro);
+		color: var(--fg-2);
+		text-decoration: none;
+
+		&:hover {
+			border: var(--hairline-2);
+		}
+
+		& img {
+			width: var(--wdth-1);
+			height: var(--wdth-1);
+			border-radius: var(--r-xs);
+		}
+	}
+
+	& .chipMore {
+		display: inline-flex;
+		align-items: center;
+		padding: var(--sp-1) var(--sp-2);
+		font-family: var(--ff-rubik);
+		font-size: var(--t-micro);
+		line-height: var(--lh-micro);
+		color: var(--fg-3);
+		cursor: default;
+	}
+}
+
+/* ============================================================
+ * SortToggle.tsx — toggle de orden asc/desc
+ * ============================================================ */
+
+.toggle {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-2);
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+
+	& .btn {
+		background: none;
+		border: none;
+		cursor: pointer;
+		font: inherit;
+		color: var(--fg-3);
+		padding: var(--sp-1);
+		transition: color var(--t-base) var(--ease);
+
+		&:hover {
+			color: var(--fg-2);
+		}
+	}
+
+	& .active {
+		color: var(--fg);
+	}
+
+	& .sep {
+		color: var(--fg-3);
+		user-select: none;
+	}
+}
+
+/* ============================================================
+ * src/pages/notas/[...id].astro — página de detalle de una nota.
+ * .meta y .pill de la cabecera reutilizan las reglas de arriba.
+ * ============================================================ */
+
+.note {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-6);
+
+	& .noteIntro {
+		display: flex;
+		flex-direction: column;
+		gap: var(--sp-3);
+	}
+
+	& .sourcesFooter {
+		display: flex;
+		flex-direction: column;
+		gap: var(--sp-3);
+		border-top: var(--hairline);
+		padding-top: var(--sp-5);
+
+		& .sourcesLabel {
+			font-family: var(--ff-mono);
+			font-size: var(--t-micro);
+			line-height: var(--lh-micro);
+			text-transform: uppercase;
+			letter-spacing: var(--tracking-eyebrow);
+			color: var(--fg-3);
+		}
+	}
+}
+
+/* ============================================================
+ * Reduced motion
+ * ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+	.timeline .item {
+		animation: none;
+	}
+}
