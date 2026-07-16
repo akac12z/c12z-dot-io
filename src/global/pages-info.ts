@@ -19,6 +19,7 @@ import { SITE_DEFAULT_CONFIG } from "./site-info";
 const OG_IMAGE_DEFAULT = "/og/og-image.avif";
 const OG_IMAGE_LIBRARY = "/og/pages/og-image-library.avif";
 const OG_IMAGE_BEHAVIOR = "/og/pages/og-image-behavior.avif";
+const OG_IMAGE_LEARNING = "/og/pages/og-image-learnings.avif";
 const OG_IMAGE_BIAS = "/og/pages/og-image-bias.avif";
 const OG_IMAGE_MENTAL_MODEL = "/og/pages/og-image-mental-models.avif";
 const OG_IMAGE_ESSAY = "/og/pages/og-image-essay.avif";
@@ -118,6 +119,22 @@ export const PAGES = z.record(z.string(), PAGE_INFO_SCHEMA).parse({
 			"lista de modelos mentales",
 			"modelos mentales para tomar decisiones",
 			"cómo pensar mejor con modelos mentales",
+		],
+	},
+	learnings: {
+		title: "Learnings: fuentes detrás de sesgos y modelos - c12z",
+		description:
+			"Los libros, vídeos, artículos y citas que voy consultando para cada sesgo y modelo mental, antes y después de publicarlo.",
+		ogImage: OG_IMAGE_LEARNING,
+		ogImageAlt: "Learnings: fuentes y notas en crudo de behavior - c12z",
+		keywords: [
+			"learnings de behavioral economics",
+			"fuentes sobre sesgos cognitivos",
+			"notas en crudo sobre comportamiento humano",
+			"cuaderno de trabajo de behavioral economics",
+			"fuentes y apuntes de modelos mentales",
+			"material de estudio de economía conductual",
+			"notas de lectura sobre psicología del comportamiento",
 		],
 	},
 	essay: {
