@@ -1,0 +1,85 @@
+---
+import styles from "./mental-models.module.css";
+import { getCollection } from "astro:content";
+
+import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
+
+import { parseSourceDate } from "@/features/sources/data/parse-source-date.ts";
+
+const models = (await getCollection("mentalModels")).sort(
+	(a, b) =>
+		parseSourceDate(b.data.publishDate).getTime() -
+		parseSourceDate(a.data.publishDate).getTime(),
+);
+---
+
+<section class={styles.modelsPage}>
+	<GoBackInTop
+		headPage="/behavior"
+		title="ir a la página de behavior"
+	/>
+
+	<header class={styles.pageHeader}>
+		<h1
+			class={styles.title}
+			transition:name="mental-models-header-page-h1-transition-name"
+		>
+			Modelos mentales
+		</h1>
+		<p>
+			Los modelos mentales son atajos que todos usamos para entender cómo
+			funciona el mundo: una forma de simplificar problemas complejos y ver lo
+			que de verdad importa. Aquí voy recopilando los que más me han servido
+			para pensar con claridad y tomar mejores decisiones. Cada uno arranca de
+			una pregunta y termina siendo una herramienta que puedes robar y aplicar a
+			tu propio contexto.
+		</p>
+	</header>
+
+	{
+		models.length > 0 ? (
+			<ol class={styles.index}>
+				{models.map((model, i) => (
+					<li class={styles.row}>
+						{model.data.backlog === "wip" ? (
+							<div class={styles.rowInner}>
+								<span class={styles.rowIndex}>
+									{String(i + 1).padStart(2, "0")}
+								</span>
+								<div class={styles.rowMain}>
+									<h2 class={styles.modelName}>{model.data.modelName}</h2>
+									<p class={styles.modelQuestion}>{model.data.modelQuestion}</p>
+								</div>
+								<span class={styles.wipMark}>¡Estoy estudiándolo!</span>
+							</div>
+						) : (
+							<a
+								class={styles.rowInner}
+								href={`/behavior/modelos-mentales/${model.id}`}
+							>
+								<span class={styles.rowIndex}>
+									{String(i + 1).padStart(2, "0")}
+								</span>
+								<div class={styles.rowMain}>
+									<h2
+										class={styles.modelName}
+										transition:name={`${model.id}-name`}
+									>
+										{model.data.modelName}
+									</h2>
+									<p class={styles.modelQuestion}>{model.data.modelQuestion}</p>
+								</div>
+								<span class={styles.rowMeta}>{model.data.publishDate}</span>
+							</a>
+						)}
+					</li>
+				))}
+			</ol>
+		) : (
+			<p class={styles.empty}>
+				Todavía no hay ningún modelo mental publicado. Pronto habrá contenido.
+				🙂
+			</p>
+		)
+	}
+</section>

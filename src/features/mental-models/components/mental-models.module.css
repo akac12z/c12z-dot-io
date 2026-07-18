@@ -1,0 +1,179 @@
+/* ============================================================
+ * /behavior/modelos-mentales — índice editorial B/N.
+ * Lista numerada tipo sumario de periódico: filas con hairline,
+ * tipografía protagonista, acento naranja solo en hover/estado.
+ * ============================================================ */
+
+.modelsPage {
+	display: grid;
+	margin-inline: auto;
+	max-width: var(--screen-md);
+	width: 100%;
+}
+
+.pageHeader {
+	max-width: var(--screen-md);
+	margin-bottom: var(--sp-4);
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+
+	& .title {
+		margin-bottom: var(--sp-2);
+	}
+}
+
+/* ---- Sumario ------------------------------------------------ */
+
+.index {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	border-bottom: var(--hairline-2);
+}
+
+.row {
+	border-top: var(--hairline-2);
+}
+
+.rowInner {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: var(--sp-5);
+	row-gap: var(--sp-2);
+	padding-block: var(--sp-5);
+	align-items: baseline;
+
+	@media (width >= 48rem) {
+		grid-template-columns: var(--wdth-8) 1fr auto;
+	}
+}
+
+a.rowInner:focus-visible {
+	outline: 0.125rem solid var(--c-behavior);
+	outline-offset: 0.25rem;
+}
+
+.rowIndex {
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+	transition: color var(--t-fast) var(--ease);
+}
+
+.rowMain {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+	min-width: 0;
+}
+
+.modelName {
+	font-family: var(--ff-pixel);
+	font-size: var(--t-h1);
+	line-height: var(--lh-h1);
+	letter-spacing: var(--tracking-widest);
+	color: var(--fg);
+	transition: color var(--t-fast) var(--ease);
+}
+
+.modelQuestion {
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	color: var(--fg-2);
+	max-width: var(--maxw-prose);
+}
+
+.rowMeta {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-3);
+	text-align: right;
+}
+
+a.rowInner:hover {
+	& .rowIndex {
+		color: var(--c-behavior);
+	}
+
+	& .modelName {
+		color: var(--c-behavior);
+	}
+}
+
+/* wip: sin link, con aviso */
+.wipMark {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--c-wip);
+}
+
+.empty {
+	padding-block: var(--sp-8);
+	color: var(--fg-2);
+}
+
+/* ============================================================
+ * Detalle de un modelo mental ([...id].astro)
+ * ============================================================ */
+
+.model {
+	display: grid;
+	margin-inline: auto;
+	max-width: var(--screen-md);
+}
+
+.intro {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-6);
+}
+
+.textAlign {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	margin-bottom: var(--sp-4);
+}
+
+.modelTitle {
+	font-family: var(--ff-pixel);
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+	line-height: var(--lh-h1);
+	letter-spacing: var(--tracking-widest);
+}
+
+.modelSubtitle {
+	font-family: var(--ff-rubik);
+	font-weight: 300;
+	font-size: var(--t-h3);
+	line-height: var(--lh-h3);
+	color: var(--fg-2);
+}
+
+.publish {
+	display: flex;
+	gap: var(--sp-4);
+
+	& .text {
+		font-family: var(--ff-mono);
+		font-size: var(--t-micro);
+		line-height: var(--lh-micro);
+		color: var(--fg-3);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rowIndex,
+	.modelName {
+		transition: none;
+	}
+}

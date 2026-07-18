@@ -1,0 +1,21 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import PagesSEO from "@/seo/PagesSEO.astro";
+
+import { PAGES } from "@/global/pages-info";
+
+import MentalModelsPage from "@/features/mental-models/components/MentalModelsPage.astro";
+import { mentalModelsKeywords } from "@/features/mental-models/seo/mentalModels.keywords";
+---
+
+<MainLayout>
+	<PagesSEO
+		slot="head"
+		pageTitle={PAGES.mentalModel.title}
+		pageDescription={PAGES.mentalModel.description}
+		ogImage={PAGES.mentalModel.ogImage}
+		ogImageAlt={PAGES.mentalModel.ogImageAlt}
+		pageKeywords={mentalModelsKeywords}
+	/>
+	<MentalModelsPage />
+</MainLayout>

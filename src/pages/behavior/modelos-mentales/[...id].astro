@@ -1,0 +1,78 @@
+---
+import styles from "@/features/mental-models/components/mental-models.module.css";
+
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+import MainLayout from "@layouts/MainLayout.astro";
+
+import MentalModelSEO from "@/features/mental-models/seo/MentalModelSEO.content.astro";
+import PostSources from "@/features/sources/components/PostSources.astro";
+
+import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
+import TOC from "@/components/common/ui/toc/toc";
+
+interface Props {
+	entry: CollectionEntry<"mentalModels">;
+}
+
+export async function getStaticPaths() {
+	const models = await getCollection("mentalModels");
+
+	return models.map((entry) => ({
+		params: { id: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { data, id } = entry;
+const { modelName, publishDate, lastTimeEdited, modelQuestion } = data;
+
+const { Content, headings } = await render(entry);
+---
+
+<MainLayout>
+	<MentalModelSEO
+		slot="head"
+		entry={entry}
+	/>
+	<section class={styles.model}>
+		<TOC
+			client:only="react"
+			headings={headings}
+			title={modelName}
+		/>
+		<GoBackInTop
+			headPage="/behavior/modelos-mentales"
+			title="ir a la página de modelos mentales"
+		/>
+
+		<article class={styles.intro}>
+			<section class={styles.textAlign}>
+				<h1
+					transition:name={`${id}-name`}
+					class={styles.modelTitle}
+				>
+					{modelName}
+				</h1>
+				<h2 class={styles.modelSubtitle}>{modelQuestion}</h2>
+				<section class={styles.publish}>
+					{
+						lastTimeEdited && lastTimeEdited !== publishDate ? (
+							<>
+								<span class={styles.text}>Publicado: {publishDate}</span>
+								<span class={styles.text}>Editado: {lastTimeEdited}</span>
+							</>
+						) : (
+							<span class={styles.text}>Publicado: {publishDate}</span>
+						)
+					}
+				</section>
+			</section>
+			<section class="lettering">
+				<Content />
+			</section>
+			<PostSources sources={data.sources} />
+		</article>
+	</section>
+</MainLayout>
