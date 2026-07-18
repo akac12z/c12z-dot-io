@@ -1,29 +1,118 @@
 ---
-import styles from "./behavior.module.css"
+/**
+ * /behavior — hub de la sección. Solo recoge y da acceso a lo que hay
+ * dentro (sesgos, modelos mentales y el cajón de fuentes); aquí no
+ * se escribe contenido.
+ */
+import styles from "./behavior.module.css";
+import { getCollection } from "astro:content";
+
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
+import SourcesFolder from "./SourcesFolder.astro";
+
+const [biases, models] = await Promise.all([
+	getCollection("bias"),
+	getCollection("mentalModels"),
+]);
+
+// el cajón agrega las fuentes del frontmatter de sesgos y modelos mentales
+const withSources = [...biases, ...models].filter(
+	(entry) => entry.data.sources.length > 0,
+);
+const totalSources = withSources.reduce(
+	(sum, entry) => sum + entry.data.sources.length,
+	0,
+);
+
+const count = (num: number, singular: string, plural: string) =>
+	`${num} ${num === 1 ? singular : plural}`;
+
+const SECTIONS = [
+	{
+		href: "/behavior/sesgos",
+		name: "Sesgos cognitivos",
+		transitionName: "bias-header-page-h1-transition-name",
+		description:
+			"Inclinaciones desproporcionadas a favor o en contra de una idea o cosa, normalmente de una forma inexacta, prejuiciosa o injusta.",
+		meta: count(biases.length, "publicado", "publicados"),
+	},
+	{
+		href: "/behavior/modelos-mentales",
+		name: "Modelos mentales",
+		transitionName: "mental-models-header-page-h1-transition-name",
+		description:
+			"Marcos para pensar con más claridad y tomar mejores decisiones sin reinventar la rueda cada vez.",
+		meta: count(models.length, "publicado", "publicados"),
+	},
+] as const;
 ---
 
 <section class={styles.behaviorPage}>
-  <GoBackInTop headPage="/" title="go home" />
-  <section class={styles.contentPage}>
-    <section class={styles.intro}>
-      <h1 class={styles.title}>Behavior Page: W.I.P.</h1>
-      <p>
-        Aquí te vas a encontrar contenido relacionado al comportamiento humano
-        enfocado al producto y diseño. UX, UI, CX, sesgos cognitivos, modelos
-        mentales, etc. Por ahora solo te puedo decir que estoy trabajando en
-        ello. Pronto habrá contenido.
-      </p>
-    </section>
-    <section class={styles.content}>
-      <a
-        class={styles.behaviorPageLink}
-        href="/behavior/sesgos"
-        >Ir a la página de <span
-          transition:name="bias-header-page-h1-transition-name"
-          >Sesgos Cognitivos</span
-        ></a
-      >
-    </section>
-  </section>
+	<GoBackInTop
+		headPage="/"
+		title="go home"
+	/>
+
+	<header class={styles.pageHeader}>
+		<h1 class={styles.title}>The Behavior Page.</h1>
+		<p>
+			Aquí te vas a encontrar contenido relacionado a cómo la mente humana
+			funciona y cómo afecta a nuestro comportamiento de simples simios con un
+			plan. Cómo crear mejores diseños, experiencia de usuarios (UX, UI, CX),
+			sesgos cognitivos y modelos mentales. Por ahora solo te puedo decir que
+			estoy trabajando en ello.
+		</p>
+		<p>Pronto habrá contenido 🧠💡</p>
+	</header>
+
+	<nav aria-label="secciones de behavior">
+		<ol class={styles.index}>
+			{
+				SECTIONS.map((section, i) => (
+					<li class={styles.row}>
+						<a
+							class={styles.rowInner}
+							href={section.href}
+						>
+							<span
+								class={styles.rowIndex}
+								aria-hidden="true"
+							>
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<div class={styles.rowMain}>
+								<h2 class={styles.rowName}>
+									<span transition:name={section.transitionName}>
+										{section.name}
+									</span>
+								</h2>
+								<p class={styles.rowDescription}>{section.description}</p>
+							</div>
+							<span class={styles.rowMeta}>{section.meta}</span>
+							<span
+								class={styles.rowArrow}
+								aria-hidden="true"
+							>
+								→
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ol>
+	</nav>
+
+	{/* folder section */}
+	<div class={styles.archive}>
+		<span
+			class={styles.archiveRail}
+			aria-hidden="true"
+			>Archivos</span
+		>
+
+		<SourcesFolder
+			sources={totalSources}
+			topics={withSources.length}
+		/>
+	</div>
 </section>

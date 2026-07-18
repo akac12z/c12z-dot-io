@@ -1,40 +1,175 @@
+/* ============================================================
+ * /behavior — hub de la sección.
+ * Índice editorial: tres filas grandes tipo sumario de
+ * periódico. El acento de sección (--c-behavior) solo aparece en
+ * hover/focus, como detalle puntual.
+ * ============================================================ */
+
 .behaviorPage {
 	display: grid;
 	margin-inline: auto;
 	max-width: var(--screen-md);
+	width: 100%;
+}
 
-	& .contentPage {
-		margin-inline: auto;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+.pageHeader {
+	margin-bottom: var(--sp-4);
 
-		& .intro {
-			display: flex;
-			flex-direction: column;
-			align-items: start;
-			justify-content: center;
-			margin-bottom: var(--sp-4);
-
-			& .title {
-				margin-bottom: var(--sp-2);
-			}
-		}
-
-		& .content {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-
-		& .behaviorPageLink {
-			color: var(--c-bias);
-			text-decoration: underline;
-			text-decoration-color: var(--c-bias);
-			text-underline-offset: var(--sp-1);
-		}
+	& .title {
+		margin-bottom: var(--sp-2);
 	}
+}
+
+/* ---- Sumario: tres filas ------------------------------------ */
+
+.index {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	border-bottom: var(--hairline-2);
+}
+
+.row {
+	border-top: var(--hairline-2);
+}
+
+.rowInner {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	column-gap: var(--sp-5);
+	row-gap: var(--sp-2);
+	align-items: baseline;
+	padding-block: var(--sp-6);
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.25rem;
+	}
+
+	@media (width >= 48rem) {
+		grid-template-columns: var(--wdth-8) 1fr auto auto;
+	}
+}
+
+.rowIndex {
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+	transition: color var(--t-fast) var(--ease);
+}
+
+.rowMain {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+	min-width: 0;
+}
+
+.rowName {
+	font-family: var(--ff-pixel);
+	font-size: clamp(1.375rem, 3.5vw, 1.75rem);
+	line-height: var(--lh-h1);
+	letter-spacing: var(--tracking-widest);
+	color: var(--fg);
+	transition: color var(--t-fast) var(--ease);
+}
+
+.rowDescription {
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	color: var(--fg-2);
+	max-width: var(--maxw-prose);
+}
+
+.rowMeta {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-3);
+	text-align: right;
+	grid-column: 2;
+
+	@media (width >= 48rem) {
+		grid-column: auto;
+	}
+}
+
+.rowArrow {
+	display: none;
+	font-family: var(--ff-mono);
+	font-size: var(--t-h4);
+	color: var(--fg-3);
+	transform: translateX(0);
+	transition:
+		color var(--t-fast) var(--ease),
+		transform var(--t-base) var(--ease);
+
+	@media (width >= 48rem) {
+		display: block;
+	}
+}
+
+.rowInner:hover {
+	& .rowIndex,
+	& .rowArrow {
+		color: var(--c-behavior);
+	}
+
+	& .rowName {
+		color: var(--c-behavior);
+	}
+
+	& .rowArrow {
+		transform: translateX(var(--sp-1));
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rowIndex,
+	.rowName,
+	.rowArrow {
+		transition: none;
+	}
+}
+
+/* ---- Nota al margen: archivo --------------------------------- */
+
+/* El sumario de arriba es contenido escrito; el cajón de abajo es un
+ * archivo. En vez de flotar bajo el sumario, se ancla por una etiqueta
+ * vertical mono en su filo izquierdo —letras apiladas, tipo lomo de
+ * carpeta—, que lo lee como objeto deliberado y no como tarjeta suelta.
+ * Toda la separación vertical vive aquí (el cajón ya no aporta margin). */
+.archive {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--sp-4);
+	margin-top: var(--sp-14);
+}
+
+.archiveRail {
+	flex: none;
+	writing-mode: vertical-rl;
+	text-orientation: upright;
+	padding-top: var(--sp-1);
+	border-right: var(--hairline-2);
+	padding-right: var(--sp-3);
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: var(--sp-1);
+	color: var(--fg-3);
+	user-select: none;
+}
+
+/* el cajón se queda con el ancho que le sobra al lado de la etiqueta,
+ * hasta su tope propio (34rem lo pone sources-disk) */
+.archive > :global(aside) {
+	flex: 1 1 auto;
+	min-width: 0;
 }
