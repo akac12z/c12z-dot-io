@@ -98,23 +98,22 @@
 
 :root {
 	/* ---- Palette: burntpaper (default) -------------------- */
-	--bg: #0b0b0c;
-	--surface-1: #121215;
-	--surface-2: #1b1b20;
-	--surface-3: #232328;
-	--border: #26262c;
-	--border-2: #34343b;
-	--border-3: #5d5d60;
+	--bg: #17181b;
+	--surface-1: #1e2024;
+	--surface-2: #232529;
+	--surface-3: #2c2f35;
+	--border: #34373e;
+	--border-2: #43474f;
+	--border-3: #696e79;
 
-	--fg: #f5f4f0;
-	--fg-2: #cac9c5;
-	--fg-3: #6e6d68;
-	--fg-inverse: #17161a;
+	--fg: #f3f4f6;
+	--fg-2: #c8cad0;
+	--fg-3: #70747c;
+	--fg-inverse: #16171b;
 
 	/* ---- Accents ---------------------------------------- */
-	--accent: #a2ce12; /* raspberry — editorial pink */
+	--accent: #a2ce12;
 	--accent-ink: #7ea10d;
-	--accent-soft: rgba(214, 51, 108, 0.12);
 
 	/* Second accent */
 	--accent-2: #904fe7; /* purple */
@@ -278,14 +277,14 @@
 
 	/* ---- Layout ----------------------------------------- */
 	--maxw: 75rem;
-	--maxw-prose: 68ch;
+	--maxw-prose: 34rem;
 	--maxw-hero: 45rem;
 	--header-h: 4rem;
 }
 
 /* ---- RecycledPaper mode ------------------------------------------ */
 [data-theme="light"] {
-	--bg: #f6f4ee;
+	--bg: #f3efe5;
 	--surface-1: #ffffff;
 	--surface-2: #eeebe2;
 	--surface-3: #e6e2d8;
@@ -297,11 +296,11 @@
 	--fg-inverse: #f5f4f0;
 	--accent: #a2ce12;
 	--accent-ink: #8ab00b;
-	--accent-soft: rgba(214, 51, 108, 0.1);
+
 	--inset-top: inset 0 0.0625rem 0 rgba(255, 255, 255, 0.8);
 
 	/* Content section colors (light mode) */
-	--c-behavior: #80008e;
+	--c-behavior: #d62ae9;
 	--c-essay: #016c60;
 	--c-library: #d0a01c;
 	--c-project: #ac0a0a;

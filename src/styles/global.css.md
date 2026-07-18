@@ -58,21 +58,11 @@ border: var(--hairline-2); /* 1px solid --border-2 */
 
 El acento principal del sitio. Usar para elementos interactivos, highlights y decoración clave.
 
-| Variable        | Valor                  | Cuándo                                        |
-| --------------- | ---------------------- | --------------------------------------------- |
-| `--accent`      | `#d6336c`              | Bordes de acento, outlines de foco            |
-| `--accent-ink`  | `#e5668f`              | Texto de acento sobre fondo oscuro            |
-| `--accent-soft` | `rgba(214,51,108,.12)` | Fondo de badges, hover suave                  |
-| `--accent-2`    | `#904fe7`              | Segundo acento (púrpura), usar con moderación |
-
-```css
-/* Ejemplo: botón de acento */
-accent-btn {
-	border: 1px solid var(--accent);
-	color: var(--accent-ink);
-	background: var(--accent-soft);
-}
-```
+| Variable       | Valor     | Cuándo                                        |
+| -------------- | --------- | --------------------------------------------- |
+| `--accent`     | `#d6336c` | Bordes de acento, outlines de foco            |
+| `--accent-ink` | `#e5668f` | Texto de acento sobre fondo oscuro            |
+| `--accent-2`   | `#904fe7` | Segundo acento (púrpura), usar con moderación |
 
 ---
 
@@ -122,13 +112,3 @@ Solo para la sección Behavior. Cada categoría cognitiva tiene su color fijo (n
 | `--c-goback` | `#f16f0e` | Botón de navegación atrás |
 
 ---
-
-## Jerarquía visual resumida
-
-```
-Texto principal    →  --fg
-Texto secundario   →  --fg-2
-Texto desactivado  →  --fg-3
-Acento interactivo →  --accent-ink  (texto) / --accent (borde) / --accent-soft (fondo)
-Sección específica →  --c-essay / --c-library / --c-behavior / --c-project
-```
