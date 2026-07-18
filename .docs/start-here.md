@@ -253,6 +253,11 @@ el sitio es 100% estático, no hace falta.
   `features/<name>/seo/` (específico de esa feature).
 - **Tocar imágenes OG** → `src/lib/og/` + `src/pages/og/` — ver
   `og-images.md` antes de cambiar nada, tiene el porqué de cada decisión.
+- **Tocar el cajón de fuentes** (`/behavior/fuentes`, las carpetas, el
+  visor) → `src/features/sources/` — ver
+  [`features/sources.md`](./features/sources.md): explica de dónde
+  salen los datos (viven en el frontmatter de cada sesgo/modelo, no en una
+  collection propia) y por qué el CSS está escrito así.
 - **Tocar navegación de header** → el código existe
   (`headerMenus/`) pero está desconectado; confirmar con el usuario si
   el objetivo es reactivarlo o si `Header.astro` (solo Logo+Toggle) es
