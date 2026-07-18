@@ -34,7 +34,7 @@ const essayCollection = defineCollection({
 		// readingTime: z.string(),
 		// categories: z.array(z.string()),
 		// status: z.boolean().default(true),
-		// canonicalURL: z.string().url(),
+		// canonicalURL: z.string()
 		// isDraft: z.boolean().default(true).optional(),
 		// isIndexed: z.boolean().default(false),
 	}),
@@ -86,8 +86,6 @@ const libraryCollection = defineCollection({
 					return val ?? publishDate;
 				})
 				.optional(),
-			tags: z.array(z.string()).optional(),
-			language: z.enum(["es", "en"]),
 			authors: z.union([
 				z.object({
 					name: z.string(),
@@ -121,36 +119,6 @@ const libraryCollection = defineCollection({
 			]),
 			readingTime: z.number().optional(),
 			keywords: z.array(z.string()),
-			authorLink: z.string().optional(),
-			isDraft: z.boolean().default(true).optional(),
-			isIndexed: z.boolean().default(false),
-			buyItOnAmazon: z
-				.object({
-					spain: z
-						.string()
-						.refine(
-							(url) =>
-								url.startsWith("https://www.amazon.es") ||
-								url.startsWith("https://amazon.es"),
-							{
-								message:
-									"The URL must start with 'https://www.amazon.es' or 'https://amazon.es'.",
-							},
-						),
-					usa: z
-						.string()
-						.refine(
-							(url) =>
-								url.startsWith("https://www.amazon.com") ||
-								url.startsWith("https://amazon.com"),
-							{
-								message:
-									"The URL must start with 'https://www.amazon.com  or 'https://amazon.com'.",
-							},
-						)
-						.optional(),
-				})
-				.optional(),
 		}),
 });
 
@@ -180,11 +148,34 @@ const projectCollection = defineCollection({
 					return val ?? publishDate;
 				})
 				.optional(),
-			tags: z.array(z.string()),
-			language: z.enum(["es"]),
 			keywords: z.array(z.string()),
 			styleClass: z.string().optional(),
 		}),
+});
+
+/**
+ * Sources cited in a post (bias or mental model). They are located in the
+ * frontmatter of the post itself—no duplicate content—and are
+ * displayed as what they are (book, video, quote...) in /behavior/sources
+ * and in the "Behind This Post" block on the post detail page.
+ */
+const sourceSchema = z.object({
+	// in a `quote` the title is the fragment itself
+	title: z.string().max(300),
+	type: z.enum([
+		"libro",
+		"articulo",
+		"paper",
+		"video",
+		"podcast",
+		"charla",
+		"web",
+		"cita",
+	]),
+	author: z.string().optional(),
+	url: z.string().optional(),
+	date: z.string().refine(isValidDateFormat).optional(),
+	excerpt: z.string().max(300).optional(),
 });
 
 const biasCollection = defineCollection({
@@ -196,7 +187,6 @@ const biasCollection = defineCollection({
 		z
 			.object({
 				biasName: z.string().max(80),
-				biasID: z.string(),
 				cover: z.object({
 					src: image().optional(),
 					alt: z.string(),
@@ -215,23 +205,12 @@ const biasCollection = defineCollection({
 						return val ?? publishDate;
 					})
 					.optional(),
-				tags: z.array(z.string()),
-				language: z.enum(["es"]),
 				keywords: z.array(z.string()),
-				isDraft: z.boolean().default(true).optional(),
-				isIndexed: z.boolean().default(false),
-				relatedLinks: z
-					.array(
-						z.object({
-							label: z.string(),
-							url: z.string(),
-						}),
-					)
-					.optional(),
 				readingTime: z.number().optional(),
 				category: z.array(
 					z.enum(["velocidad", "memoria", "percepción", "contexto", "juicio"]),
 				),
+				sources: z.array(sourceSchema).default([]),
 			})
 			.refine(
 				(data) => {
@@ -246,6 +225,54 @@ const biasCollection = defineCollection({
 					message:
 						"The field { lastTimeEdited } cannot be earlier than { publishDate }.",
 					path: ["lastTimeEdited"], // Indicates the field where the error is displayed
+				},
+			),
+});
+
+const mentalModelsCollection = defineCollection({
+	loader: glob({
+		pattern: "**/*.{md,mdx}",
+		base: "./src/content/mental-models",
+	}),
+	schema: ({ image }) =>
+		z
+			.object({
+				modelName: z.string().max(80),
+				cover: z.object({
+					src: image().optional(),
+					alt: z.string(),
+				}),
+				titleTag: z.string().max(60),
+				description: z.string().min(110).max(160),
+				modelQuestion: z.string().min(50).max(120),
+				backlog: z.enum(["wip", "upload"]),
+				publishDate: z.string().refine(isValidDateFormat),
+				lastTimeEdited: z
+					.string()
+					.refine(isValidDateFormat)
+					.refine((val) => (val ? isValidDateFormat(val) : true))
+					.transform((val, ctx) => {
+						const publishDate = ctx;
+						return val ?? publishDate;
+					})
+					.optional(),
+				keywords: z.array(z.string()),
+				readingTime: z.number().optional(),
+				sources: z.array(sourceSchema).default([]),
+			})
+			.refine(
+				(data) => {
+					if (data.lastTimeEdited && data.publishDate) {
+						const publishDateObj = new Date(data.publishDate);
+						const lastTimeEditedObj = new Date(data.lastTimeEdited);
+						return lastTimeEditedObj >= publishDateObj;
+					}
+					return true;
+				},
+				{
+					message:
+						"The field { lastTimeEdited } cannot be earlier than { publishDate }.",
+					path: ["lastTimeEdited"],
 				},
 			),
 });
@@ -270,7 +297,6 @@ const notesCollection = defineCollection({
 					return val ?? publishDate;
 				})
 				.optional(),
-			tags: z.array(z.string()).default([]),
 			sources: z
 				.array(
 					z.object({
@@ -295,5 +321,6 @@ export const collections = {
 	library: libraryCollection,
 	projects: projectCollection,
 	notes: notesCollection,
+	mentalModels: mentalModelsCollection,
 };
 // essay: essayCollection,
