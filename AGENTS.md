@@ -87,24 +87,27 @@ Dark-first, retro-digital, content-focused personal site. Hot pink accent on dar
 
 ### Typography
 
-| Role | Font | Notes |
-|------|------|-------|
+| Role              | Font                   | Notes                           |
+| ----------------- | ---------------------- | ------------------------------- |
 | Display / headers | **Tamago** (pixel art) | `font-pixel`, `tracking-widest` |
-| Body | **Rubik** | weights 300–700 + italic |
-| Code | **Cascadia** | monospace |
+| Body              | **Rubik**              | weights 300–700 + italic        |
+| Code              | **Cascadia**           | monospace                       |
 
 ### Color palette
 
 **Dark mode (default):**
+
 - Background `#111`, Surface `#1a1a1a`, Surface-alt `#2e2e2e`
 - Text: headers `#fcf8f1`, body `#dfdbd5`, muted `#9d9b98`
 - Accent pink `#ff2f92`, accent purple `#904fe7`
 
 **Light mode:**
+
 - Background `#f5f2ee` (beige), Surface `#eae6e1`
 - Text: headers `#0c0c0b`, body `#1f1e1d`, muted `#595856`
 
 **Content-type accent colors (dark / light):**
+
 - Behavior: `#e22ef6` / `#80008e`
 - Essays: `#33ffe8` / `#016c60`
 - Library: `#ffa424` / `#a15e00`
