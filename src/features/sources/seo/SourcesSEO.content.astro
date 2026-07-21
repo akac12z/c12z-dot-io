@@ -1,0 +1,30 @@
+---
+/**
+ * Generic SEO for the sources views (the index and the per-topic dynamic
+ * routes). Sources are not content of their own, so they ALWAYS share the
+ * same static OG image (PAGES.sources.ogImage) instead of generating one
+ * per topic — unlike biases, books or projects, which do have a dynamic
+ * OG route under src/pages/og/.
+ */
+
+import PagesSEO from "@/seo/PagesSEO.astro";
+import type { PageKeywords } from "@/interfaces/keywords.interface.ts";
+import { PAGES } from "@/global/pages-info.ts";
+
+interface Props {
+	pageTitle: string;
+	pageDescription: string;
+	ogImageAlt?: string;
+	pageKeywords: PageKeywords;
+}
+
+const { pageTitle, pageDescription, ogImageAlt, pageKeywords } = Astro.props;
+---
+
+<PagesSEO
+	pageTitle={pageTitle}
+	pageDescription={pageDescription}
+	ogImage={PAGES.sources.ogImage}
+	ogImageAlt={ogImageAlt ?? PAGES.sources.ogImageAlt}
+	pageKeywords={pageKeywords}
+/>
