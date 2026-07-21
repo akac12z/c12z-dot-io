@@ -15,7 +15,7 @@ import BiasSEO from "@/features/bias/seo/BiasSEO.content.astro";
 import BiasCategory from "@/features/bias/components/BiasCategory.astro";
 
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
-import TOC from "@/components/common/ui/toc/toc";
+import TOC from "@/components/common/ui/toc/toc.ts";
 
 // import PostSources from "@/features/sources/components/PostSources.astro";
 
@@ -76,7 +76,7 @@ const { Content, headings } = await render(entry);
         <section class="lettering">
           <Content />
         </section>
-        <!-- <PostSources sources={data.sources} /> -->
+        {/* <PostSources sources={data.sources} /> */}
     </article>
   </section>
 </MainLayout>
