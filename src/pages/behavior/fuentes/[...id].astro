@@ -1,0 +1,36 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import SourcesSEO from "@/features/sources/seo/SourcesSEO.content.astro";
+
+import TopicPage from "@/features/sources/components/TopicPage.astro";
+import { getTopics, type Topic } from "@/features/sources/data/get-topics.ts";
+
+interface Props {
+	topic: Topic;
+}
+
+export async function getStaticPaths() {
+	const topics = await getTopics();
+
+	return topics.map((topic) => ({
+		params: { id: topic.slug },
+		props: { topic },
+	}));
+}
+
+const { topic } = Astro.props;
+
+const pageTitle = `${topic.name}: fuentes consultadas - c12z`;
+const pageDescription = `Las ${topic.sources.length} fuentes que he consultando para escribir sobre ${topic.name.toLowerCase()} - c12z.`;
+---
+
+<MainLayout>
+	<SourcesSEO
+		slot="head"
+		pageTitle={pageTitle}
+		pageDescription={pageDescription}
+		ogImageAlt={`Fuentes sobre ${topic.name} - c12z`}
+		pageKeywords={{ keywords: [topic.name, `fuentes sobre ${topic.name}`] }}
+	/>
+	<TopicPage topic={topic} />
+</MainLayout>
