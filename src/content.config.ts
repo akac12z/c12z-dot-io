@@ -156,11 +156,18 @@ const projectCollection = defineCollection({
 /**
  * Sources cited in a post (bias or mental model). They are located in the
  * frontmatter of the post itself—no duplicate content—and are
- * displayed as what they are (book, video, quote...) in /behavior/sources
- * and in the "Behind This Post" block on the post detail page.
+ * displayed as what they are (book, video, quote...) in /behavior/fuentes
+ * and in the "Detrás de este post" block on the post detail page.
+ *
+ * There is no `sources` collection on purpose: adding a source means adding
+ * four lines to the .mdx you are already writing. `default([])` keeps a post
+ * without sources valid — it simply does not show up in the drawer.
+ *
+ * Adding a new type takes TWO steps: the `z.enum` below AND `TYPE_LABELS` in
+ * features/sources/data/source-types.ts (the build fails if you forget the
+ * second one — that is intended). See .docs/features/sources.md.
  */
 const sourceSchema = z.object({
-	// in a `quote` the title is the fragment itself
 	title: z.string().max(300),
 	type: z.enum([
 		"libro",
@@ -173,9 +180,9 @@ const sourceSchema = z.object({
 		"cita",
 	]),
 	author: z.string().optional(),
-	url: z.string().optional(),
+	url: z.string().startsWith("https://").optional(),
 	date: z.string().refine(isValidDateFormat).optional(),
-	excerpt: z.string().max(300).optional(),
+	excerpt: z.string().optional(),
 });
 
 const biasCollection = defineCollection({
