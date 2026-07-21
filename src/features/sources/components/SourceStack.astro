@@ -1,0 +1,102 @@
+---
+/**
+ * A pile of folders: the sources of a post stacked and half visible (each
+ * one peeks out its tab with the type). Clicking any of them opens the
+ * viewer, and the whole pile is walked through as a slider.
+ *
+ * Here 1 folder = 1 SOURCE (in the drawer, 1 folder = 1 topic). Used in
+ * the post detail ("Detrás de este post"), where there are few sources
+ * and it pays to see them all at once, and in TopicPage.
+ *
+ * With `file`, the cards are sheets of paper with a folded corner instead
+ * of folders (same behaviour): on a topic page you are already INSIDE its
+ * folder, and inside a folder there are files.
+ *
+ * The overlap is not computed here: this component only injects two
+ * variables and the CSS derives the step from them (see `.stack` in
+ * sources.module.css):
+ *   --n  how many sources. Clamped to a minimum of 2 because the step
+ *        formula divides by (--n - 1) — a single source would divide by 0.
+ *   --i  position in the pile, used as the z-index so each folder covers
+ *        the previous one.
+ *
+ * It renders its own SourceSheets viewer, linked by `id`.
+ */
+import styles from "./sources.module.css";
+import SourceSheets from "./SourceSheets.astro";
+import { TYPE_LABELS, type Source } from "../data/source-types.ts";
+
+interface Props {
+	/** unique in the page: links the pile to its dialog (`data-folder-open`) */
+	id: string;
+	/** for the aria-label of the pile */
+	label: string;
+	/** topic label in the viewer header (optional) */
+	title?: string;
+	/** loose pile: little overlap and, with a mouse, the hovered one comes
+	 *  to the front (see `.stackLoose`) */
+	loose?: boolean;
+	/** files (folded corner) instead of folders: inside a topic folder what
+	 *  you find are files, not more folders */
+	file?: boolean;
+	sources: Source[];
+}
+
+const { id, label, title, loose = false, file = false, sources } = Astro.props;
+---
+
+<div class={styles.stackWrap}>
+	<ul
+		class:list={[
+			styles.stack,
+			loose && styles.stackLoose,
+			file && styles.stackFiles,
+		]}
+		aria-label={`fuentes de ${label}`}
+		style={`--n: ${Math.max(sources.length, 2)}`}
+	>
+		{
+			sources.map((source, i) => (
+				<li
+					class={styles.stackItem}
+					data-source-item
+					data-type={source.type}
+					style={`--i: ${i}`}
+				>
+					<button
+						type="button"
+						class:list={[styles.folder, file && styles.file]}
+						data-folder-open={id}
+						data-index={i}
+						aria-haspopup="dialog"
+					>
+						<span class={styles.folderTab}>{TYPE_LABELS[source.type]}</span>
+						<span class={styles.folderTitle}>{source.title}</span>
+						{/* the note itself if there is one; if the source is only a
+					    title, the drawn lines fill the sheet so it does not read
+					    as half empty */}
+						{file &&
+							(source.excerpt ? (
+								<span class={styles.fileExcerpt}>{source.excerpt}</span>
+							) : (
+								<span
+									class={styles.fileLines}
+									aria-hidden="true"
+								/>
+							))}
+						<span class={styles.srOnly}>
+							{`Abrir ${TYPE_LABELS[source.type]}: ${source.title}`}
+						</span>
+					</button>
+				</li>
+			))
+		}
+	</ul>
+
+	<SourceSheets
+		id={id}
+		title={title}
+		file={file}
+		sources={sources}
+	/>
+</div>

@@ -1,0 +1,58 @@
+---
+/**
+ * One folder = one topic (a bias or a mental model) with its sources
+ * inside. The tab says which kind of post it is; inside, the topic name
+ * and how many sources it keeps. Clicking it opens the viewer and its
+ * sources are walked through as a slider.
+ *
+ * This is the drawer grain (1 folder = 1 topic), as opposed to
+ * SourceStack (1 folder = 1 source). It only renders a cell of
+ * SourcesPage's grid; the folder shape lives in .topicFolder.
+ *
+ * The `data-*` on the <li> are what the filter script reads
+ * (../scripts/sources-filters.ts): CSS Module class names are hashed at
+ * build time, so JS can never target them.
+ */
+import styles from "./sources.module.css";
+import SourceSheets from "./SourceSheets.astro";
+import type { Topic } from "../data/get-topics.ts";
+
+interface Props {
+	topic: Topic;
+}
+
+const { topic } = Astro.props;
+const { id, slug, kind, name, state, sources } = topic;
+---
+
+<li
+	class={styles.topicCell}
+	data-topic
+	data-kind={kind}
+	data-name={name.toLowerCase()}
+>
+	<button
+		type="button"
+		class={styles.topicFolder}
+		data-folder-open={id}
+		aria-haspopup="dialog"
+	>
+		<span class={styles.folderTab}>{kind}</span>
+		<span class={styles.topicName}>{name}</span>
+		<span class={styles.topicFoot}>
+			<span>
+				{`${sources.length} ${sources.length === 1 ? "fuente" : "fuentes"}`}
+			</span>
+		</span>
+		<span class={styles.srOnly}>
+			{`Abrir las fuentes de ${name} (${kind}, ${state})`}
+		</span>
+	</button>
+
+	<SourceSheets
+		id={id}
+		title={name}
+		titleHref={`/behavior/fuentes/${slug}`}
+		sources={sources}
+	/>
+</li>

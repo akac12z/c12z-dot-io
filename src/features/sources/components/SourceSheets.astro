@@ -1,0 +1,155 @@
+---
+/**
+ * The viewer: an enlarged folder in the middle of the screen (a native
+ * <dialog>) with one slide per source, walked through as a slider (‹ ›,
+ * arrow keys, Esc). Shared by the three views — the pile of sources of a
+ * post, a topic page and a topic folder in the drawer.
+ *
+ * Every source of the folder is printed here at build time, all `hidden`
+ * but the first; ../scripts/folder-dialog.ts only flips which one shows
+ * and rewrites the counter, the tab and the date from the active slide's
+ * `data-*`. That is why the markup carries `data-type`, `data-type-label`
+ * and `data-date`: they are the script's only source of truth.
+ *
+ * INVARIANT: this `id` must match the `data-folder-open` of the button
+ * that opens it, and be unique in the page — it is the whole link between
+ * a folder and its viewer.
+ */
+import styles from "./sources.module.css";
+import { TYPE_LABELS, type Source } from "../data/source-types.ts";
+
+interface Props {
+	/** unique in the page: links the folder to its dialog */
+	id: string;
+	/** topic name, printed in the viewer header */
+	title?: string;
+	/** topic route (/behavior/fuentes/<slug>), only when coming from the
+	 *  drawer: it turns into the "← ver notas" link */
+	titleHref?: string;
+	/** viewer as a file (folded corner) instead of a folder with a tab:
+	 *  it was opened from a pile of files, not of folders */
+	file?: boolean;
+	sources: Source[];
+}
+
+const { id, title, titleHref, file = false, sources } = Astro.props;
+---
+
+<dialog
+	class={styles.sheet}
+	id={id}
+	data-folder-dialog
+>
+	<article class:list={[styles.sheetInner, file && styles.sheetFile]}>
+		{
+			/* the type of the active source, written on the folder tab (same
+		    rule as the cards in the pile); the script updates it when
+		    changing slide */
+		}
+		<span
+			class={styles.sheetTab}
+			data-sheet-type
+		>
+			{TYPE_LABELS[sources[0].type]}
+		</span>
+
+		<header class={styles.sheetHead}>
+			<span
+				class={styles.sheetCounter}
+				data-counter
+			>
+				1 / {sources.length}
+			</span>
+			{title && <span class={styles.sheetTopic}>{title}</span>}
+			<time
+				class={styles.sheetDate}
+				data-sheet-date
+				hidden={!sources[0].date}
+			>
+				{sources[0].date}
+			</time>
+		</header>
+
+		{
+			/* every slide in the same grid cell: the viewer is as tall as the
+		    tallest one, so moving from one to another never jumps */
+		}
+		<section class={styles.sheetSlides}>
+			{
+				sources.map((source, index) => (
+					<div
+						class={styles.slide}
+						data-slide={index}
+						data-type={source.type}
+						data-type-label={TYPE_LABELS[source.type]}
+						data-date={source.date}
+						hidden={index !== 0}
+					>
+						{source.type === "cita" ? (
+							<blockquote class={`${styles.sheetQuote} ${styles.clamp2}`}>
+								“{source.title}”
+							</blockquote>
+						) : (
+							<h3 class={`${styles.sheetTitle} ${styles.clamp2}`}>
+								{source.title}
+							</h3>
+						)}
+						{source.author && (
+							<p class={styles.sheetAuthor}>— {source.author}</p>
+						)}
+						{source.excerpt && (
+							<p
+								class={styles.sheetExcerpt}
+								data-excerpt
+							>
+								{source.excerpt}
+							</p>
+						)}
+						{/* the link bar: on the left, inwards (my notes on the topic);
+					    on the right, outwards (the original source) */}
+						<footer class={styles.sheetFoot}>
+							{titleHref && (
+								<a
+									class={styles.sheetTopicLink}
+									href={titleHref}
+								>
+									← ver notas
+								</a>
+							)}
+							{source.url && (
+								<a
+									class={styles.sheetLink}
+									href={source.url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									ir a la fuente ↗
+								</a>
+							)}
+						</footer>
+					</div>
+				))
+			}
+		</section>
+
+		<nav
+			class={styles.sheetNav}
+			aria-label="navegar entre fuentes"
+		>
+			<button
+				type="button"
+				class={styles.navBtn}
+				data-folder-prev
+			>
+				‹ anterior
+			</button>
+			<button
+				type="button"
+				class={styles.navBtn}
+				data-folder-next
+			>
+				siguiente ›
+			</button>
+		</nav>
+	</article>
+</dialog>

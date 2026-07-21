@@ -1,0 +1,146 @@
+---
+/**
+ * /behavior/fuentes/<topic> — the sources of one bias or mental model, a
+ * file (folded corner) each, barely overlapped: they are almost fully
+ * visible and with a mouse the hovered one comes to the front, but to read
+ * one you have to click it (viewer + slider). Files and not folders:
+ * here you are already inside the topic's folder.
+ *
+ * Grain: 1 file = 1 SOURCE (in the drawer, 1 folder = 1 topic).
+ *
+ * The `width` on `.topicPage` is not decorative: without it the stack
+ * overlap has no width to resolve against and the page overflows on
+ * mobile. See §"El ancho explícito" in .docs/features/sources.md.
+ */
+import styles from "./sources.module.css";
+
+import SourceStack from "./SourceStack.astro";
+import FolderDialogScript from "./FolderDialogScript.astro";
+import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
+
+import { TYPE_LABELS } from "../data/source-types.ts";
+import type { Topic } from "../data/get-topics.ts";
+
+interface Props {
+	/** built by `getTopics()` and handed over by `getStaticPaths` */
+	topic: Topic;
+}
+
+const { topic } = Astro.props;
+const { id, kind, name, href, state, sources } = topic;
+
+// how many of each type, for the header summary ("2 libros · 1 cita")
+const byType = sources.reduce<Record<string, number>>((acc, source) => {
+	acc[source.type] = (acc[source.type] ?? 0) + 1;
+	return acc;
+}, {});
+
+// kept as pairs (not as a joined string): each type is its own unit in the
+// header, with the figure set apart from its label
+const tally = Object.entries(byType).map(([type, n]) => ({
+	n,
+	label: `${TYPE_LABELS[type as keyof typeof TYPE_LABELS]}${n > 1 ? "s" : ""}`,
+}));
+
+// zero-padded so the numeral keeps the same width from 1 to 9 sources and
+// the title column never shifts between topics
+const count = String(sources.length).padStart(2, "0");
+
+// only offer toggles for the types this topic actually keeps — with a
+// single type there is nothing to filter, so the whole nav is dropped
+const TYPE_FILTERS = Object.keys(byType);
+---
+
+<section
+	class={styles.topicPage}
+	data-topic-root
+>
+	<GoBackInTop
+		headPage="/behavior/fuentes"
+		title="volver al cajón"
+	/>
+
+	<header class={styles.topicPageHeader}>
+		<div class={styles.topicIdentity}>
+			<h1 class={styles.title}>
+				<span class={styles.titlePrefix}>Fuentes sobre</span>
+				{name}
+			</h1>
+			<p class={styles.countBox}>
+				<span class={styles.count}>{count}</span>
+				<span class={styles.countLabel}>
+					{sources.length > 1 ? "fuentes" : "fuente"}
+				</span>
+			</p>
+		</div>
+
+		<div class={styles.topicMeta}>
+			<ul class={styles.topicTally}>
+				{
+					tally.map(({ n, label }) => (
+						<li class={styles.tallyItem}>
+							<span class={styles.tallyN}>{n}</span>
+							{label}
+						</li>
+					))
+				}
+			</ul>
+			{
+				/* the two states of the SAME thing — the post these sources are
+				 * for: it is out and you can read it, or it is not out yet.
+				 * `href` only exists when backlog === "upload", so this is
+				 * exactly `state === "publicado"` seen from the link's side. */
+				href ? (
+					<a
+						class={styles.topicPageLink}
+						href={href}
+					>
+						lee el post →
+					</a>
+				) : (
+					<span class={styles.wipTag}>wip</span>
+				)
+			}
+		</div>
+	</header>
+
+	{
+		TYPE_FILTERS.length > 1 && (
+			<nav
+				class={styles.topicFilters}
+				aria-label="filtrar las fuentes"
+			>
+				<span class={styles.filterLabel}>Tipo de fuente:</span>
+				<section class={styles.toggleSect}>
+					{TYPE_FILTERS.map((type) => (
+						<button
+							class={styles.toggle}
+							data-filter-type={type}
+							aria-pressed="false"
+						>
+							{TYPE_LABELS[type as keyof typeof TYPE_LABELS]}
+						</button>
+					))}
+				</section>
+			</nav>
+		)
+	}
+
+	<SourceStack
+		id={id}
+		label={name}
+		title={name}
+		sources={sources}
+		loose
+		file
+	/>
+
+	<FolderDialogScript />
+</section>
+
+<script>
+	import { initTopicFilters } from "../scripts/topic-filters.ts";
+
+	initTopicFilters();
+	document.addEventListener("astro:page-load", initTopicFilters);
+</script>

@@ -1,0 +1,44 @@
+---
+/**
+ * "Detrás de este post": the sources from the frontmatter of the post
+ * itself (a bias or a mental model), stacked as folders. If the post has
+ * no sources it renders nothing at all — that is why the consumer pages
+ * can drop it in unconditionally.
+ *
+ * It is the third and smallest view of the feature; the other two are
+ * SourcesPage (the drawer) and TopicPage (one topic). Here 1 folder =
+ * 1 source, as in TopicPage — not 1 topic, as in the drawer.
+ *
+ * Used by: src/pages/behavior/modelos-mentales/[...id].astro (and, once
+ * uncommented, .../sesgos/[...id].astro).
+ */
+import styles from "./sources.module.css";
+
+import SourceStack from "./SourceStack.astro";
+import FolderDialogScript from "./FolderDialogScript.astro";
+import type { Source } from "../data/source-types.ts";
+
+interface Props {
+	/** the `sources` array straight from the post frontmatter */
+	sources: Source[];
+}
+
+const { sources } = Astro.props;
+---
+
+{
+	sources.length > 0 && (
+		<aside class={styles.behindPost}>
+			<h2 class={styles.behindTitle}>Detrás de este post</h2>
+			<p class={styles.behindIntro}>
+				Las fuentes que he consultado para escribirlo:
+			</p>
+			<SourceStack
+				id="post-sources"
+				label="este post"
+				sources={sources}
+			/>
+			<FolderDialogScript />
+		</aside>
+	)
+}

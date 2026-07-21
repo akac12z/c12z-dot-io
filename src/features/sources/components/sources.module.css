@@ -1,0 +1,1527 @@
+/* ============================================================
+ * sources.module.css — every style of the `sources` feature.
+ *
+ * One single stylesheet for the three views, because they share the
+ * same shapes (folder / file / viewer) and sharing beats splitting here:
+ *   1. /behavior/fuentes            → .sourcesPage + .topicGrid + .topicFolder
+ *   2. /behavior/fuentes/<topic>    → .topicPage + .stack (.stackLoose .stackFiles)
+ *   3. "Detrás de este post"        → .behindPost + .stack
+ * The viewer (.sheet) is shared by all three.
+ *
+ * Three things to understand before editing (see .docs/features/sources.md):
+ *   - the folder silhouette is a clip-path, and a clip-path also cuts off
+ *     box-shadows: that is why the shadow lives on the <li>, not the button;
+ *   - the stack overlap comes from grid columns narrower than the folder
+ *     (--step vs --folder-w), never from negative margins;
+ *   - `rem` here is 14px, not 16px (global.css sets html { font-size: --t-body }).
+ * ============================================================ */
+
+/* ---- Header (same format as the other pages) ------------ */
+
+.pageHeader {
+	max-width: var(--screen-md);
+	margin-bottom: var(--sp-4);
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+
+	& .title {
+		margin-bottom: var(--sp-2);
+	}
+}
+
+/* ---- Filter panel: a terminal window ------------------------- */
+
+/* Intro + search + toggles inside a single "window": a title bar with its
+ * traffic lights on top and the body below. It is a <details>: the whole bar
+ * (summary) folds and unfolds the panel, like minimizing a terminal. */
+.filterPanel {
+	/* fixed width (not max-width): with justify-self the box is measured by
+	 * its content, so when folded only the bar would be left and it would shrink */
+	width: min(36rem, 100%);
+	display: flex;
+	flex-direction: column;
+	justify-self: center;
+	border: var(--hairline-2);
+	border-radius: var(--r-md);
+	background-color: var(--surface-1);
+	overflow: hidden;
+	margin-block: var(--sp-5) var(--sp-10);
+}
+
+/* the window title bar; it is also the fold button */
+.panelBar {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-3);
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	letter-spacing: var(--tracking-wider);
+	color: var(--fg-3);
+	padding: var(--sp-2) var(--sp-3);
+	cursor: pointer;
+	user-select: none;
+	list-style: none;
+	transition: color var(--t-fast) var(--ease);
+
+	/* no native <summary> arrow: the [-]/[+] already tells the state */
+	&::-webkit-details-marker {
+		display: none;
+	}
+
+	&:hover {
+		color: var(--fg);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: -0.125rem;
+	}
+
+	/* state indicator on the right, in terminal key */
+	&::after {
+		content: "[-]";
+		margin-left: auto;
+	}
+
+	/* only when the panel is open: closed, this hairline would sit on the
+	 * bottom edge of the window and would read as a double line */
+	.filterPanel[open] & {
+		border-bottom: var(--hairline-2);
+	}
+
+	.filterPanel:not([open]) &::after {
+		content: "[+]";
+	}
+}
+
+/* the window traffic lights, using the system status colors */
+.trafficLights {
+	display: inline-flex;
+	gap: var(--sp-2);
+}
+
+.light {
+	width: 0.625rem;
+	height: 0.625rem;
+	border-radius: 50%;
+}
+
+.lightClose {
+	background-color: var(--err);
+}
+
+.lightMin {
+	background-color: var(--warn);
+}
+
+.lightMax {
+	background-color: var(--ok);
+}
+
+.panelBody {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+	padding: var(--sp-3) var(--sp-4) var(--sp-4);
+}
+
+/* title on the left, tally on the right */
+.panelHead {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-2) var(--sp-4);
+
+	& h2 {
+		font-size: var(--t-h4);
+		line-height: var(--lh-h4);
+	}
+}
+
+.panelText {
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-2);
+}
+
+.tally {
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+}
+
+/* Empty drawer: no post has sources to collect yet. Message in terminal key
+ * (mono + prompt), like an idle console with nothing to list; it takes the
+ * place of the search field and the toggles. */
+.emptyState {
+	display: flex;
+	align-items: baseline;
+	gap: var(--sp-2);
+	margin-top: var(--sp-2);
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+}
+
+.emptyPrompt {
+	color: var(--c-behavior);
+}
+
+/* ---- Filters ------------------------------------------------ */
+
+.filters {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	margin-top: var(--sp-2);
+}
+
+.filterGroup {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--sp-2);
+}
+
+/*
+ * Terminal-style prompt search: with hundreds of folders, typing is
+ * faster than searching. The line below delimits the field, and a block cursor
+ * blinks next to the prompt to indicate "type here"; when
+ * focused, the prompt lights up and the fake cursor gives way to the real caret.
+*/
+.searchBox {
+	display: flex;
+	align-items: baseline;
+	gap: var(--sp-2);
+	width: 100%;
+	max-width: 20rem;
+}
+
+.searchPrompt {
+	font-family: var(--ff-mono);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	color: var(--fg-3);
+	transition: color var(--t-fast) var(--ease);
+
+	.searchBox:focus-within & {
+		color: var(--c-behavior);
+	}
+
+	/* blinking block cursor, like an idle terminal */
+	&::after {
+		content: "";
+		display: inline-block;
+		width: var(--sp-05);
+		height: 1em;
+		margin-left: var(--sp-2);
+		transform: translateY(0.125em);
+		background-color: currentColor;
+		animation: caretBlink 1.2s steps(1) infinite;
+	}
+
+	/* on focus the real caret takes over; with text typed it is not needed */
+	.searchBox:focus-within &::after,
+	.searchBox:has(.search:not(:placeholder-shown)) &::after {
+		display: none;
+	}
+}
+
+@keyframes caretBlink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+.search {
+	flex: 1;
+	min-width: 0;
+	background: none;
+	border: none;
+	border-bottom: var(--hairline-2);
+	padding: var(--sp-1) 0;
+	font-family: var(--ff-mono);
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	color: var(--fg);
+	caret-color: var(--c-behavior);
+
+	&::placeholder {
+		color: var(--fg-3);
+	}
+
+	&:focus {
+		outline: none;
+		border-bottom-color: var(--c-behavior);
+	}
+}
+
+.filterLabel {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-3);
+}
+
+/* Toggles: they switch on and off independently (several at a time) and none
+ * switched on = everything passes. That is why there is no "all" button:
+ * switching them all off already means "all". Terminal checkbox: `[ ]` off,
+ * `[x]` on — in mono both are the same width, so nothing shifts on activation. */
+.toggle {
+	display: inline-flex;
+	align-items: baseline;
+	gap: var(--sp-1);
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+	/* the `[ ]` and its label are one token: without this the box breaks away
+	 * from the word and the `]` falls to the next line on its own */
+	white-space: nowrap;
+	transition: color var(--t-fast) var(--ease);
+	user-select: none;
+
+	/* the toggle checkbox */
+	&::before {
+		content: "[ ]";
+		letter-spacing: normal;
+		transition: color var(--t-fast) var(--ease);
+	}
+
+	&:hover {
+		color: var(--fg);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.125rem;
+	}
+
+	&[aria-pressed="true"] {
+		color: var(--fg);
+
+		&::before {
+			content: "[x]";
+			color: var(--c-behavior);
+		}
+	}
+}
+
+/* ---- Folder silhouette (shared) -------------------------- */
+
+/* The folder cut — tab on the top left — is defined ONCE for the three
+ * silhouettes (topic, source and viewer); each class tunes the tab with
+ * --tab-h / --tab-w / --tab-slope and the radius with --folder-r.
+ * The polygon (straight top-right corner) is the fallback; where shape()
+ * exists, the variable is overridden and that corner is rounded with an arc. */
+.topicFolder,
+.folder,
+.sheetInner {
+	--folder-clip: polygon(
+		0 0,
+		var(--tab-w) 0,
+		calc(var(--tab-w) + var(--tab-slope)) var(--tab-h),
+		100% var(--tab-h),
+		100% 100%,
+		0 100%
+	);
+
+	border-radius: var(--folder-r);
+	clip-path: var(--folder-clip);
+
+	@supports (clip-path: shape(from 0% 0%, line to 100% 100%)) {
+		--folder-clip: shape(
+			from 0% 0%,
+			hline to var(--tab-w),
+			line to calc(var(--tab-w) + var(--tab-slope)) var(--tab-h),
+			hline to calc(100% - var(--folder-r)),
+			arc to 100% calc(var(--tab-h) + var(--folder-r)) of var(--folder-r) cw,
+			vline to 100%,
+			hline to 0%,
+			close
+		);
+	}
+}
+
+/* Left edge: separates a folder from the one underneath it. It lives INSIDE
+ * the box (a border, not a shadow): the clip-path cuts off whatever falls
+ * outside, so an outer box-shadow would never be visible. */
+.topicFolder,
+.folder {
+	background-color: var(--surface-3);
+	border-left: 0.125rem solid var(--border-2);
+
+	/* &:hover,
+	&:focus-visible {
+		border-left-color: var(--border-3);
+	} */
+}
+
+/* Shadow of the hovered folder, the same for both grids. It is defined on the
+ * <li> (not on the button itself: its clip-path would cut it off) and each
+ * list switches it on in its own :has(...:hover). */
+.topicCell,
+.stackItem {
+	--folder-shadow: drop-shadow(0.2rem 0.4rem 0.2rem rgb(0 0 0 / 0.45));
+}
+
+/* ---- Folder grid: one folder = one topic --------------------- */
+
+/* Dense on purpose: with ~140 topics (biases + models) one folder per source
+ * would be an endless scroll. Here each folder keeps its sources inside and
+ * the viewer walks through them. */
+.topicGrid {
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+	gap: var(--sp-5) var(--sp-4);
+	min-width: 0;
+
+	/* Tablet: 3 fixed columns sharing the available width. */
+	@media (width < 48rem) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	/* Mobile: 2 columns filling the screen width, with no side gap. */
+	@media (width < 30rem) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.topicCell {
+	min-width: 0;
+	transition: filter var(--t-base) var(--ease);
+
+	/* the hovered folder casts the same shadow as in the stack */
+	&:has(.topicFolder:hover),
+	&:has(.topicFolder:focus-visible) {
+		filter: var(--folder-shadow);
+	}
+
+	&[hidden] {
+		display: none;
+	}
+}
+
+/* same folder silhouette as the source ones, but this is the whole topic */
+.topicFolder {
+	--tab-h: 1.125rem;
+	--tab-w: 55%;
+	--tab-slope: 0.875rem;
+	--folder-r: var(--r-md);
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+	width: 100%;
+	height: 7.5rem;
+	padding: var(--sp-1) var(--sp-3) var(--sp-3);
+	text-align: left;
+	color: var(--fg);
+	cursor: pointer;
+	transition:
+		background-color var(--t-base) var(--ease),
+		border-color var(--t-base) var(--ease),
+		transform var(--t-base) var(--ease);
+
+	&:hover,
+	&:focus-visible {
+		transform: translateY(-0.125rem);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.125rem;
+	}
+}
+
+.topicName {
+	padding-top: var(--sp-1);
+	font-family: var(--ff-rubik);
+	font-weight: 500;
+	font-size: var(--t-body);
+	line-height: var(--lh-body);
+	color: var(--fg);
+
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	overflow: hidden;
+}
+
+.topicFoot {
+	display: flex;
+	align-items: baseline;
+	gap: var(--sp-2);
+	margin-top: auto;
+	font-family: var(--ff-mono);
+	font-size: var(--t-nano);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wider);
+	color: var(--fg-3);
+}
+
+/* ============================================================
+ * /behavior/fuentes/<topic> — the sources of one topic, laid out
+ * ============================================================ */
+
+/* Explicit width (not `100%`): the global <main> has `margin-inline: auto`,
+ * so it is sized by its content. Without a fixed reference, the stack step
+ * — computed against the available width — would have nothing to resolve
+ * against. */
+.topicPage {
+	width: min(var(--screen-md), calc(100vw - 2 * var(--sp-3)));
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+/* Corner marks, no box: four brackets frame the header like a viewfinder and
+ * the content floats inside them. A full border would draw one more rectangle
+ * on a page that is already all rectangles; the corners fence the same area
+ * with a quarter of the ink.
+ *
+ * They are drawn on two pseudo-elements (top and bottom), each carrying its
+ * two vertical strokes as borders and its two horizontal ones as background
+ * layers — that way four corners cost two elements and no extra markup.
+ *
+ * Neutral on purpose: in this header the only color is the "wip" pill, so it
+ * reads as a state and not as decoration. */
+.topicPageHeader {
+	--mark: 1.25rem;
+	--mark-w: 0.125rem;
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-4);
+	padding: var(--sp-5);
+	margin-bottom: var(--sp-8);
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		inset-inline: 0;
+		height: var(--mark);
+		border-left: var(--mark-w) solid var(--border-3);
+		border-right: var(--mark-w) solid var(--border-3);
+		pointer-events: none;
+	}
+
+	/* the two top brackets: vertical strokes from the borders, horizontal ones
+	 * pinned to the top edge */
+	&::before {
+		top: 0;
+		background:
+			linear-gradient(var(--border-3) 0 0) left top / var(--mark) var(--mark-w)
+				no-repeat,
+			linear-gradient(var(--border-3) 0 0) right top / var(--mark) var(--mark-w)
+				no-repeat;
+	}
+
+	&::after {
+		bottom: 0;
+		background:
+			linear-gradient(var(--border-3) 0 0) left bottom / var(--mark)
+				var(--mark-w) no-repeat,
+			linear-gradient(var(--border-3) 0 0) right bottom / var(--mark)
+				var(--mark-w) no-repeat;
+	}
+}
+
+/* the title on the left, the numeral pinned to the right corner */
+.topicIdentity {
+	display: flex;
+	align-items: start;
+	justify-content: space-between;
+	gap: var(--sp-4);
+
+	& .title {
+		margin-block: 0;
+	}
+}
+
+.countBox {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	gap: var(--sp-05);
+	/* the title wraps; the numeral never does */
+	flex-shrink: 0;
+}
+
+/* the count as a figure, big enough to be the second thing read after the
+ * title. It carries the top-right corner of the frame: without that weight
+ * the brackets would be holding an empty corner. */
+.count {
+	font-family: var(--ff-pixel);
+	font-size: 3.25rem;
+	line-height: 1;
+	color: var(--fg-2);
+}
+
+.countLabel {
+	font-family: var(--ff-mono);
+	font-size: var(--t-nano);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-3);
+}
+
+/* deliberately NOT mono uppercase: the eyebrow above already is, and two
+ * labels in the same key would read as one broken line */
+.titlePrefix {
+	display: block;
+	font-family: var(--ff-rubik);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-2);
+	margin-bottom: var(--sp-05);
+}
+
+/* The bottom row of the frame: the breakdown on the left, the state of the
+ * post on the right — the same split as the title and the numeral above, so
+ * both rows hang from the two edges the corner marks are holding. Stacked in
+ * a column they left the bottom-right corner empty and the frame looked
+ * unbalanced. */
+.topicMeta {
+	display: flex;
+	/* never wraps: the state of the post belongs to the bottom-right corner of
+	 * the frame at every width, so it is the tally that reflows, not the row */
+	flex-wrap: nowrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-4);
+}
+
+.topicTally {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: var(--sp-2) var(--sp-3);
+	/* it is the one that gives way when the row runs out of room */
+	min-width: 0;
+}
+
+/* Each type is a unit of its own, split by a hairline instead of the middot
+ * it used to be joined with: it is a rule in the same key as the corner marks
+ * and it survives wrapping, whereas a middot ends up orphaned at the end of
+ * a line. */
+.tallyItem {
+	display: flex;
+	align-items: baseline;
+	gap: var(--sp-1);
+	border-left: var(--hairline-2);
+	padding-left: var(--sp-3);
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-3);
+
+	&:first-child {
+		border-left: none;
+		padding-left: 0;
+	}
+}
+
+/* the figure in the same pixel font as the big count above: the row reads as
+ * its breakdown and not as another label */
+.tallyN {
+	font-family: var(--ff-pixel);
+	font-size: var(--t-body);
+	line-height: 1;
+	color: var(--fg-2);
+}
+
+/* "wip": it takes the place of the link to the post, because it says the same
+ * thing in its other state — the post is not out yet. It used to be a rounded
+ * pill, which inside a frame of square corners read as a second system: now it
+ * is a status word with a lit square, like a light on a panel. */
+.wipTag {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--sp-2);
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	letter-spacing: var(--tracking-wider);
+	color: var(--c-wip);
+	/* pinned to its corner: it is the tally that shrinks */
+	flex-shrink: 0;
+
+	&::before {
+		content: "";
+		width: 0.375rem;
+		height: 0.375rem;
+		background-color: currentColor;
+	}
+}
+
+@media (width < 40rem) {
+	.topicPageHeader {
+		--mark: 1rem;
+
+		padding: var(--sp-4) var(--sp-3);
+	}
+
+	.count {
+		font-size: 2.5rem;
+	}
+
+	/* With many types in a narrow column a free wrap leaves orphans on the last
+	 * line and a separator dangling at the start of it. Three fixed columns
+	 * keep the rows aligned and the hairlines only between columns — the tally
+	 * reads as a small table instead of as a broken sentence. */
+	.topicTally {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--sp-2) 0;
+	}
+
+	/* the columns are fixed (1fr), so a long label — "artículo" — reaches the
+	 * edge of its cell and ends up glued to the separator of the next one. The
+	 * padding on the right keeps that air inside the cell: the word wraps
+	 * earlier instead of touching the hairline. */
+	.tallyItem {
+		padding-inline: var(--sp-2);
+
+		/* first of each row: no separator to its left, it opens the row */
+		&:nth-child(3n + 1) {
+			border-left: none;
+			padding-left: 0;
+		}
+	}
+}
+
+.eyebrow {
+	display: flex;
+	gap: var(--sp-3);
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-3);
+}
+
+/* twin of .wipTag — the other state of the same thing — so it sits in the same
+ * corner, in the same size and key, and only the underline tells it apart */
+.topicPageLink {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	line-height: var(--lh-micro);
+	letter-spacing: var(--tracking-wider);
+	color: var(--fg);
+	text-decoration: underline;
+	text-underline-offset: var(--sp-1);
+	white-space: nowrap;
+	/* twin of .wipTag: same corner, and it does not give way either */
+	flex-shrink: 0;
+	transition: color var(--t-fast) var(--ease);
+
+	&:hover {
+		color: var(--c-behavior);
+	}
+}
+
+/* the same toggles as in the drawer, but by type only: inside a topic the
+ * state is already stated by the header and there are no names to search */
+.topicFilters {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: start;
+	gap: var(--sp-2);
+	border-top: var(--hairline-2);
+	border-bottom: var(--hairline-2);
+	padding-block: var(--sp-3);
+	margin-bottom: var(--sp-6);
+}
+
+.toggleSect {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	column-gap: var(--sp-3);
+	row-gap: var(--sp-2);
+}
+/* ---- Folder stack -------------------------------------------- */
+
+.stackWrap {
+	position: relative;
+	min-width: 0;
+}
+
+/* The folders take columns as wide as the *step* and, being wider than their
+ * column, they invade the next one: that is where the stacking comes from.
+ * With negative margins, the first folder of each row would drag the overlap
+ * and stick out on the left; with columns, it does not.
+ *
+ * The step adapts to the available room and to how many sources there are
+ * (--n, injected by the component):
+ *   - if they fit whole (few sources or a wide screen) → no overlap, spaced
+ *     by a normal gap;
+ *   - if they do not fit → they overlap just enough to fit in the row;
+ *   - if not even then (many sources on mobile) → the overlap stops at
+ *     --min-step, so the tab always peeks out, and they wrap to the next row. */
+.stack {
+	--folder-w: 10.5rem;
+	/* Maximum overlap. It is also the uncovered strip of each folder, i.e. its
+	 * hover/click area: lowering it too much shows more folders at once but
+	 * makes them harder to aim at. */
+	--min-step: 5rem;
+	--gap: var(--sp-3);
+	--step: clamp(
+		var(--min-step),
+		calc((100% - var(--folder-w)) / (var(--n) - 1)),
+		calc(var(--folder-w) + var(--gap))
+	);
+
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, var(--step));
+	align-items: start;
+	row-gap: var(--sp-5);
+	width: 100%;
+	/* room for the hover (translateY) and for the piece the last folder of each
+	 * row sticks out beyond its column (nothing, if there is no overlap) */
+	padding-top: var(--sp-2);
+	padding-right: max(0px, calc(var(--folder-w) - var(--step)));
+
+	@media (width < 40rem) {
+		--folder-w: 9rem;
+		--min-step: 3.5rem;
+		/* On mobile the stack does not fill the row (fixed --step columns):
+		 * centered instead of stuck to the left. It works out because the
+		 * padding-right already reserves exactly the last folder's overhang.
+		 * On desktop it stays left-aligned, like everything else. */
+		justify-content: center;
+	}
+}
+
+/* Loose stack: on the topic page the sources are the content, not an ornament
+ * of the post. They are still overlapped — just enough that none can be fully
+ * read and you have to click it — but the overlap is far smaller and, with a
+ * mouse, the hovered folder comes to the front and is seen whole. */
+.stackLoose {
+	/* they barely step on each other: almost the whole folder shows, but never
+	 * all of it */
+	--min-step: 8.5rem;
+
+	/* On mobile, no overlap at all: 2 columns filling the screen width (no side
+	 * gap), just like the drawer grid (/fuentes). */
+	@media (width < 40rem) {
+		/* step = folder ⇒ the overlap padding-right resolves to 0 */
+		--min-step: calc(var(--folder-w) + var(--gap));
+
+		grid-template-columns: repeat(2, 1fr);
+		column-gap: var(--sp-4);
+
+		/* the folders stretch to their cell: they share the width evenly with
+		 * no gap left on the sides */
+		& .folder {
+			width: 100%;
+			height: 7.5rem;
+		}
+	}
+
+	/* Mouse only: here the z-index IS raised (unlike the closed stack). With
+	 * this overlap the hovered folder covers little of the next one, so every
+	 * folder is still reachable by moving the cursor. */
+	@media (hover: hover) {
+		& .stackItem:has(.folder:hover) {
+			z-index: 20;
+		}
+	}
+}
+
+.stackItem {
+	position: relative;
+	/* increasing z-index: each folder covers the previous one, like in a drawer.
+	 *
+	 * CAREFUL: on hover the z-index is NOT raised. If the hovered folder jumped
+	 * to the front, it would cover the next 2-3 with its full width and, moving
+	 * the mouse to the right, you would skip over them. Keeping the natural
+	 * order, the uncovered strip of each folder (= --step) stays its hover/click
+	 * area, and all of them are reachable in both directions. */
+	z-index: calc(var(--i) + 1);
+	transition:
+		transform var(--t-base) var(--ease),
+		filter var(--t-base) var(--ease);
+
+	/* The hovered folder lifts up (without coming in front of the rest of the
+	 * stack) and casts a shadow to detach itself from its neighbours.
+	 * drop-shadow and not box-shadow: the shadow follows the clipped silhouette.
+	 * It lives here, on the <li>, because on the button itself the clip-path
+	 * would eat it. */
+	&:has(.folder:hover),
+	&:has(.folder:focus-visible) {
+		transform: translateY(-0.5rem);
+		filter: var(--folder-shadow);
+	}
+
+	/* with the keyboard it does come to the front: there is no cursor that can
+	 * "skip" anything, and this way both the focus ring and the focused folder
+	 * are seen whole */
+	&:has(.folder:focus-visible) {
+		z-index: 20;
+	}
+}
+
+/* The folder: tab cut out on the top left with clip-path, like a filing
+ * cabinet folder. Small: in the stack only the type and the beginning of the
+ * title can be read; the rest, once enlarged. */
+.folder {
+	--tab-h: 1.125rem;
+	--tab-w: 50%;
+	--tab-slope: 0.875rem;
+	--folder-r: var(--r-md);
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-1);
+	/* wider than its column (--step): the excess is the overlap */
+	width: var(--folder-w);
+	height: 7.5rem;
+	padding: var(--sp-1) var(--sp-3) var(--sp-3);
+	text-align: left;
+	color: var(--fg);
+	cursor: pointer;
+	transition:
+		background-color var(--t-base) var(--ease),
+		border-color var(--t-base) var(--ease);
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.125rem;
+	}
+
+	@media (width < 40rem) {
+		height: 6.75rem;
+	}
+}
+
+/* the source type, written on the tab itself */
+.folderTab {
+	display: block;
+	height: var(--tab-h);
+	line-height: var(--tab-h);
+	font-family: var(--ff-mono);
+	font-size: var(--t-nano);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wider);
+	/* --fg-3 over the folder only reaches 2.8:1; with --fg-2 the type label
+	 * is readable (hierarchy is carried by the size and the uppercase) */
+	color: var(--fg-2);
+}
+
+.folderTitle {
+	padding-top: var(--sp-1);
+	font-family: var(--ff-rubik);
+	font-weight: 500;
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg);
+
+	/* only hinted at: the full title lives in the enlarged folder */
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+	overflow: hidden;
+}
+
+/* ---- File silhouette (.folder modifier) ----------------------- */
+
+/* On the topic page you are already INSIDE the folder, and inside a folder
+ * there are files: each source is a sheet of paper with its top-right corner
+ * folded. It sits ON TOP of .folder (same box, stack, hover and viewer): it
+ * only overrides the silhouette (--folder-clip) and repositions the type label. */
+.file {
+	/* side of the square taken by the folded corner */
+	--fold: 1.375rem;
+	--folder-clip: polygon(
+		0 0,
+		calc(100% - var(--fold)) 0,
+		100% var(--fold),
+		100% 100%,
+		0 100%
+	);
+
+	position: relative;
+	/* no tab to clear: normal top padding */
+	padding-top: var(--sp-3);
+
+	/* the folded flap: a triangle falling over the sheet, a notch lighter than
+	 * the paper so it reads as a fold */
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: var(--fold);
+		height: var(--fold);
+		background-color: var(--border-2);
+		border-bottom-left-radius: var(--r-sm);
+		clip-path: polygon(0 0, 0 100%, 100% 100%);
+	}
+
+	/* the type, as a label on top (there is no tab left to host it); it leaves
+	 * room on the right so it does not slide under the folded corner */
+	& .folderTab {
+		height: auto;
+		line-height: var(--lh-micro);
+		padding-right: var(--fold);
+	}
+
+	/* on a sheet the title is the heading OF the note, so it is set in bold
+	 * against the plain text of the excerpt */
+	& .folderTitle {
+		font-weight: 700;
+	}
+
+	/* with a note under it the title yields lines: it stops being the whole
+	 * preview and becomes just its first block */
+	&:has(.fileExcerpt) .folderTitle {
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+	}
+}
+
+/* Stack of files: A4 proportion (210×297), taller than wide, as opposed to the
+ * landscape folders. The height comes from the aspect-ratio, so on mobile
+ * (cell width) the sheet is still a sheet. */
+.stackFiles {
+	--folder-w: 8.5rem;
+	/* overlap smaller than the sheet width: a wide strip always peeks out */
+	--min-step: 7rem;
+
+	& .folder {
+		height: auto;
+		aspect-ratio: 210 / 297;
+	}
+
+	/* mobile: no overlap, like the other grids (2 full columns) */
+	@media (width < 40rem) {
+		--min-step: calc(var(--folder-w) + var(--gap));
+	}
+
+	/* tablet: with the vertical A4, 2 columns (the .stackLoose rule below
+	 * 40rem) come out huge — here 3 sheets fit per row */
+	@media (30rem <= width < 40rem) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* "text" lines filling the rest of the sheet, like in the good old file icon.
+ * Only for sources with no `excerpt`: with nothing written under the title
+ * they are what keeps the sheet from reading as half empty. */
+.fileLines {
+	flex: 1;
+	min-height: 0;
+	margin-top: var(--sp-2);
+	background-image: repeating-linear-gradient(
+		to bottom,
+		var(--border-2) 0,
+		var(--border-2) 0.125rem,
+		transparent 0.125rem,
+		transparent 0.6875rem
+	);
+}
+
+/* The note itself, under the title: a real preview where the drawn lines
+ * above would be. It is not clamped by a line count but cut by the edge of
+ * the sheet — whatever fits, fits — and faded out at the bottom so it reads
+ * as text that continues inside the file. */
+.fileExcerpt {
+	flex: 1;
+	min-height: 0;
+	margin-top: var(--sp-1);
+	overflow: hidden;
+	font-family: var(--ff-rubik);
+	font-size: var(--t-nano);
+	line-height: var(--lh-mili);
+	color: var(--fg-2);
+	/* the cut is a fade, not an ellipsis: it is the sheet running out, not the
+	 * text ending */
+	mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+/* ---- Enlarged folder (dialog) --------------------------------- */
+
+.sheet {
+	margin: auto; /* centered on screen */
+	width: min(34rem, calc(100vw - 2 * var(--sp-4)));
+	padding: 0;
+	border: none;
+	background: transparent;
+	color: var(--fg);
+	overflow: visible;
+
+	&::backdrop {
+		background-color: rgb(0 0 0 / 0.7);
+		backdrop-filter: blur(0.125rem);
+	}
+
+	&[open] {
+		animation: folderOpen var(--t-base) var(--ease) both;
+	}
+
+	/* in file mode the viewer is a vertical A4: narrower than the landscape
+	 * folder (the height comes from .sheetFile's aspect-ratio) */
+	&:has(.sheetFile) {
+		width: min(24rem, calc(100vw - 2 * var(--sp-4)));
+	}
+}
+
+@keyframes folderOpen {
+	from {
+		opacity: 0;
+		transform: scale(0.94) translateY(0.75rem);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
+}
+
+/* same folder silhouette, in large (the cut comes from the shared rule;
+ * here only the tab and the radius are tuned) */
+.sheetInner {
+	--tab-h: 4rem;
+	--tab-w: 38%;
+	--tab-slope: 1.75rem;
+	--folder-r: var(--r-lg);
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	padding: var(--sp-2) var(--sp-6) var(--sp-6);
+	background-color: var(--surface-1);
+	/* the viewer never goes past the screen: from here on the excerpt is what
+	 * gives way (see .sheetExcerpt) */
+	max-height: calc(100dvh - 2 * var(--sp-6));
+}
+
+/* the type of the active source, written on the folder tab itself
+ * (the same rule as .folderTab on the stack cards) */
+.sheetTab {
+	display: block;
+	height: var(--tab-h);
+	line-height: var(--tab-h);
+	/* keep it out of the clipped area of the tab (clip-path) */
+	max-width: calc(var(--tab-w) - var(--sp-4));
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-2);
+}
+
+/* Viewer in file mode: the enlarged source is also a file with its top-right
+ * corner folded, not a folder with a tab. Same pattern as .file over .folder:
+ * it only overrides the silhouette (--folder-clip) and repositions the type
+ * label. */
+.sheetFile {
+	--fold: 2.25rem;
+	--folder-clip: polygon(
+		0 0,
+		calc(100% - var(--fold)) 0,
+		100% var(--fold),
+		100% 100%,
+		0 100%
+	);
+
+	position: relative;
+	/* no tab to clear: normal top padding */
+	padding-top: var(--sp-5);
+	/* vertical A4 proportion, like the sheets in the stack; it is a preferred
+	 * height: if a source brings a lot of text, the box grows */
+	aspect-ratio: 210 / 297;
+
+	/* the slides fill the extra room: this way the footer (go to source) falls
+	 * to the bottom of the sheet instead of sticking to the text */
+	& .sheetSlides {
+		flex: 1;
+	}
+
+	/* here the sheet does have a height of its own, so the excerpt takes all
+	 * the room left between the author and the links: short ones are read
+	 * whole and long ones fill the sheet down to the links and scroll */
+	& .sheetExcerpt {
+		flex: 1;
+	}
+
+	/* the folded flap, twin of the one on the stack sheets */
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: var(--fold);
+		height: var(--fold);
+		background-color: var(--border-2);
+		border-bottom-left-radius: var(--r-sm);
+		clip-path: polygon(0 0, 0 100%, 100% 100%);
+	}
+
+	/* the type, as a label on top; room on the right for the corner */
+	& .sheetTab {
+		height: auto;
+		line-height: var(--lh-micro);
+		max-width: none;
+		padding-right: var(--fold);
+	}
+}
+
+.sheetHead {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-4);
+}
+
+/* the topic the sources being viewed belong to */
+.sheetTopic {
+	flex: 1;
+	min-width: 0;
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-eyebrow);
+	color: var(--fg-2);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* close the viewer */
+.sheetClose {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	letter-spacing: var(--tracking-wider);
+	color: var(--fg-3);
+	transition: color var(--t-fast) var(--ease);
+
+	&:hover {
+		color: var(--fg);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.25rem;
+	}
+}
+
+/* position inside the stack: 2 / 4 */
+.sheetCounter {
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	letter-spacing: var(--tracking-wider);
+	color: var(--fg-3);
+}
+
+/* All the slides share the same cell: the grid is as tall as the tallest one
+ * and the viewer does not resize when moving from one source to another. */
+.sheetSlides {
+	display: grid;
+	/* minmax(0,…): the row may be shorter than its content, so a long excerpt
+	 * gets cut instead of stretching the sheet */
+	grid-template-rows: minmax(0, 1fr);
+	min-height: 0;
+}
+
+.slide {
+	grid-area: 1 / 1;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	min-width: 0;
+	min-height: 0;
+
+	/* the slide that is not showing still reserves its height, but it is
+	 * neither visible nor focusable (hiding it with `display` would shrink
+	 * the viewer) */
+	&[hidden] {
+		display: flex;
+		visibility: hidden;
+	}
+
+	/* the one discarded by the filter does disappear: it must not stretch
+	 * the viewer */
+	&[data-off] {
+		display: none;
+	}
+}
+
+/* the date of the active source, on the right of the header (in line with the
+ * counter and the topic); the script updates it when changing slide */
+.sheetDate {
+	margin-left: auto;
+	font-family: var(--ff-mono);
+	font-size: var(--t-micro);
+	letter-spacing: var(--tracking-wider);
+	color: var(--fg-3);
+}
+
+/* slider: move to the next folder in the stack. With its own hairline: one
+ * separates the content from the links and another the links from the slider,
+ * so the three areas of the viewer read as separate blocks. */
+.sheetNav {
+	display: flex;
+	justify-content: space-between;
+	gap: var(--sp-4);
+	border-top: var(--hairline-2);
+	padding-top: var(--sp-3);
+
+	&[hidden] {
+		display: none;
+	}
+}
+
+.navBtn {
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+	transition: color var(--t-fast) var(--ease);
+	user-select: none;
+
+	&:hover {
+		color: var(--c-behavior);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.25rem;
+	}
+}
+
+/* Clamped: if a title got out of hand, the whole viewer would grow and the
+ * other slides would inherit that height. Whatever does not fit is cut with an
+ * ellipsis and read in full at the original source. (The excerpt is not
+ * clamped by lines: see .sheetExcerpt.) */
+.clamp2 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+}
+
+.sheetTitle {
+	font-family: var(--ff-pixel);
+	font-size: var(--t-h2);
+	line-height: var(--lh-h2);
+	letter-spacing: var(--tracking-wider);
+	padding-top: var(--sp-2);
+}
+
+.sheetQuote {
+	border-left: 0.1875rem solid var(--c-behavior);
+	padding-left: var(--sp-4);
+	margin-top: var(--sp-2);
+	font-family: var(--ff-rubik);
+	font-style: italic;
+	font-size: var(--t-h3);
+	line-height: var(--lh-h3);
+	color: var(--fg);
+}
+
+.sheetAuthor {
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-2);
+}
+
+/* Not clamped by a line count: whatever fits is read whole and it is the sheet
+ * running out that cuts it. `flex: 0 1 auto` + `min-height: 0`: it asks for
+ * all its height (in the landscape folder, with no fixed height, the whole
+ * excerpt shows) but it gives way when there is no room, instead of stretching
+ * the viewer past the screen. */
+.sheetExcerpt {
+	flex: 0 1 auto;
+	min-height: 0;
+	/* what does not fit is not lost: it is read by scrolling inside the sheet,
+	 * which keeps its size (../scripts/folder-dialog.ts marks the fade and
+	 * makes it focusable only while there is something to scroll) */
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border-2) transparent;
+	font-family: var(--ff-rubik);
+	font-size: var(--t-body);
+	line-height: 1.7;
+	color: var(--fg-2);
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.25rem;
+	}
+}
+
+/* The fade is the sign that the text keeps going, on the side where there is
+ * more of it: it is the sheet running out, not the excerpt ending. Without
+ * `data-fade` (everything fits) there is no fade at all. */
+.sheetExcerpt[data-fade="bottom"] {
+	mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent);
+}
+
+.sheetExcerpt[data-fade="top"] {
+	mask-image: linear-gradient(to top, #000 calc(100% - 2.5rem), transparent);
+}
+
+.sheetExcerpt[data-fade="both"] {
+	mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		#000 2.5rem,
+		#000 calc(100% - 2.5rem),
+		transparent
+	);
+}
+
+/* Stuck to the bottom of the slide (which fills the whole cell): with little
+ * content the empty room stays on top and the links do not rise, so they always
+ * land right above ‹ anterior / siguiente ›, each area with its own hairline. */
+.sheetFoot {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--sp-4);
+	margin-top: auto;
+	border-top: var(--hairline-2);
+	padding-top: var(--sp-3);
+	font-family: var(--ff-mono);
+	font-size: var(--t-mili);
+	line-height: var(--lh-mili);
+	color: var(--fg-3);
+}
+
+/* The two footer links are twins and read as a single bar: on the left the
+ * inward one (the topic this source comes from), on the right the outward one
+ * (the original source). The arrow tells where each one goes. */
+.sheetLink,
+.sheetTopicLink {
+	font-family: inherit;
+	color: var(--fg);
+	text-decoration: underline;
+	text-underline-offset: var(--sp-1);
+	transition: color var(--t-fast) var(--ease);
+	user-select: none;
+
+	&:hover {
+		color: var(--c-behavior);
+	}
+
+	&:focus-visible {
+		outline: 0.125rem solid var(--c-behavior);
+		outline-offset: 0.25rem;
+	}
+}
+
+/* always pinned to the right, even with nothing to its left */
+.sheetLink {
+	margin-left: auto;
+}
+
+/* ---- Filters: the class `display` overrides [hidden] ---------- */
+
+.group[hidden],
+.stackItem[hidden] {
+	display: none;
+}
+
+.noResults {
+	font-style: italic;
+	color: var(--fg-3);
+	text-align: center;
+	padding-block: var(--sp-8);
+}
+
+/* ============================================================
+ * PostSources.astro — "Detrás de este post" on the bias /
+ * mental model detail page: the sources of the post itself
+ * ============================================================ */
+
+.behindPost {
+	border-top: 0.1875rem solid var(--fg);
+	margin-top: var(--sp-9);
+	padding-top: var(--sp-4);
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-5);
+}
+
+.behindTitle {
+	font-family: var(--ff-pixel);
+	font-size: var(--t-h2);
+	line-height: var(--lh-h2);
+	letter-spacing: var(--tracking-widest);
+}
+
+.behindIntro {
+	font-size: var(--t-body);
+	color: var(--fg-2);
+	margin-top: calc(-1 * var(--sp-3));
+}
+
+/* ---- Utilities ------------------------------------------------ */
+
+.srOnly {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.toggle,
+	.panelBar,
+	.folder,
+	.stackItem,
+	.topicCell,
+	.navBtn,
+	.sheetLink,
+	.sheetTopicLink,
+	.sheetClose,
+	.groupLink {
+		transition: none;
+	}
+
+	.sheet[open] {
+		animation: none;
+	}
+
+	/* no blinking: the cursor stays still */
+	.searchPrompt::after {
+		animation: none;
+	}
+}

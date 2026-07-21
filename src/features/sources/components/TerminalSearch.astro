@@ -1,0 +1,125 @@
+---
+/**
+ * The drawer control panel, dressed as a terminal window: title bar with
+ * traffic lights, intro, tally, kind toggles and the search field.
+ *
+ * It is a <details>, so the whole bar folds the panel like minimizing a
+ * terminal — no JS involved in that part.
+ *
+ * It only prints the controls; the state lives in
+ * ../scripts/sources-filters.ts, which finds them through `data-search`
+ * and `data-filter-kind`. If the drawer is empty it swaps the controls for
+ * an idle-console message instead of showing filters that filter nothing.
+ */
+import styles from "./sources.module.css";
+import type { Topic } from "../data/get-topics.ts";
+
+/**
+ * Filters by KIND of topic (bias / mental model), not by source type: at
+ * drawer level a folder is a whole topic, and its sources may be of many
+ * types. Filtering by source type happens inside a topic (TopicPage).
+ *
+ * Both values must match `Topic["kind"]`, which is what TopicFolder writes
+ * into `data-kind`.
+ */
+const KIND_FILTERS = [
+	{ value: "sesgo", label: "sesgos" },
+	{ value: "modelo", label: "modelos mentales" },
+	{ value: "diseño", label: "diseño" },
+] as const;
+
+interface Props {
+	/** the topics already built by `getTopics()`; used only to count */
+	topics: Topic[];
+	/** total sources across every topic, for the tally */
+	totalSources: number;
+}
+
+const { topics, totalSources } = Astro.props;
+---
+
+<details class={styles.filterPanel}>
+	<summary class={styles.panelBar}>
+		<span
+			class={styles.trafficLights}
+			aria-hidden="true"
+		>
+			<span class={`${styles.light} ${styles.lightClose}`}></span>
+			<span class={`${styles.light} ${styles.lightMin}`}></span>
+			<span class={`${styles.light} ${styles.lightMax}`}></span>
+		</span>
+		~/cajón · <i>Abre la terminal y filtra.</i>
+	</summary>
+
+	<section class={styles.panelBody}>
+		<header class={styles.panelHead}>
+			<h2>Contenido</h2>
+			<p class={styles.tally}>
+				{
+					`${topics.length} ${topics.length === 1 ? "carpeta" : "carpetas"} · ${totalSources} ${totalSources === 1 ? "fuente" : "fuentes"}`
+				}
+			</p>
+		</header>
+		<p class={styles.panelText}>
+			Puedes filtrar por el tipo de contenido que estás buscando, la fuente de
+			donde viene o del tipo de contenido que quieres encontrar.
+		</p>
+
+		{
+			topics.length > 0 ? (
+				<nav
+					class={styles.filters}
+					aria-label="buscar y filtrar por tipo"
+				>
+					<section class={styles.filterGroup}>
+						<span class={styles.filterLabel}>tipo:</span>
+						<section class={styles.toggleSect}>
+							{KIND_FILTERS.map(({ value, label }) => (
+								<button
+									class={styles.toggle}
+									data-filter-kind={value}
+									aria-pressed="false"
+								>
+									{label}
+								</button>
+							))}
+						</section>
+					</section>
+
+					<section class={styles.searchBox}>
+						<label
+							class={styles.srOnly}
+							for="sources-search"
+						>
+							buscar
+						</label>
+						<span
+							class={styles.searchPrompt}
+							aria-hidden="true"
+						>
+							›
+						</span>
+						<input
+							class={styles.search}
+							id="sources-search"
+							type="search"
+							placeholder="nombre del sesgo o modelo mental..."
+							autocomplete="off"
+							data-search
+						/>
+					</section>
+				</nav>
+			) : (
+				<p class={styles.emptyState}>
+					<span
+						class={styles.emptyPrompt}
+						aria-hidden="true"
+					>
+						›
+					</span>
+					No hay contenido por ahora que filtrar.
+				</p>
+			)
+		}
+	</section>
+</details>
