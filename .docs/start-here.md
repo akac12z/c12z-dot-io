@@ -1,64 +1,63 @@
-# c12z.io — arquitectura y mapa del proyecto
+# c12z.io — architecture and project map
 
-> Punto de entrada a la documentación. Describe cómo está organizado el
-> repo y qué hace cada pieza, para que un dev o una IA puedan orientarse
-> sin tener que leer todo el código primero. Para el sistema de imágenes
-> OG dinámicas, ver [`og-images.md`](./og-images.md) (documentación
-> específica, más detallada).
+> Entry point to the documentation. Describes how the repo is organized
+> and what each piece does, so a dev or an AI can get oriented without
+> having to read all the code first. For the dynamic OG images system,
+> see [`og-images.md`](./og-images.md) (dedicated, more detailed
+> documentation).
 
-## 1. Qué es
+## 1. What it is
 
-Blog/portfolio personal de Chema Ferrandez. **Astro 7** + **React 19**
-(solo para islas interactivas) + **TailwindCSS v4** + **MDX**, `output:
-"static"`, desplegado en **Vercel**.
+Personal blog/portfolio of Chema Ferrandez. **Astro 7** + **React 19**
+(only for interactive islands) + **TailwindCSS v4** + **MDX**, `output:
+"static"`, deployed on **Vercel**.
 
 ```bash
-pnpm dev      # servidor de desarrollo
+pnpm dev      # development server
 pnpm build    # astro check (type-check) + astro build
-pnpm preview  # sirve el build de producción en local
+pnpm preview  # serves the production build locally
 ```
 
-No hay lint ni tests configurados. `pnpm build` es el único gate de
-calidad (falla si hay errores de tipos o de los schemas Zod de las
-collections).
+There is no lint or tests configured. `pnpm build` is the only quality
+gate (it fails on type errors or on the Zod schemas of the collections).
 
-**Antes de arrancar `pnpm dev` por primera vez**: copiar `.env.template`
-a `.env` y rellenar las 4 vars (`GA4_MEASUREMENT_ID`, `GTM_MEASUREMENT_ID`,
-`AHRFS_MEASUREMENT_ID`, `OVERTRACKING_MEASUREMENT_ID`). Están declaradas
-como `optional: false` en el `env.schema` de `astro.config.mjs` — sin
-ellas el servidor ni siquiera arranca. Valores dummy sirven en local.
+**Before running `pnpm dev` for the first time**: copy `.env.template`
+to `.env` and fill in the 4 vars (`GA4_MEASUREMENT_ID`, `GTM_MEASUREMENT_ID`,
+`AHRFS_MEASUREMENT_ID`, `OVERTRACKING_MEASUREMENT_ID`). They're declared
+as `optional: false` in the `env.schema` of `astro.config.mjs` — without
+them the server won't even start. Dummy values work locally.
 
-## 2. Principio de organización: feature-based
+## 2. Organizing principle: feature-based
 
-Cada dominio de contenido vive en `src/features/<name>/`, con esta forma
-interna (no todas las features tienen las 4 carpetas):
+Each content domain lives in `src/features/<name>/`, with this internal
+shape (not every feature has all 4 folders):
 
 ```
 features/<name>/
-├── components/   componentes Astro/React de esa feature
-├── seo/          keywords + componente de SEO específico del contenido
-├── data/ | rules/  lógica de negocio, datos estáticos, interfaces
-└── styles/         CSS Modules si hace falta estilo propio
+├── components/   Astro/React components for that feature
+├── seo/          keywords + SEO component specific to that content
+├── data/ | rules/  business logic, static data, interfaces
+└── styles/         CSS Modules if it needs its own styling
 ```
 
-Todo lo que es **transversal** (no pertenece a un solo dominio) vive
-fuera de `features/`: layouts, componentes comunes de UI/SEO/analytics,
-config global del sitio, utils, interfaces compartidas.
+Everything **cross-cutting** (not belonging to a single domain) lives
+outside `features/`: layouts, common UI/SEO/analytics components, global
+site config, utils, shared interfaces.
 
-## 3. Árbol de `src/`
+## 3. `src/` tree
 
 ```
 src/
-├── assets/            fuentes (Tamago, Cascadia, Rubik), imágenes (404, OpenGraph, mii)
-├── components/common/ ver §6
-├── content/            entradas de contenido (md/mdx), una carpeta por collection
-├── content.config.ts   schemas Zod de las collections — ver §5
-├── features/            ver §9 (estado de cada feature)
-├── global/               config del sitio — ver §7
-├── interfaces/            tipos TS compartidos entre features
+├── assets/            fonts (Tamago, Cascadia, Rubik), images (404, OpenGraph, mii)
+├── components/common/ see §6
+├── content/            content entries (md/mdx), one folder per collection
+├── content.config.ts   Zod schemas for the collections — see §5
+├── features/            see §9 (status of each feature)
+├── global/               site config — see §7
+├── interfaces/            TS types shared across features
 ├── layouts/                MainLayout.astro, Layout404Error.astro
-├── lib/og/                  motor de generación de imágenes OG — ver og-images.md
-├── pages/                    rutas — ver §8
+├── lib/og/                  OG image generation engine — see og-images.md
+├── pages/                    routes — see §8
 ├── styles/                    global.css (design tokens), typo.css, lettering.css
 └── utils/                      formatter, process-keywords, validating-date
 ```
@@ -80,187 +79,187 @@ src/
 @/assets/*    → src/assets/*
 ```
 
-`@/ui/*` está declarado pero apunta a `components/ui`, que no existe —
-no usarlo.
+`@/ui/*` is declared but points to `components/ui`, which doesn't exist —
+don't use it.
 
 ## 5. Content collections (`content.config.ts`)
 
-Loader `glob` sobre `**/*.{md,mdx}`. Se exportan **3** collections:
-`library`, `projects`, `bias`. `essay` está **definida pero comentada**
-(no exportada) — ver estado en §9.
+`glob` loader over `**/*.{md,mdx}`. **3** collections are exported:
+`library`, `projects`, `bias`. `essay` is **defined but commented out**
+(not exported) — see status in §9.
 
-| Collection | Carpeta física | Campos clave | Entradas reales hoy |
+| Collection | Physical folder | Key fields | Real entries today |
 |---|---|---|---|
 | `library` | `content/library/{slug}/` | `title`, `cover`, `abstract`, `backlog: "wip"\|"upload"`, `category` (health/product/culture/psychology/economics/creativity/philosophy/other), `score` (1-5), `authors`, `publishDate`/`lastTimeEdited` (`DD/MM/YYYY`), `keywords` | 4 (show-your-work, steal-like-an-artist, the-cold-start-problem, the-mom-test) |
-| `projects` | `content/project/{slug}/` (⚠️ singular en disco, plural el nombre de la collection) | `projectTitle`, `projectDescription`, `projectUrl`, `cover`, `why` (≤20 chars, usado como meta en Home), `styleClass?` | 1 (la-vida-moderna-es) |
-| `bias` | `content/bias/{slug}/` | `biasName`, `biasQuestion`, `category[]` (velocidad/memoria/percepción/contexto/juicio), `relatedLinks?` | **0** — feature completa, sin contenido todavía |
+| `projects` | `content/project/{slug}/` (⚠️ singular on disk, plural as the collection name) | `projectTitle`, `projectDescription`, `projectUrl`, `cover`, `why` (≤20 chars, used as meta on Home), `styleClass?` | 1 (la-vida-moderna-es) |
+| `bias` | `content/bias/{slug}/` | `biasName`, `biasQuestion`, `category[]` (velocidad/memoria/percepción/contexto/juicio), `relatedLinks?` | **0** — feature complete, no content yet |
 
-`backlog: "wip"` vs `"upload"` controla en todas las cards si la entrada
-es clicable o se muestra como "todavía no disponible" — es el
-mecanismo general de "publicar en borrador" del sitio.
+`backlog: "wip"` vs `"upload"` controls, across all cards, whether the
+entry is clickable or shown as "not available yet" — it's the site's
+general "publish as draft" mechanism.
 
-Todas las collections con `publishDate`/`lastTimeEdited` validan el
-formato `DD/MM/YYYY` con `isValidDateFormat` (`src/utils/validating-date.ts`).
+Every collection with `publishDate`/`lastTimeEdited` validates the
+`DD/MM/YYYY` format with `isValidDateFormat` (`src/utils/validating-date.ts`).
 
-⚠️ En `library`, el `.transform` opcional de `lastTimeEdited` recibe `ctx`
-como si fuera el valor de `publishDate` — huele a bug de copy-paste del
-`.refine` de `bias` (que sí usa `ctx` correctamente). No toca nada hoy
-porque el campo es opcional y las 4 entradas actuales no fuerzan ese
-camino, pero revisar antes de depender de ese transform.
+⚠️ In `library`, the optional `.transform` of `lastTimeEdited` receives `ctx`
+as if it were the value of `publishDate` — smells like a copy-paste bug from
+the `.refine` in `bias` (which does use `ctx` correctly). It doesn't affect
+anything today because the field is optional and the 4 current entries don't
+force that path, but review it before relying on that transform.
 
-**Pipeline de markdown/MDX** (`astro.config.mjs`): `remark-math` +
-`rehype-katex` — se puede escribir LaTeX en cualquier `.mdx` y renderiza
-como fórmula (CSS de KaTeX cargado por CDN en `BaseHead`). Todos los
-links externos del contenido se reescriben automáticamente a
-`target="_blank" rel="noopener noreferrer"` vía `rehype-external-links`
-— el componente `ui/content/Link.astro` es solo para el estilo visual,
-no hace falta para el comportamiento de seguridad.
+**Markdown/MDX pipeline** (`astro.config.mjs`): `remark-math` +
+`rehype-katex` — you can write LaTeX in any `.mdx` and it renders as a
+formula (KaTeX CSS loaded from a CDN in `BaseHead`). Every external link
+in the content is automatically rewritten to
+`target="_blank" rel="noopener noreferrer"` via `rehype-external-links`
+— the `ui/content/Link.astro` component is only for the visual style,
+it isn't needed for the security behavior.
 
-## 6. `src/components/common/` (transversal, no ligado a una feature)
+## 6. `src/components/common/` (cross-cutting, not tied to a feature)
 
 ```
 common/
 ├── analytics/   Google (GA4, GTM head/body), Ahrefs, Overtracking
-│                → todos cargan is:inline vía Partytown, no bloquean el hilo principal
-├── layout/      Header (solo Logo + ToggleTheme), Footer
+│                → all load is:inline via Partytown, they don't block the main thread
+├── layout/      Header (only Logo + ToggleTheme), Footer
 │                headerMenus/ (NavbarDesktopMenu, NavbarMobileMenu, NavLinks)
-│                ⚠️ headerMenus/* es código muerto: Header.astro no las importa
-├── navigation/  BottomBar.tsx (React, client:only) — scroll-to-top + "subir un nivel"
-├── seo/         BaseHead (head compartido, theme script, favicons, analytics),
-│                PagesSEO (listados), ContentSEO (contenido individual),
+│                ⚠️ headerMenus/* is dead code: Header.astro doesn't import them
+├── navigation/  BottomBar.tsx (React, client:only) — scroll-to-top + "go up one level"
+├── seo/         BaseHead (shared head, theme script, favicons, analytics),
+│                PagesSEO (listings), ContentSEO (individual content),
 │                Favicons, 404/Error404SEO
 └── ui/
-    ├── buttons/   GoBackInTop, SummarizeLLMs (abre ChatGPT/Claude/Grok/Perplexity
-    │              con un prompt prellenado para resumir la página)
-    ├── content/   ImgAndCap, Link (externo), OwnThoughts (callout para MDX),
-    │              QuoteCard, SummarizeSection (agrupa 4 SummarizeLLMs)
-    ├── darkmode/  ToggleTheme (alterna data-theme + localStorage + startViewTransition)
-    ├── icons/     Logo, iconos de contenido (Bulb, UnclearThought),
-    │              ai/ (logos de los LLMs), social/ (SocialBlock, SocialLink)
-    │              ⚠️ Moon/Sun/YingYang/GoOut.astro: sin uso, código muerto
-    └── toc/       toc.tsx (React, tabla de contenidos flotante con motion/react
-                   + IntersectionObserver), progressCircle.tsx (círculo de progreso)
-                   ⚠️ old.TableOfContent.tsx: versión legacy sin uso, las 3 páginas
-                   dinámicas ya usan toc.tsx
+    ├── buttons/   GoBackInTop, SummarizeLLMs (opens ChatGPT/Claude/Grok/Perplexity
+    │              with a prefilled prompt to summarize the page)
+    ├── content/   ImgAndCap, Link (external), OwnThoughts (callout for MDX),
+    │              QuoteCard, SummarizeSection (groups 4 SummarizeLLMs)
+    ├── darkmode/  ToggleTheme (toggles data-theme + localStorage + startViewTransition)
+    ├── icons/     Logo, content icons (Bulb, UnclearThought),
+    │              ai/ (LLM logos), social/ (SocialBlock, SocialLink)
+    │              ⚠️ Moon/Sun/YingYang/GoOut.astro: unused, dead code
+    └── toc/       toc.tsx (React, floating table of contents with motion/react
+                   + IntersectionObserver), progressCircle.tsx (progress circle)
+                   ⚠️ old.TableOfContent.tsx: legacy version, unused — the 3 dynamic
+                   pages already use toc.tsx
 ```
 
-**Regla implícita**: si un componente necesita interactividad en cliente
-(scroll, estado, animación), es `.tsx` React con `client:only="react"` o
-similar; todo lo demás es `.astro`.
+**Implicit rule**: if a component needs client-side interactivity
+(scroll, state, animation), it's a `.tsx` React component with
+`client:only="react"` or similar; everything else is `.astro`.
 
-## 7. `src/global/` — configuración del sitio
+## 7. `src/global/` — site configuration
 
 - **`site-info.ts`** — `SITE_VERSION`, `SITE_DEFAULT_CONFIG` (title,
   description, url, author, lang `es-ES`), `SITE_404_CONFIG`.
 - **`header-links.ts`** — `HEADER_LINKS[]` (ensayos/biblioteca/behavior).
-  ⚠️ usa clases Tailwind (`cz-neon-*`) que no coinciden con las CSS vars
-  de contenido (`--c-essay`, `--c-library`, `--c-behavior`) de
-  `global.css` — revisar si se retoma la navegación de header.
-- **`pages-info.ts`** — `PAGE_INFO_SCHEMA` (Zod, valida title 50-60
-  chars y description 110-160 en build time) + `PAGES`, metadata SEO por
-  sección con sus OG images fijas.
+  ⚠️ uses Tailwind classes (`cz-neon-*`) that don't match the content CSS
+  vars (`--c-essay`, `--c-library`, `--c-behavior`) in `global.css` —
+  review if header navigation is picked up again.
+- **`pages-info.ts`** — `PAGE_INFO_SCHEMA` (Zod, validates title 50-60
+  chars and description 110-160 at build time) + `PAGES`, SEO metadata per
+  section with its fixed OG images.
 - **`socialmedia-links.ts`** — `SOCIAL_LINKS` (github, x, linkedin,
   substack, goodreads).
 
-## 8. Rutas (`src/pages/`)
+## 8. Routes (`src/pages/`)
 
-| Ruta | Qué es |
+| Route | What it is |
 |---|---|
-| `/` | Home — hero + `ShowSortContent` (últimos 4 items de cada collection publicada) |
-| `/biblioteca`, `/biblioteca/[...id]` | listado y ficha de libro |
-| `/proyectos`, `/proyectos/[...id]` | listado y ficha de proyecto |
-| `/behavior`, `/behavior/sesgos`, `/behavior/sesgos/[...id]` | listado y ficha de sesgo cognitivo |
-| `/contexto` | "sobre mí", renderiza `features/context/context.mdx` directamente |
-| `/ensayos` | placeholder estático — feature `essay` inactiva (§9) |
-| `/404` | usa `Layout404Error` (sin Header/Footer/BottomBar) |
-| `/llms.txt` | endpoint de texto plano — describe el sitio para LLMs/crawlers de IA |
-| `/robots.txt` | genera `Sitemap:` apuntando a `sitemap-index.xml` |
-| `/og/{biblioteca,proyectos,behavior/sesgos}/[...id].png` | imágenes OG generadas en build time — ver `og-images.md` |
-| `/_og-playground` | herramienta de dev para ajustar el layout de las OG images; el prefijo `_` la excluye del build de producción |
+| `/` | Home — hero + `ShowSortContent` (latest 4 items of each published collection) |
+| `/biblioteca`, `/biblioteca/[...id]` | listing and book detail page |
+| `/proyectos`, `/proyectos/[...id]` | listing and project detail page |
+| `/behavior`, `/behavior/sesgos`, `/behavior/sesgos/[...id]` | listing and cognitive bias detail page |
+| `/contexto` | "about me", renders `features/context/context.mdx` directly |
+| `/ensayos` | static placeholder — `essay` feature inactive (§9) |
+| `/404` | uses `Layout404Error` (no Header/Footer/BottomBar) |
+| `/llms.txt` | plain text endpoint — describes the site for LLMs/AI crawlers |
+| `/robots.txt` | generates `Sitemap:` pointing to `sitemap-index.xml` |
+| `/og/{biblioteca,proyectos,behavior/sesgos}/[...id].png` | OG images generated at build time — see `og-images.md` |
+| `/_og-playground` | dev tool for tuning the OG images layout; the `_` prefix excludes it from the production build |
 
-Las páginas dinámicas (`[...id].astro`) siguen todas el mismo patrón:
-`getStaticPaths()` sobre la collection → layout + TOC (`toc.tsx`) +
-componente `*SEO.content.astro` de la feature.
+The dynamic pages (`[...id].astro`) all follow the same pattern:
+`getStaticPaths()` over the collection → layout + TOC (`toc.tsx`) +
+the feature's `*SEO.content.astro` component.
 
-## 9. Estado real de cada feature (importante antes de tocar código)
+## 9. Real status of each feature (important before touching code)
 
-| Feature | Estado |
+| Feature | Status |
 |---|---|
-| `home` | completa y activa |
-| `books` (biblioteca) | completa y activa, 4 entradas |
-| `projects` | completa y activa, 1 entrada |
-| `bias` (behavior/sesgos) | **código completo, sin contenido**. Si vas a añadir un sesgo, la feature ya soporta todo (card, SEO, OG dinámico); solo falta crear el `.mdx` en `content/bias/` |
-| `essay` | **fantasma**: schema comentada en `content.config.ts`, sin carpeta de contenido, sus 3 componentes (`EssayPage/Card/Header.astro`) están vacíos, `/ensayos` es un placeholder estático. Antes de "arreglar un bug" en essay, confirmar si el plan es implementarla desde cero |
-| `context` | activa, pero vía MDX directo (`context.mdx`), no vía content collection — `Context.astro` está vacío y sin uso |
-| `404` | activa |
+| `home` | complete and active |
+| `books` (biblioteca) | complete and active, 4 entries |
+| `projects` | complete and active, 1 entry |
+| `bias` (behavior/sesgos) | **code complete, no content**. If you're going to add a bias, the feature already supports everything (card, SEO, dynamic OG); all that's missing is creating the `.mdx` in `content/bias/` |
+| `essay` | **ghost**: schema commented out in `content.config.ts`, no content folder, its 3 components (`EssayPage/Card/Header.astro`) are empty, `/ensayos` is a static placeholder. Before "fixing a bug" in essay, confirm whether the plan is to implement it from scratch |
+| `context` | active, but via direct MDX (`context.mdx`), not via a content collection — `Context.astro` is empty and unused |
+| `404` | active |
 
-Archivos vacíos/sin consumidores detectados (no asumir que hacen algo
-si aparecen en un `grep`): `PsychologyHeader.astro`, `BiasTLDR.astro`,
-`BookAuthor.astro`, `Context.astro`, los 3 de `essay/`, y
-`features/projects/data/projectsData.ts` (reemplazado por la content
-collection `projects`, con typo `PROJETCS_DATA` si alguna vez se vuelve
-a tocar).
+Empty files / files with no consumers detected (don't assume they do
+something if they show up in a `grep`): `PsychologyHeader.astro`,
+`BiasTLDR.astro`, `BookAuthor.astro`, `Context.astro`, the 3 in `essay/`,
+and `features/projects/data/projectsData.ts` (replaced by the `projects`
+content collection, with a typo `PROJETCS_DATA` if it's ever touched again).
 
 ## 10. Design system
 
-Tokens en `src/styles/global.css` bajo `@theme` (Tailwind v4 los lee
-directo de ahí — **no hay `tailwind.config.js`**). Tema oscuro por
-defecto, alternado con `[data-theme="light"]` vía atributo en `<html>` +
-`localStorage`, con `document.startViewTransition` tanto para el toggle
-como para la navegación entre páginas.
+Tokens in `src/styles/global.css` under `@theme` (Tailwind v4 reads them
+straight from there — **there's no `tailwind.config.js`**). Dark theme by
+default, toggled with `[data-theme="light"]` via an attribute on `<html>` +
+`localStorage`, with `document.startViewTransition` both for the toggle
+and for page-to-page navigation.
 
-- **Tipografía**: Tamago (pixel, `font-pixel`, headers) / Rubik (cuerpo)
-  / Cascadia (mono, código).
-- **Acento de marca**: rosa `#ff2f92` (dark) sobre fondos oscuros.
-- **Color por tipo de contenido**: cada collection tiene su propio par
-  dark/light (`--c-behavior`, `--c-essay`, `--c-library`, `--c-project`).
-- **Color por categoría**: sesgos cognitivos y libros tienen su propia
-  escala de color por categoría (ver CLAUDE.md para los valores hex).
-- Motivo visual recurrente: borde izquierdo/inferior (`rounded-bl`) en
-  items de lista. Secciones WIP: caja con borde rojo + badge 🚧
+- **Typography**: Tamago (pixel, `font-pixel`, headers) / Rubik (body)
+  / Cascadia (mono, code).
+- **Brand accent**: pink `#ff2f92` (dark) on dark backgrounds.
+- **Color per content type**: each collection has its own dark/light pair
+  (`--c-behavior`, `--c-essay`, `--c-library`, `--c-project`).
+- **Color per category**: cognitive biases and books each have their own
+  per-category color scale (see CLAUDE.md for the hex values).
+- Recurring visual motif: left/bottom border (`rounded-bl`) on list
+  items. WIP sections: box with a red border + 🚧 badge
   (`border-error`).
 
-No hardcodear colores nuevos — siempre usar las CSS vars existentes.
+Don't hardcode new colors — always use the existing CSS vars.
 
-## 11. `src/utils/` e `src/interfaces/`
+## 11. `src/utils/` and `src/interfaces/`
 
 - `formatter.ts` — `Formatter.formatDate()` / `.formatDateToISO()` (Intl `es-ES`).
-- `process-keywords.ts` — normaliza y deduplica keywords para SEO.
-- `validating-date.ts` — valida/convierte fechas `DD/MM/YYYY` usadas en el frontmatter.
-- `interfaces/` — tipos compartidos entre features (`PageKeywords`,
-  `SocialLinksInterface`, `SiteDefaultConfigInterface`, etc.); si un tipo
-  se usa desde 2+ features, va aquí en vez de duplicarse.
+- `process-keywords.ts` — normalizes and deduplicates keywords for SEO.
+- `validating-date.ts` — validates/converts the `DD/MM/YYYY` dates used in the frontmatter.
+- `interfaces/` — types shared across features (`PageKeywords`,
+  `SocialLinksInterface`, `SiteDefaultConfigInterface`, etc.); if a type
+  is used from 2+ features, it goes here instead of being duplicated.
 
-## 12. Librerías clave a reutilizar (antes de añadir una nueva)
+## 12. Key libraries to reuse (before adding a new one)
 
-- **`motion`** (Framer Motion v12) — animaciones en componentes React
+- **`motion`** (Framer Motion v12) — animations in React components
   (`toc.tsx`, `progressCircle.tsx`).
-- **`es-toolkit`** — utilidades tipo lodash (throttle en `toc.tsx`).
-- **`@vercel/og` + `sharp`** — todo el pipeline de imágenes OG (§`og-images.md`).
-- **`@lucide/astro`** — set de iconos (además de los SVG a medida en `ui/icons/`).
-- **`@astrojs/partytown`** — todo analytics carga con `type="text/partytown"`,
-  cualquier script de tracking nuevo debería seguir el mismo patrón.
+- **`es-toolkit`** — lodash-style utilities (throttle in `toc.tsx`).
+- **`@vercel/og` + `sharp`** — the whole OG images pipeline (§`og-images.md`).
+- **`@lucide/astro`** — icon set (in addition to the custom SVGs in `ui/icons/`).
+- **`@astrojs/partytown`** — all analytics load with `type="text/partytown"`,
+  any new tracking script should follow the same pattern.
 
-No hay librería de fetching/estado (no hay React Query, Zustand, etc.) —
-el sitio es 100% estático, no hace falta.
+There's no fetching/state library (no React Query, Zustand, etc.) —
+the site is 100% static, it isn't needed.
 
-## 13. Dónde mirar según la tarea
+## 13. Where to look depending on the task
 
-- **Añadir contenido** (libro/proyecto/sesgo) → crear `.mdx` en la
-  carpeta de la collection correspondiente bajo `src/content/`; el resto
-  (card, SEO, OG image) ya funciona solo si el schema Zod se cumple.
-- **Tocar SEO/meta tags** → `components/common/seo/` (compartido) o
-  `features/<name>/seo/` (específico de esa feature).
-- **Tocar imágenes OG** → `src/lib/og/` + `src/pages/og/` — ver
-  `og-images.md` antes de cambiar nada, tiene el porqué de cada decisión.
-- **Tocar el cajón de fuentes** (`/behavior/fuentes`, las carpetas, el
-  visor) → `src/features/sources/` — ver
-  [`features/sources.md`](./features/sources.md): explica de dónde
-  salen los datos (viven en el frontmatter de cada sesgo/modelo, no en una
-  collection propia) y por qué el CSS está escrito así.
-- **Tocar navegación de header** → el código existe
-  (`headerMenus/`) pero está desconectado; confirmar con el usuario si
-  el objetivo es reactivarlo o si `Header.astro` (solo Logo+Toggle) es
-  intencional antes de asumir que es un bug.
-- **Tocar theming/colores** → `src/styles/global.css`, sección `@theme` y
-  `[data-theme="light"]`.
+- **Add content** (book/project/bias) → create an `.mdx` in the folder of
+  the matching collection under `src/content/`; everything else (card,
+  SEO, OG image) already works on its own as long as the Zod schema is met.
+- **Touch SEO/meta tags** → `components/common/seo/` (shared) or
+  `features/<name>/seo/` (specific to that feature).
+- **Touch OG images** → `src/lib/og/` + `src/pages/og/` — see
+  `og-images.md` before changing anything, it has the reasoning behind
+  each decision.
+- **Touch the sources drawer** (`/behavior/fuentes`, the folders, the
+  viewer) → `src/features/sources/` — see
+  [`features/sources.md`](./features/sources.md): it explains where the
+  data comes from (it lives in the frontmatter of each bias/model, not in
+  its own collection) and why the CSS is written the way it is.
+- **Touch header navigation** → the code exists (`headerMenus/`) but it's
+  disconnected; confirm with the user whether the goal is to reactivate it
+  or whether `Header.astro` (only Logo+Toggle) is intentional before
+  assuming it's a bug.
+- **Touch theming/colors** → `src/styles/global.css`, the `@theme` section
+  and `[data-theme="light"]`.
