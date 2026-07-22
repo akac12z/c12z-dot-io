@@ -128,7 +128,7 @@
 .inner:focus-visible {
 	& .tab,
 	& .cta {
-		color: var(--c-behavior);
+		color: var(--c-source);
 	}
 
 	& .ctaArrow {

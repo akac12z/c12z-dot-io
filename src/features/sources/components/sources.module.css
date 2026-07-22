@@ -75,7 +75,7 @@
 	}
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: -0.125rem;
 	}
 
@@ -169,7 +169,7 @@
 }
 
 .emptyPrompt {
-	color: var(--c-behavior);
+	color: var(--c-source);
 }
 
 /* ---- Filters ------------------------------------------------ */
@@ -210,7 +210,7 @@
 	transition: color var(--t-fast) var(--ease);
 
 	.searchBox:focus-within & {
-		color: var(--c-behavior);
+		color: var(--c-source);
 	}
 
 	/* blinking block cursor, like an idle terminal */
@@ -254,7 +254,7 @@
 	font-size: var(--t-body);
 	line-height: var(--lh-body);
 	color: var(--fg);
-	caret-color: var(--c-behavior);
+	caret-color: var(--c-source);
 
 	&::placeholder {
 		color: var(--fg-3);
@@ -262,7 +262,7 @@
 
 	&:focus {
 		outline: none;
-		border-bottom-color: var(--c-behavior);
+		border-bottom-color: var(--c-source);
 	}
 }
 
@@ -305,7 +305,7 @@
 	}
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.125rem;
 	}
 
@@ -314,7 +314,7 @@
 
 		&::before {
 			content: "[x]";
-			color: var(--c-behavior);
+			color: var(--c-source);
 		}
 	}
 }
@@ -442,7 +442,7 @@
 	}
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.125rem;
 	}
 }
@@ -737,7 +737,7 @@
 	transition: color var(--t-fast) var(--ease);
 
 	&:hover {
-		color: var(--c-behavior);
+		color: var(--c-source);
 	}
 }
 
@@ -910,7 +910,7 @@
 		border-color var(--t-base) var(--ease);
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.125rem;
 	}
 
@@ -1229,7 +1229,7 @@
 	}
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.25rem;
 	}
 }
@@ -1309,11 +1309,11 @@
 	user-select: none;
 
 	&:hover {
-		color: var(--c-behavior);
+		color: var(--c-source);
 	}
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.25rem;
 	}
 }
@@ -1339,7 +1339,7 @@
 }
 
 .sheetQuote {
-	border-left: 0.1875rem solid var(--c-behavior);
+	border-left: 0.1875rem solid var(--c-source);
 	padding-left: var(--sp-4);
 	margin-top: var(--sp-2);
 	font-family: var(--ff-rubik);
@@ -1377,7 +1377,7 @@
 	color: var(--fg-2);
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.25rem;
 	}
 }
@@ -1433,11 +1433,11 @@
 	user-select: none;
 
 	&:hover {
-		color: var(--c-behavior);
+		color: var(--c-source);
 	}
 
 	&:focus-visible {
-		outline: 0.125rem solid var(--c-behavior);
+		outline: 0.125rem solid var(--c-source);
 		outline-offset: 0.25rem;
 	}
 }

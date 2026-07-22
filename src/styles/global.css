@@ -124,6 +124,9 @@
 
 	/* Content section colors */
 	--c-behavior: #e22ef6;
+	--c-bias: #a58faa;
+	--c-mental-model: #ed6164;
+	--c-source: #e34a85;
 	--c-essay: #33ffe8;
 	--c-library: #ffa424;
 	--c-project: #ff3838;
@@ -138,7 +141,6 @@
 
 	/* Bias neutral scale */
 	--c-bias-soft: #c3b4c6;
-	--c-bias: #a58faa;
 	--c-bias-dark: #756679;
 
 	/* Books category colors */
