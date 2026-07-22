@@ -6,6 +6,7 @@
 	width: fit-content;
 	height: fit-content;
 	/* margin-bottom: var(--sp-5); */
+	user-select: none;
 
 	margin-block: var(--sp-4);
 	padding-inline: var(--sp-2);
