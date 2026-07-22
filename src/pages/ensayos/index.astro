@@ -13,23 +13,26 @@ import { essaysKeywords } from "@/features/essay/seo/essays.keywords";
 ---
 
 <MainLayout>
-  <PagesSEO
-    slot="head"
-    pageTitle={PAGES.essay.title}
-    pageDescription={PAGES.essay.description}
-    ogImage={PAGES.essay.ogImage}
-    ogImageAlt={PAGES.essay.ogImageAlt}
-    pageKeywords={essaysKeywords}
-  />
-  <GoBackInTop headPage="/" title="ir a la home" />
-  <section class="flex flex-col max-w-3xl">
-    <h1>Ensayos</h1>
-    <p>Por ahora, no tengo ningún ensayo que mustrarte! 🙂</p>
-  </section>
+	<PagesSEO
+		slot="head"
+		pageTitle={PAGES.essay.title}
+		pageDescription={PAGES.essay.description}
+		ogImage={PAGES.essay.ogImage}
+		ogImageAlt={PAGES.essay.ogImageAlt}
+		pageKeywords={essaysKeywords}
+	/>
+	<GoBackInTop
+		headPage="/"
+		title="ir a la home"
+	/>
+	<section>
+		<h1>Ensayos</h1>
+		<p>Por ahora, no tengo ningún ensayo que mustrarte! 🙂</p>
+	</section>
 
-  <section class="flex justify-between items-center mt-6 gap-x-4">
-    {
-      /*essays.map((essay) => {
+	<section>
+		{
+			/*essays.map((essay) => {
         const { data, id } = essay;
         const { title, description } = data;
 
@@ -37,10 +40,11 @@ import { essaysKeywords } from "@/features/essay/seo/essays.keywords";
           <article class="">
             <div>
               <h1>{title}</h1>
-              <p class="mb-2">{description}</p>
+              <p >{description}</p>
             </div>
             <a
-              class="text-sm underline hover:text-cz-primary hover:no-underline"
+              
+
               href={`/ensayos/${id}`}
             >
               Ir al post
@@ -49,6 +53,6 @@ import { essaysKeywords } from "@/features/essay/seo/essays.keywords";
         );
       })
     */
-    }
-  </section>
+		}
+	</section>
 </MainLayout>
