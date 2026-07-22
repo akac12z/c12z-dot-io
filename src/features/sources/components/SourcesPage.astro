@@ -19,19 +19,18 @@
  */
 import styles from "./sources.module.css";
 
-import { getTopics } from "../data/get-topics.ts";
+import { getTopics, countSources } from "../data/get-topics.ts";
 
 import TopicFolder from "./TopicFolder.astro";
 import FolderDialogScript from "./FolderDialogScript.astro";
 import GoBackInTop from "@/components/common/ui/buttons/GoBackInTop.astro";
 
 import TerminalSearch from "./TerminalSearch.astro";
-import OwnThoughts from "@/components/common/ui/content/OwnThoughts.astro";
 
 const topics = await getTopics();
 
 // for the tally in the terminal panel ("N carpetas · M fuentes")
-const totalSources = topics.reduce((sum, t) => sum + t.sources.length, 0);
+const totalSources = countSources(topics);
 ---
 
 <section
@@ -53,10 +52,10 @@ const totalSources = topics.reduce((sum, t) => sum + t.sources.length, 0);
 		</p>
 		<p>
 			Este lugar existe porque a mí me costó mucho encontrar dónde aprender
-			sobre <i>behavioral economics</i>, ya que no es algo que se enseñe fácilmente.
-			Si te interesa entender por qué nos comportamos como lo hacemos, y cómo puedes
-			aplicarlo a producto (o cómo lo aplican contigo), quizá aquí encuentres por
-			dónde empezar.
+			sobre <i>behavioral economics</i>, ya que no es algo que se enseñe
+			fácilmente. Si te interesa entender por qué nos comportamos como lo
+			hacemos, y cómo puedes aplicarlo a producto (o cómo lo aplican contigo),
+			quizá aquí encuentres por dónde empezar.
 		</p>
 	</header>
 	<TerminalSearch

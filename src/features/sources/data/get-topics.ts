@@ -1,4 +1,4 @@
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 import { parseSourceDate } from "./parse-source-date.ts";
 import type { Source } from "./source-types.ts";
@@ -27,6 +27,87 @@ export interface Topic {
 	sources: Source[];
 }
 
+/** the two collections that carry `sources` in their frontmatter */
+type SourcedEntry = CollectionEntry<"bias"> | CollectionEntry<"mentalModels">;
+
+/**
+ * There is no `status` field in the frontmatter: the state of a topic is
+ * read from `backlog`, which is what the author already fills in.
+ */
+const toState = (backlog: "wip" | "upload"): Topic["state"] =>
+	backlog === "wip" ? "estudiando" : "publicado";
+
+/**
+ * The shape of a topic, in one place. Both collections share `id`,
+ * `backlog`, `publishDate` and `sources`; only the name field and the
+ * route change, so those two arrive already resolved.
+ */
+const buildTopic = (
+	entry: SourcedEntry,
+	kind: Topic["kind"],
+	name: string,
+	basePath: string,
+): Topic => ({
+	id: `${kind}-${entry.id}`,
+	slug: entry.id,
+	kind,
+	name,
+	href:
+		entry.data.backlog === "upload" ? `${basePath}/${entry.id}` : undefined,
+	state: toState(entry.data.backlog),
+	date: entry.data.publishDate,
+	sources: entry.data.sources,
+});
+
+const biasToTopic = (entry: CollectionEntry<"bias">) =>
+	buildTopic(entry, "sesgo", entry.data.biasName, "/behavior/sesgos");
+
+const modelToTopic = (entry: CollectionEntry<"mentalModels">) =>
+	buildTopic(
+		entry,
+		"modelo",
+		entry.data.modelName,
+		"/behavior/modelos-mentales",
+	);
+
+/**
+ * A topic with no sources never reaches the drawer, so it never shows an
+ * empty folder. That is also how you hide a post from the drawer: remove
+ * its `sources`.
+ */
+const hasSources = (topic: Topic) => topic.sources.length > 0;
+
+/**
+ * A bias, a design and a model could have the same id: if the slug
+ * conflicts, it is prefixed with its kind ("modelo-anclaje") so as not to
+ * break `getStaticPaths` — two identical routes would fail the build.
+ *
+ * Returns new topics instead of rewriting `slug` in place: the input list
+ * stays as it was built.
+ */
+const disambiguateSlugs = (topics: Topic[]): Topic[] => {
+	const times = new Map<string, number>();
+	for (const topic of topics) {
+		times.set(topic.slug, (times.get(topic.slug) ?? 0) + 1);
+	}
+
+	return topics.map((topic) =>
+		(times.get(topic.slug) ?? 0) > 1
+			? { ...topic, slug: `${topic.kind}-${topic.slug}` }
+			: topic,
+	);
+};
+
+/**
+ * What is being studied goes first (the drawer is a workbench, not an
+ * archive) and, within each group, the newest first. Change the order
+ * HERE, not in the component.
+ */
+const byStudyingThenNewest = (a: Topic, b: Topic) => {
+	if (a.state !== b.state) return a.state === "estudiando" ? -1 : 1;
+	return parseSourceDate(b.date).getTime() - parseSourceDate(a.date).getTime();
+};
+
 /**
  * The single source of truth of the feature: builds every topic by reading
  * the `sources` array in the frontmatter of each bias and each mental
@@ -37,14 +118,6 @@ export interface Topic {
  * Used by BOTH the drawer grid and `getStaticPaths` of
  * /behavior/fuentes/[...id], which is what keeps slug and order in sync
  * between the two.
- *
- * It does three things worth knowing:
- *   1. drops topics with no sources, so the drawer never fills with empty
- *      folders (that is also how you hide a post from the drawer: remove
- *      its `sources`);
- *   2. sorts what is being studied first (the drawer is the workbench) and
- *      then by descending date — change the order HERE, not in the component;
- *   3. disambiguates colliding slugs (see below).
  */
 export const getTopics = async (): Promise<Topic[]> => {
 	const [biases, models] = await Promise.all([
@@ -52,55 +125,18 @@ export const getTopics = async (): Promise<Topic[]> => {
 		getCollection("mentalModels"),
 	]);
 
-	const toState = (backlog: "wip" | "upload") =>
-		backlog === "wip" ? ("estudiando" as const) : ("publicado" as const);
+	const topics = [
+		...biases.map(biasToTopic),
+		...models.map(modelToTopic),
+	].filter(hasSources);
 
-	const topics: Topic[] = [
-		...biases.map((entry) => ({
-			id: `sesgo-${entry.id}`,
-			slug: entry.id,
-			kind: "sesgo" as const,
-			name: entry.data.biasName,
-			href:
-				entry.data.backlog === "upload"
-					? `/behavior/sesgos/${entry.id}`
-					: undefined,
-			state: toState(entry.data.backlog),
-			date: entry.data.publishDate,
-			sources: entry.data.sources,
-		})),
-		...models.map((entry) => ({
-			id: `modelo-${entry.id}`,
-			slug: entry.id,
-			kind: "modelo" as const,
-			name: entry.data.modelName,
-			href:
-				entry.data.backlog === "upload"
-					? `/behavior/modelos-mentales/${entry.id}`
-					: undefined,
-			state: toState(entry.data.backlog),
-			date: entry.data.publishDate,
-			sources: entry.data.sources,
-		})),
-	].filter((topic) => topic.sources.length > 0);
-
-	// A bias, design and a model could have the same ID: if the slug conflicts, it is
-	// disambiguated based on the type ("modelo-anclaje") so as not to break
-	// `getStaticPaths` — two identical routes would fail the build.
-	const times = new Map<string, number>();
-	for (const topic of topics) {
-		times.set(topic.slug, (times.get(topic.slug) ?? 0) + 1);
-	}
-	for (const topic of topics) {
-		if ((times.get(topic.slug) ?? 0) > 1) {
-			topic.slug = `${topic.kind}-${topic.slug}`;
-		}
-	}
-
-	return topics.sort((a, b) => {
-		if (a.state !== b.state) return a.state === "estudiando" ? -1 : 1;
-		return (
-			parseSourceDate(b.date).getTime() - parseSourceDate(a.date).getTime()
-		);
-	});
+	return disambiguateSlugs(topics).sort(byStudyingThenNewest);
 };
+
+/**
+ * Every source of every topic, for the drawer tally ("N carpetas · M
+ * fuentes"). It lives here and not in the component because it counts what
+ * `getTopics` builds.
+ */
+export const countSources = (topics: Topic[]) =>
+	topics.reduce((total, topic) => total + topic.sources.length, 0);

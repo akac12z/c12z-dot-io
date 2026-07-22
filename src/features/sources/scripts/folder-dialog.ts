@@ -1,11 +1,24 @@
 /**
  * The folder viewer: opens a folder's native <dialog> and navigates through
- * its sources using a slider
+ * its sources using a slider.
  *
- * Every slide is already in the HTML printed by SourceSheets. this only
+ * Every slide is already in the HTML printed by SourceSheets. This only
  * flips which one is `hidden` and rewrites the counter, the tab and the
  * date from the active slide's `data-*`.
  */
+
+// ── the excerpt ───────────────────────────────────────────────────────────
+
+/**
+ * Which side has more text left to read. Pure on purpose: it is the only
+ * decision in the file that needs no DOM.
+ */
+const fadeState = (above: boolean, below: boolean) => {
+	if (above && below) return "both";
+	if (below) return "bottom";
+	if (above) return "top";
+	return undefined;
+};
 
 /**
  * An excerpt longer than the sheet is read by scrolling inside it. This only
@@ -19,9 +32,8 @@ const syncExcerpt = (excerpt: HTMLElement) => {
 	const below =
 		excerpt.scrollTop + excerpt.clientHeight < excerpt.scrollHeight - 1;
 
-	if (above && below) excerpt.dataset.fade = "both";
-	else if (below) excerpt.dataset.fade = "bottom";
-	else if (above) excerpt.dataset.fade = "top";
+	const fade = fadeState(above, below);
+	if (fade) excerpt.dataset.fade = fade;
 	else delete excerpt.dataset.fade;
 
 	// only a scrollable region is focusable: otherwise it would be one more
@@ -38,66 +50,120 @@ const syncActiveExcerpt = (dialog: HTMLDialogElement) => {
 	if (excerpt) syncExcerpt(excerpt);
 };
 
-/** navigable slides: those that the type filter has not excluded */
-const openSlides = (dialog: HTMLDialogElement) => [
-	...dialog.querySelectorAll<HTMLElement>("[data-slide]:not([data-off])"),
-];
+/** every source is read from the top, not from where it was left last time */
+const resetExcerpt = (slide: HTMLElement | null) => {
+	const excerpt = slide?.querySelector<HTMLElement>("[data-excerpt]");
+	if (!excerpt) return;
+
+	excerpt.scrollTop = 0;
+	syncExcerpt(excerpt);
+};
+
+// ── the slider ────────────────────────────────────────────────────────────
+
+/**
+ * The navigable slides, by index: those the type filter has not excluded.
+ * It is the running order of the slider — position in this array is what
+ * the counter shows, and what `step` walks through.
+ */
+const slideOrder = (dialog: HTMLDialogElement) =>
+	[...dialog.querySelectorAll<HTMLElement>("[data-slide]:not([data-off])")].map(
+		(slide) => Number(slide.dataset.slide),
+	);
+
+/** shows one slide and hides the rest; returns the one left visible */
+const activate = (dialog: HTMLDialogElement, index: number) => {
+	let active: HTMLElement | null = null;
+
+	for (const slide of dialog.querySelectorAll<HTMLElement>("[data-slide]")) {
+		slide.hidden = Number(slide.dataset.slide) !== index;
+		if (!slide.hidden) active = slide;
+	}
+
+	dialog.dataset.active = String(index);
+	return active;
+};
+
+const setCounter = (
+	dialog: HTMLDialogElement,
+	position: number,
+	total: number,
+) => {
+	const counter = dialog.querySelector<HTMLElement>("[data-counter]");
+	if (counter) counter.textContent = `${position} / ${total}`;
+};
+
+/** the tab (type) and the date in the header are from the active sheet */
+const setHeaderFrom = (dialog: HTMLDialogElement, slide: HTMLElement | null) => {
+	if (!slide) return;
+
+	const tab = dialog.querySelector<HTMLSpanElement>("[data-sheet-type]");
+	if (tab) tab.textContent = slide.dataset.typeLabel ?? "";
+
+	const date = dialog.querySelector<HTMLTimeElement>("[data-sheet-date]");
+	if (date) {
+		date.textContent = slide.dataset.date ?? "";
+		date.hidden = !slide.dataset.date;
+	}
+};
+
+/** with only one visible source, there is nothing to go through */
+const toggleNav = (dialog: HTMLDialogElement, total: number) => {
+	const nav =
+		dialog.querySelector<HTMLButtonElement>("[data-folder-prev]")?.parentElement;
+	if (nav) nav.hidden = total < 2;
+};
 
 const show = (dialog: HTMLDialogElement, index: number) => {
-	const order = openSlides(dialog).map((s) => Number(s.dataset.slide));
+	const order = slideOrder(dialog);
 	if (order.length === 0) return;
 
 	// if the requested slide is filtered out, start with the first one
 	const active = order.includes(index) ? index : order[0];
+	const slide = activate(dialog, active);
 
-	let activeSlide: HTMLElement | null = null;
-	for (const slide of dialog.querySelectorAll<HTMLElement>("[data-slide]")) {
-		slide.hidden = Number(slide.dataset.slide) !== active;
-		if (!slide.hidden) activeSlide = slide;
-	}
-	dialog.dataset.active = String(active);
-
-	const counter = dialog.querySelector<HTMLElement>("[data-counter]");
-	if (counter) {
-		counter.textContent = `${order.indexOf(active) + 1} / ${order.length}`;
-	}
-
-	// the tab (type) and the date in the header are from the active sheet
-	const tab = dialog.querySelector<HTMLSpanElement>("[data-sheet-type]");
-	if (tab && activeSlide) {
-		tab.textContent = activeSlide.dataset.typeLabel ?? "";
-	}
-
-	const date = dialog.querySelector<HTMLTimeElement>("[data-sheet-date]");
-	if (date && activeSlide) {
-		date.textContent = activeSlide.dataset.date ?? "";
-		date.hidden = !activeSlide.dataset.date;
-	}
-
-	// every source is read from the top of its excerpt, not from where it was
-	// left the last time it was seen
-	const excerpt = activeSlide?.querySelector<HTMLElement>("[data-excerpt]");
-	if (excerpt) {
-		excerpt.scrollTop = 0;
-		syncExcerpt(excerpt);
-	}
-
-	// with only one visible source, there's nothing to go through
-	const nav =
-		dialog.querySelector<HTMLButtonElement>(
-			"[data-folder-prev]",
-		)?.parentElement;
-	if (nav) nav.hidden = order.length < 2;
+	setCounter(dialog, order.indexOf(active) + 1, order.length);
+	setHeaderFrom(dialog, slide);
+	resetExcerpt(slide);
+	toggleNav(dialog, order.length);
 };
 
 const step = (dialog: HTMLDialogElement, delta: number) => {
-	const order = openSlides(dialog).map((s) => Number(s.dataset.slide));
+	const order = slideOrder(dialog);
 	if (order.length === 0) return;
 
 	const current = Number(dialog.dataset.active ?? order[0]);
 	const pos = order.indexOf(current);
 	// cyclical: from the last one back to the first
 	show(dialog, order[(pos + delta + order.length) % order.length]);
+};
+
+// ── the handlers ──────────────────────────────────────────────────────────
+
+/** the viewer on screen, if any: only one can be open at a time */
+const openDialog = () =>
+	document.querySelector<HTMLDialogElement>("[data-folder-dialog][open]");
+
+const openFolder = (opener: HTMLElement) => {
+	const id = opener.dataset.folderOpen;
+	if (!id) return;
+
+	const dialog = document.getElementById(id);
+	if (!(dialog instanceof HTMLDialogElement)) return;
+
+	show(dialog, Number(opener.dataset.index ?? 0));
+	dialog.showModal();
+	// only now does the sheet have a size: with the dialog closed everything
+	// measures 0 and no excerpt looks scrollable
+	syncActiveExcerpt(dialog);
+};
+
+const actOnDialog = (dialog: HTMLDialogElement, target: HTMLElement) => {
+	if (target.closest("[data-folder-close]")) dialog.close();
+	else if (target.closest("[data-folder-next]")) step(dialog, 1);
+	else if (target.closest("[data-folder-prev]")) step(dialog, -1);
+	// clicking on the backdrop (the dialog box itself) closes it
+	else if (target === dialog) dialog.close();
 };
 
 /**
@@ -114,32 +180,16 @@ export const initFolderDialog = () => {
 
 		const opener = target.closest<HTMLButtonElement>("[data-folder-open]");
 		if (opener) {
-			const dialog = document.getElementById(
-				opener.dataset.folderOpen as string,
-			) as HTMLDialogElement | null;
-			if (!dialog) return;
-			show(dialog, Number(opener.dataset.index ?? 0));
-			dialog.showModal();
-			// only now does the sheet have a size: with the dialog closed
-			// everything measures 0 and no excerpt looks scrollable
-			syncActiveExcerpt(dialog);
+			openFolder(opener);
 			return;
 		}
 
 		const dialog = target.closest<HTMLDialogElement>("[data-folder-dialog]");
-		if (!dialog) return;
-
-		if (target.closest("[data-folder-close]")) dialog.close();
-		else if (target.closest("[data-folder-next]")) step(dialog, 1);
-		else if (target.closest("[data-folder-prev]")) step(dialog, -1);
-		// Clicking on the backdrop (the dialog box itself) closes it
-		else if (target === dialog) dialog.close();
+		if (dialog) actOnDialog(dialog, target);
 	});
 
 	document.addEventListener("keydown", (event) => {
-		const dialog = document.querySelector<HTMLDialogElement>(
-			"[data-folder-dialog][open]",
-		);
+		const dialog = openDialog();
 		if (!dialog) return;
 
 		if (event.key === "ArrowRight") step(dialog, 1);
@@ -159,9 +209,7 @@ export const initFolderDialog = () => {
 	// resizing the window changes how much text fits: what was cut may no
 	// longer be, and the other way round
 	window.addEventListener("resize", () => {
-		const dialog = document.querySelector<HTMLDialogElement>(
-			"[data-folder-dialog][open]",
-		);
+		const dialog = openDialog();
 		if (dialog) syncActiveExcerpt(dialog);
 	});
 };

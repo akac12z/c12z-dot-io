@@ -1,22 +1,17 @@
+import { bindToggles, claimRoot, passes } from "./filter-toggles.ts";
+
 /**
  * Filters the folders in the drawer (/behavior/fuentes) by name and by kind
  * of topic (bias or mental model). The kinds are toggles: you can turn both
  * on, or leave both off = everything goes through. The source type (book,
  * quote...) is filtered within each topic, not here.
  *
- * It works only with `data-*` and `hidden`, never with classes: CSS Module
- * class names are hashed at build time (`_folder_1h04g_344`), so
- * `classList.add("folder")` from here would do nothing.
- *
- * Guarded by `data-init` on the root because it is re-run on
- * `astro:page-load`; unlike the dialog script, the listeners live on
- * elements that the view transition replaces, so they must be re-attached
- * — but only once per rendered root.
+ * The toggle machinery and the `data-*` rules live in ./filter-toggles.ts;
+ * what is only the drawer's is the search field and the empty-state message.
  */
 export const initSourcesFilters = () => {
-	const root = document.querySelector<HTMLElement>("[data-sources-root]");
-	if (!root || root.dataset.init === "true") return;
-	root.dataset.init = "true";
+	const root = claimRoot("[data-sources-root]");
+	if (!root) return;
 
 	const cells = [...root.querySelectorAll<HTMLElement>("[data-topic]")];
 	const noResults = root.querySelector<HTMLElement>("[data-no-results]");
@@ -25,14 +20,14 @@ export const initSourcesFilters = () => {
 	let query = "";
 	const kinds = new Set<string>();
 
+	// both conditions at once: a cell survives if its name matches what is
+	// typed AND its kind is among the ones selected
 	const apply = () => {
 		let visible = 0;
 
 		for (const cell of cells) {
 			const okName = (cell.dataset.name ?? "").includes(query);
-			const okKind = kinds.size === 0 || kinds.has(cell.dataset.kind ?? "");
-
-			cell.hidden = !(okName && okKind);
+			cell.hidden = !(okName && passes(kinds, cell.dataset.kind));
 			if (!cell.hidden) visible++;
 		}
 
@@ -44,19 +39,5 @@ export const initSourcesFilters = () => {
 		apply();
 	});
 
-	for (const btn of root.querySelectorAll<HTMLButtonElement>(
-		"[data-filter-kind]",
-	)) {
-		btn.addEventListener("click", () => {
-			const kind = btn.dataset.filterKind;
-			if (!kind) return;
-
-			const on = !kinds.has(kind);
-			if (on) kinds.add(kind);
-			else kinds.delete(kind);
-
-			btn.setAttribute("aria-pressed", String(on));
-			apply();
-		});
-	}
+	bindToggles(root, "data-filter-kind", kinds, apply);
 };

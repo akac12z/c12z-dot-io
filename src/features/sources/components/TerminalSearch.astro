@@ -12,6 +12,8 @@
  * an idle-console message instead of showing filters that filter nothing.
  */
 import styles from "./sources.module.css";
+import { pluralize } from "@utils/pluralize.ts";
+
 import type { Topic } from "../data/get-topics.ts";
 
 /**
@@ -56,7 +58,7 @@ const { topics, totalSources } = Astro.props;
 			<h2>Contenido</h2>
 			<p class={styles.tally}>
 				{
-					`${topics.length} ${topics.length === 1 ? "carpeta" : "carpetas"} · ${totalSources} ${totalSources === 1 ? "fuente" : "fuentes"}`
+					`${topics.length} ${pluralize(topics.length, "carpeta")} · ${totalSources} ${pluralize(totalSources, "fuente")}`
 				}
 			</p>
 		</header>

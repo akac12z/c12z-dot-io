@@ -14,6 +14,8 @@
  * build time, so JS can never target them.
  */
 import styles from "./sources.module.css";
+import { pluralize } from "@utils/pluralize.ts";
+
 import SourceSheets from "./SourceSheets.astro";
 import type { Topic } from "../data/get-topics.ts";
 
@@ -41,7 +43,7 @@ const { id, slug, kind, name, state, sources } = topic;
 		<span class={styles.topicName}>{name}</span>
 		<span class={styles.topicFoot}>
 			<span>
-				{`${sources.length} ${sources.length === 1 ? "fuente" : "fuentes"}`}
+				{`${sources.length} ${pluralize(sources.length, "fuente")}`}
 			</span>
 		</span>
 		<span class={styles.srOnly}>
