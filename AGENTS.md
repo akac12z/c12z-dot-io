@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents when working with code in this repository.
 
 ## Commands
 
@@ -22,52 +22,63 @@ rm -rf dist && rm -rf .vercel/* && mkdir -p .vercel
 
 ## Architecture
 
-Personal blog/portfolio site built with **Astro 6** + **React 19** + **TailwindCSS v4** + **MDX**, deployed to Vercel (static output).
+Personal blog/portfolio site built with **Astro 7** + **React 19** + **MDX**, deployed to Vercel (static output). **No Tailwind** — styling is plain CSS: design-token CSS variables in `src/styles/global.css` plus CSS Modules per component.
+
+Longer-form docs live in `.docs/` (`start-here.md`, `features/`, `lib/`, `pages/`).
 
 ### Key structural patterns
 
-**Feature-based organization** — `src/features/<name>/` encapsulates all domain logic:
+**Feature-based organization** — `src/features/<name>/` encapsulates all domain logic (`404`, `behavior`, `bias`, `books`, `context`, `essay`, `home`, `mental-models`, `notes`, `projects`, `sources`):
 
 - `components/` — Astro/React components specific to that feature
 - `seo/` — keywords and metadata for that feature
 - `data/` or `rules/` — business logic or static data
 - `styles/` — CSS Modules scoped to the feature
 
-**Content Collections** — `src/content/` holds markdown/MDX files validated by Zod schemas in `content.config.ts`. Collections: `essay`, `library` (book reviews), `bias` (cognitive biases), `projects`.
+**Content Collections** — `src/content/` holds markdown/MDX validated by Zod schemas in `src/content.config.ts`. Registered collections: `bias`, `library` (book reviews), `projects`, `notes`, `mentalModels`. An `essay` collection is defined but commented out of the exports.
 
-**Shared globals** — `src/global/` holds site-wide config: `siteInfo.ts`, `headerLinks.ts`, `pagesInfo.ts`, `socialMediaLinks.ts`.
+**Sources are frontmatter, not a collection** — posts embed a `sources` array (`sourceSchema`: title, type enum, author, url…) in their own frontmatter. Adding a source type takes TWO steps: the `z.enum` in `content.config.ts` AND `TYPE_LABELS` in `features/sources/data/source-types.ts` (build fails if you forget the second — intended). See `.docs/features/sources.md`.
 
-**Common UI** — `src/components/common/` has layout, navigation, SEO, analytics, and reusable UI components (buttons, icons, toc).
+**Shared globals** — `src/global/`: `site-info.ts`, `header-links.ts`, `pages-info.ts`, `socialmedia-links.ts`.
+
+**Common UI** — `src/components/common/`: `layout`, `navigation`, `seo`, `analytics`, `ui` (buttons, icons, toc…).
+
+**OG images** — `src/lib/og/` renders social images with `@vercel/og` + `sharp` at build time.
 
 ### Path aliases (tsconfig.json)
 
 ```
-@/*          → src/*
-@/features/* → src/features/*
-@/global/*   → src/global/*
-@/ui/*       → src/components/ui/*
-@/common/*   → src/components/common/*
-@/icons/*    → src/components/common/ui/icons/*
-@/seo/*      → src/components/common/seo/*
-@layouts/*   → src/layouts/*
-@utils/*     → src/utils/*
+@/*           → src/*
+@/features/*  → src/features/*
+@/lib/*       → src/lib/*
+@/global/*    → src/global/*
+@/ui/*        → src/components/ui/*
+@/common/*    → src/components/common/*
+@/icons/*     → src/components/common/ui/icons/*
+@/seo/*       → src/components/common/seo/*
+@/analytics/* → src/components/common/analytics/*
+@layouts/*    → src/layouts/*
+@utils/*      → src/utils/*
 @interfaces/* → src/interfaces/*
-@/assets/*   → src/assets/*
+@/assets/*    → src/assets/*
 ```
 
 ### Content collection schemas
 
-- **library** — book reviews; fields: cover images, scores, authors, Amazon links, language
-- **bias** — cognitive biases; categories: `velocidad`, `memoria`, `percepción`, `contexto`, `juicio`
-- **essay** — minimal schema (title, description)
-- **projects** — schema currently commented out, raw MDX
+- **library** — book reviews; covers, score, authors, Amazon links, `category` enum (`health`, `product`, `culture`, `psychology`, `economics`, `creativity`, `philosophy`, `other`)
+- **bias** — cognitive biases; `category` enum: `velocidad`, `memoria`, `percepción`, `contexto`, `juicio`
+- **projects**, **notes**, **mentalModels** — see `src/content.config.ts`
+- `backlog: z.enum(["wip", "upload"])` gates unpublished entries
+
+### Markdown pipeline
+
+`astro.config.mjs` wires a custom `unified` processor: `remark-math` + `rehype-katex` (math via `$$`), `rehype-external-links` (`target="_blank"`, `noopener noreferrer`).
 
 ### Environment variables
 
-See `.env.template`:
+See `.env.template` (validated via `envField` in `astro.config.mjs`):
 
-- `GA4_MEASUREMENT_ID`
-- `GTM_MEASUREMENT_ID`
+- `GA4_MEASUREMENT_ID`, `GTM_MEASUREMENT_ID` (currently unused — cookie concerns)
 - `AHRFS_MEASUREMENT_ID`
 - `OVERTRACKING_MEASUREMENT_ID`
 
@@ -75,52 +86,40 @@ See `.env.template`:
 
 - Vercel adapter (`@astrojs/vercel`), static output mode
 - `vercel.json` disables trailing slashes
-- TailwindCSS v4 is wired via the **Vite plugin** (not the Astro integration)
 
 ## Design System
 
-All design tokens live in `src/styles/global.css` as CSS variables under `@theme`. No `tailwind.config.js` — Tailwind reads from those CSS variables directly.
+All design tokens live in `src/styles/global.css` as plain CSS variables on `:root` (dark, default — palette "burntpaper") and `[data-theme="light"]` (light — "recycledpaper"). Color notes in `src/styles/global.css.md`.
 
 ### Aesthetic direction
 
-Dark-first, retro-digital, content-focused personal site. Hot pink accent on dark backgrounds is the signature. Generous spacing, minimal chrome, no decorative fluff.
+Dark-first, retro-digital, content-focused personal site. Lime accent on near-black backgrounds. Generous spacing, minimal chrome, no decorative fluff.
 
 ### Typography
 
-| Role              | Font                   | Notes                           |
-| ----------------- | ---------------------- | ------------------------------- |
-| Display / headers | **Tamago** (pixel art) | `font-pixel`, `tracking-widest` |
-| Body              | **Rubik**              | weights 300–700 + italic        |
-| Code              | **Cascadia**           | monospace                       |
+| Role | Font | Var |
+|------|------|-----|
+| Display / headers | **Tamago** (pixel art) | `--ff-pixel` |
+| Body | **Rubik** (300–700 + italic) | `--ff-rubik` |
+| Code | **Cascadia** | `--ff-mono` |
 
-### Color palette
+Type scale (`--t-*`/`--lh-*`), tracking (`--tracking-*`), 4pt spacing (`--sp-*`), widths (`--wdth-*`), radii (`--r-*`), motion (`--ease`, `--t-fast/base/slow`) are all tokenized — use them, don't invent values. Note: `html` font-size is `--t-body` (14px), so `1rem` = 14px.
 
-**Dark mode (default):**
+### Color tokens (see global.css for exact values)
 
-- Background `#111`, Surface `#1a1a1a`, Surface-alt `#2e2e2e`
-- Text: headers `#fcf8f1`, body `#dfdbd5`, muted `#9d9b98`
-- Accent pink `#ff2f92`, accent purple `#904fe7`
-
-**Light mode:**
-
-- Background `#f5f2ee` (beige), Surface `#eae6e1`
-- Text: headers `#0c0c0b`, body `#1f1e1d`, muted `#595856`
-
-**Content-type accent colors (dark / light):**
-
-- Behavior: `#e22ef6` / `#80008e`
-- Essays: `#33ffe8` / `#016c60`
-- Library: `#ffa424` / `#a15e00`
-- Projects: `#ff3838` / `#2e5100`
-
-**Bias category colors:** Speed `#e03d3d`, Memory `#af76ff`, Judgment `#4c9dff`, Context `#9ed841`, Perception `#f2ce57`
+- Surfaces: `--bg`, `--surface-1..3`, `--border`, `--border-2/3`
+- Text: `--fg`, `--fg-2`, `--fg-3`, `--fg-inverse`
+- Accents: `--accent` (lime `#a2ce12`), `--accent-ink`, `--accent-2` (purple `#904fe7`)
+- Content sections: `--c-behavior`, `--c-bias`, `--c-mental-model`, `--c-source`, `--c-essay`, `--c-library`, `--c-project`, `--c-note`
+- Bias categories: `--c-bias-category-{speed,memory,judgment,context,perception}`
+- Book categories: `--c-book-{health,product,culture,psychology,economics,creativity,philosophy,other}`
+- Utility: `--c-goback`, `--c-wip`, `--ok`, `--warn`, `--err`
 
 ### UI conventions when building new components
 
-- Use existing CSS variables — never hardcode colors
-- New feature-scoped styles go in `src/features/<name>/styles/*.module.css`
-- Tailwind utilities for layout/spacing; CSS Modules for component-specific styles
+- Use existing CSS variables — never hardcode colors, sizes, or spacing
+- Styles go in CSS Modules (`*.module.css`) next to the component or in `src/features/<name>/styles/`
 - React components (`.tsx`) only when interactivity is needed; prefer `.astro` otherwise
 - Motion library (`motion/react`) is available for animations in React components
-- Left/bottom borders (`rounded-bl`) as a recurring visual motif for list items
-- WIP sections get a red-border box with a 🚧 badge (`border-error`)
+- Left/bottom borders as a recurring visual motif for list items
+- WIP sections get a red-border box with a 🚧 badge (`--c-wip`)
