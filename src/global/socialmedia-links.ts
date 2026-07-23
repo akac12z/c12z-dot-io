@@ -3,8 +3,8 @@ import type { SocialLinksInterface } from "@/interfaces/socialMediaLinks.interfa
 export const SOCIAL_LINKS: SocialLinksInterface = {
 	github: {
 		name: "Github",
-		url: "https://github.com/akac12z",
-		userName: "akac12z",
+		url: "https://github.com/cz-chan",
+		userName: "cz-chan",
 		title: "ir a Github de Chema Ferrández - cz",
 	},
 	twitter: {
@@ -28,7 +28,7 @@ export const SOCIAL_LINKS: SocialLinksInterface = {
 	goodreads: {
 		name: "Goodreads",
 		url: "goodreads.com/cz__chan",
-		userName: "akac12z",
+		userName: "cz__chan",
 		title: "ir a Goodreads de Chema Ferrández - cz",
 	},
 };
